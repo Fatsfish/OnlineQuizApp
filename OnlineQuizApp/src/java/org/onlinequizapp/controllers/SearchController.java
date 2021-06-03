@@ -24,7 +24,7 @@ import org.onlinequizapp.dtos.UserDTO;
 public class SearchController extends HttpServlet {
 
     private static final String SUCCESS = "search.jsp";
-    private static final String ERROR = "error.jsp";
+    private static final String ERROR = "404.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

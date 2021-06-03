@@ -25,8 +25,8 @@ import org.onlinequizapp.dtos.UserError;
 @WebServlet(name = "CreateController", urlPatterns = {"/CreateController"})
 public class CreateController extends HttpServlet {
 
-    private static final String SUCCESS = "login.jsp";
-    private static final String ERROR = "createUser.jsp";
+    private static final String SUCCESS = "login.html";
+    private static final String ERROR = "register.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

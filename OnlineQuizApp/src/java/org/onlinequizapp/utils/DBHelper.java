@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package swp.util;
+package org.onlinequizapp.utils;
 
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.SQLWarning;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;

@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,16 +11,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Register</title>
+    <title>Online Quiz App - Register</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="Dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="Dashboard/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -36,34 +38,52 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" action="MainController" method="Post">
+                                <div class="form-group">
+                                    <input type="text" name="userID" required="" class="form-control form-control-user" id="exampleInputEmail"
+                                        placeholder="User ID">
+                                </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name">
+                                        <input type="text" required="" class="form-control form-control-user" name="fullName" id="exampleFirstName"
+                                            placeholder="Full Name">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name">
+                                        <input type="text" name="phone" required="" class="form-control form-control-user" id="exampleLastName"
+                                            placeholder="Phone Number">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                    <input type="email" name="email" required="" class="form-control form-control-user" id="exampleInputEmail"
                                         placeholder="Email Address">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
+                                        <input type="password" name="password" required="" class="form-control form-control-user"
                                             id="exampleInputPassword" placeholder="Password">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
+                                        <input type="password" name="confirm" required="" class="form-control form-control-user"
                                             id="exampleRepeatPassword" placeholder="Repeat Password">
                                     </div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
+                                 <div class="form-group">
+                                    <input type="text" name="address" required="" class="form-control form-control-user" id="exampleInputEmail"
+                                        placeholder="Shipping Address">
+                                </div>
+      
+                            <div class="wthree-text">
+                                <label class="anim">
+                                    <input type="checkbox" class="checkbox" required="">
+                                    <span>I Agree To The Terms & Conditions</span>
+                                </label>
+                                <div class="clear"> </div>
+                            </div>
+                            <input type="submit" name="action" class="btn btn-primary btn-user btn-block" value="Create">
+                                
+                                <!--<a href="login.html" class="btn btn-primary btn-user btn-block">
                                     Register Account
-                                </a>
+                                </a>-->
                                 <hr>
                                 <a href="index.html" class="btn btn-google btn-user btn-block">
                                     <i class="fab fa-google fa-fw"></i> Register with Google
@@ -86,16 +106,26 @@
         </div>
 
     </div>
+    
+   
+<h1>${requestScope.ERROR.userIDError}</h1>
+<h1>${requestScope.ERROR.fullNameError}</h1>
+<h1>${requestScope.ERROR.roleIDError}</h1>
+<h1>${requestScope.ERROR.passwordError}</h1>
+<h1>${requestScope.ERROR.confirmError}</h1>
+<h1>${requestScope.ERROR.phoneError}</h1>
+<h1>${requestScope.ERROR.emailError}</h1>
+<h1>${requestScope.ERROR.addressError}</h1>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="Dashboard/vendor/jquery/jquery.min.js"></script>
+    <script src="Dashboard/endor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="Dashboard/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="Dashboard/js/sb-admin-2.min.js"></script>
 
 </body>
 
