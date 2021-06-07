@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.onlinequizapp.daos;
-
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,29 +9,26 @@ import java.util.List;
 import org.onlinequizapp.dtos.CourseDTO;
 import org.onlinequizapp.utils.DBUtils;
 
-/**
- *
- * @author User-PC
- */
 public class CourseDAO {
-    
-    public CourseDTO checkCourse(String courseID, String authorID) throws SQLException {
-        CourseDTO user = null;
+
+    public CourseDTO checkCourse(String courseID, String courseName) throws SQLException {
+        CourseDTO course = null;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Select userID, fullName, roleID "
-                        + "FROM tblUser "
-                        + "Where userID=\'" + courseID + "\' AND password=\'" + authorID + "\'";
+                String sql = "Select courseID, courseName, authorID "
+                        + "FROM tblCourse "
+                        + "Where courseID=\'" + courseID + "\' AND courseName=\'" + courseName + "\'";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 if (rs.next()) {
-                    String fullName = rs.getString("fullName");
-                    String roleID = rs.getString("roleID");
-                    user = new CourseDTO(courseID, fullName, roleID, "");
+                    String duration = rs.getString("duration");
+                    String status = rs.getString("status");
+                    String authorID = rs.getString("authorID");
+                    course = new CourseDTO(courseID, courseName, authorID, duration, status);
                 }
             }
         } catch (ClassNotFoundException | SQLException e) {
@@ -54,32 +45,33 @@ public class CourseDAO {
             }
 
         }
-        return user;
+        return course;
     }
 
-    public List<CourseDTO> getListUser(String search) throws SQLException {
-        List<CourseDTO> listUser = null;
+    public List<CourseDTO> getListCourse (String search) throws SQLException {
+        List<CourseDTO> listCourse = null;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Select userID, fullName, roleID , phone, email, address "
-                        + "from tblUser "
-                        + "WHERE fullName like ?";
+                String sql = "Select courseID, courseName, authorID, duration , status "
+                        + "from tblCourse "
+                        + "WHERE courseName like ?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, "%" + search + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String courseID = rs.getString("courseID");
+                    String courseName = rs.getString("courseName");
                     String authorID = rs.getString("authorID");
                     String duration = rs.getString("duration");
-                    String status = "***";
-                    if (listUser == null) {
-                        listUser = new ArrayList<>();
+                    String status = rs.getString("status");
+                    if (listCourse == null) {
+                        listCourse = new ArrayList<>();
                     }
-                    listUser.add(new CourseDTO(courseID, authorID, status, duration));
+                    listCourse.add(new CourseDTO(courseID, courseName, authorID, status, duration));
 
                 }
             }
@@ -98,10 +90,10 @@ public class CourseDAO {
             }
 
         }
-        return listUser;
+        return listCourse;
     }
 
-    public boolean deleteUser(String userID) throws SQLException {
+    public boolean deleteUser(String courseID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -109,10 +101,10 @@ public class CourseDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "DELETE tblUser "
-                        + "Where userID=?";
+                String sql = "DELETE tblCourse "
+                        + "Where courseID=?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, userID);
+                stm.setString(1, courseID);
                 check = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (ClassNotFoundException | SQLException e) {
@@ -132,19 +124,20 @@ public class CourseDAO {
         return check;
     }
 
-    public boolean update(CourseDTO user) throws SQLException {
+    public boolean update(CourseDTO course) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPdaTE tblUser SET fullName=?, roleID=? "
-                        + " Where userID=?";
+                String sql = "UPDATE tblCourse SET courseName=?, authorID=? "
+                        + " Where courseID=?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, user.getCourseID());
-                stm.setString(2, user.getAuthorID());
-                stm.setString(3, user.getDuration());
+                stm.setString(1, course.getCourseID());
+                stm.setString(2, course.getAuthorID());
+                stm.setString(3, course.getDuration());
+                stm.setString(4, course.getStatus());
                 check = stm.executeUpdate() > 0 ? true : false;
             }
 
@@ -161,7 +154,7 @@ public class CourseDAO {
         return check;
     }
 
-    public boolean checkDuplicate(String userID) throws SQLException {
+    public boolean checkDuplicate(String courseID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -169,11 +162,11 @@ public class CourseDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Select userID "
-                        + " FROM tblUser "
-                        + " Where UserID=?";
+                String sql = "Select courseID "
+                        + " FROM tblCourse "
+                        + " Where courseID=?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, userID);
+                stm.setString(1, courseID);
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     check = true;
@@ -195,19 +188,20 @@ public class CourseDAO {
         return check;
     }
 
-    public void insert(CourseDTO user) throws SQLException {
+    public void insert(CourseDTO course) throws SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblUser(userID, fullName, roleID, password) "
-                        + " VALUES(\'?\',\'?\',\'?\',\'?\')";
+                String sql = "INSERT INTO tblCourse(courseID, courseName, authorID, duration, status) "
+                        + " VALUES(\'?\',\'?\',\'?\',\'?\',\'?\')";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, user.getCourseID());
-                stm.setString(2, user.getAuthorID());
-                stm.setString(3, user.getDuration());
-                stm.setString(4, user.getStatus());
+                stm.setString(1, course.getCourseID());
+                stm.setString(2, course.getAuthorID());
+                stm.setString(3, course.getDuration());
+                stm.setString(4, course.getStatus());
+                stm.setString(5, course.getCourseName());
             }
         } catch (Exception e) {
 
@@ -221,19 +215,20 @@ public class CourseDAO {
         }
     }
 
-    public void insertNew(CourseDTO user) throws SQLException, ClassNotFoundException {
+    public void insertNew(CourseDTO course) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblUser(userID, fullName, roleID, password, phone, email, address) "
-                        + " VALUES(?,?,?,?,?,?,?)";
+                String sql = "INSERT INTO tblCourse(courseID, courseName, authorID, duration, status) "
+                        + " VALUES(?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, user.getCourseID());
-                stm.setString(2, user.getAuthorID());
-                stm.setString(3, user.getDuration());
-                stm.setString(4, user.getStatus());
+                stm.setString(1, course.getCourseID());
+                stm.setString(2, course.getAuthorID());
+                stm.setString(3, course.getDuration());
+                stm.setString(4, course.getStatus());
+                stm.setString(5, course.getCourseName());
                 stm.executeUpdate();
             }
         } finally {
@@ -246,19 +241,20 @@ public class CourseDAO {
         }
     }
 
-    public void insertNew1(CourseDTO user) throws SQLException, ClassNotFoundException {
+    public void insertNew1(CourseDTO course) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblUser(userID, fullName, roleID, password) "
-                        + " VALUES(?,?,?,?)";
+                String sql = "INSERT INTO tblCourse(courseID, courseName, authorID, duration, status) "
+                        + " VALUES(?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, user.getCourseID());
-                stm.setString(2, user.getAuthorID());
-                stm.setString(3, user.getDuration());
-                stm.setString(4, user.getStatus());
+                stm.setString(1, course.getCourseID());
+                stm.setString(2, course.getAuthorID());
+                stm.setString(3, course.getDuration());
+                stm.setString(4, course.getStatus());
+                stm.setString(5, course.getCourseName());
                 stm.executeUpdate();
             }
         } finally {
