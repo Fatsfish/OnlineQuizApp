@@ -154,6 +154,61 @@ public class UserDAO {
         return check;
     }
 
+    public boolean updateEnable(UserDTO user) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPdaTE tblUser SET roleID='C' "
+                        + " Where userID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, user.getUserID());
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+
+        } catch (Exception e) {
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean updateCode(UserDTO user, String code) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPdaTE tblUser SET verification_code=? "
+                        + " Where userID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, code);
+                stm.setString(1, user.getUserID());
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+
+        } catch (Exception e) {
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
     public boolean checkDuplicate(String userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -220,8 +275,8 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblUser(userID, fullName, roleID, password, phone, email, address) "
-                        + " VALUES(?,?,?,?,?,?,?)";
+                String sql = "INSERT INTO tblUser(userID, fullName, roleID, password, phone, email, address, verification_code) "
+                        + " VALUES(?,?,?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, user.getUserID());
                 stm.setString(2, user.getFullname());
@@ -230,6 +285,7 @@ public class UserDAO {
                 stm.setInt(5, Integer.parseInt(user.getPhone()));
                 stm.setString(6, user.getEmail());
                 stm.setString(7, user.getAddress());
+                stm.setString(8, user.getVerification());
                 stm.executeUpdate();
             }
         } finally {
@@ -266,4 +322,5 @@ public class UserDAO {
             }
         }
     }
+
 }

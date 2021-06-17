@@ -74,7 +74,7 @@
       
                             <div class="wthree-text">
                                 <label class="anim">
-                                    <input type="checkbox" class="checkbox" required="">
+                                    <input type="checkbox" class="checkbox" name="agreement" required="">
                                     <span>I Agree To The Terms & Conditions</span>
                                 </label>
                                 <div class="clear"> </div>

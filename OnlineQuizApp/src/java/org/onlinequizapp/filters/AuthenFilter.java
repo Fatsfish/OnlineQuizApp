@@ -167,7 +167,7 @@ public class AuthenFilter implements Filter {
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
-                PrintStream ps = new PrintStream(response.getOutputStream());
+                /*PrintStream ps = new PrintStream(response.getOutputStream());
                 PrintWriter pw = new PrintWriter(ps);
                 pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
 
@@ -177,15 +177,15 @@ public class AuthenFilter implements Filter {
                 pw.print("</pre></body>\n</html>"); //NOI18N
                 pw.close();
                 ps.close();
-                response.getOutputStream().close();
+                response.getOutputStream().close();*/
             } catch (Exception ex) {
             }
         } else {
             try {
-                PrintStream ps = new PrintStream(response.getOutputStream());
+               /* PrintStream ps = new PrintStream(response.getOutputStream());
                 t.printStackTrace(ps);
                 ps.close();
-                response.getOutputStream().close();
+                response.getOutputStream().close();*/
             } catch (Exception ex) {
             }
         }
@@ -194,12 +194,12 @@ public class AuthenFilter implements Filter {
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
-            StringWriter sw = new StringWriter();
+           /* StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             t.printStackTrace(pw);
             pw.close();
             sw.close();
-            stackTrace = sw.getBuffer().toString();
+            stackTrace = sw.getBuffer().toString();*/
         } catch (Exception ex) {
         }
         return stackTrace;

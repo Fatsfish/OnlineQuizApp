@@ -1,22 +1,30 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.onlinequizapp.daos.EmailDAO;
 import org.onlinequizapp.daos.UserDAO;
 import org.onlinequizapp.dtos.UserDTO;
+import org.onlinequizapp.dtos.UserError;
 
-public class LoginController extends HttpServlet {
+/**
+ *
+ * @author User-PC
+ */
+public class CodeVerify extends HttpServlet {
 
-    private static final String SUCCESS = "admindashboard.html";
-    private static final String Student = "studentdashboard.html";
-    private static final String Teacher = "teacherdashboard.html";
-    private static final String ERROR = "login.html";
-    private static final String SHOPPING = "index.html";
+    private static final String SUCCESS = "login.html";
+    private static final String ERROR = "verify.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,45 +40,30 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String userID = request.getParameter("userID");
-            String password = request.getParameter("password");
-            UserDAO dao = new UserDAO();
-            UserDTO user = dao.checkLogin(userID, password);
             HttpSession session = request.getSession();
+            UserDTO user = (UserDTO) session.getAttribute("authcode");
+            String code = request.getParameter("authcode");
 
-            if (user != null) {
-                session.setAttribute("LOGIN_USER", user);
-                if (user.getRole().contains("AD")) {
+            if (code.equals(user.getVerification())) {
+                UserDAO userdao = new UserDAO();
+                userdao.updateEnable(user);
+                if (userdao.updateEnable(user)) {
                     url = SUCCESS;
-                } else if (user.getRole().contains("C") || user.getRole().contains("M")) {
-                    url = Teacher;
-                } else if (user.getRole().contains("G") || user.getRole().contains("S")) {
-                    url = Student;
                 } else {
-                    url = SHOPPING;
+                    url = ERROR;
+                    request.setAttribute("ERROR", "The Verification has met an exception, please try again or contact support team!");
                 }
-            }
-            String rememberLogin = request.getParameter("rememberMe");
-            if ("on".equals(rememberLogin)) {
-                //add cookie to user device if user choose to remember their login info
-                Cookie cookieID = new Cookie("USERID", userID);
-                cookieID.setMaxAge(0);
-
-                Cookie cookiePassWord = new Cookie("PASSWORD", password);
-                cookiePassWord.setMaxAge(0);
-
-                response.addCookie(cookieID);
-                response.addCookie(cookiePassWord);
+            } else {
+                request.setAttribute("ERROR", "The verification code is either wrong, expired or used. Please check your verification code again!");
             }
         } catch (Exception e) {
-            log("Error at LoginController:" + e.toString());
+            log("Error at CodeVerifyController: " + e.toString());
         } finally {
-            response.sendRedirect(url);
-
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

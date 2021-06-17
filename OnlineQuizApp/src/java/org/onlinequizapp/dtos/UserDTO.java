@@ -11,6 +11,8 @@ public class UserDTO implements Serializable {
     private String phone;
     private String email;
     private String address;
+    private String verification;
+
 
     public UserDTO(String userID, String fullname, String role, String password, String phone, String email, String address) {
         this.userID = userID;
@@ -20,6 +22,17 @@ public class UserDTO implements Serializable {
         this.phone = phone;
         this.email = email;
         this.address = address;
+    }
+
+    public UserDTO(String userID, String fullname, String role, String password, String phone, String email, String address, String verification) {
+        this.userID = userID;
+        this.fullname = fullname;
+        this.role = role;
+        this.password = password;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.verification = verification;
     }
 
     public UserDTO(String userID, String fullname, String role, String password) {
@@ -88,4 +101,11 @@ public class UserDTO implements Serializable {
         return password;
     }
 
+    public String getVerification() {
+        return verification;
+    }
+
+    public void setVerification(String verification) {
+        this.verification = verification;
+    }
 }

@@ -14,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.onlinequizapp.daos.EmailDAO;
 import org.onlinequizapp.daos.UserDAO;
 import org.onlinequizapp.dtos.UserDTO;
 import org.onlinequizapp.dtos.UserError;
@@ -25,8 +27,8 @@ import org.onlinequizapp.dtos.UserError;
 @WebServlet(name = "CreateController", urlPatterns = {"/CreateController"})
 public class CreateController extends HttpServlet {
 
-    private static final String SUCCESS = "login.html";
-    private static final String ERROR = "register.html";
+    private static final String SUCCESS = "verify.jsp";
+    private static final String ERROR = "register.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,15 +46,16 @@ public class CreateController extends HttpServlet {
         UserError userError = new UserError("", "", "", "", "", "", "", "");
         try {
             String userID = request.getParameter("userID");
-            String roleID = "G";
+            String roleID = "U";
             String fullName = request.getParameter("fullName");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
             String password = request.getParameter("password");
             String confirm = request.getParameter("confirm");
+            //boolean agree = "on".equals(request.getParameter("agreement"));
             boolean flag = true;
-            if (userID.length() > 5 || userID.length() < 1) {
+            if (userID.length() > 20 || userID.length() < 1) {
                 flag = false;
                 userError.setUserIDError("UserID must be [1-5]");
             }
@@ -60,24 +63,41 @@ public class CreateController extends HttpServlet {
                 flag = false;
                 userError.setFullNameError("Full Name must be [1-250]");
             }
-            if (roleID.length() > 2 || roleID.length() < 1 || (!roleID.equals("G") && !roleID.equals("M"))) {
+            if (roleID.length() > 2 || roleID.length() < 1 || (!roleID.equals("G") && !roleID.equals("M")&& !roleID.equals("U"))) {
                 flag = false;
-                userError.setRoleIDError("RoleID must be [1-2] and must be G - guest or M - member");
+                userError.setRoleIDError("RoleID must be [1-2] and must be G - guest, U - Unvalidated Member or M - member");
             }
             if (!password.equals(confirm)) {
                 flag = false;
                 userError.setConfirmError("2 passwords are not matched!");
             }
+            /*if (!agree) {
+                flag = false;
+                userError.setConfirmError("Please hava a look at our policies and tick the agreement box");
+            }*/
             if (flag) {
                 UserDAO dao = new UserDAO();
-                UserDTO user = new UserDTO(userID, fullName, roleID, password, phone, email, address);
+               
+                EmailDAO sm = new EmailDAO();
+                //get the 6-digit code
+                String code = sm.getRandom();
+                UserDTO user = new UserDTO(userID, fullName, roleID, password, phone, email, address, code);
                 dao.insertNew(user);
-                url = SUCCESS;
+                dao.updateCode(user, code);
+                boolean test = sm.sendEmail(user);
+                if (test) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("authcode", user);
+                    url = SUCCESS;
+                } else {
+                    request.setAttribute("ERROR", userError);
+                }
+
             } else {
                 request.setAttribute("ERROR", userError);
             }
-
         } catch (Exception e) {
+
             log("Error at CreateController: " + e.toString());
             if (e.toString().contains("duplicate")) {
                 userError.setUserIDError("UserID duplicate!");
