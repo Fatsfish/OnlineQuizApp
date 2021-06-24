@@ -23,7 +23,7 @@
             <div class="main-agileinfo">
                 <div class="agileits-top">
                     <c:if test="${empty sessionScope.LOGIN_USER}">
-                        Have an account?<a href="login.jsp">Login here!</a>
+                        Have an account?<a href="login.html">Login here!</a>
                     </c:if>
                     <c:if test="${not empty sessionScope.LOGIN_USER}">
                         <form action="MainController"> 

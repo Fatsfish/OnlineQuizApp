@@ -25,7 +25,7 @@
             <c:if test="${empty sessionScope.LOGIN_USER}">
                 <div class="main-agileinfo">
                     <div class="agileits-top">
-                        <p>Have an account? <a href="login.jsp">Login here!</a></p>
+                        <p>Have an account? <a href="login.html">Login here!</a></p>
                     </div>
                 </div>
             </c:if>

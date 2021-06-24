@@ -48,7 +48,7 @@ public class PayPalAuthorizePayment extends HttpServlet {
         UserDAO test = new UserDAO();
         if (user == null) {
             try {
-                user = test.checkLogin("guest", "123456");
+                user = test.checkLogin("james", "123456");
             } catch (SQLException ex) {
                 Logger.getLogger(PayPalAuthorizePayment.class.getName()).log(Level.SEVERE, null, ex);
             }

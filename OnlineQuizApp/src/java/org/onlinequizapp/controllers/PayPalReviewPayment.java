@@ -41,7 +41,7 @@ public class PayPalReviewPayment extends HttpServlet {
             request.setAttribute("shippingAddress", shippingAddress);
 
             String url = "review.jsp?paymentId=" + paymentId + "&PayerID=" + payerId;
-
+            
             request.getRequestDispatcher(url).forward(request, response);
 
         } catch (PayPalRESTException ex) {

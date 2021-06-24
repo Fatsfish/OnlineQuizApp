@@ -1,4 +1,4 @@
-package org.onlinequizapp.daos;
+package org.onlinequizapp.controllers;
 
 import org.onlinequizapp.daos.UserDAO;
 import org.onlinequizapp.dtos.UserDTO;
@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.onlinequizapp.daos.UserDAO;
 
 import org.onlinequizapp.dtos.GooglePojoDTO;
 import org.onlinequizapp.utils.GoogleUtils;
@@ -65,7 +66,7 @@ public class LoginGoogleServlet extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(LoginGoogleServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            RequestDispatcher dis = request.getRequestDispatcher("index.html");
+            RequestDispatcher dis = request.getRequestDispatcher("teacherdashboard.html");
             dis.forward(request, response);
         }
 
