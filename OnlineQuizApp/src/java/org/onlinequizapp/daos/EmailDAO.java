@@ -34,8 +34,8 @@ public class EmailDAO {
         boolean test = false;
 
         String toEmail = user.getEmail();
-        String fromEmail = "tuankhai512@gmail.com";
-        String password = "fatsfishV1";
+        String fromEmail = "bossesonlinequiz@gmail.com";
+        String password = "onlinequizapp123";
 
         try {
 
