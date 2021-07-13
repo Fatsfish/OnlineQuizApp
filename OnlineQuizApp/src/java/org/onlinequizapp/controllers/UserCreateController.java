@@ -25,7 +25,7 @@ import org.onlinequizapp.dtos.UserError;
  * @author User-PC
  */
 @WebServlet(name = "CreateController", urlPatterns = {"/CreateController"})
-public class CreateController extends HttpServlet {
+public class UserCreateController extends HttpServlet {
 
     private static final String SUCCESS = "verify.jsp";
     private static final String ERROR = "register.jsp";
@@ -100,7 +100,7 @@ public class CreateController extends HttpServlet {
 
             log("Error at CreateController: " + e.toString());
             if (e.toString().contains("duplicate")) {
-                userError.setUserIDError("UserID duplicate!");
+                userError.setUserIDError("User Name duplicate!");
                 request.setAttribute("ERROR", userError);
             };
         } finally {
@@ -123,7 +123,7 @@ public class CreateController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(CreateController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserCreateController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -142,7 +142,7 @@ public class CreateController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(CreateController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserCreateController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

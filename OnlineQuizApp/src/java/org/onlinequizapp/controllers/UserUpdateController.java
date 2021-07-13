@@ -8,21 +8,23 @@ package org.onlinequizapp.controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.onlinequizapp.daos.UserDAO;
 import org.onlinequizapp.dtos.UserDTO;
-import javax.servlet.http.HttpSession;
+import org.onlinequizapp.dtos.UserError;
 
 /**
  *
  * @author User-PC
  */
-public class DeleteController extends HttpServlet {
+@WebServlet(name = "UpdateController", urlPatterns = {"/UpdateController"})
+public class UserUpdateController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
     private static final String SUCCESS = "SearchController";
+    private static final String ERROR = "updateUser.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,34 +39,36 @@ public class DeleteController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        HttpSession session = request.getSession();
-        String LogID = "";
-        if (session.getAttribute("LOGIN_USER") != null) {
-            LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
-        }
+        UserError userError = new UserError("", "", "", "", "", "", "", "");
         try {
             String userID = request.getParameter("userID");
+            String fullName = request.getParameter("fullName");
             String roleID = request.getParameter("roleID");
-            if (!LogID.equals(userID)) {
-                UserDAO dao = new UserDAO();
-                if (!roleID.contains("AD")) {
-                    boolean check = dao.deleteUser(userID);
-                    if (check) {
-                        url = SUCCESS;
-                    }
-                } else {
-                    request.setAttribute("DELETE_ERROR", "Cannot delete admin!");
+            UserDAO dao = new UserDAO();
+            UserDTO user = new UserDTO(userID, fullName, roleID, "");
+            boolean flag = true;
+            if (fullName.length() > 250 || fullName.length() < 1) {
+                flag = false;
+                userError.setFullNameError("Full Name must be [1-250]");
+            }
+            if (roleID.length() > 2 || roleID.length() < 1 || (!roleID.equals("G") && !roleID.equals("M") && !roleID.equals("AD"))) {
+                flag = false;
+                userError.setRoleIDError("RoleID must be [1-2] and must be G - guest, M - member or AD - admin");
+            }
+            if (flag) {
+                boolean check = dao.update(user);
+                if (check) {
                     url = SUCCESS;
                 }
             } else {
-                request.setAttribute("DELETE_ERROR", "User is logging in!");
-                url = SUCCESS;
+                request.setAttribute("ERROR", userError);
             }
         } catch (Exception e) {
 
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

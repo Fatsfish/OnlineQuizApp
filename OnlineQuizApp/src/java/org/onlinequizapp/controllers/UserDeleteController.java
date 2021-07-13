@@ -6,22 +6,23 @@
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.onlinequizapp.daos.UserDAO;
+import org.onlinequizapp.dtos.UserDTO;
 import javax.servlet.http.HttpSession;
-import org.onlinequizapp.dtos.CartDTO;
-import org.onlinequizapp.dtos.ProductDTO;
 
 /**
  *
  * @author User-PC
  */
-public class AddController extends HttpServlet {
+public class UserDeleteController extends HttpServlet {
 
-    private static final String SUCCESS = "shopping.jsp";
     private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "SearchController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,25 +37,31 @@ public class AddController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        HttpSession session = request.getSession();
+        String LogID = "";
+        if (session.getAttribute("LOGIN_USER") != null) {
+            LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
+        }
         try {
-            String teaStr = request.getParameter("cmbTea");
-            String tmp[] = teaStr.split("-");
-            String id = tmp[0];
-            String name = tmp[1];
-            double price = Double.parseDouble(tmp[2]);
-            int quantity = 1;
-            ProductDTO tea = new ProductDTO(id, name, quantity, price);
-            HttpSession session = request.getSession(true);
-            CartDTO cart = (CartDTO) session.getAttribute("CART");
-            if (cart == null) {
-                cart = new CartDTO();
+            String userID = request.getParameter("userID");
+            String roleID = request.getParameter("roleID");
+            if (!LogID.equals(userID)) {
+                UserDAO dao = new UserDAO();
+                if (!roleID.contains("AD")) {
+                    boolean check = dao.deleteUser(userID);
+                    if (check) {
+                        url = SUCCESS;
+                    }
+                } else {
+                    request.setAttribute("DELETE_ERROR", "Cannot delete admin!");
+                    url = SUCCESS;
+                }
+            } else {
+                request.setAttribute("DELETE_ERROR", "User is logging in!");
+                url = SUCCESS;
             }
-            cart.add(tea);
-            session.setAttribute("CART", cart);
-            request.setAttribute("MESSAGE", "You have bought " + name + " successfully!");
-            url = SUCCESS;
         } catch (Exception e) {
-            log("Error at AddController " + e.toString());
+
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.onlinequizapp.daos;
+package org.onlinequizapp.dtos;
 
 /**
  *
  * @author User-PC
  */
-public class CommentDAO {
+public class LectureDTO {
     
 }

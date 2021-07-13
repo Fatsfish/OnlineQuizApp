@@ -9,6 +9,6 @@ package org.onlinequizapp.dtos;
  *
  * @author User-PC
  */
-public class CommentDTO {
+public class CourseDetailDTO {
     
 }

@@ -6,25 +6,23 @@
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.onlinequizapp.daos.UserDAO;
-import org.onlinequizapp.dtos.UserDTO;
+import javax.servlet.http.HttpSession;
+import org.onlinequizapp.dtos.CartDTO;
+import org.onlinequizapp.dtos.ProductDTO;
 
 /**
  *
  * @author User-PC
  */
-@WebServlet(name = "SearchController", urlPatterns = {"/SearchController"})
-public class SearchController extends HttpServlet {
+public class ProductEditController extends HttpServlet {
 
-    private static final String SUCCESS = "search.jsp";
-    private static final String ERROR = "404.html";
+    private static final String SUCCESS = "viewCart.jsp";
+    private static final String ERROR = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,21 +38,31 @@ public class SearchController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String search = request.getParameter("search");
-            UserDAO dao = new UserDAO();
-            List<UserDTO> list = dao.getListUser(search);
-            if (list != null) {
-                request.setAttribute("LIST_USER", list);
-                url = SUCCESS;
+            String id = request.getParameter("id");
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            if (quantity < 0) {
+                quantity = 0;
             }
-        } catch (SQLException e) {
-            log("Error at SearchController: " + e.toString());
+            HttpSession session = request.getSession();
+            CartDTO cart = (CartDTO) session.getAttribute("CART");
+            ProductDTO teaDTO = null;
+            for (ProductDTO tea : cart.getCart().values()) {
+                if (tea.getId().equals(id)) {
+                    teaDTO = new ProductDTO(id, tea.getName(), quantity, tea.getPrice());
+                    break;
+                }
+            }
+            cart.update(id, teaDTO);
+            session.setAttribute("CART", cart);
+            url = SUCCESS;
+        } catch (Exception e) {
+
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
