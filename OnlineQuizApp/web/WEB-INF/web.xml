@@ -14,19 +14,19 @@
     </servlet>
     <servlet>
         <servlet-name>DeleteController</servlet-name>
-        <servlet-class>org.onlinequizapp.controllers.DeleteController</servlet-class>
+        <servlet-class>org.onlinequizapp.controllers.UserDeleteController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddController</servlet-name>
-        <servlet-class>org.onlinequizapp.controllers.AddController</servlet-class>
+        <servlet-class>org.onlinequizapp.controllers.ProductAddController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RemoveController</servlet-name>
-        <servlet-class>org.onlinequizapp.controllers.RemoveController</servlet-class>
+        <servlet-class>org.onlinequizapp.controllers.ProductRemoveController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditController</servlet-name>
-        <servlet-class>org.onlinequizapp.controllers.EditController</servlet-class>
+        <servlet-class>org.onlinequizapp.controllers.ProductEditController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>VerificationController</servlet-name>

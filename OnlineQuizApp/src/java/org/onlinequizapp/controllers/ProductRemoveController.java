@@ -18,7 +18,7 @@ import org.onlinequizapp.dtos.CartDTO;
  *
  * @author User-PC
  */
-public class RemoveController extends HttpServlet {
+public class ProductRemoveController extends HttpServlet {
 
     private static final String SUCCESS = "viewCart.jsp";
     private static final String ERROR = "error.jsp";

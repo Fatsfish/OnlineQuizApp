@@ -6,25 +6,22 @@
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.onlinequizapp.daos.UserDAO;
-import org.onlinequizapp.dtos.UserDTO;
-import org.onlinequizapp.dtos.UserError;
+import javax.servlet.http.HttpSession;
+import org.onlinequizapp.dtos.CartDTO;
+import org.onlinequizapp.dtos.ProductDTO;
 
 /**
  *
  * @author User-PC
  */
-@WebServlet(name = "UpdateController", urlPatterns = {"/UpdateController"})
-public class UpdateController extends HttpServlet {
+public class ProductAddController extends HttpServlet {
 
-    private static final String SUCCESS = "SearchController";
-    private static final String ERROR = "updateUser.jsp";
+    private static final String SUCCESS = "shopping.jsp";
+    private static final String ERROR = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,36 +36,28 @@ public class UpdateController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        UserError userError = new UserError("", "", "", "", "", "", "", "");
         try {
-            String userID = request.getParameter("userID");
-            String fullName = request.getParameter("fullName");
-            String roleID = request.getParameter("roleID");
-            UserDAO dao = new UserDAO();
-            UserDTO user = new UserDTO(userID, fullName, roleID, "");
-            boolean flag = true;
-            if (fullName.length() > 250 || fullName.length() < 1) {
-                flag = false;
-                userError.setFullNameError("Full Name must be [1-250]");
+            String teaStr = request.getParameter("cmbTea");
+            String tmp[] = teaStr.split("-");
+            String id = tmp[0];
+            String name = tmp[1];
+            double price = Double.parseDouble(tmp[2]);
+            int quantity = 1;
+            ProductDTO tea = new ProductDTO(id, name, quantity, price);
+            HttpSession session = request.getSession(true);
+            CartDTO cart = (CartDTO) session.getAttribute("CART");
+            if (cart == null) {
+                cart = new CartDTO();
             }
-            if (roleID.length() > 2 || roleID.length() < 1 || (!roleID.equals("G") && !roleID.equals("M") && !roleID.equals("AD"))) {
-                flag = false;
-                userError.setRoleIDError("RoleID must be [1-2] and must be G - guest, M - member or AD - admin");
-            }
-            if (flag) {
-                boolean check = dao.update(user);
-                if (check) {
-                    url = SUCCESS;
-                }
-            } else {
-                request.setAttribute("ERROR", userError);
-            }
+            cart.add(tea);
+            session.setAttribute("CART", cart);
+            request.setAttribute("MESSAGE", "You have bought " + name + " successfully!");
+            url = SUCCESS;
         } catch (Exception e) {
-
+            log("Error at AddController " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
