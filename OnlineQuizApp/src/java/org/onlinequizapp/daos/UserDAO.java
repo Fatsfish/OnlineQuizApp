@@ -93,6 +93,8 @@ public class UserDAO {
         }
         return listUser;
     }
+    
+    
 
     public boolean deleteUser(String userID) throws SQLException {
         boolean check = false;
@@ -192,7 +194,35 @@ public class UserDAO {
                         + " Where userID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, code);
-                stm.setString(1, user.getUserID());
+                stm.setString(2, user.getUserID());
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+
+        } catch (Exception e) {
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public boolean updatePass(UserDTO user, String pass) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPdaTE tblUser SET password=? "
+                        + " Where userID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, pass);
+                stm.setString(2, user.getUserID());
                 check = stm.executeUpdate() > 0 ? true : false;
             }
 

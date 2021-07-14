@@ -7,7 +7,9 @@ package org.onlinequizapp.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,11 +23,11 @@ import org.onlinequizapp.dtos.UserError;
  *
  * @author User-PC
  */
-public class CodeVerify extends HttpServlet {
+@WebServlet(name = "UserResetController", urlPatterns = {"/UserResetController"})
+public class UserResetController extends HttpServlet {
 
-    private static final String SUCCESS = "login.html";
-    private static final String ERROR = "verify.jsp";
-    private static final String ERROR1 = "resetPass.jsp";
+    private static final String SUCCESS = "resetPass.jsp";
+    private static final String ERROR = "forgot-password.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,41 +42,41 @@ public class CodeVerify extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        UserError userError = new UserError("", "", "", "", "", "", "", "");
         try {
-            HttpSession session = request.getSession();
-            UserDTO user = (UserDTO) session.getAttribute("authcode");
-            String code = request.getParameter("authcode");
-            String Pass = (String) session.getAttribute("Pass");
-            String Password = request.getParameter("Password");
-            String Confirm = request.getParameter("Confirm");
+            String email = request.getParameter("email");
+            String userID = request.getParameter("username");
 
-            if (code.equals(user.getVerification())) {
-                if (Pass.equalsIgnoreCase("Create")) {
-                    UserDAO userdao = new UserDAO();
-                    userdao.updateEnable(user);
-                    if (userdao.updateEnable(user)) {
-                        url = SUCCESS;
-                    } else {
-                        url = ERROR;
-                        request.setAttribute("ERROR", "The Verification has met an exception, please try again or contact support team!");
-                    }
-                } else if (Pass.equalsIgnoreCase("Reset")) {
-                    if (Password.equals(Confirm)) {
-                        UserDAO userdao = new UserDAO();
-                        userdao.updatePass(user, Password);
-                        if (userdao.updatePass(user, Password)) {
-                            url = SUCCESS;
-                        } else {
-                            url = ERROR1;
-                            request.setAttribute("ERROR", "The Verification has met an exception, please try again or contact support team!");
-                        }
-                    }
+            UserDAO dao = new UserDAO();
+            UserDTO user = null;
+            EmailDAO sm = new EmailDAO();
+            //get the 6-digit code
+            String code = sm.getRandom();
+            List<UserDTO> userList = dao.getListUser("");
+            for (UserDTO x : userList) {
+                if (x.getUserID().equalsIgnoreCase(userID) && x.getEmail().equalsIgnoreCase(email)) {
+                    user = x;
+                }
+            }
+            if (user != null) {
+                dao.updateCode(user, code);
+                user = new UserDTO(user.getUserID(),user.getFullname(),user.getRole(),user.getPassword(),user.getPhone(),user.getEmail(),user.getAddress(),code);
+                boolean test = sm.sendEmail(user, code);
+                if (test) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("authcode", user);
+                    session.setAttribute("Pass", "Reset");
+                    url = SUCCESS;
+                } else {
+                    request.setAttribute("ERROR", userError);
                 }
             } else {
-                request.setAttribute("ERROR", "The verification code is either wrong, expired or used. Please check your verification code again!");
+                request.setAttribute("ERROR", "Cannot find user or user does not exist!");
             }
         } catch (Exception e) {
-            log("Error at CodeVerifyController: " + e.toString());
+            log("Error at CreateController: " + e.toString());
+            request.setAttribute("ERROR", e);
+
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

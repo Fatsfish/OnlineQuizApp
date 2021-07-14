@@ -84,10 +84,11 @@ public class UserCreateController extends HttpServlet {
                 UserDTO user = new UserDTO(userID, fullName, roleID, password, phone, email, address, code);
                 dao.insertNew(user);
                 dao.updateCode(user, code);
-                boolean test = sm.sendEmail(user);
+                boolean test = sm.sendEmail(user, code);
                 if (test) {
                     HttpSession session = request.getSession();
                     session.setAttribute("authcode", user);
+                    session.setAttribute("Pass", "Create");
                     url = SUCCESS;
                 } else {
                     request.setAttribute("ERROR", userError);

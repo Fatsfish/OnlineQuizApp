@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Forgot Password</title>
+    <title>Reset Password</title>
 
     <!-- Custom fonts for this template-->
     <link href="Dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -39,21 +39,25 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
-                                        <p class="mb-4">We get it, stuff happens. Just enter your email address below
-                                            and we'll send you a link to reset your password!</p>
+                                        <h1 class="h4 text-gray-900 mb-2">Finish your final step!</h1>
+                                        <p class="mb-4">Please enter your new password with confirmation and Verification code below
+                                            and you're good to go!</p>
                                     </div>
-                                    <form class="user" action="UserResetController" method="post">
+           
+                                    <form class="user" action="CodeVerify" method="post">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control form-control-user"
+                                            <input type="text" name="authcode" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
-                                            <input type="text" name="username" class="form-control form-control-user"
+                                                placeholder="Enter Verification Code...">  
+                                            <input type="password" name="Password" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter username...">
+                                                placeholder="Enter new Password ...">  
+                                            <input type="password" name="Confirm" class="form-control form-control-user"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Confirm new Password ...">
                                         </div>
-                                            <input type="submit" value="Reset Password" class="btn btn-primary btn-user btn-block">
-
+                                        <input type="submit" value="Reset" class="btn btn-primary btn-user btn-block">
+                                        
                                     </form>
                                     <hr>
                                     <div class="text-center">
