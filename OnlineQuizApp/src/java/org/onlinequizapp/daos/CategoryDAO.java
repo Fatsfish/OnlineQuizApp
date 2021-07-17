@@ -81,7 +81,7 @@ public class CategoryDAO {
                 stm.setString(1, "%" + search + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    int categoryID = rs.getInt("categoryID");
+                    String categoryID = rs.getString("categoryID");
                     String categoryName = rs.getString("categoryName");
                     String description = rs.getString("description");
                     String status = rs.getString("status");
@@ -274,7 +274,7 @@ public class CategoryDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 if (status == true) {
-                    String sql = "UPdaTE tblCategory SET status='1' "
+                    String sql = "UPdaTE tblCategoryBlog SET status='1' "
                             + " Where categoryID=?";
                     stm = conn.prepareStatement(sql);
                     stm.setInt(1, ID);
@@ -301,7 +301,7 @@ public class CategoryDAO {
         return check;
     }
 
-    public boolean checkDuplicate(String userID) throws SQLException {
+    public boolean checkDuplicateQ(String ID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -309,11 +309,11 @@ public class CategoryDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Select userID "
-                        + " FROM tblUser "
-                        + " Where UserID=?";
+                String sql = "Select categoryID "
+                        + " FROM tblCategory "
+                        + " Where categoryID=?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, userID);
+                stm.setString(1, ID);
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     check = true;
@@ -335,19 +335,78 @@ public class CategoryDAO {
         return check;
     }
 
-    public void insert(UserDTO user) throws SQLException {
+    public boolean checkDuplicateB(String ID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Select categoryID "
+                        + " FROM tblCategoryBlog "
+                        + " Where categoryID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, ID);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public void insertQ(CategoryDTO cate) throws SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblUser(userID, fullName, roleID, password) "
+                String sql = "INSERT INTO tblCategory( categoryName, description, level, status) "
                         + " VALUES(\'?\',\'?\',\'?\',\'?\')";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, user.getUserID());
-                stm.setString(2, user.getFullname());
-                stm.setString(3, user.getRole());
-                stm.setString(4, user.getPassword());
+                stm.setString(1, cate.getCategoryName());
+                stm.setString(2, cate.getDescription());
+                stm.setString(3, cate.getLevel());
+                stm.setString(4, cate.getStatus());
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    
+    public void insertB(CategoryDTO cate) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "INSERT INTO tblCategory( categoryName, description, status) "
+                        + " VALUES(\'?\',\'?\',\'?\')";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, cate.getCategoryName());
+                stm.setString(2, cate.getDescription());
+                stm.setString(3, cate.getStatus());
             }
         } catch (Exception e) {
 
