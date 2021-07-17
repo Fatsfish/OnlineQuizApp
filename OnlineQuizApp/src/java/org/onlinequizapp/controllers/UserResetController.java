@@ -52,7 +52,7 @@ public class UserResetController extends HttpServlet {
             EmailDAO sm = new EmailDAO();
             //get the 6-digit code
             String code = sm.getRandom();
-            List<UserDTO> userList = dao.getListUser("");
+            List<UserDTO> userList = dao.getList("");
             for (UserDTO x : userList) {
                 if (x.getUserID().equalsIgnoreCase(userID) && x.getEmail().equalsIgnoreCase(email)) {
                     user = x;

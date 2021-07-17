@@ -95,7 +95,7 @@ public class BlogDAO {
         return listBlog;
     }
 
-    public boolean deleteUser(String BlogID) throws SQLException {
+    public boolean deleteBlog(String BlogID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
