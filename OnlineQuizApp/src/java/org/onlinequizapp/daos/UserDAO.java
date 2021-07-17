@@ -47,7 +47,7 @@ public class UserDAO {
         return user;
     }
 
-    public List<UserDTO> getListUser(String search) throws SQLException {
+    public List<UserDTO> getList(String search) throws SQLException {
         List<UserDTO> listUser = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -93,10 +93,8 @@ public class UserDAO {
         }
         return listUser;
     }
-    
-    
-
-    public boolean deleteUser(String userID) throws SQLException {
+  
+    public boolean delete(String userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;

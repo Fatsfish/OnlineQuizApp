@@ -42,7 +42,7 @@ public class UserSearchController extends HttpServlet {
         try {
             String search = request.getParameter("search");
             UserDAO dao = new UserDAO();
-            List<UserDTO> list = dao.getListUser(search);
+            List<UserDTO> list = dao.getList(search);
             if (list != null) {
                 request.setAttribute("LIST_USER", list);
                 url = SUCCESS;

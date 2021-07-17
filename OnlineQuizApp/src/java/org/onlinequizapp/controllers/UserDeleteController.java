@@ -48,7 +48,7 @@ public class UserDeleteController extends HttpServlet {
             if (!LogID.equals(userID)) {
                 UserDAO dao = new UserDAO();
                 if (!roleID.contains("AD")) {
-                    boolean check = dao.deleteUser(userID);
+                    boolean check = dao.delete(userID);
                     if (check) {
                         url = SUCCESS;
                     }
