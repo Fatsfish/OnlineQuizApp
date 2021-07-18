@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.onlinequizapp.dtos.QuizDTO;
-import org.onlinequizapp.dtos.UserDTO;
+import org.onlinequizapp.dtos.QuizDetailDTO;
 import org.onlinequizapp.utils.DBUtils;
 
 /**
@@ -30,7 +30,7 @@ public class QuizDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "Select QuizID, Name, Description , NumberOfQuestions, TotalMark, Status, "
-                        + "AuthorID, ClassID" + "from tblQuiz " + "WHERE Name like ?";
+                        + "AuthorID, ClassID from tblQuiz WHERE Name like ?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, "%" + search + "%");
                 rs = stm.executeQuery();
@@ -68,29 +68,29 @@ public class QuizDAO {
         return listQuiz;
     }
 
-    public List<QuizDTO> getListB(String search) throws SQLException {
-        List<QuizDTO> listQuiz = null;
+    public List<QuizDetailDTO> getListQD(String search) throws SQLException {
+        List<QuizDetailDTO> listQuiz = null;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Select QuizID, Name, Description, Status "
+                String sql = "Select QuizID, questionID, Time, Mark "
                         + "from tblQuizDetail "
-                        + "WHERE Name like ?";
+                        + "WHERE quizID like ?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, "%" + search + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    int QuizID = rs.getInt("QuizID");
-                    String Name = rs.getString("Name");
-                    String Description = rs.getString("Description");
-                    String Status = rs.getString("Status");
+                    String QuizID = rs.getString("QuizID");
+                    String questionID = rs.getString("questionID");
+                    String Time = rs.getString("Time");
+                    String Mark = rs.getString("Mark");
                     if (listQuiz == null) {
                         listQuiz = new ArrayList<>();
                     }
-                    listQuiz.add(new QuizDTO(QuizID, Name, Description, Status));
+                    listQuiz.add(new QuizDetailDTO(QuizID, questionID, Time, Mark));
 
                 }
             }
@@ -143,7 +143,7 @@ public class QuizDAO {
         return check;
     }
 
-    public boolean deleteB(String ID) throws SQLException {
+    public boolean deleteQD(String ID, String QID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -152,9 +152,10 @@ public class QuizDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "DELETE tblQuizDetail "
-                        + "Where QuizID=?";
+                        + "Where QuizID=? and QuestionID=? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, ID);
+                stm.setString(2, QID);
                 check = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (ClassNotFoundException | SQLException e) {
@@ -181,13 +182,17 @@ public class QuizDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPdaTE tblQuiz SET Name=?, Description=?, level=?, Status=? "
-                        + " Where userID=?";
+                String sql = "UPdaTE tblQuiz SET Name=?, Description=?, NumberOfQuestions=?, TotalMark=?, AuthorID=?, Status=?, ClassID=? "
+                        + " Where quizID=?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, quiz.getQuizName());
+                stm.setString(1, quiz.getName());
                 stm.setString(2, quiz.getDescription());
-                stm.setString(3, quiz.getLevel());
-                stm.setString(4, quiz.getStatus());
+                stm.setString(3, quiz.getNumberOfQuestions());
+                stm.setString(4, quiz.getTotalMark());
+                stm.setString(5, quiz.getAuthorID());
+                stm.setString(6, quiz.getStatus());
+                stm.setString(7, quiz.getClassID());
+                stm.setString(8, quiz.getQuizID());
                 check = stm.executeUpdate() > 0 ? true : false;
             }
 
@@ -204,19 +209,21 @@ public class QuizDAO {
         return check;
     }
 
-    public boolean updateB(QuizDTO quiz) throws SQLException {
+    public boolean updateQD(QuizDetailDTO quiz, String QID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPdaTE tblQuizDetail SET Name=?, Description=?, Status=? "
-                        + " Where userID=?";
+                String sql = "UPdaTE tblQuizDetail SET Time=?, Mark=?, QuestionID=? "
+                        + " Where QuizID=? and questionID=? ";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, quiz.getQuizName());
-                stm.setString(2, quiz.getDescription());
-                stm.setString(3, quiz.getStatus());
+                stm.setString(1, quiz.getTime());
+                stm.setString(2, quiz.getMark());
+                stm.setString(3, quiz.getQuestionID());
+                stm.setString(4, quiz.getQuizID());
+                stm.setString(5, QID);
                 check = stm.executeUpdate() > 0 ? true : false;
             }
 
@@ -233,100 +240,26 @@ public class QuizDAO {
         return check;
     }
 
-    public boolean updateEnableQ(int ID, boolean Status) throws SQLException {
-        boolean check = false;
+    public void insertQ(QuizDTO quiz) throws SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                if (Status == true) {
-                    String sql = "UPdaTE tblQuiz SET Status='1' "
-                            + " Where QuizID=?";
-                    stm = conn.prepareStatement(sql);
-                    stm.setInt(1, ID);
-                    check = stm.executeUpdate() > 0 ? true : false;
-                } else if (Status == false) {
-                    String sql = "UPdaTE tblQuiz SET Status='0' "
-                            + " Where QuizID=?";
-                    stm = conn.prepareStatement(sql);
-                    stm.setInt(1, ID);
-                    check = stm.executeUpdate() > 0 ? true : false;
-                }
-            }
-
-        } catch (Exception e) {
-
-        } finally {
-            if (stm != null) {
-                stm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        return check;
-    }
-
-    public boolean updateEnableB(int ID, boolean Status) throws SQLException {
-        boolean check = false;
-        Connection conn = null;
-        PreparedStatement stm = null;
-        try {
-            conn = DBUtils.getConnection();
-            if (conn != null) {
-                if (Status == true) {
-                    String sql = "UPdaTE tblQuiz SET Status='1' "
-                            + " Where QuizID=?";
-                    stm = conn.prepareStatement(sql);
-                    stm.setInt(1, ID);
-                    check = stm.executeUpdate() > 0 ? true : false;
-                } else if (Status == false) {
-                    String sql = "UPdaTE tblQuiz SET Status='0' "
-                            + " Where QuizID=?";
-                    stm = conn.prepareStatement(sql);
-                    stm.setInt(1, ID);
-                    check = stm.executeUpdate() > 0 ? true : false;
-                }
-            }
-
-        } catch (Exception e) {
-
-        } finally {
-            if (stm != null) {
-                stm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        return check;
-    }
-
-    public boolean checkDuplicate(String userID) throws SQLException {
-        boolean check = false;
-        Connection conn = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        try {
-            conn = DBUtils.getConnection();
-            if (conn != null) {
-                String sql = "Select userID "
-                        + " FROM tblUser "
-                        + " Where UserID=?";
+                String sql = "INSERT INTO tblQuiz(Name, NumberOfQuestions, Description, TotalMark, AuthorID, Status, ClassID ) "
+                        + " VALUES(\'?\',\'?\',\'?\',\'?\',\'?\',\'1\',\'?\')";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, userID);
-                rs = stm.executeQuery();
-                if (rs.next()) {
-                    check = true;
-                }
+                stm.setString(1, quiz.getName());
+                stm.setString(2, quiz.getNumberOfQuestions());
+                stm.setString(3, quiz.getDescription());
+                stm.setString(4, quiz.getTotalMark());
+                stm.setString(5, quiz.getTotalMark());
+                stm.setString(6, quiz.getAuthorID());
+                stm.setString(7, quiz.getClassID());
             }
         } catch (Exception e) {
 
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
             if (stm != null) {
                 stm.close();
             }
@@ -334,22 +267,22 @@ public class QuizDAO {
                 conn.close();
             }
         }
-        return check;
     }
-
-    public void insert(UserDTO user) throws SQLException {
+    
+    public void insertQD(QuizDetailDTO quiz) throws SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblUser(userID, fullName, roleID, password) "
+                String sql = "INSERT INTO tblQuizDetail(QuizID, QuestionID, Time, Mark ) "
                         + " VALUES(\'?\',\'?\',\'?\',\'?\')";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, user.getUserID());
-                stm.setString(2, user.getFullname());
-                stm.setString(3, user.getRole());
-                stm.setString(4, user.getPassword());
+                stm.setString(1, quiz.getQuizID());
+                stm.setString(2, quiz.getQuestionID());
+                stm.setString(3, quiz.getTime());
+                stm.setString(4, quiz.getMark());
+              
             }
         } catch (Exception e) {
 
@@ -363,4 +296,38 @@ public class QuizDAO {
         }
     }
 
+    public boolean updateEnableQ(int ID, boolean status) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                if (status == true) {
+                    String sql = "UPdaTE tblQuiz SET status='1' "
+                            + " Where quizID=?";
+                    stm = conn.prepareStatement(sql);
+                    stm.setInt(1, ID);
+                    check = stm.executeUpdate() > 0 ? true : false;
+                } else if (status == false) {
+                    String sql = "UPdaTE tblQuiz SET status='0' "
+                            + " Where QuizID=?";
+                    stm = conn.prepareStatement(sql);
+                    stm.setInt(1, ID);
+                    check = stm.executeUpdate() > 0 ? true : false;
+                }
+            }
+
+        } catch (Exception e) {
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 }

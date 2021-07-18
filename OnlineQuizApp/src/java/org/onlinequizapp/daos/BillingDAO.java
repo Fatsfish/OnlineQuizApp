@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author User-PC
  */
-public class OrderDAO {
+public class BillingDAO {
 
     public OrderDTO get(String orderID) throws SQLException {
         OrderDTO order = null;

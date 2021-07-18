@@ -8,8 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import com.paypal.base.rest.PayPalRESTException;
-import org.onlinequizapp.daos.OrderDAO;
-import org.onlinequizapp.daos.ProductDAO;
+import org.onlinequizapp.daos.BillingDAO;
+import org.onlinequizapp.daos.ServiceDAO;
 import org.onlinequizapp.daos.UserDAO;
 import org.onlinequizapp.dtos.CartDTO;
 import org.onlinequizapp.dtos.OrderDTO;
@@ -40,7 +40,7 @@ public class PayPalAuthorizePayment extends HttpServlet {
         HttpSession session = request.getSession(true);
         UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
         CartDTO cart = (CartDTO) session.getAttribute("CART");
-        ProductDAO flowerdao = null;
+        ServiceDAO flowerdao = null;
         boolean check = false;
         if (cart == null) {
             cart = new CartDTO();
@@ -79,7 +79,7 @@ public class PayPalAuthorizePayment extends HttpServlet {
             list.add(orderDetail);
         }*/
         OrderDTO dto = new OrderDTO(user.getUserID(), "CURRENT_TIMESTAMP", total);
-        OrderDAO dao = new OrderDAO();
+        BillingDAO dao = new BillingDAO();
         try {
             dao.insert(dto);
         } catch (SQLException ex) {

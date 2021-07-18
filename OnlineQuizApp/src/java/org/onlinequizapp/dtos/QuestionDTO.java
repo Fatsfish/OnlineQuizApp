@@ -16,8 +16,8 @@ public class QuestionDTO implements Serializable {
     private String Status;
     private String categoryID;
    
-    public QuestionDTO(String QuestionID, String Name, String Description, String Answer, 
-            String AuthorID, String Question1, String Question2, String Question3, String Question4, String Status, String categoryID) {
+    public QuestionDTO(String QuestionID, String Name, String Question1, String Question2, String Question3, String Question4, String Description, String Answer, 
+            String AuthorID, String Status, String categoryID) {
         
         this.QuestionID = QuestionID;
         this.Name = Name;

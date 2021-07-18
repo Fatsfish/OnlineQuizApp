@@ -18,7 +18,7 @@ import org.onlinequizapp.utils.DBUtils;
  *
  * @author User-PC
  */
-public class ProductDAO {
+public class ServiceDAO {
 
     public ProductDTO get(int productID) throws SQLException {
         ProductDTO product = null;
