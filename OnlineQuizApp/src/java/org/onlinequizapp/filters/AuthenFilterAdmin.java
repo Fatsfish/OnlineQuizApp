@@ -25,10 +25,10 @@ import org.onlinequizapp.dtos.UserDTO;
  *
  * @author User-PC
  */
-@WebFilter(filterName = "AuthenFilter", urlPatterns = {"/search.jsp"})
-public class AuthenFilter implements Filter {
+@WebFilter(filterName = "AuthenFilterAdmin", urlPatterns = {"/dashboardadmin.html", "/search.jsp"})
+public class AuthenFilterAdmin implements Filter {
 
-    private static final String lOGIN = "login.jsp";
+    private static final String lOGIN = "login.html";
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
@@ -36,13 +36,13 @@ public class AuthenFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
 
-    public AuthenFilter() {
+    public AuthenFilterAdmin() {
     }
 
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("AuthenFilter:DoBeforeProcessing");
+            log("AuthenFilterAdmin:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -70,7 +70,7 @@ public class AuthenFilter implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("AuthenFilter:DoAfterProcessing");
+            log("AuthenFilterAdmin:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -115,6 +115,9 @@ public class AuthenFilter implements Filter {
         }
     }
 
+    /**
+     * Return the filter configuration object for this filter.
+     */
     public FilterConfig getFilterConfig() {
         return (this.filterConfig);
     }
@@ -141,7 +144,7 @@ public class AuthenFilter implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {
-                log("AuthenFilter:Initializing filter");
+                log("AuthenFilterAdmin:Initializing filter");
             }
         }
     }
@@ -152,9 +155,9 @@ public class AuthenFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("AuthenFilter()");
+            return ("AuthenFilterAdmin()");
         }
-        StringBuffer sb = new StringBuffer("AuthenFilter(");
+        StringBuffer sb = new StringBuffer("AuthenFilterAdmin(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
@@ -166,7 +169,7 @@ public class AuthenFilter implements Filter {
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
-                /*PrintStream ps = new PrintStream(response.getOutputStream());
+                PrintStream ps = new PrintStream(response.getOutputStream());
                 PrintWriter pw = new PrintWriter(ps);
                 pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
 
@@ -176,15 +179,15 @@ public class AuthenFilter implements Filter {
                 pw.print("</pre></body>\n</html>"); //NOI18N
                 pw.close();
                 ps.close();
-                response.getOutputStream().close();*/
+                response.getOutputStream().close();
             } catch (Exception ex) {
             }
         } else {
             try {
-               /* PrintStream ps = new PrintStream(response.getOutputStream());
+                PrintStream ps = new PrintStream(response.getOutputStream());
                 t.printStackTrace(ps);
                 ps.close();
-                response.getOutputStream().close();*/
+                response.getOutputStream().close();
             } catch (Exception ex) {
             }
         }
@@ -193,12 +196,12 @@ public class AuthenFilter implements Filter {
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
-           /* StringWriter sw = new StringWriter();
+            StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             t.printStackTrace(pw);
             pw.close();
             sw.close();
-            stackTrace = sw.getBuffer().toString();*/
+            stackTrace = sw.getBuffer().toString();
         } catch (Exception ex) {
         }
         return stackTrace;

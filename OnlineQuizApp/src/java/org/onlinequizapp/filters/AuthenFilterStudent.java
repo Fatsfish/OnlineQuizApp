@@ -25,10 +25,10 @@ import org.onlinequizapp.dtos.UserDTO;
  *
  * @author User-PC
  */
-@WebFilter(filterName = "AuthenFilter", urlPatterns = {"/search.jsp"})
-public class AuthenFilter implements Filter {
+@WebFilter(filterName = "AuthenFilterStudent", urlPatterns = {"/dashboardstudent.html"})
+public class AuthenFilterStudent implements Filter {
 
-    private static final String lOGIN = "login.jsp";
+    private static final String lOGIN = "login.html";
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
@@ -36,7 +36,7 @@ public class AuthenFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
 
-    public AuthenFilter() {
+    public AuthenFilterStudent() {
     }
 
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
@@ -108,7 +108,8 @@ public class AuthenFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
         if (session != null && session.getAttribute("LOGIN_USER") != null
-                && ((UserDTO) session.getAttribute("LOGIN_USER")).getRole().contains("AD")) {
+                && (((UserDTO) session.getAttribute("LOGIN_USER")).getRole().contains("S")
+                || ((UserDTO) session.getAttribute("LOGIN_USER")).getRole().contains("G"))) {
             chain.doFilter(request, response);
         } else {
             res.sendRedirect(lOGIN);
@@ -166,7 +167,7 @@ public class AuthenFilter implements Filter {
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
-                /*PrintStream ps = new PrintStream(response.getOutputStream());
+                PrintStream ps = new PrintStream(response.getOutputStream());
                 PrintWriter pw = new PrintWriter(ps);
                 pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
 
@@ -176,15 +177,15 @@ public class AuthenFilter implements Filter {
                 pw.print("</pre></body>\n</html>"); //NOI18N
                 pw.close();
                 ps.close();
-                response.getOutputStream().close();*/
+                response.getOutputStream().close();
             } catch (Exception ex) {
             }
         } else {
             try {
-               /* PrintStream ps = new PrintStream(response.getOutputStream());
+                PrintStream ps = new PrintStream(response.getOutputStream());
                 t.printStackTrace(ps);
                 ps.close();
-                response.getOutputStream().close();*/
+                response.getOutputStream().close();
             } catch (Exception ex) {
             }
         }
@@ -193,12 +194,12 @@ public class AuthenFilter implements Filter {
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
-           /* StringWriter sw = new StringWriter();
+            StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             t.printStackTrace(pw);
             pw.close();
             sw.close();
-            stackTrace = sw.getBuffer().toString();*/
+            stackTrace = sw.getBuffer().toString();
         } catch (Exception ex) {
         }
         return stackTrace;
