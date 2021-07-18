@@ -1,6 +1,8 @@
 package org.onlinequizapp.dtos;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -10,11 +12,11 @@ public class ScoreDTO implements Serializable{
 
     private String QuizID;
     private String UserID;
-    private String StartTime;
-    private String EndTime;
+    private Timestamp StartTime;
+    private Timestamp EndTime;
     private String Mark;
 
-    public ScoreDTO(String QuizID, String UserID, String StartTime, String EndTime, String Mark) {
+    public ScoreDTO(String QuizID, String UserID, Timestamp StartTime, Timestamp EndTime, String Mark) {
         this.QuizID = QuizID;
         this.UserID = UserID;
         this.StartTime = StartTime;
@@ -42,19 +44,19 @@ public class ScoreDTO implements Serializable{
         this.UserID = UserID;
     }
 
-    public String getStartTime() {
+    public Timestamp getStartTime() {
         return StartTime;
     }
 
-    public void setStartTime(String StartTime) {
+    public void setStartTime(Timestamp StartTime) {
         this.StartTime = StartTime;
     }
 
-    public String getEndTime() {
+    public Timestamp getEndTime() {
         return EndTime;
     }
 
-    public void setEndTime(String EndTime) {
+    public void setEndTime(Timestamp EndTime) {
         this.EndTime = EndTime;
     }
 
