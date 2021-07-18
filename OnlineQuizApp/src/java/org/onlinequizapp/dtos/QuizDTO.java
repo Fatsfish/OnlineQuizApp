@@ -17,8 +17,9 @@ public class QuizDTO {
     private String totalMark;
     private String authorID;
     private String status;
-
-    public QuizDTO(String quizID, String name, String numberOfQuestions, String description, String totalMark, String authorID, String status) {
+    private String classID;
+    
+    public QuizDTO(String quizID, String name, String numberOfQuestions, String description, String totalMark, String authorID, String status,String classID) {
         this.quizID = quizID;
         this.name = name;
         this.numberOfQuestions = numberOfQuestions;
@@ -26,10 +27,15 @@ public class QuizDTO {
         this.totalMark = totalMark;
         this.authorID = authorID;
         this.status = status;
+        this.classID = classID;
     }
 
     public String getQuizID() {
         return quizID;
+    }
+
+    public String getClassID() {
+        return classID;
     }
 
     public void setQuizID(String quizID) {
@@ -66,6 +72,10 @@ public class QuizDTO {
 
     public void setTotalMark(String totalMark) {
         this.totalMark = totalMark;
+    }
+
+    public void setClassID(String classID) {
+        this.classID = classID;
     }
 
     public String getAuthorID() {
