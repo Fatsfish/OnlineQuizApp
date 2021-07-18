@@ -25,10 +25,10 @@ import org.onlinequizapp.dtos.UserDTO;
  *
  * @author User-PC
  */
-@WebFilter(filterName = "AuthenFilter", urlPatterns = {"/search.jsp"})
+@WebFilter(filterName = "AuthenFilter", urlPatterns = {"/admindashboard.html"})
 public class AuthenFilter implements Filter {
 
-    private static final String lOGIN = "login.jsp";
+    private static final String lOGIN = "login.html";
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If

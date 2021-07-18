@@ -1,7 +1,9 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="org.onlinequizapp.daos.UserDAO"%>
-<%@page import="java.util.List"%>
-<%@page import="org.onlinequizapp.dtos.UserDTO"%>
+<%-- 
+    Document   : dashboardstudent
+    Created on : Jul 18, 2021, 10:54:34 PM
+    Author     : User-PC
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,155 +16,161 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Online Quiz App - Search</title>
+    <title>Student Dashboard</title>
 
-    <!-- Custom fonts for this template -->
+    <!-- Custom fonts for this template-->
     <link href="Dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this template-->
     <link href="Dashboard/css/sb-admin-2.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this page -->
-    <link href="Dashboard/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-</head>
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=xIVuE_ozcCbrLGQAd1YjNY1igi-S1CP43nAyco0T9KUWFR3DP241sUoqhQ28Nssb8MOc0_NyzWD288uw8Cz4sN0QniEuCntlBi0CAvP5xnn5VdUYvUQSSJDej7gynFp5V1xRJ2xvsjNwq0MH-RIZRi182jYBUfRLtxDXpsJLL34" charset="UTF-8"></script></head>
 
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-         <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                    <div class="sidebar-brand-icon">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <div class="sidebar-brand-text mx-3">Admin</div>
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Student</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Learn
+            </div>
+
+            <!-- Nav Item - Courses Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourses"
+                    aria-expanded="true" aria-controls="collapseCourses">
+                    <i class="fas fa-fw fa-book"></i>
+                    <span>Courses</span>
                 </a>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0">
-
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item">
-                    <a class="nav-link" href="admindashboard.html">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Learn
-                </div>
-
-                <!-- Nav Item - Courses Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourses"
-                       aria-expanded="false" aria-controls="collapseCourses">
-                        <i class="fas fa-fw fa-book"></i>
-                        <span>Courses</span>
-                    </a>
-                    <div id="collapseCourses" class="collapse" aria-labelledby="headingCourses" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Courses:</h6>
-                            <a class="collapse-item" href="all-course.html">All Courses</a>
-                            <a class="collapse-item" href="course.jsp">My Courses</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="courseAdd.jsp">Create Course</a>
-                        </div>
+                <div id="collapseCourses" class="collapse" aria-labelledby="headingCourses" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Courses:</h6>
+                        <a class="collapse-item" href="buttons.html">All Courses</a>
+                        <a class="collapse-item" href="cards.html">My Courses</a>
                     </div>
-                </li>
-
-                <!-- Nav Item - Quizzes Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
-                       aria-expanded="false" aria-controls="collapseQuizzes">
-                        <i class="fas fa-fw fa-edit"></i>
-                        <span>Quizzes</span>
-                    </a>
-                    <div id="collapseQuizzes" class="collapse" aria-labelledby="headingQuizzes"
-                         data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Quizzes:</h6>
-                            <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
-                            <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
-                        </div>
-                    </div>
-                </li>
-
-
-                <!-- Nav Item - Marks -->
-                <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Marks</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Community
                 </div>
+            </li>
 
-
-                <!-- Nav Item - Blogs Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
-                       aria-expanded="false" aria-controls="collapseQuizzes">
-                        <i class="fas fa-fw fa-users"></i>
-                        <span>Blogs</span>
-                    </a>
-                    <div id="collapseQuizzes" class="collapse" aria-labelledby="headingQuizzes"
-                         data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Blogs:</h6>
-                            <a class="collapse-item" href="all-blog.html">All Blogs</a>
-                            <a class="collapse-item" href="blog.jsp">My Blogs</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="blogAdd.html">Create Blog</a>
-                        </div>
+            <!-- Nav Item - Quizzes Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
+                    aria-expanded="true" aria-controls="collapseQuizzes">
+                    <i class="fas fa-fw fa-edit"></i>
+                    <span>Quizzes</span>
+                </a>
+                <div id="collapseQuizzes" class="collapse" aria-labelledby="headingQuizzes"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Quizzes:</h6>
+                        <a class="collapse-item" href="utilities-color.html">All Quizzes</a>
+                        <a class="collapse-item" href="utilities-border.html">My Quizzes</a>
                     </div>
-                </li>
-
-                <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="ranking.jsp">
-                        <i class="fas fa-fw fa-trophy"></i>
-                        <span>Ranking</span></a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="search.jsp">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>User Management</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
-
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
                 </div>
+            </li>
 
-            </ul>
-            <!-- End of Sidebar -->
+            <!-- Nav Item - Marks -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Marks</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Community
+            </div>
+
+            <!-- Nav Item - Blogs Collapse Menu -->
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseBlogs" aria-expanded="true"
+                    aria-controls="collapseBlogs">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Blogs</span>
+                </a>
+                <div id="collapseBlogs" class="collapse show" aria-labelledby="headingBlogs"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Blogs:</h6>
+                        <a class="collapse-item" href="#">All Blogs</a>
+                        <a class="collapse-item" href="#">My Blogs</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Create:</h6>
+                        <a class="collapse-item" href="404.html">Create Blog</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-trophy"></i>
+                    <span>Ranking</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Others
+            </div>
+
+            <!-- Nav Item - Billing -->
+            <li class="nav-item">
+                <a class="nav-link" href="billing.html">
+                    <i class="fas fa-fw fa-receipt"></i>
+                    <span>Billing</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -173,11 +181,9 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <form class="form-inline">
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                    </form>
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
 
                     <!-- Topbar Search -->
                     <form
@@ -294,7 +300,7 @@
                                     <div class="font-weight-bold">
                                         <div class="text-truncate">Hi there! I am wondering if you can help me with a
                                             problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler Â· 58m</div>
+                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -306,7 +312,7 @@
                                     <div>
                                         <div class="text-truncate">I have the photos that you ordered last month, how
                                             would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun Â· 1d</div>
+                                        <div class="small text-gray-500">Jae Chun · 1d</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -318,7 +324,7 @@
                                     <div>
                                         <div class="text-truncate">Last month's report looks great, I am very happy with
                                             the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez Â· 2d</div>
+                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -330,7 +336,7 @@
                                     <div>
                                         <div class="text-truncate">Am I a good boy? The reason I ask is because someone
                                             told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog Â· 2w</div>
+                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
@@ -343,9 +349,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.fullname}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="Dashboard/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -377,93 +383,12 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                 
-        
-                
-                    <h1 class="h3 mb-2 text-gray-800">UserManagement</h1>
-                    <p class="mb-4">${requestScope.DELETE_ERROR}.</p>
-                     <form action="MainController"> 
-                                <input type="submit" name="action" value="Logout"/>
-                            </form>
-                            <c:if test="${not empty param.search}">
-                                <form action="MainController">
-                                    <p>Search</p> <input class="text" type="text" name="search" value="${param.search}"/>
-                                    <input type="submit" name="action" value="Search"/>
-                                </form>
-                            </c:if>
-                            <c:if test="${empty param.search}">
-                                <form action="MainController">
-                                    <p>Search</p> <input class="text" type="text" name="search" value=""/>
-                                    <input type="submit" name="action" value="Search"/>
-                                </form>
-                            </c:if>
-                <c:if test="${requestScope.LIST_USER != null && not empty requestScope.LIST_USER}">                       
+
                     <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
 
-                    <!-- DataTales Example
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">-->
-                     <!--class="table table-bordered" id="dataTable"--><table width="100%" cellspacing="0">
-                                      <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>User ID</th>
-                                                    <th>Full Name</th>
-                                                    <th>Role ID</th>
-                                                    <th>Password</th>
-                                                    <th>Delete</th>
-                                                    <th>Update</th>
-                                                </tr>
-                                        </thead>
-                                    <tfoot>
-                                        <tr>
-                                           <th>No</th>
-                                                    <th>User ID</th>
-                                                    <th>Full Name</th>
-                                                    <th>Role ID</th>
-                                                    <th>Password</th>
-                                                    <th>Delete</th>
-                                                    <th>Update</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                            <c:forEach var="user" varStatus="counter" items="${requestScope.LIST_USER}">
-                                                <form action="MainController">
-                                                    <tr>
-                                                        <td>${counter.count}</td>
-                                                        <td>${user.userID}</td>
-                                                        <td>${user.fullname}</td>
-                                                        <td>${user.role}</td>
-                                                        <td>${user.password}</td>
-                                                        <td
-                                                            <input type="hidden" name="search" value="${param.search}"/>
-                                                            <input type="hidden" name="userID" value="${user.userID}"/>
-                                                            <input type="hidden" name="roleID" value="${user.role}"/>
-                                                            <input type="submit" name="action" value="Delete"/>
-                                                        </td>
-                                                        <td>
-                                                            <input type="submit" name="action" value="Update"/>
-                                                            <input type="hidden" name="userID" value="${user.userID}"/>
-                                                            <input type="hidden" name="fullName" value="${user.fullname}"/>
-                                                            <input type="hidden" name="roleID" value="${user.role}"/>
-                                                            <input type="hidden" name="search" value="${param.search}"/>
-                                                        </td>
-                                                </form>
-                                                </tr>
-                                                </tbody>
-                                            </c:forEach>         
-                                    </table>
-                                </c:if>
-                         </div>
-                    <!--</div>
                 </div>
-                </div>        
-                /.container-fluid -->
-
+                <!-- /.container-fluid -->
             </div>
             <!-- End of Main Content -->
 
@@ -496,7 +421,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">Ã</span>
+                        <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
@@ -518,13 +443,7 @@
     <!-- Custom scripts for all pages-->
     <script src="Dashboard/js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="Dashboard/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="Dashboard/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="Dashboard/js/demo/datatables-demo.js"></script>
-
 </body>
 
 </html>
+

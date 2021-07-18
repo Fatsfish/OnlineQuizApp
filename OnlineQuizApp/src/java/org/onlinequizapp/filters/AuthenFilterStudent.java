@@ -25,7 +25,7 @@ import org.onlinequizapp.dtos.UserDTO;
  *
  * @author User-PC
  */
-@WebFilter(filterName = "AuthenFilterStudent", urlPatterns = {"/dashboardstudent.html"})
+@WebFilter(filterName = "AuthenFilterStudent", urlPatterns = {"/dashboardstudent.jsp"})
 public class AuthenFilterStudent implements Filter {
 
     private static final String lOGIN = "login.html";
