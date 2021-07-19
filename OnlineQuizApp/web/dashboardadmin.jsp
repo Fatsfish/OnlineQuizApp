@@ -109,6 +109,28 @@
                         <i class="fas fa-fw fa-chart-area"></i>
                         <span>Marks</span></a>
                 </li>
+                
+                <!-- Nav Item - Category Collapse Menu -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
+                       aria-expanded="false" aria-controls="collapseCategories">
+                        <i class="fas fa-fw fa-edit"></i>
+                        <span>Categories</span>
+                    </a>
+                    <div id="collapseCategories" class="collapse" aria-labelledby="headingQuizzes"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Categories:</h6>
+                            <a class="collapse-item" href="all-category.html">All Categories</a>
+                            <a class="collapse-item" href="category.jsp">My Categories</a>
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Create:</h6>
+                            <a class="collapse-item" href="categoryAdd.jsp">Create Quiz Category</a>
+                            <a class="collapse-item" href="categoryBlogAdd.jsp">Create Blog Category</a>
+                        </div>
+                    </div>
+                </li>
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">

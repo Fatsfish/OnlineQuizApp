@@ -12,13 +12,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.onlinequizapp.daos.CategoryDAO;
+import org.onlinequizapp.dtos.CategoryBlogDTO;
+import org.onlinequizapp.dtos.CategoryDTO;
 
 /**
  *
- * @author User-PC
+ * @author Category-PC
  */
 @WebServlet(name = "CategoryUpdateController", urlPatterns = {"/CategoryUpdateController"})
 public class CategoryUpdateController extends HttpServlet {
+
+    private static final String SUCCESS = "SearchController";
+    private static final String ERROR = "updateCategory.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,17 +38,88 @@ public class CategoryUpdateController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CategoryUpdateController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CategoryUpdateController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String url = ERROR;
+        CategoryDTO categoryDTO = new CategoryDTO("", "", "", "", "");
+        try {
+            String categoryID = request.getParameter("categoryID");
+            String categoryName = request.getParameter("categoryName");
+            String description = request.getParameter("description");
+            String status = request.getParameter("status");
+            String level = request.getParameter("level");
+            CategoryDAO dao = new CategoryDAO();
+            CategoryDTO category = new CategoryDTO(categoryID, categoryName, description, status, level);
+            boolean flag = true;
+            if (categoryID.length() > 20 || categoryID.length() < 1) {
+                flag = false;
+                categoryDTO.setCategoryID("CategoryID must be [1-5]");
+            }
+            if (categoryName.length() > 250 || categoryName.length() < 1) {
+                flag = false;
+                categoryDTO.setCategoryName("Category Name must be [1-250]");
+            }
+            if (status.isEmpty() || !(status.equals(1)) || !(status.equals(0))) {
+                flag = false;
+                categoryDTO.setStatus("Status must be 0 or 1");
+            }
+            if (description.length() > 250 || description.length() < 1) {
+                flag = false;
+                categoryDTO.setCategoryName("Description must be [1-250]");
+            }
+            if (level.length() > 50 || level.length() < 1) {
+                flag = false;
+                categoryDTO.setCategoryName("Level must be [1-50]");
+            }
+            if (flag) {
+                boolean check = dao.updateQ(category);
+                if (check) {
+                    url = SUCCESS;
+                }
+            } else {
+                request.setAttribute("ERROR", categoryDTO);
+            }
+        } catch (Exception e) {
+
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
+
+        CategoryBlogDTO categoryBlogDTO = new CategoryBlogDTO("", "", "", "");
+        try {
+            String categoryID = request.getParameter("categoryID");
+            String categoryName = request.getParameter("categoryName");
+            String description = request.getParameter("description");
+            String status = request.getParameter("status");
+            CategoryDAO dao = new CategoryDAO();
+            CategoryBlogDTO category = new CategoryBlogDTO(categoryID, categoryName, description, status);
+            boolean flag = true;
+            if (categoryID.length() > 20 || categoryID.length() < 1) {
+                flag = false;
+                categoryDTO.setCategoryID("CategoryID must be [1-5]");
+            }
+            if (categoryName.length() > 250 || categoryName.length() < 1) {
+                flag = false;
+                categoryDTO.setCategoryName("Category Name must be [1-250]");
+            }
+            if (status.isEmpty() || !(status.equals(1)) || !(status.equals(0))) {
+                flag = false;
+                categoryDTO.setStatus("Status must be 0 or 1");
+            }
+            if (description.length() > 250 || description.length() < 1) {
+                flag = false;
+                categoryDTO.setCategoryName("Description must be [1-250]");
+            }
+            if (flag) {
+                boolean check = dao.updateB(category);
+                if (check) {
+                    url = SUCCESS;
+                }
+            } else {
+                request.setAttribute("ERROR", categoryDTO);
+            }
+        } catch (Exception e) {
+
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

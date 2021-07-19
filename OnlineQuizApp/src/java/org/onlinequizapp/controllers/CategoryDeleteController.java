@@ -12,13 +12,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.onlinequizapp.daos.CategoryDAO;
+import org.onlinequizapp.dtos.CategoryBlogDTO;
+import org.onlinequizapp.dtos.CategoryDTO;
 
 /**
  *
- * @author User-PC
+ * @author Category-PC
  */
 @WebServlet(name = "CategoryDeleteController", urlPatterns = {"/CategoryDeleteController"})
 public class CategoryDeleteController extends HttpServlet {
+
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "CategoryController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,17 +39,55 @@ public class CategoryDeleteController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CategoryDeleteController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CategoryDeleteController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String url = ERROR;
+        HttpSession session = request.getSession();
+        
+        if (session.getAttribute("categoryID") != null) {
+            String categoryID = ((CategoryDTO) session.getAttribute("categoryID")).getCategoryID();
+        }
+        try {
+            String categoryID = request.getParameter("categoryID");
+            if (!categoryID.equals(categoryID)) {
+                CategoryDAO dao = new CategoryDAO();
+                boolean check = dao.deleteQ(categoryID);
+                if (check) {
+                    url = SUCCESS;
+                } else {
+                    request.setAttribute("DELETE_ERROR", "Cannot delete!");
+                    url = SUCCESS;
+                }
+            } else {
+                request.setAttribute("DELETE_ERROR", "Category is being used!");
+                url = SUCCESS;
+            }
+        } catch (Exception e) {
+
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
+        
+        if (session.getAttribute("categoryBlogID") != null) {
+            String categoryBlogID = ((CategoryBlogDTO) session.getAttribute("categoryBlogID")).getCategoryID();
+        }
+        try {
+            String categoryBlogID = request.getParameter("categoryBlogID");
+            if (!categoryBlogID.equals(categoryBlogID)) {
+                CategoryDAO dao = new CategoryDAO();
+                boolean check = dao.deleteQ(categoryBlogID);
+                if (check) {
+                    url = SUCCESS;
+                } else {
+                    request.setAttribute("DELETE_ERROR", "Cannot delete!");
+                    url = SUCCESS;
+                }
+            } else {
+                request.setAttribute("DELETE_ERROR", "CategoryBlog is being used!");
+                url = SUCCESS;
+            }
+        } catch (Exception e) {
+
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

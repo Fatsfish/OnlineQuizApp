@@ -109,50 +109,6 @@ public class CategoryDAO {
         }
         return listCate;
     }
-    
-        public List<CategoryBlogDTO> getListBCreate() throws SQLException {
-        List<CategoryBlogDTO> listCate = null;
-        Connection conn = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        try {
-            conn = DBUtils.getConnection();
-            if (conn != null) {
-                String sql = "Select categoryID, categoryName, description, status "
-                        + "from tblCategoryBlog "
-                        + "WHERE categoryName like ?";
-                stm = conn.prepareStatement(sql);
-                stm.setString(1, "%%");
-                rs = stm.executeQuery();
-                while (rs.next()) {
-                    String categoryID = rs.getString("categoryID");
-                    String categoryName = rs.getString("categoryName");
-                    String description = rs.getString("description");
-                    String status = rs.getString("status");
-                    if (listCate == null) {
-                        listCate = new ArrayList<>();
-                    }
-                    listCate.add(new CategoryBlogDTO(categoryID, categoryName, description, status));
-
-                }
-            }
-
-        } catch (ClassNotFoundException | SQLException e) {
-
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-
-        }
-        return listCate;
-    }
 
     public boolean deleteQ(String ID) throws SQLException {
         boolean check = false;
@@ -223,7 +179,7 @@ public class CategoryDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPdaTE tblCategory SET categoryName=?, description=?, level=?, status=? "
+                String sql = "UPDATE tblCategory SET categoryName=?, description=?, level=?, status=? "
                         + " Where userID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, cate.getCategoryName());
@@ -439,7 +395,7 @@ public class CategoryDAO {
         }
     }
     
-    public void insertB(CategoryDTO cate) throws SQLException {
+    public void insertB(CategoryBlogDTO cate) throws SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
