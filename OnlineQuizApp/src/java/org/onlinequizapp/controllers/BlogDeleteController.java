@@ -12,6 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.onlinequizapp.daos.BlogDAO;
+import org.onlinequizapp.dtos.BlogDTO;
+import org.onlinequizapp.dtos.UserDTO;
 
 /**
  *
@@ -19,6 +23,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "BlogDeleteController", urlPatterns = {"/BlogDeleteController"})
 public class BlogDeleteController extends HttpServlet {
+
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "SearchController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,17 +39,32 @@ public class BlogDeleteController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet BlogDeleteController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet BlogDeleteController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String url = ERROR;
+        HttpSession session = request.getSession();
+                String LogID = "";
+        if (session.getAttribute("LOGIN_USER") != null) {
+            LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
+        }
+        try {
+            String blogID = request.getParameter("blogID");
+
+            BlogDAO dao = new BlogDAO();
+            BlogDTO dto = dao.checkBlogAuthor(LogID);
+
+            if (dto.getAuthorID().equals(LogID)) {
+                boolean check = dao.deleteBlog(blogID);
+                if (check) {
+                    url = SUCCESS;
+                }
+            } else {
+                request.setAttribute("DELETE_ERROR", "Cannot delete other user blog!");
+                url = SUCCESS;
+            }
+
+        } catch (Exception e) {
+            log("Error at BlogDelete Controller");
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
