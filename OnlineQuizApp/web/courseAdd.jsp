@@ -1,7 +1,7 @@
 <%-- 
-    Document   : dashboardadmin
-    Created on : Jul 19, 2021, 10:59:22 AM
-    Author     : Mr Hien Khoa
+    Document   : courseAdd
+    Created on : Jul 19, 2021, 8:07:23 PM
+    Author     : User-PC
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -26,6 +26,9 @@
 
     <!-- Custom styles for this template-->
     <link href="Dashboard/css/sb-admin-2.min.css" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 
 </head>
 
@@ -743,7 +746,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="/LogoutController">Logout</a>
                 </div>
             </div>
         </div>
@@ -766,7 +769,8 @@
     <script src="Dashboard/js/demo/chart-area-demo.js"></script>
     <script src="Dashboard/js/demo/chart-pie-demo.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
-
