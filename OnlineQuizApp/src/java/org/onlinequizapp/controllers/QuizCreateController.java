@@ -15,10 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.onlinequizapp.daos.EmailDAO;
 import org.onlinequizapp.daos.QuizDAO;
-import org.onlinequizapp.daos.UserDAO;
 import org.onlinequizapp.dtos.QuizDTO;
-import org.onlinequizapp.dtos.UserDTO;
-import org.onlinequizapp.dtos.UserError;
 
 /**
  *

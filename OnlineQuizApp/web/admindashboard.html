@@ -1,10 +1,3 @@
-<%-- 
-    Document   : dashboardadmin
-    Created on : Jul 19, 2021, 10:59:22 AM
-    Author     : Mr Hien Khoa
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,7 +43,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="dashboardadmin.jsp">
+                    <a class="nav-link" href="admindashboard.html">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -121,12 +114,12 @@
 
                 <!-- Nav Item - Blogs Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs"
-                       aria-expanded="false" aria-controls="collapseBlogs">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
+                       aria-expanded="false" aria-controls="collapseQuizzes">
                         <i class="fas fa-fw fa-users"></i>
                         <span>Blogs</span>
                     </a>
-                    <div id="collapseBlogs" class="collapse" aria-labelledby="headingBlogs"
+                    <div id="collapseQuizzes" class="collapse" aria-labelledby="headingQuizzes"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Blogs:</h6>
@@ -343,7 +336,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.fullname}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
                                     src="Dashboard/img/undraw_profile.svg">
                             </a>
@@ -770,4 +763,3 @@
 </body>
 
 </html>
-

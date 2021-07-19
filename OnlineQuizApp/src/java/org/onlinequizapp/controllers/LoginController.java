@@ -15,8 +15,8 @@ public class LoginController extends HttpServlet {
     private static final String SUCCESS = "dashboardadmin.jsp";
     private static final String Student = "dashboardstudent.jsp";
     private static final String Teacher = "dashboardteacher.jsp";
-    private static final String ERROR = "login.jsp";
-    private static final String SHOPPING = "index.jsp";
+    private static final String ERROR = "login.html";
+    private static final String SHOPPING = "index.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,9 +37,7 @@ public class LoginController extends HttpServlet {
             UserDAO dao = new UserDAO();
             UserDTO user = dao.checkLogin(userID, password);
             HttpSession session = request.getSession();
-            if(user==null){
-               request.setAttribute("LOGIN_ERROR", "Wrong Information or User does not exist!");
-            }
+
             if (user != null) {
                 session.setAttribute("LOGIN_USER", user);
                 if (user.getRole().contains("AD")) {
