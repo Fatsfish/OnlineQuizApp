@@ -7,6 +7,7 @@ package org.onlinequizapp.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Boolean.TRUE;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +27,7 @@ import org.onlinequizapp.dtos.CategoryDTO;
  */
 @WebServlet(name = "CategoryCreateController", urlPatterns = {"/CategoryCreateController"})
 public class CategoryCreateController extends HttpServlet {
+
     private static final String SUCCESS = "blog.html";
     private static final String ERROR = "error.jsp";
 
@@ -42,108 +44,108 @@ public class CategoryCreateController extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        CategoryDTO categoryDTO = new CategoryDTO("", "", "", "", "");
-        try {
-            String categoryID = request.getParameter("categoryID");
-            String categoryName = request.getParameter("categoryName");
-            String description = request.getParameter("description");
-            String status = request.getParameter("status");
-            String level = request.getParameter("level");
-            boolean flag = true;
-            if (categoryID.length() > 20 || categoryID.length() < 1) {
-                flag = false;
-                categoryDTO.setCategoryID("CategoryID must be [1-5]");
-            }
-            if (categoryName.length() > 250 || categoryName.length() < 1) {
-                flag = false;
-                categoryDTO.setCategoryName("Category Name must be [1-250]");
-            }
-            if (status.isEmpty() || !(status.equals(1)) || !(status.equals(0))) {
-                flag = false;
-                categoryDTO.setStatus("Status must be 0 or 1");
-            }
-            if (description.length() > 250 || description.length() < 1) {
-                flag = false;
-                categoryDTO.setCategoryName("Description must be [1-250]");
-            }
-            if (level.length() > 50 || level.length() < 1) {
-                flag = false;
-                categoryDTO.setCategoryName("Level must be [1-50]");
-            }
-            /*if (!agree) {
-                flag = false;
-                categoryDTO.setConfirm("Please hava a look at our policies and tick the agreement box");
-            }*/
-            if (flag) {
-                CategoryDAO dao = new CategoryDAO();
-                
-                CategoryDTO category = new CategoryDTO(categoryID, categoryName, description, status, level);
-                dao.insertQ(category);
-                
-                url = SUCCESS;
-                } else {
-                    request.setAttribute("ERROR", categoryDTO);
-                }
-        } catch (Exception e) {
-
-            log("Error at CreateController: " + e.toString());
-            if (e.toString().contains("duplicate")) {
-                categoryDTO.setCategoryID("Category Name duplicate!");
-                request.setAttribute("ERROR", categoryDTO);
-            };
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        }
+        String check = request.getParameter("check");
         
-        CategoryBlogDTO categoryBlogDTO = new CategoryBlogDTO("", "", "", "");
-        try {
-            String categoryID = request.getParameter("categoryID");
-            String categoryName = request.getParameter("categoryName");
-            String description = request.getParameter("description");
-            String status = request.getParameter("status");
-            boolean flag = true;
-            if (categoryID.length() > 20 || categoryID.length() < 1) {
-                flag = false;
-                categoryBlogDTO.setCategoryID("CategoryID must be [1-5]");
-            }
-            if (categoryName.length() > 250 || categoryName.length() < 1) {
-                flag = false;
-                categoryBlogDTO.setCategoryName("Category Name must be [1-250]");
-            }
-            if (status.isEmpty() || !(status.equals(1)) || !(status.equals(0))) {
-                flag = false;
-                categoryBlogDTO.setStatus("Status must be 0 or 1");
-            }
-            if (description.length() > 250 || description.length() < 1) {
-                flag = false;
-                categoryBlogDTO.setCategoryName("Description must be [1-250]");
-            }
-            /*if (!agree) {
+            CategoryDTO categoryDTO = new CategoryDTO("", "", "", "", "");
+            try {
+                String categoryID = request.getParameter("categoryID");
+                String categoryName = request.getParameter("categoryName");
+                String description = request.getParameter("description");
+                String status = request.getParameter("status");
+                String level = request.getParameter("level");
+                boolean flag = true;
+                if (categoryID.length() > 20 || categoryID.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCategoryID("CategoryID must be [1-5]");
+                }
+                if (categoryName.length() > 250 || categoryName.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCategoryName("Category Name must be [1-250]");
+                }
+                if (status.isEmpty() || !(status.equals(1)) || !(status.equals(0))) {
+                    flag = false;
+                    categoryDTO.setStatus("Status must be 0 or 1");
+                }
+                if (description.length() > 250 || description.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCategoryName("Description must be [1-250]");
+                }
+                if (level.length() > 50 || level.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCategoryName("Level must be [1-50]");
+                }
+                /*if (!agree) {
                 flag = false;
                 categoryDTO.setConfirm("Please hava a look at our policies and tick the agreement box");
             }*/
-            if (flag) {
-                CategoryDAO dao = new CategoryDAO();
-                
-                CategoryBlogDTO category = new CategoryBlogDTO(categoryID, categoryName, description, status);
-                dao.insertB(category);
-                
-                url = SUCCESS;
+                if (flag) {
+                    CategoryDAO dao = new CategoryDAO();
+
+                    CategoryDTO category = new CategoryDTO(categoryID, categoryName, description, status, level);
+                    dao.insertQ(category);
+
+                    url = SUCCESS;
                 } else {
                     request.setAttribute("ERROR", categoryDTO);
                 }
-        } catch (Exception e) {
+            } catch (Exception e) {
 
-            log("Error at CreateController: " + e.toString());
-            if (e.toString().contains("duplicate")) {
-                categoryDTO.setCategoryID("Category Name duplicate!");
-                request.setAttribute("ERROR", categoryDTO);
-            };
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        }
+                log("Error at CreateController: " + e.toString());
+                if (e.toString().contains("duplicate")) {
+                    categoryDTO.setCategoryID("Category Name duplicate!");
+                    request.setAttribute("ERROR", categoryDTO);
+                };
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
+            CategoryBlogDTO categoryBlogDTO = new CategoryBlogDTO("", "", "", "");
+            try {
+                String categoryID = request.getParameter("categoryID");
+                String categoryName = request.getParameter("categoryName");
+                String description = request.getParameter("description");
+                String status = request.getParameter("status");
+                boolean flag = true;
+                if (categoryID.length() > 20 || categoryID.length() < 1) {
+                    flag = false;
+                    categoryBlogDTO.setCategoryID("CategoryID must be [1-5]");
+                }
+                if (categoryName.length() > 250 || categoryName.length() < 1) {
+                    flag = false;
+                    categoryBlogDTO.setCategoryName("Category Name must be [1-250]");
+                }
+                if (status.isEmpty() || !(status.equals(1)) || !(status.equals(0))) {
+                    flag = false;
+                    categoryBlogDTO.setStatus("Status must be 0 or 1");
+                }
+                if (description.length() > 250 || description.length() < 1) {
+                    flag = false;
+                    categoryBlogDTO.setCategoryName("Description must be [1-250]");
+                }
+                /*if (!agree) {
+                flag = false;
+                categoryDTO.setConfirm("Please hava a look at our policies and tick the agreement box");
+            }*/
+                if (flag) {
+                    CategoryDAO dao = new CategoryDAO();
+
+                    CategoryBlogDTO category = new CategoryBlogDTO(categoryID, categoryName, description, status);
+                    dao.insertB(category);
+
+                    url = SUCCESS;
+                } else {
+                    request.setAttribute("ERROR", categoryBlogDTO);
+                }
+            } catch (Exception e) {
+
+                log("Error at CreateController: " + e.toString());
+                if (e.toString().contains("duplicate")) {
+                    categoryBlogDTO.setCategoryID("Category Name duplicate!");
+                    request.setAttribute("ERROR", categoryBlogDTO);
+                };
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
