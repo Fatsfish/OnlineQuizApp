@@ -12,7 +12,7 @@ import org.onlinequizapp.dtos.UserDTO;
 
 public class LoginController extends HttpServlet {
 
-    private static final String SUCCESS = "admindashboard.html";
+    private static final String SUCCESS = "dashboardadmin.jsp";
     private static final String Student = "studentdashboard.html";
     private static final String Teacher = "teacherdashboard.html";
     private static final String ERROR = "login.html";

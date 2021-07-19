@@ -51,7 +51,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="admindashboard.html">
+                    <a class="nav-link" href="dashboardadmin.jsp">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -122,12 +122,12 @@
 
                 <!-- Nav Item - Blogs Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
-                       aria-expanded="false" aria-controls="collapseQuizzes">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs"
+                       aria-expanded="false" aria-controls="collapseBlogs">
                         <i class="fas fa-fw fa-users"></i>
                         <span>Blogs</span>
                     </a>
-                    <div id="collapseQuizzes" class="collapse" aria-labelledby="headingQuizzes"
+                    <div id="collapseBlogs" class="collapse" aria-labelledby="headingBlogs"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Blogs:</h6>
@@ -380,11 +380,8 @@
                  
         
                 
-                    <h1 class="h3 mb-2 text-gray-800">UserManagement</h1>
-                    <p class="mb-4">${requestScope.DELETE_ERROR}.</p>
-                     <form action="MainController"> 
-                                <input type="submit" name="action" value="Logout"/>
-                            </form>
+                    <h1 class="h3 mb-2 text-gray-800">User Management</h1>
+                    <p class="mb-4">${requestScope.DELETE_ERROR}</p>
                             <c:if test="${not empty param.search}">
                                 <form action="MainController">
                                     <p>Search</p> <input class="text" type="text" name="search" value="${param.search}"/>
