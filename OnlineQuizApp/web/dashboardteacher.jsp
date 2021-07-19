@@ -1,7 +1,7 @@
 <%-- 
-    Document   : dashboardstudent
-    Created on : Jul 18, 2021, 10:54:34 PM
-    Author     : User-PC
+    Document   : dashboardteacher
+    Created on : Jul 19, 2021, 2:11:01 PM
+    Author     : Mr Hien Khoa
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Student Dashboard</title>
+    <title>Teacher Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="Dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -27,7 +27,7 @@
     <!-- Custom styles for this template-->
     <link href="Dashboard/css/sb-admin-2.min.css" rel="stylesheet">
 
-<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=xIVuE_ozcCbrLGQAd1YjNY1igi-S1CP43nAyco0T9KUWFR3DP241sUoqhQ28Nssb8MOc0_NyzWD288uw8Cz4sN0QniEuCntlBi0CAvP5xnn5VdUYvUQSSJDej7gynFp5V1xRJ2xvsjNwq0MH-RIZRi182jYBUfRLtxDXpsJLL34" charset="UTF-8"></script></head>
+</head>
 
 <body id="page-top">
 
@@ -40,9 +40,9 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon">
-                    <i class="fas fa-user-graduate"></i>
+                    <i class="fas fa-chalkboard-teacher"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Student</div>
+                <div class="sidebar-brand-text mx-3">Teacher</div>
             </a>
 
             <!-- Divider -->
@@ -75,6 +75,9 @@
                         <h6 class="collapse-header">Courses:</h6>
                         <a class="collapse-item" href="buttons.html">All Courses</a>
                         <a class="collapse-item" href="cards.html">My Courses</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Create:</h6>
+                        <a class="collapse-item" href="404.html">Create Course</a>
                     </div>
                 </div>
             </li>
@@ -92,8 +95,18 @@
                         <h6 class="collapse-header">Quizzes:</h6>
                         <a class="collapse-item" href="utilities-color.html">All Quizzes</a>
                         <a class="collapse-item" href="utilities-border.html">My Quizzes</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Create:</h6>
+                        <a class="collapse-item" href="404.html">Create Quiz</a>
                     </div>
                 </div>
+            </li>
+
+            <!-- Nav Item - Students -->
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-user-graduate"></i>
+                    <span>Students</span></a>
             </li>
 
             <!-- Nav Item - Marks -->
@@ -293,7 +306,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="Dashboard/img/undraw_profile_1.svg"
+                                        <img class="rounded-circle" src="Dasrefboard/img/undraw_profile_1.svg"
                                             alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
@@ -389,6 +402,7 @@
 
                 </div>
                 <!-- /.container-fluid -->
+
             </div>
             <!-- End of Main Content -->
 
@@ -446,4 +460,3 @@
 </body>
 
 </html>
-
