@@ -125,13 +125,13 @@
             </div>
 
             <!-- Nav Item - Blogs Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseBlogs" aria-expanded="true"
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs" aria-expanded="false"
                     aria-controls="collapseBlogs">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Blogs</span>
                 </a>
-                <div id="collapseBlogs" class="collapse show" aria-labelledby="headingBlogs"
+                <div id="collapseBlogs" class="collapse" aria-labelledby="headingBlogs"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Blogs:</h6>
