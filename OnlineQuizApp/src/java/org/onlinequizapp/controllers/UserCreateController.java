@@ -49,11 +49,7 @@ public class UserCreateController extends HttpServlet {
         String url = ERROR;
         UserError userError = new UserError("", "", "", "", "", "", "", "");
         try {
-            //String userID = request.getParameter("userID");
-            //String fullName = request.getParameter("fullName");
             String email = request.getParameter("email");
-            //String phone = request.getParameter("phone");
-            //String address = request.getParameter("address");
             String password = request.getParameter("password");
             String confirm = request.getParameter("confirm");
             boolean flag = true;
@@ -61,15 +57,7 @@ public class UserCreateController extends HttpServlet {
                 flag = false;
                 userError.setConfirmError("Please hava a look at our policies and tick the agreement box");
             }
-            /*if (userID.length() > 20 || userID.length() < 1) {
-                flag = false;
-                userError.setUserIDError("UserName must be [1-20]");
-            }
-            if (fullName.length() > 250 || fullName.length() < 1) {
-                flag = false;
-                userError.setFullNameError("Full Name must be [1-250]");
-            }*/
-              if (password.length() < 6 || password.length() > 20) {
+            if (password.length() < 6 || password.length() > 20) {
                 flag = false;
                 userError.setPasswordError("Password length must be between 6 and 20 characters");
             }
@@ -101,17 +89,22 @@ public class UserCreateController extends HttpServlet {
                 //get the 6-digit code
                 String code = sm.getRandom();
                 String sha256hex = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
-                UserDTO user = new UserDTO(code, "U", sha256hex, email, code);
-                dao.insertNew(user);
-                dao.updateCode(user, code);
-                boolean test = sm.sendEmail(user, code);
-                if (test) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("authcode", user);
-                    session.setAttribute("Pass", "Create");
-                    url = SUCCESS;
-                } else {
-                    request.setAttribute("ERROR", userError);
+                if (dao.checkEmail(email)) {
+                    userError.setEmailError("Email has been used!");
+                } 
+                else {
+                    UserDTO user = new UserDTO(code, email, "U", sha256hex, email, code);
+                    dao.insertNew2(user);
+                    dao.updateCode(user, code);
+                    boolean test = sm.sendEmail(user, code);
+                    if (test) {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("authcode", user);
+                        session.setAttribute("Pass", "Create");
+                        url = SUCCESS;
+                    } else {
+                        request.setAttribute("ERROR", userError);
+                    }
                 }
 
             } else {
