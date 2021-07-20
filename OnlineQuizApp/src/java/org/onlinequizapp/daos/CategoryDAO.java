@@ -402,13 +402,13 @@ public class CategoryDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblCategory( categoryName, description, status) "
-                        + " VALUES(\'?\',\'?\',\'?\')";
+                String sql = "INSERT INTO tblCategoryBlog( categoryName, description, status) "
+                        + " VALUES(?,?,?)";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, cate.getCategoryName());
                 stm.setString(2, cate.getDescription());
-                stm.setString(3, cate.getStatus());
-                stm.executeUpdate();
+                stm.setByte(3, (byte)Integer.parseInt(cate.getStatus()));
+                stm.executeQuery();
             }
         } catch (Exception e) {
 

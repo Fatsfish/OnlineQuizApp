@@ -1,7 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="org.onlinequizapp.daos.UserDAO"%>
+<%@page import="org.onlinequizapp.daos.CategoryDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="org.onlinequizapp.dtos.UserDTO"%>
+<%@page import="org.onlinequizapp.dtos.CategoryDTO"%>
+<%@page import="org.onlinequizapp.dtos.CategoryBlogDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,7 +124,8 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Categories:</h6>
-                            <a class="collapse-item" href="all-category.jsp">All Categories</a>
+                            <a class="collapse-item" href="all-category.html">All Categories</a>
+                            <a class="collapse-item" href="category.jsp">My Categories</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="categoryAdd.jsp">Create Quiz Category</a>
@@ -131,8 +133,6 @@
                         </div>
                     </div>
                 </li>
-
-                
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
@@ -406,23 +406,15 @@
                     <h1 class="h3 mb-2 text-gray-800">User Management</h1>
                     <p class="mb-4">${requestScope.DELETE_ERROR}</p>
                             <c:if test="${not empty param.search}">
-                                <form class="row g-3" action="MainController">
-                                    <div class="col-auto">
-                                    <input class="form-control" type="text" name="search" value="${param.search}"/>
-                                    </div>
-                                    <div class="col-auto">
-                                    <input type="submit" class="btn btn-primary mb-3" name="action" value="Search"/>
-                                    </div>
+                                <form action="MainController">
+                                    <p>Search</p> <input class="text" type="text" name="search" value="${param.search}"/>
+                                    <input type="submit" name="action" value="Search"/>
                                 </form>
                             </c:if>
                             <c:if test="${empty param.search}">
-                                <form class="row g-3" action="MainController">
-                                    <div class="col-auto">
-                                    <input class="form-control" type="text" name="search" value=""/>
-                                    </div>
-                                    <div class="col-auto">
-                                    <input type="submit" class="btn btn-primary mb-3" name="action" value="Search"/>
-                                    </div>
+                                <form action="MainController">
+                                    <p>Search</p> <input class="text" type="text" name="search" value=""/>
+                                    <input type="submit" name="action" value="Search"/>
                                 </form>
                             </c:if>
                 <c:if test="${requestScope.LIST_USER != null && not empty requestScope.LIST_USER}">                       
@@ -435,7 +427,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">-->
-                     <!--class="table table-bordered" id="dataTable"--><table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                     <!--class="table table-bordered" id="dataTable"--><table width="100%" cellspacing="0">
                                       <thead>
                                                 <tr>
                                                     <th>No</th>
@@ -471,10 +463,10 @@
                                                             <input type="hidden" name="search" value="${param.search}"/>
                                                             <input type="hidden" name="userID" value="${user.userID}"/>
                                                             <input type="hidden" name="roleID" value="${user.role}"/>
-                                                            <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
+                                                            <input type="submit" name="action" value="Delete"/>
                                                         </td>
                                                         <td>
-                                                            <input type="submit" class="btn btn-success" name="action" value="Update"/>
+                                                            <input type="submit" name="action" value="Update"/>
                                                             <input type="hidden" name="userID" value="${user.userID}"/>
                                                             <input type="hidden" name="fullName" value="${user.fullname}"/>
                                                             <input type="hidden" name="roleID" value="${user.role}"/>
