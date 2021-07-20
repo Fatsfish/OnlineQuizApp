@@ -48,6 +48,8 @@ create table dbo.tblCourse (
 	Status bit);
 
 	alter table dbo.tblCourse add categoryID int foreign key references dbo.tblCategory(categoryID);	
+	alter table dbo.tblCourse add Name varchar(250);	
+	alter table dbo.tblCourse add Description varchar(MAX);	
 
 	
 create table dbo.tblClass (

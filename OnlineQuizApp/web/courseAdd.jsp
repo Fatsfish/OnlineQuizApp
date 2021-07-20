@@ -261,24 +261,8 @@
                                     <textarea class="form-control" id="QuestionDesc" rows="3"></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="formFile" class="form-label">Upload picture (optional)</label>
-                                    <input class="form-control" type="file" id="formFile">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="Answer1" class="form-label">Answer 1</label>
-                                    <input type="text" class="form-control" id="Answer1">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="Answer2" class="form-label">Answer 2</label>
-                                    <input type="text" class="form-control" id="Answer2">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="Answer3" class="form-label">Answer 3</label>
-                                    <input type="text" class="form-control" id="Answer3">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="Answer4" class="form-label">Answer 4 </label>
-                                    <input type="text" class="form-control" id="Answer4">
+                                    <label for="Duration" class="form-label">Duration</label>
+                                    <textarea class="form-control" id="Duration"></textarea>
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" id="status">
