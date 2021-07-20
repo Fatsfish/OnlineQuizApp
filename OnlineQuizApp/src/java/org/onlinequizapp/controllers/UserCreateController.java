@@ -95,7 +95,6 @@ public class UserCreateController extends HttpServlet {
                 else {
                     UserDTO user = new UserDTO(code, email, "U", sha256hex, email, code);
                     dao.insertNew2(user);
-                    dao.updateCode(user, code);
                     boolean test = sm.sendEmail(user, code);
                     if (test) {
                         HttpSession session = request.getSession();

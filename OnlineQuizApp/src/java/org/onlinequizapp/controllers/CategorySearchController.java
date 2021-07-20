@@ -42,8 +42,8 @@ public class CategorySearchController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String check = request.getParameter("check");
-
-        if (check.equals("Search")) {
+        String cate=request.getParameter("cate");
+        if (cate.equals("1")) {
             try {
                 String search = request.getParameter("search");
                 CategoryDAO dao = new CategoryDAO();
@@ -58,13 +58,29 @@ public class CategorySearchController extends HttpServlet {
                 request.getRequestDispatcher(url).forward(request, response);
             }
 
-        } else if (check.equals("")) {
+        } else if (cate.equals("2")) {
             try {
                 String search = request.getParameter("search");
                 CategoryDAO dao = new CategoryDAO();
                 List<CategoryBlogDTO> list = dao.getListB(search);
                 if (list != null) {
                     request.setAttribute("LIST_BLOG_CATEGORY", list);
+                    url = SUCCESS;
+                }
+            } catch (SQLException e) {
+                log("Error at CategorySearchController: " + e.toString());
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
+        }else{
+             try {
+                String search = request.getParameter("search");
+                CategoryDAO dao = new CategoryDAO();
+                List<CategoryDTO> list = dao.getListQ(search);
+                List<CategoryBlogDTO> Blist = dao.getListB(search);
+                if (list != null) {
+                    request.setAttribute("LIST_BLOG_CATEGORY", Blist);
+                    request.setAttribute("LIST_QUIZ_CATEGORY", list);
                     url = SUCCESS;
                 }
             } catch (SQLException e) {

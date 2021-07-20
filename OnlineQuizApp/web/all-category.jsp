@@ -410,8 +410,15 @@
                                 <div class="col-auto">
                                     <input class="form-control" type="text" name="search" placeholder="Search.." value="${param.search}"/>
                                 </div>
+                                <div>
+                                    <select class="form-select" aria-label="Category select" name="cate">
+                                        <option selected>Choose category</option>
+                                        <option value="1">Quiz</option>
+                                        <option value="2">Blog</option>
+                                    </select>
+                                </div>
                                 <div class="col-auto">
-                                    <input type="submit" class="btn btn-primary mb-3" name="check" value="Search"/>
+                                    <input type="submit" class="btn btn-primary mb-3" value="Search"/>
                                 </div>
                             </form>
                         </c:if>
@@ -419,6 +426,13 @@
                             <form class="row g-3" action="CategorySearchController">
                                 <div class="col-auto">
                                     <input class="form-control" type="text" name="search" placeholder="Search.." value=""/>
+                                </div>
+                                <div>
+                                    <select class="form-select" aria-label="Category select" name="cate">
+                                        <option selected>Choose category</option>
+                                        <option value="1">Quiz</option>
+                                        <option value="2">Blog</option>
+                                    </select>
                                 </div>
                                 <div class="col-auto">
                                     <input type="submit" class="btn btn-primary mb-3" name="check" value="Search"/>
