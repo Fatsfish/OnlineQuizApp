@@ -245,7 +245,7 @@
                         </div>
 
                         <div class="container">
-                            <form>
+                            <form action="CourseCreateController">
                                 <div class="mb-3">
                                     <label for="questionName" class="form-label">Course Name</label>
                                     <input type="text" class="form-control" id="questionName">
