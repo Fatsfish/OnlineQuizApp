@@ -47,7 +47,7 @@ public class CategorySearchController extends HttpServlet {
             CategoryDAO dao = new CategoryDAO();
             List<CategoryDTO> list = dao.getListQ(search);
             if (list != null) {
-                request.setAttribute("LIST_CATEGORY", list);
+                request.setAttribute("LIST_QUIZ_CATEGORY", list);
                 url = SUCCESS;
             }
         } catch (SQLException e) {
@@ -61,7 +61,7 @@ public class CategorySearchController extends HttpServlet {
             CategoryDAO dao = new CategoryDAO();
             List<CategoryBlogDTO> list = dao.getListB(search);
             if (list != null) {
-                request.setAttribute("LIST_CATEGORY", list);
+                request.setAttribute("LIST_BLOG_CATEGORY", list);
                 url = SUCCESS;
             }
         } catch (SQLException e) {

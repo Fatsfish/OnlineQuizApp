@@ -128,8 +128,7 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Categories:</h6>
-                            <a class="collapse-item" href="all-category.html">All Categories</a>
-                            <a class="collapse-item" href="category.jsp">My Categories</a>
+                            <a class="collapse-item" href="all-category.jsp">All Categories</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="categoryAdd.jsp">Create Quiz Category</a>

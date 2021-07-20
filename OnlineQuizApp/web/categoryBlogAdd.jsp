@@ -125,8 +125,7 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Categories:</h6>
-                            <a class="collapse-item" href="all-category.html">All Categories</a>
-                            <a class="collapse-item" href="category.jsp">My Categories</a>
+                            <a class="collapse-item" href="all-category.jsp">All Categories</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="categoryAdd.jsp">Create Quiz Category</a>
@@ -263,37 +262,29 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Category Blog Add</h1>
+                            <h1 class="h3 mb-0 text-gray-800" style="margin-left: 2rem">Category Blog Add</h1>
                         </div>
 
                         <div class="container">
-                            <form>
-
-                                <div class="mb-3">
-                                    <label for="categoryID" class="form-label">Category ID</label>
-                                    <input type="text" class="form-control" id="categoryID">
-                                </div>
+                            <form action="CategoryCreateController" method="POST">
                                 <div class="mb-3">
                                     <label for="categoryName" class="form-label">Category Name</label>
-                                    <input type="text" class="form-control" id="categoryName">
+                                    <input type="text" name="categoryName" class="form-control" id="categoryName">
                                 </div>
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control" id="description" rows="3"></textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="status" class="form-label">Status</label>
-                                    <textarea class="form-control" id="status" ></textarea>
+                                    <textarea name="description" class="form-control" id="description" rows="3"></textarea>
                                 </div>
                                 <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="active">
+                                    <input name="status" type="checkbox" class="form-check-input" id="active">
                                     <label class="form-check-label" for="status">Active</label>
                                 </div>
-                                    <input type="hidden" name="check" value="category" class="form-check-input" id="check">
+                                <input type="hidden" name="check" value="blog" class="form-check-input" id="check">
 
                                 <button type="submit" class="btn btn-primary">Create</button>
-                                <button type="submit" class="btn btn-danger">Cancel</button>
-                            </form></div>
+                                <a href="dashboardadmin.jsp" class="btn btn-danger">Cancel</a>
+                            </form>
+                        </div>
 
 
 
