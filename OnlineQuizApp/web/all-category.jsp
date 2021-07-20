@@ -451,7 +451,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">-->
-                            <!--class="table table-bordered" id="dataTable"--><table width="100%" cellspacing="0" >Quiz Category
+                            <!--class="table table-bordered" id="dataTable"--><table class="table table-bordered table-hover" width="100%" cellspacing="0" >Quiz Category
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -460,6 +460,8 @@
                                         <th>Status</th>
                                         <th>Level</th>
                                         <th>Description</th>
+                                        <th>Delete</th>
+                                        <th>Update</th>
                                     </tr>
                                 </thead>
                                 
@@ -476,10 +478,10 @@
                                             <td
                                                 <input type="hidden" name="search" value="${param.search}"/>
                                                 <input type="hidden" name="categoryID" value="${category.categoryID}"/>
-                                                <input type="submit" name="action" value="Delete"/>
+                                                <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
                                             </td>
                                             <td>
-                                                <input type="submit" name="action" value="Update"/>
+                                                <input type="submit" class="btn btn-success" name="action" value="Update"/>
                                                 <input type="hidden" name="categoryID" value="${category.categoryID}"/>
                                                 <input type="hidden" name="categoryName" value="${category.categoryName}"/>
                                                 <input type="hidden" name="status" value="${category.status}"/>
@@ -572,7 +574,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">Ã</span>
+                            <span aria-hidden="true">x</span>
                         </button>
                     </div>
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>

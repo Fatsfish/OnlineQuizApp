@@ -408,7 +408,7 @@
                             <c:if test="${not empty param.search}">
                                 <form class="row g-3" action="MainController">
                                     <div class="col-auto">
-                                    <input class="form-control" type="text" name="search" value="${param.search}"/>
+                                    <input class="form-control" type="text" name="search" placeholder="Search.." value="${param.search}"/>
                                     </div>
                                     <div class="col-auto">
                                     <input type="submit" class="btn btn-primary mb-3" name="action" value="Search"/>
@@ -418,7 +418,7 @@
                             <c:if test="${empty param.search}">
                                 <form class="row g-3" action="MainController">
                                     <div class="col-auto">
-                                    <input class="form-control" type="text" name="search" value=""/>
+                                    <input class="form-control" type="text" name="search" placeholder="Search.." value=""/>
                                     </div>
                                     <div class="col-auto">
                                     <input type="submit" class="btn btn-primary mb-3" name="action" value="Search"/>
@@ -524,7 +524,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">Ã</span>
+                        <span aria-hidden="true">x</span>
                     </button>
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
