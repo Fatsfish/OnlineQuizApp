@@ -25,7 +25,7 @@ import org.onlinequizapp.dtos.CategoryDTO;
 @WebServlet(name = "CategorySearchController", urlPatterns = {"/CategorySearchController"})
 public class CategorySearchController extends HttpServlet {
 
-    private static final String SUCCESS = "search.jsp";
+    private static final String SUCCESS = "all-category.jsp";
     private static final String ERROR = "404.html";
 
     /**
@@ -41,33 +41,37 @@ public class CategorySearchController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        
-        try {
-            String search = request.getParameter("search");
-            CategoryDAO dao = new CategoryDAO();
-            List<CategoryDTO> list = dao.getListQ(search);
-            if (list != null) {
-                request.setAttribute("LIST_QUIZ_CATEGORY", list);
-                url = SUCCESS;
+        String check = request.getParameter("check");
+
+        if (check.equals("Search")) {
+            try {
+                String search = request.getParameter("search");
+                CategoryDAO dao = new CategoryDAO();
+                List<CategoryDTO> list = dao.getListQ(search);
+                if (list != null) {
+                    request.setAttribute("LIST_QUIZ_CATEGORY", list);
+                    url = SUCCESS;
+                }
+            } catch (SQLException e) {
+                log("Error at CategorySearchController: " + e.toString());
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
             }
-        } catch (SQLException e) {
-            log("Error at CategorySearchController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        }
-        
-        try {
-            String search = request.getParameter("search");
-            CategoryDAO dao = new CategoryDAO();
-            List<CategoryBlogDTO> list = dao.getListB(search);
-            if (list != null) {
-                request.setAttribute("LIST_BLOG_CATEGORY", list);
-                url = SUCCESS;
+
+        } else if (check.equals("")) {
+            try {
+                String search = request.getParameter("search");
+                CategoryDAO dao = new CategoryDAO();
+                List<CategoryBlogDTO> list = dao.getListB(search);
+                if (list != null) {
+                    request.setAttribute("LIST_BLOG_CATEGORY", list);
+                    url = SUCCESS;
+                }
+            } catch (SQLException e) {
+                log("Error at CategorySearchController: " + e.toString());
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
             }
-        } catch (SQLException e) {
-            log("Error at CategorySearchController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

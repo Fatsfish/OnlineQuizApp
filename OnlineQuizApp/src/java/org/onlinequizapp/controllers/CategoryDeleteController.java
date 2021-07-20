@@ -53,11 +53,11 @@ public class CategoryDeleteController extends HttpServlet {
                 if (check) {
                     url = SUCCESS;
                 } else {
-                    request.setAttribute("DELETE_ERROR", "Cannot delete!");
+                    request.setAttribute("DELETE_Q_ERROR", "Cannot delete!");
                     url = SUCCESS;
                 }
             } else {
-                request.setAttribute("DELETE_ERROR", "Category is being used!");
+                request.setAttribute("DELETE_Q_ERROR", "Category is being used!");
                 url = SUCCESS;
             }
         } catch (Exception e) {
@@ -77,11 +77,11 @@ public class CategoryDeleteController extends HttpServlet {
                 if (check) {
                     url = SUCCESS;
                 } else {
-                    request.setAttribute("DELETE_ERROR", "Cannot delete!");
+                    request.setAttribute("DELETE_B_ERROR", "Cannot delete!");
                     url = SUCCESS;
                 }
             } else {
-                request.setAttribute("DELETE_ERROR", "CategoryBlog is being used!");
+                request.setAttribute("DELETE_B_ERROR", "CategoryBlog is being used!");
                 url = SUCCESS;
             }
         } catch (Exception e) {
