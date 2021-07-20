@@ -26,3 +26,7 @@ hs_err_pid*
 /OnlineQuizApp/nbproject/
 /OnlineQuizApp/build/
 /OnlineQuizApp/dist/
+*.xml
+*.properties
+*.properties
+*.xml
