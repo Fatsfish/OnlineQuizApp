@@ -29,7 +29,7 @@ public class CategoryDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Select categoryID, categoryName, description , level, status "
+                String sql = "Select categoryID, categoryName, description , status, level "
                         + "from tblCategory "
                         + "WHERE categoryName like ?";
                 stm = conn.prepareStatement(sql);
@@ -44,7 +44,7 @@ public class CategoryDAO {
                     if (listCate == null) {
                         listCate = new ArrayList<>();
                     }
-                    listCate.add(new CategoryDTO(categoryID, categoryName, description, level, status));
+                    listCate.add(new CategoryDTO(categoryID, categoryName, description, status, level));
 
                 }
             }
