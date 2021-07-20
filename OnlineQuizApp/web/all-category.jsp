@@ -444,6 +444,7 @@
                         <c:if test="${requestScope.LIST_QUIZ_CATEGORY != null && not empty requestScope.LIST_QUIZ_CATEGORY}">                       
                             <!-- Page Heading -->
 
+<<<<<<< Updated upstream
                             <!-- DataTales Example
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
@@ -452,6 +453,9 @@
                                 <div class="card-body">
                                     <div class="table-responsive">-->
                             <!--class="table table-bordered" id="dataTable"--><table class="table table-bordered table-hover" width="100%" cellspacing="0" >Quiz Category
+=======
+                            <table width="100%" cellspacing="0" >Quiz Category
+>>>>>>> Stashed changes
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -478,7 +482,12 @@
                                             <td
                                                 <input type="hidden" name="search" value="${param.search}"/>
                                                 <input type="hidden" name="categoryID" value="${category.categoryID}"/>
+<<<<<<< Updated upstream
                                                 <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
+=======
+                                                <input type="hidden" name="status" value="${category.status}"/>
+                                                <input type="submit" name="action" value="Delete"/>
+>>>>>>> Stashed changes
                                             </td>
                                             <td>
                                                 <input type="submit" class="btn btn-success" name="action" value="Update"/>

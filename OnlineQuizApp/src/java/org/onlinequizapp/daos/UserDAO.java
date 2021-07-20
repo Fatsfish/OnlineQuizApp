@@ -46,7 +46,45 @@ public class UserDAO {
         }
         return user;
     }
+    
+    public UserDTO checkMailLogin(String userID, String password) throws SQLException {
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Select userID, fullName, roleID, email "
+                        + "FROM tblUser "
+                        + "Where email=\'" + userID + "\' AND password=\'" + password + "\'";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    String fullName = rs.getString("fullName");
+                    String roleID = rs.getString("roleID");
+                    String email= rs.getString("email");
+                    user = new UserDTO(userID, fullName, roleID, "", email);
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
 
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return user;
+    }
+
+    
     public List<UserDTO> getList(String search) throws SQLException {
         List<UserDTO> listUser = null;
         Connection conn = null;
@@ -204,7 +242,7 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPdaTE tblUser SET roleID='C' "
+                String sql = "UPdaTE tblUser SET roleID='S' "
                         + " Where userID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, user.getUserID());

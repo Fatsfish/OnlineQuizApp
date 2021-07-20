@@ -41,13 +41,9 @@ public class CategoryDeleteController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         HttpSession session = request.getSession();
-        
-        if (session.getAttribute("categoryID") != null) {
-            String categoryID = ((CategoryDTO) session.getAttribute("categoryID")).getCategoryID();
-        }
         try {
-            String categoryID = request.getParameter("categoryID");
-            if (!categoryID.equals(categoryID)) {
+            if (!request.getParameter("status").equals("1")) {
+                String categoryID = request.getParameter("categoryID");
                 CategoryDAO dao = new CategoryDAO();
                 boolean check = dao.deleteQ(categoryID);
                 if (check) {
@@ -65,7 +61,7 @@ public class CategoryDeleteController extends HttpServlet {
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-        
+
         if (session.getAttribute("categoryBlogID") != null) {
             String categoryBlogID = ((CategoryBlogDTO) session.getAttribute("categoryBlogID")).getCategoryID();
         }

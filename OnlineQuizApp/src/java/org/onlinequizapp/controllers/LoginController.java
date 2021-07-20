@@ -39,8 +39,10 @@ public class LoginController extends HttpServlet {
             String sha256hex = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
             UserDAO dao = new UserDAO();
             UserDTO user = dao.checkLogin(userID, sha256hex);
+            if(user==null){
+                user= dao.checkMailLogin(userID, sha256hex);
+            }
             HttpSession session = request.getSession();
-
             if (user != null) {
                 session.setAttribute("LOGIN_USER", user);
                 if (user.getRole().contains("AD")) {
