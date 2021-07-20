@@ -80,7 +80,7 @@
                             <a class="collapse-item" href="class.jsp">My Classes</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="courseAdd.jsp">Create Course</a>>
+                            <a class="collapse-item" href="courseAdd.jsp">Create Course</a>
                             <a class="collapse-item" href="lectureAdd.jsp">Create Lecture</a>
                             <a class="collapse-item" href="sourceAdd.jsp">Create Resource</a>
                             <a class="collapse-item" href="classAdd.jsp">Create Class</a>
