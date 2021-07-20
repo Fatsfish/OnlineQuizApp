@@ -35,13 +35,24 @@ public class UserDTO implements Serializable {
         this.verification = verification;
     }
 
-    public UserDTO(String userID, String fullname, String role, String password) {
+    public UserDTO(String userID, String fullname, String role, String password, String email) {
         this.userID = userID;
         this.fullname = fullname;
         this.role = role;
         this.password = password;
+        this.email= email;
     }
 
+    public UserDTO(String userID, String fullname, String role, String password, String email, String verification) {
+        this.userID = userID;
+        this.role = role;
+        this.fullname=fullname;
+        this.password = password;
+        this.email = email;
+        this.verification = verification;
+    }
+
+    
     public UserDTO() {
     }
 

@@ -40,20 +40,6 @@
                             </div>
                             <form class="user" action="MainController" method="Post">
                                 <div class="form-group">
-                                    <input type="text" name="userID" required="" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="User Name">
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" required="" class="form-control form-control-user" name="fullName" id="exampleFirstName"
-                                            placeholder="Full Name">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="phone" required="" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Phone Number">
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <input type="email" name="email" required="" class="form-control form-control-user" id="exampleInputEmail"
                                         placeholder="Email Address">
                                 </div>
@@ -67,11 +53,6 @@
                                             id="exampleRepeatPassword" placeholder="Repeat Password">
                                     </div>
                                 </div>
-                                 <div class="form-group">
-                                    <input type="text" name="address" required="" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Shipping Address">
-                                </div>
-      
                             <div class="wthree-text">
                                 <label class="anim">
                                     <input type="checkbox" class="checkbox" name="agreement" required="">

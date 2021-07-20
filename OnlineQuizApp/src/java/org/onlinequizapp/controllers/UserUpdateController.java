@@ -44,8 +44,9 @@ public class UserUpdateController extends HttpServlet {
             String userID = request.getParameter("userID");
             String fullName = request.getParameter("fullName");
             String roleID = request.getParameter("roleID");
+            String email = request.getParameter("Email");
             UserDAO dao = new UserDAO();
-            UserDTO user = new UserDTO(userID, fullName, roleID, "");
+            UserDTO user = new UserDTO(userID, fullName, roleID, "",email);
             boolean flag = true;
             if (fullName.length() > 250 || fullName.length() < 1) {
                 flag = false;

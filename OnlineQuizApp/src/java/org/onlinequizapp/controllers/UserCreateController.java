@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +21,8 @@ import org.onlinequizapp.daos.EmailDAO;
 import org.onlinequizapp.daos.UserDAO;
 import org.onlinequizapp.dtos.UserDTO;
 import org.onlinequizapp.dtos.UserError;
+import com.google.common.hash.Hashing;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -45,43 +49,59 @@ public class UserCreateController extends HttpServlet {
         String url = ERROR;
         UserError userError = new UserError("", "", "", "", "", "", "", "");
         try {
-            String userID = request.getParameter("userID");
-            String roleID = "U";
-            String fullName = request.getParameter("fullName");
+            //String userID = request.getParameter("userID");
+            //String fullName = request.getParameter("fullName");
             String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
-            String address = request.getParameter("address");
+            //String phone = request.getParameter("phone");
+            //String address = request.getParameter("address");
             String password = request.getParameter("password");
             String confirm = request.getParameter("confirm");
-            //boolean agree = "on".equals(request.getParameter("agreement"));
             boolean flag = true;
-            if (userID.length() > 20 || userID.length() < 1) {
+            if (request.getParameter("agreement") == null) {
                 flag = false;
-                userError.setUserIDError("UserID must be [1-5]");
+                userError.setConfirmError("Please hava a look at our policies and tick the agreement box");
+            }
+            /*if (userID.length() > 20 || userID.length() < 1) {
+                flag = false;
+                userError.setUserIDError("UserName must be [1-20]");
             }
             if (fullName.length() > 250 || fullName.length() < 1) {
                 flag = false;
                 userError.setFullNameError("Full Name must be [1-250]");
-            }
-            if (roleID.length() > 2 || roleID.length() < 1 || (!roleID.equals("G") && !roleID.equals("M")&& !roleID.equals("U"))) {
+            }*/
+              if (password.length() < 6 || password.length() > 20) {
                 flag = false;
-                userError.setRoleIDError("RoleID must be [1-2] and must be G - guest, U - Unvalidated Member or M - member");
+                userError.setPasswordError("Password length must be between 6 and 20 characters");
+            }
+            // ReGex to check if a string
+            // contains uppercase, lowercase
+            // numeric value
+            Pattern regex_3_1 = Pattern.compile("[^a-zA-Z0-9]");//check if password doesn't match the pattern
+            // Find match between given string
+            Matcher matcher_3_1 = regex_3_1.matcher(password);
+            // condition: password must have atleast 1 caps/ 1 non-caps/ 1 numberic
+            if (matcher_3_1.matches()) {
+                flag = false;
+                userError.setPasswordError("Password must have at least 1 capital letter, 1 lower case letter, 1 number");
+            }
+            //check if password contain any special character
+            Pattern regex_spec_char = Pattern.compile("[$&+,:;=?@#|'<>.-^*()%!]");//check if password match the pattern 
+            Matcher matcher_spec_char = regex_spec_char.matcher(password);
+            if (matcher_spec_char.matches()) {
+                flag = false;
+                userError.setPasswordError("Password must not contain any special character");
             }
             if (!password.equals(confirm)) {
                 flag = false;
                 userError.setConfirmError("2 passwords are not matched!");
             }
-            /*if (!agree) {
-                flag = false;
-                userError.setConfirmError("Please hava a look at our policies and tick the agreement box");
-            }*/
             if (flag) {
                 UserDAO dao = new UserDAO();
-               
                 EmailDAO sm = new EmailDAO();
                 //get the 6-digit code
                 String code = sm.getRandom();
-                UserDTO user = new UserDTO(userID, fullName, roleID, password, phone, email, address, code);
+                String sha256hex = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
+                UserDTO user = new UserDTO(code, "U", sha256hex, email, code);
                 dao.insertNew(user);
                 dao.updateCode(user, code);
                 boolean test = sm.sendEmail(user, code);

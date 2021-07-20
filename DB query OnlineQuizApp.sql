@@ -6,9 +6,8 @@ create table dbo.tblRole (
 	CONSTRAINT PK_tblRole PRIMARY KEY (roleID));
 
 insert into dbo.tblRole(roleID, name) values 
-('AD', 'admin'),('G', 'guest'),('M', 'modifier'),('C', 'customer');
+('AD', 'admin'),('S', 'Student'),('S1', 'SubStudent'),('T', 'Teacher'),('T1', 'SubTeacher'),('U', 'Unverified');
 insert into dbo.tblRole(roleID, name) values ('U', 'Unabled');
-alter table dbo.tblUser add verification_code varchar(64);
 create table dbo.tblUser (
 	userID varchar(250),
 	[password] varchar (250) not null,
@@ -20,6 +19,10 @@ create table dbo.tblUser (
 	[address] varchar(250)
 	CONSTRAINT PK_tblUser PRIMARY KEY (userID)
 );
+alter table dbo.tblUser add verification_code varchar(64);
+alter table dbo.tblUser add [image] varchar(8000);
+alter table dbo.tblUser add CONSTRAINT PK_tblUser PRIMARY KEY (email)
+
 
 insert into dbo.tblUser (userID, [password], fullName, roleID, email, [address])
 values 

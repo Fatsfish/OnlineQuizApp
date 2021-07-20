@@ -24,6 +24,9 @@ import org.onlinequizapp.utils.GoogleUtils;
 public class LoginGoogleServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    private static final String SUCCESS = "dashboardadmin.jsp";
+    private static final String STUDENT = "dashboardstudent.jsp";
+    private static final String TEACHER = "dashboardteacher.jsp";
 
     public LoginGoogleServlet() {
         super();
@@ -33,7 +36,7 @@ public class LoginGoogleServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String code = request.getParameter("code");
-
+        String url=STUDENT;
         if (code == null || code.isEmpty()) {
             RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
             dis.forward(request, response);
@@ -45,28 +48,44 @@ public class LoginGoogleServlet extends HttpServlet {
             request.setAttribute("email", googlePojo.getEmail());
             String userID = googlePojo.getId();
             String fullName = googlePojo.getEmail();
-            String roleID = "C";
+            String roleID = "S";
             String password = "***";
             HttpSession session = request.getSession();
             UserDAO dao = new UserDAO();
-            UserDTO user = new UserDTO(userID, fullName, roleID, password);
-            if (user != null) {
-                session.setAttribute("LOGIN_USER", user);
-            }
+            UserDTO user = null;
             try {
-                if (!dao.checkDuplicate(userID)) {
-                    try {
-                        dao.insertNew1(user);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(LoginGoogleServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(LoginGoogleServlet.class.getName()).log(Level.SEVERE, null, ex);
+                if (dao.checkEmail(fullName)) {
+                    user = dao.getListEmail(fullName);
+                    if(user.getRole().equals("T")||user.getRole().equals("T1")){
+                        url=TEACHER;
+                    }else if(user.getRole().equals("U")){
+                        dao.updateEnable(user);
+                    }else if(user.getRole().equals("AD")){
+                        url=SUCCESS;
                     }
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(LoginGoogleServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            RequestDispatcher dis = request.getRequestDispatcher("teacherdashboard.html");
+            if (user == null) {
+                user = new UserDTO(userID, fullName, roleID, password, fullName);
+                try {
+                    if (!dao.checkDuplicate(userID)) {
+                        try {
+                            dao.insertNew1(user);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(LoginGoogleServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(LoginGoogleServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(LoginGoogleServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (user != null) {
+                session.setAttribute("LOGIN_USER", user);
+            }
+            RequestDispatcher dis = request.getRequestDispatcher(url);
             dis.forward(request, response);
         }
 

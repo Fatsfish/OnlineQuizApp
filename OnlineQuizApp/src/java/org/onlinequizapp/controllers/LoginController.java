@@ -1,6 +1,8 @@
 package org.onlinequizapp.controllers;
 
+import com.google.common.hash.Hashing;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -34,17 +36,18 @@ public class LoginController extends HttpServlet {
         try {
             String userID = request.getParameter("userID");
             String password = request.getParameter("password");
+            String sha256hex = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
             UserDAO dao = new UserDAO();
-            UserDTO user = dao.checkLogin(userID, password);
+            UserDTO user = dao.checkLogin(userID, sha256hex);
             HttpSession session = request.getSession();
 
             if (user != null) {
                 session.setAttribute("LOGIN_USER", user);
                 if (user.getRole().contains("AD")) {
                     url = SUCCESS;
-                } else if (user.getRole().contains("C") || user.getRole().contains("M")) {
+                } else if (user.getRole().contains("T") || user.getRole().contains("T1")) {
                     url = Teacher;
-                } else if (user.getRole().contains("G") || user.getRole().contains("S")) {
+                } else if (user.getRole().contains("S") || user.getRole().contains("S1")) {
                     url = Student;
                 } else {
                     url = SHOPPING;
@@ -66,7 +69,6 @@ public class LoginController extends HttpServlet {
             log("Error at LoginController:" + e.toString());
         } finally {
             response.sendRedirect(url);
-
         }
     }
 
