@@ -411,7 +411,7 @@
                                 <div class="col-auto">
                                     <input class="form-control" type="text" name="search" placeholder="Search.." value="${param.search}"/>
                                 </div>
-                                <div>
+                                <div class="col-auto">
                                     <select class="form-select" aria-label="Category select" name="cate">
                                         <option selected>All Categories</option>
                                         <option value="1">Quiz</option>
