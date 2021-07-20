@@ -376,12 +376,13 @@ public class CategoryDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "INSERT INTO tblCategory( categoryName, description, level, status) "
-                        + " VALUES(\'?\',\'?\',\'?\',\'?\')";
+                        + " VALUES(?,?,?,?)";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, cate.getCategoryName());
                 stm.setString(2, cate.getDescription());
                 stm.setString(3, cate.getLevel());
-                stm.setString(4, cate.getStatus());
+                stm.setByte(4, (byte)Integer.parseInt(cate.getStatus()));
+                stm.executeQuery();
             }
         } catch (Exception e) {
 
@@ -407,6 +408,7 @@ public class CategoryDAO {
                 stm.setString(1, cate.getCategoryName());
                 stm.setString(2, cate.getDescription());
                 stm.setString(3, cate.getStatus());
+                stm.executeUpdate();
             }
         } catch (Exception e) {
 

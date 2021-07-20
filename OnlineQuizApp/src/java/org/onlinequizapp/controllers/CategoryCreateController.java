@@ -28,7 +28,7 @@ import org.onlinequizapp.dtos.CategoryDTO;
 @WebServlet(name = "CategoryCreateController", urlPatterns = {"/CategoryCreateController"})
 public class CategoryCreateController extends HttpServlet {
 
-    private static final String SUCCESS = "blog.html";
+    private static final String SUCCESS = "categoryAdd.jsp";
     private static final String ERROR = "error.jsp";
 
     /**
@@ -45,51 +45,45 @@ public class CategoryCreateController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String check = request.getParameter("check");
-        
+        if (check.equals("quiz")) {
             CategoryDTO categoryDTO = new CategoryDTO("", "", "", "", "");
             try {
-                String categoryID = request.getParameter("categoryID");
-                String categoryName = request.getParameter("categoryName");
+                String categoryName = request.getParameter("name");
                 String description = request.getParameter("description");
                 String status = request.getParameter("status");
                 String level = request.getParameter("level");
-                boolean flag = true;
-                if (categoryID.length() > 20 || categoryID.length() < 1) {
-                    flag = false;
-                    categoryDTO.setCategoryID("CategoryID must be [1-5]");
+                if(status==null){
+                        status="0";
+                    }
+                else if (status.equals("on")) {
+                    status = "1";
+                } else{
+                    status = "0";
                 }
+                boolean flag = true;
                 if (categoryName.length() > 250 || categoryName.length() < 1) {
                     flag = false;
                     categoryDTO.setCategoryName("Category Name must be [1-250]");
-                }
-                if (status.isEmpty() || !(status.equals(1)) || !(status.equals(0))) {
-                    flag = false;
-                    categoryDTO.setStatus("Status must be 0 or 1");
                 }
                 if (description.length() > 250 || description.length() < 1) {
                     flag = false;
                     categoryDTO.setCategoryName("Description must be [1-250]");
                 }
-                if (level.length() > 50 || level.length() < 1) {
+                if (!level.equalsIgnoreCase("Hard") && !level.equalsIgnoreCase("Medium") && !level.equalsIgnoreCase("Easy")) {
                     flag = false;
-                    categoryDTO.setCategoryName("Level must be [1-50]");
+                    categoryDTO.setCategoryName("Level must be Hard, Easy or Medium");
                 }
-                /*if (!agree) {
-                flag = false;
-                categoryDTO.setConfirm("Please hava a look at our policies and tick the agreement box");
-            }*/
                 if (flag) {
                     CategoryDAO dao = new CategoryDAO();
-
-                    CategoryDTO category = new CategoryDTO(categoryID, categoryName, description, status, level);
+                    
+                    CategoryDTO category = new CategoryDTO("", categoryName, description, status, level);
                     dao.insertQ(category);
-
                     url = SUCCESS;
+
                 } else {
                     request.setAttribute("ERROR", categoryDTO);
                 }
             } catch (Exception e) {
-
                 log("Error at CreateController: " + e.toString());
                 if (e.toString().contains("duplicate")) {
                     categoryDTO.setCategoryID("Category Name duplicate!");
@@ -98,6 +92,7 @@ public class CategoryCreateController extends HttpServlet {
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
+        } else if (check.equals("blog")) {
             CategoryBlogDTO categoryBlogDTO = new CategoryBlogDTO("", "", "", "");
             try {
                 String categoryID = request.getParameter("categoryID");
@@ -145,6 +140,7 @@ public class CategoryCreateController extends HttpServlet {
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

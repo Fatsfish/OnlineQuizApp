@@ -267,36 +267,27 @@
                         </div>
 
                         <div class="container">
-                            <form>
-
-                                <div class="mb-3">
-                                    <label for="categoryID" class="form-label">Category ID</label>
-                                    <input type="text" class="form-control" id="categoryID">
-                                </div>
+                            <form action="CategoryCreateController" method="POST">
                                 <div class="mb-3">
                                     <label for="categoryName" class="form-label">Category Name</label>
-                                    <input type="text" class="form-control" id="categoryName">
+                                    <input type="text" name="name" class="form-control" id="categoryName">
                                 </div>
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control" id="description" rows="3"></textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="status" class="form-label">Status</label>
-                                    <textarea class="form-control" id="status" ></textarea>
+                                    <textarea name="description" class="form-control" id="description" rows="3"></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="level" class="form-label">Level</label>
-                                    <textarea class="form-control" id="level" ></textarea>
+                                    <textarea name="level" class="form-control" id="level" ></textarea>
                                 </div>
                                 <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="active">
+                                    <input name="status" type="checkbox" class="form-check-input" id="active">
                                     <label class="form-check-label" for="status">Active</label>
                                 </div>
-                                    <input type="hidden" name="check" value="category" class="form-check-input" id="check">
+                                    <input type="hidden" name="check" value="quiz" class="form-check-input" id="check">
 
                                 <button type="submit" class="btn btn-primary">Create</button>
-                                <button type="submit" class="btn btn-danger">Cancel</button>
+                                <a href="dashboardadmin.jsp" class="btn btn-danger">Cancel</a>
                             </form></div>
 
 
