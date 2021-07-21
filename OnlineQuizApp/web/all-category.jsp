@@ -125,8 +125,7 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Categories:</h6>
-                            <a class="collapse-item" href="all-category.html">All Categories</a>
-                            <a class="collapse-item" href="category.jsp">My Categories</a>
+                            <a class="collapse-item" href="all-category.jsp">All Categories</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="categoryAdd.jsp">Create Quiz Category</a>
@@ -445,8 +444,8 @@
                         </c:if>
 
                         <c:if test="${requestScope.LIST_QUIZ_CATEGORY != null && not empty requestScope.LIST_QUIZ_CATEGORY}">                       
-                            <table class="table table-bordered table-hover" width="100%" cellspacing="0" >Quiz Category
-                                <table width="100%" cellspacing="0" >Quiz Category
+                            <table class="table table-bordered table-hover" width="100%" cellspacing="0">Quiz Category
+                                <table width="100%" cellspacing="0" >
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -475,7 +474,6 @@
                                                     <input type="hidden" name="categoryID" value="${category.categoryID}"/>
                                                     <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
                                                     <input type="hidden" name="status" value="${category.status}"/>
-                                                    <input type="submit" name="action" value="Delete"/>
                                                 </td>
                                                 <td>
                                                     <input type="submit" class="btn btn-success" name="action" value="Update"/>
@@ -494,7 +492,8 @@
                             </c:if><br>
 
                             <c:if test="${requestScope.LIST_BLOG_CATEGORY != null && not empty requestScope.LIST_BLOG_CATEGORY}">                    
-                                <table width="100%" cellspacing="0">Blog Category  
+                                <table class="table table-bordered table-hover" width="100%" cellspacing="0" >Blog Category
+                                <table width="100%" cellspacing="0" >
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -517,10 +516,10 @@
                                                 <td
                                                     <input type="hidden" name="search" value="${param.search}"/>
                                                     <input type="hidden" name="categoryID" value="${category.categoryID}"/>
-                                                    <input type="submit" name="action" value="Delete"/>
+                                                    <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
                                                 </td>
                                                 <td>
-                                                    <input type="submit" name="action" value="Update"/>
+                                                    <input type="submit" class="btn btn-success" name="action" value="Update"/>
                                                     <input type="hidden" name="categoryID" value="${category.categoryID}"/>
                                                     <input type="hidden" name="categoryName" value="${category.categoryName}"/>
                                                     <input type="hidden" name="status" value="${category.status}"/>

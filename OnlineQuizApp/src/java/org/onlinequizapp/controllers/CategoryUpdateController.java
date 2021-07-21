@@ -23,7 +23,7 @@ import org.onlinequizapp.dtos.CategoryDTO;
 @WebServlet(name = "CategoryUpdateController", urlPatterns = {"/CategoryUpdateController"})
 public class CategoryUpdateController extends HttpServlet {
 
-    private static final String SUCCESS = "SearchController";
+    private static final String SUCCESS = "CategorySearchController";
     private static final String ERROR = "updateCategory.jsp";
 
     /**
@@ -49,10 +49,6 @@ public class CategoryUpdateController extends HttpServlet {
             CategoryDAO dao = new CategoryDAO();
             CategoryDTO category = new CategoryDTO(categoryID, categoryName, description, status, level);
             boolean flag = true;
-            if (categoryID.length() > 20 || categoryID.length() < 1) {
-                flag = false;
-                categoryDTO.setCategoryID("CategoryID must be [1-5]");
-            }
             if (categoryName.length() > 250 || categoryName.length() < 1) {
                 flag = false;
                 categoryDTO.setCategoryName("Category Name must be [1-250]");
