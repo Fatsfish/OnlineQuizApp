@@ -22,29 +22,26 @@
         <title>Update Category Information</title>
     </head>
     <body>
-        <h3 align="center">UPDATE ${sessionScope.LIST_QUIZ_CATEGORY.categoryName}</h3>
-        <div class="main-w3layouts wrapper">
-            <h1>Category Search and Edit page</h1>
+        <h1 align="center">UPDATE ${sessionScope.LIST_QUIZ_CATEGORY.categoryName}</h1>
+        <div >
+            <h2 style="text-align: center">Category Search and Edit page</h2>
             <div class="main-agileinfo">
                 <div class="agileits-top">
-                    <form action="CategoryUpdateController" method="POST"> 
-                        <input type="submit" name="check" value="quiz"/>
-                    </form>
                     <form action="CategoryUpdateController" method="POST">
-                        Category ID<input type="text" name="categoryID" value="${param.categoryID}" readonly=""/></br>
+                        Category ID<input type="text" name="categoryID" value="${param.categoryID}" id="categoryID" readonly=""/></br>
                         <label>
-                            <span>Category Name</span></br><input type="text" name="categoryName" value="${param.categoryName}" required=""/></br>
+                            <span>Category Name</span></br><input type="text" name="categoryName" value="${param.categoryName}" id="categoryName" required=""/></br>
                         </label>
                         <label>
-                            <span>Level (Hard, Medium, Easy)</span></br><input type="text" name="level" value="${param.level}" required=""/></br>
+                            <span>Level (Hard, Medium, Easy)</span></br><input type="text" name="level" id="categoryName" value="${param.level}" required=""/></br>
                         </label>
                         <label>
-                            <span>Description</span></br><input type="text" name="description" value="${param.description}" required=""/></br>
+                            <span>Description</span></br><input type="text" name="description" id="description" value="${param.description}" required=""/></br>
                         </label>
                         <label><span>Status (1,0)</span></br>
-                            <input type="text" name="status" value="${param.status}" required=""/></br>    
+                            <input type="text" name="status" value="${param.status}" id="status" required=""/></br>    
                             <input type="hidden" name="search" value="${param.search}" required=""/></br>
-                            <input type="submit" name="action" value="quiz"/>
+                            <input type="submit" name="action" value="Confirm"/>
                     </form>
                     </c:if>
                 </div>

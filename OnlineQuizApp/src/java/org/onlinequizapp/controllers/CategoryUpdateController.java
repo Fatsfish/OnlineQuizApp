@@ -41,7 +41,7 @@ public class CategoryUpdateController extends HttpServlet {
         String url = ERROR;
         String check = request.getParameter("check");
         CategoryDTO categoryDTO = new CategoryDTO("", "", "", "", "");
-        if (check.equals("quiz")) {
+        if (check.equals("Update")) {
             try {
                 String categoryName = request.getParameter("categoryName");
                 String description = request.getParameter("description");

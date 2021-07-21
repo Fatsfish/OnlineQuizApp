@@ -61,8 +61,7 @@ public class CategorySearchController extends HttpServlet {
                 } finally {
                     request.getRequestDispatcher(url).forward(request, response);
                 }
-            }
-            else if (check.equals("Course")) {
+            } else if (check.equals("Course")) {
                 try {
                     String search = request.getParameter("search");
                     CategoryDAO dao = new CategoryDAO();
@@ -92,7 +91,7 @@ public class CategorySearchController extends HttpServlet {
                 } finally {
                     request.getRequestDispatcher(url).forward(request, response);
                 }
-            }else if (check.equals("Blog")) {
+            } else if (check.equals("Blog")) {
                 try {
                     String search = request.getParameter("search");
                     CategoryDAO dao = new CategoryDAO();
