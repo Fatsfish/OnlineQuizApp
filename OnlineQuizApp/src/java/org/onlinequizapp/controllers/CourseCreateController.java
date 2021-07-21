@@ -12,11 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.onlinequizapp.daos.CategoryDAO;
 import org.onlinequizapp.daos.CourseDAO;
 import org.onlinequizapp.dtos.CategoryBlogDTO;
 import org.onlinequizapp.dtos.CategoryDTO;
 import org.onlinequizapp.dtos.CourseDTO;
+import org.onlinequizapp.dtos.UserDTO;
 
 /**
  *
@@ -45,15 +47,19 @@ public class CourseCreateController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String function = request.getParameter("function");
-        
+        HttpSession session = request.getSession();
+        String LogID="";
+        if (session.getAttribute("LOGIN_USER") != null) {
+            LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
+        }
         if (function.equals("quiz")) {
-            CategoryDTO categoryDTO = new CategoryDTO("", "", "", "", "");
+            CourseDTO categoryDTO = new CourseDTO("", "", "", "", "");
             try {
                 String courseName = request.getParameter("Name");
                 String description = request.getParameter("description");
                 String status = request.getParameter("status");
-                String level = request.getParameter("duration");
-                String catetegoryID = request.getParameter("categoryID");
+                String duration = request.getParameter("duration");
+                String categoryID = request.getParameter("categoryID");
                 if (status == null) {
                     status = "0";
                 } else if (status.equals("on")) {
@@ -64,20 +70,20 @@ public class CourseCreateController extends HttpServlet {
                 boolean flag = true;
                 if (courseName.length() > 250 || courseName.length() < 1) {
                     flag = false;
-                    categoryDTO.setCategoryName("Category Name must be [1-250]");
+                    categoryDTO.setCourseName("Course Name must be [1-250]");
                 }
                 if (description.length() > 250 || description.length() < 1) {
                     flag = false;
-                    categoryDTO.setCategoryName("Description must be [1-250]");
+                    categoryDTO.setCourseName("Description must be [1-250]");
                 }
-                if (!level.equalsIgnoreCase("Hard") && !level.equalsIgnoreCase("Medium") && !level.equalsIgnoreCase("Easy")) {
+                if (duration.length() > 250 || duration.length() < 1) {
                     flag = false;
-                    categoryDTO.setCategoryName("Level must be Hard, Easy or Medium");
+                    categoryDTO.setCourseName("Duration must be [1-250]");
                 }
                 if (flag) {
                     CourseDAO dao = new CourseDAO();
-                    CourseDTO course = new CourseDTO("", courseName, description, status, level);
-                    //dao.insertQ(course);
+                    CourseDTO course = new CourseDTO("", courseName, LogID, duration, status, categoryID, description);
+                    dao.insert(course);
                     url = SUCCESS;
 
                 } else {

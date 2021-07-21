@@ -28,6 +28,7 @@ public class CategorySearchController extends HttpServlet {
 
     private static final String SUCCESS = "all-category.jsp";
     private static final String COURSE = "courseAdd.jsp";
+    private static final String BLOG = "create-blog.jsp";
     private static final String ERROR = "404.html";
 
     /**
@@ -45,7 +46,6 @@ public class CategorySearchController extends HttpServlet {
         String url = ERROR;
         String check = request.getParameter("check");
         String cate = request.getParameter("cate");
-        HttpSession session = request.getSession();
         if (cate.equals("1")) {
             if (check.equals("Search")) {
                 try {
@@ -84,8 +84,22 @@ public class CategorySearchController extends HttpServlet {
                     CategoryDAO dao = new CategoryDAO();
                     List<CategoryBlogDTO> list = dao.getListB(search);
                     if (list != null) {
-                        request.setAttribute("LIST_QUIZ_CATEGORY", list);
+                        request.setAttribute("LIST_BLOG_CATEGORY", list);
                         url = SUCCESS;
+                    }
+                } catch (SQLException e) {
+                    log("Error at CategorySearchController: " + e.toString());
+                } finally {
+                    request.getRequestDispatcher(url).forward(request, response);
+                }
+            }else if (check.equals("Blog")) {
+                try {
+                    String search = request.getParameter("search");
+                    CategoryDAO dao = new CategoryDAO();
+                    List<CategoryBlogDTO> list = dao.getListB(search);
+                    if (list != null) {
+                        request.setAttribute("LIST_BLOG_CATEGORY", list);
+                        url = BLOG;
                     }
                 } catch (SQLException e) {
                     log("Error at CategorySearchController: " + e.toString());

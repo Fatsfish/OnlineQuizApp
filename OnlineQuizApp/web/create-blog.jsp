@@ -3,7 +3,11 @@
     Created on : Jul 19, 2021, 9:20:29 PM
     Author     : ASUS
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="org.onlinequizapp.daos.CategoryDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="org.onlinequizapp.dtos.CategoryDTO"%>
+<%@page import="org.onlinequizapp.dtos.CategoryBlogDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -266,23 +270,23 @@
                         </div>
 
                         <div class="container">
-                           <p class="mb-4">${requestScope.CREATE_BLOG_ERROR}</p>
+                            <p class="mb-4">${requestScope.CREATE_BLOG_ERROR}</p>
+                            <a href="CategorySearchController?cate=2&check=Blog&search=" class="btn btn-primary mb-3"/>Filter Category</a>
                             <form action="BlogCreateController">
                                 <div class="mb-3">
                                     <label for="blogTitle" class="form-label">Blog Title</label>
                                     <input type="text" class="form-control" id="blogTitle">
                                 </div>
-                                <select name="BlogCategory"  class="form-select" aria-label="Default select example">
-                                    <option selected>Choose category</option>
-                                    <c:if test="${sessionScope.LIST_BLOG_CATEGORY != null && not empty sessionScope.LIST_BLOG_CATEGORY }">
-                                        <c:forEach var="blogC" varStatus="counter" items="${sessionScope.LIST_BLOG_CATEGORY}">
-                                            <form action="CategorySearchController">
+                                <div>
+                                    <select name="BlogCategory"  class="form-select" aria-label="Default select example">
+                                        <option selected>Choose category</option>
+                                        <c:if test="${requestScope.LIST_BLOG_CATEGORY != null && not empty requestScope.LIST_BLOG_CATEGORY }">
+                                            <c:forEach var="blogC" varStatus="counter" items="${requestScope.LIST_BLOG_CATEGORY}">
                                                 <option value="${blogC.categoryID}">${blogC.categoryName}</option>
-                                            </form>
-                                        </c:forEach>
-                                    </c:if>
-
-                                </select>
+                                            </c:forEach>
+                                        </c:if>
+                                    </select>
+                                </div>
                                 <div class="mb-3">
                                     <label for="BlogContent" class="form-label">Blog Content</label>
                                     <textarea class="form-control" id="BlogContent" rows="3"></textarea>
