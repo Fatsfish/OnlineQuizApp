@@ -51,6 +51,8 @@ public class BlogCreateController extends HttpServlet {
             String Title = request.getParameter("blogTitle");
             String blogContent = request.getParameter("BlogContent");
             String categoryID = request.getParameter("categoryID");
+            String img = request.getParameter("Image");
+            String status = request.getParameter("Status");
             //boolean agree = "on".equals(request.getParameter("agreement"));
             boolean flag = true;
            if(categoryID == null)
@@ -64,7 +66,7 @@ public class BlogCreateController extends HttpServlet {
             }*/
             if (flag) {
                 BlogDAO dao = new BlogDAO();
-                BlogDTO dto = new BlogDTO("", Title, authorID, categoryID, blogContent, Title);
+                BlogDTO dto = new BlogDTO("", Title, authorID, categoryID, blogContent, img);
                 dao.insert(dto);
                 url = SUCCESS;
 

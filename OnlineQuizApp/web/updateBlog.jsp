@@ -10,7 +10,6 @@
 <%@page import="org.onlinequizapp.dtos.CategoryBlogDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -164,7 +163,7 @@
                             <a class="collapse-item" href="blog.jsp">My Blogs</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="blogAdd.html">Create Blog</a>
+                            <a class="collapse-item" href="create-blog.jsp">Create Blog</a>
                         </div>
                     </div>
                 </li>
@@ -280,8 +279,8 @@
                                 </div>
                                 <select name="BlogCategory"  class="form-select" aria-label="Default select example">
                                     <option selected>Choose category</option>
-                                    <c:if test="${sessionScope.LIST_BLOG_CATEGORY != null && not empty sessionScope.LIST_BLOG_CATEGORY }">
-                                        <c:forEach var="blogC" varStatus="counter" items="${sessionScope.LIST_BLOG_CATEGORY}">
+                                    <c:if test="${requestScope.LIST_BLOG_CATEGORY != null && not empty requestScope.LIST_BLOG_CATEGORY }">
+                                        <c:forEach var="blogC" varStatus="counter" items="${requestScope.LIST_BLOG_CATEGORY}">
                                             <form action="CategorySearchController">
                                                 <option value="${blogC.categoryID}">${blogC.categoryName}</option>
                                             </form>

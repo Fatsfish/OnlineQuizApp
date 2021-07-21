@@ -161,7 +161,7 @@
                             <a class="collapse-item" href="blog.jsp">My Blogs</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="blogAdd.jsp">Create Blog</a>
+                            <a class="collapse-item" href="create-blog.jsp">Create Blog</a>
                         </div>
                     </div>
                 </li>
