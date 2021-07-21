@@ -29,7 +29,6 @@
         <!-- Custom styles for this page -->
         <link href="Dashboard/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
 
     <body id="page-top">
@@ -444,8 +443,8 @@
                         </c:if>
 
                         <c:if test="${requestScope.LIST_QUIZ_CATEGORY != null && not empty requestScope.LIST_QUIZ_CATEGORY}">                       
-                            <table class="table table-bordered table-hover" width="100%" cellspacing="0">Quiz Category
-                                <table width="100%" cellspacing="0" >
+                            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                                <h4>Quiz Category</h4>
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -492,8 +491,8 @@
                             </c:if><br>
 
                             <c:if test="${requestScope.LIST_BLOG_CATEGORY != null && not empty requestScope.LIST_BLOG_CATEGORY}">                    
-                                <table class="table table-bordered table-hover" width="100%" cellspacing="0" >Blog Category
-                                <table width="100%" cellspacing="0" >
+                                <table class="table table-bordered table-hover" width="100%" cellspacing="0" >
+                                    <h4>Blog Category</h4>
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -501,6 +500,8 @@
                                             <th>Category Name</th>
                                             <th>Status</th>
                                             <th>Description</th>
+                                            <th>Delete</th>
+                                            <th>Update</th>
                                         </tr>
                                     </thead>
 
