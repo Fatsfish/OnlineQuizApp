@@ -24,7 +24,7 @@ import org.onlinequizapp.dtos.BlogDTO;
 @WebServlet(name = "BlogSearchController", urlPatterns = {"/BlogSearchController"})
 public class BlogSearchController extends HttpServlet {
 
-    private static final String SUCCESS = "search.jsp";
+    private static final String SUCCESS = "blog.jsp";
     private static final String ERROR = "404.html";
 
     /**
