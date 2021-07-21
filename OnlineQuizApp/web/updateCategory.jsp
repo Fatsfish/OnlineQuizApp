@@ -33,7 +33,7 @@
                             <span>Category Name</span></br><input type="text" name="categoryName" value="${param.categoryName}" id="categoryName" required=""/></br>
                         </label>
                         <label>
-                            <span>Level (Hard, Medium, Easy)</span></br><input type="text" name="level" id="categoryName" value="${param.level}" required=""/></br>
+                            <span>Level (Hard, Medium, Easy)</span></br><input type="text" name="level"  value="${param.level}" required=""/></br>
                         </label>
                         <label>
                             <span>Description</span></br><input type="text" name="description" id="description" value="${param.description}" required=""/></br>

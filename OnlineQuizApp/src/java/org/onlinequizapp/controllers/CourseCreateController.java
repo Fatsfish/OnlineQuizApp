@@ -52,8 +52,8 @@ public class CourseCreateController extends HttpServlet {
         if (session.getAttribute("LOGIN_USER") != null) {
             LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
         }
-        if (function.equals("quiz")) {
-            CourseDTO categoryDTO = new CourseDTO("", "", "", "", "");
+        if (function.equals("course")) {
+            CourseDTO categoryDTO = new CourseDTO("", "", "", "", "","","");
             try {
                 String courseName = request.getParameter("Name");
                 String description = request.getParameter("description");
@@ -76,16 +76,15 @@ public class CourseCreateController extends HttpServlet {
                     flag = false;
                     categoryDTO.setCourseName("Description must be [1-250]");
                 }
-                if (duration.length() > 250 || duration.length() < 1) {
+                if (duration.length() > 50 || duration.length() < 1) {
                     flag = false;
-                    categoryDTO.setCourseName("Duration must be [1-250]");
+                    categoryDTO.setCourseName("Duration must be [1-50]");
                 }
                 if (flag) {
                     CourseDAO dao = new CourseDAO();
                     CourseDTO course = new CourseDTO("", courseName, LogID, duration, status, categoryID, description);
                     dao.insert(course);
                     url = SUCCESS;
-
                 } else {
                     request.setAttribute("ERROR", categoryDTO);
                 }

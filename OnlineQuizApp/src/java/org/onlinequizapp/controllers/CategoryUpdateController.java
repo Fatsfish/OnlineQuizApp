@@ -43,18 +43,19 @@ public class CategoryUpdateController extends HttpServlet {
         CategoryDTO categoryDTO = new CategoryDTO("", "", "", "", "");
         if (check.equals("Update")) {
             try {
+                String categoryID = request.getParameter("categoryID");
                 String categoryName = request.getParameter("categoryName");
                 String description = request.getParameter("description");
                 String status = request.getParameter("status");
                 String level = request.getParameter("level");
                 CategoryDAO dao = new CategoryDAO();
-                CategoryDTO category = new CategoryDTO("", categoryName, description, status, level);
+                CategoryDTO category = new CategoryDTO(categoryID, categoryName, description, status, level);
                 boolean flag = true;
                 if (categoryName.length() > 250 || categoryName.length() < 1) {
                     flag = false;
                     categoryDTO.setCategoryName("Category Name must be [1-250]");
                 }
-                if (status.isEmpty() || !(status.equals(1)) || !(status.equals(0))) {
+                if (status.isEmpty() || (!(status.equals(1)) && !(status.equals(0)))) {
                     flag = false;
                     categoryDTO.setStatus("Status must be 0 or 1");
                 }

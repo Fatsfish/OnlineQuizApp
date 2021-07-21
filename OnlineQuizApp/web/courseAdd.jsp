@@ -253,14 +253,16 @@
                             <form action="CourseCreateController">
                                 <div class="mb-3">
                                     <label for="questionName" class="form-label">Course Name</label>
-                                    <input type="text" class="form-control" id="questionName">
+                                    <input type="text" name="Name" class="form-control" id="questionName">
                                 </div>
                                 <c:if test="${requestScope.LIST_QUIZ_CATEGORY != null && not empty requestScope.LIST_QUIZ_CATEGORY}">
                                     <div>
-                                        <select class="form-select" aria-label="Default select example">
+                                        <select name="categoryID" class="form-select" aria-label="Default select example">
                                             <option selected>Choose category</option>
                                             <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_QUIZ_CATEGORY}">
+                                                <c:if test="${category.status==1}">
                                                 <option value="${category.categoryID}">${counter.count} - ${category.categoryName}</option>
+                                                </c:if>
                                             </c:forEach>
                                         </select>
                                     </div>

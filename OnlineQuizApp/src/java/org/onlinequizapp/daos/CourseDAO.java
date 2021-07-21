@@ -48,7 +48,7 @@ public class CourseDAO {
         return course;
     }
 
-    public List<CourseDTO> getListCourse (String search) throws SQLException {
+    public List<CourseDTO> getListCourse(String search) throws SQLException {
         List<CourseDTO> listCourse = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -194,14 +194,17 @@ public class CourseDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblCourse(courseID, courseName, authorID, duration, status) "
-                        + " VALUES(\'?\',\'?\',\'?\',\'?\',\'?\')";
+                String sql = "INSERT INTO tblCourse( AuthorID, duration, status, categoryID, Name, Description) "
+                        + " VALUES(?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, course.getCourseID());
-                stm.setString(2, course.getAuthorID());
-                stm.setString(3, course.getDuration());
-                stm.setString(4, course.getStatus());
+                stm.setString(1, course.getAuthorID());
+                stm.setString(2, course.getDuration());
+                stm.setByte(3, (byte) Integer.parseInt(course.getStatus()));
+                stm.setInt(4, Integer.parseInt(course.getCategoryID()));
                 stm.setString(5, course.getCourseName());
+                stm.setString(6, course.getDescription());
+                stm.executeUpdate();
+
             }
         } catch (Exception e) {
 
@@ -221,15 +224,16 @@ public class CourseDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblCourse(courseID, courseName, authorID, duration, status) "
-                        + " VALUES(?,?,?,?,?)";
+                String sql = "INSERT INTO tblCourse( AuthorID, duration, status, categoryID, Name, Description) "
+                        + " VALUES(?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, course.getCourseID());
-                stm.setString(2, course.getAuthorID());
-                stm.setString(3, course.getDuration());
-                stm.setString(4, course.getStatus());
+                stm.setString(1, course.getAuthorID());
+                stm.setString(2, course.getDuration());
+                stm.setByte(3, (byte) Integer.parseInt(course.getStatus()));
+                stm.setString(4, course.getCategoryID());
                 stm.setString(5, course.getCourseName());
-                stm.executeUpdate();
+                stm.setString(6, course.getDescription());
+                stm.executeQuery();
             }
         } finally {
             if (stm != null) {
