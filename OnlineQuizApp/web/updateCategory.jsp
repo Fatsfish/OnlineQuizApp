@@ -27,10 +27,10 @@
             <h1>Category Search and Edit page</h1>
             <div class="main-agileinfo">
                 <div class="agileits-top">
-                    <form action="CategorySearchController"> 
-                        <input type="submit" name="cate" value="1"/>
+                    <form action="CategoryUpdateController" method="POST"> 
+                        <input type="submit" name="check" value="quiz"/>
                     </form>
-                    <form action="CategorySearchController">
+                    <form action="CategoryUpdateController" method="POST">
                         Category ID<input type="text" name="categoryID" value="${param.categoryID}" readonly=""/></br>
                         <label>
                             <span>Category Name</span></br><input type="text" name="categoryName" value="${param.categoryName}" required=""/></br>
@@ -44,7 +44,7 @@
                         <label><span>Status (1,0)</span></br>
                             <input type="text" name="status" value="${param.status}" required=""/></br>    
                             <input type="hidden" name="search" value="${param.search}" required=""/></br>
-                            <input type="submit" name="action" value="Confirm"/>
+                            <input type="submit" name="action" value="quiz"/>
                     </form>
                     </c:if>
                 </div>

@@ -180,7 +180,7 @@ public class CategoryDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "UPDATE tblCategory SET categoryName=?, description=?, level=?, status=? "
-                        + " Where userID=?";
+                        + " Where categoryID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, cate.getCategoryName());
                 stm.setString(2, cate.getDescription());
@@ -210,7 +210,7 @@ public class CategoryDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "UPdaTE tblCategoryBlog SET categoryName=?, description=?, status=? "
-                        + " Where userID=?";
+                        + " Where categoryID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, cate.getCategoryName());
                 stm.setString(2, cate.getDescription());

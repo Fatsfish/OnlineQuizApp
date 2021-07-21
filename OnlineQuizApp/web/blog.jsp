@@ -389,7 +389,7 @@
                     <h1 class="h3 mb-2 text-gray-800">Blog Management</h1>
                     <p class="mb-4">${requestScope.DELETE_BLOG_ERROR}</p>
                             <c:if test="${not empty param.search}">
-                                <form action="MainController">
+                                <form action="BlogSearchController">
                                     <p>Search</p> <input class="text" type="text" name="search" value="${param.search}"/>
                                     <input type="submit" name="action" value="Search"/>
                                 </form>
