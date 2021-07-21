@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.onlinequizapp.daos.BlogDAO;
 import org.onlinequizapp.dtos.BlogDTO;
-import org.onlinequizapp.dtos.BlogError;
+//import org.onlinequizapp.dtos.BlogError;
 
 /**
  *
@@ -38,7 +38,7 @@ public class BlogUpdateController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        /*String url = ERROR;
         BlogError BlogError = new BlogError("", "", "", "", "", "");
         try {
             String blogID = request.getParameter("blogID");
@@ -69,7 +69,7 @@ public class BlogUpdateController extends HttpServlet {
         }
 
     }
-
+*/
 }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
