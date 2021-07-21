@@ -267,14 +267,14 @@
                                 </c:if>
                                 <div class="mb-3">
                                     <label for="QuestionDesc" class="form-label">Description</label>
-                                    <textarea class="form-control" id="QuestionDesc" rows="3"></textarea>
+                                    <textarea class="form-control" id="QuestionDesc" name="description" rows="3"></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="Duration" class="form-label">Duration</label>
-                                    <input class="form-control" id="Duration">
+                                    <input class="form-control" name="duration" id="Duration">
                                 </div>
                                 <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="status">
+                                    <input type="checkbox" name="status" class="form-check-input" id="status">
                                     <label class="form-check-label" for="status">Active</label>
                                 </div>
                                 <input type="hidden" name="function" value="course" class="form-check-input" id="status">
