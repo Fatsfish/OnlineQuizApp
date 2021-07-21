@@ -9,7 +9,19 @@ public class CourseDTO implements Serializable {
     private String authorID;
     private String duration;
     private String status;
-   
+    private String categoryID;
+    private String Description;
+
+    public CourseDTO(String courseID, String courseName, String authorID, String duration, String status, String categoryID, String Description) {
+        this.courseID = courseID;
+        this.courseName = courseName;
+        this.authorID = authorID;
+        this.duration = duration;
+        this.status = status;
+        this.categoryID = categoryID;
+        this.Description = Description;
+    }
+    
     public CourseDTO(String courseID, String courseName, String authorID, String duration, String status) {
         this.courseID = courseID;
         this.courseName = courseName;
@@ -52,6 +64,22 @@ public class CourseDTO implements Serializable {
 
     public String getAuthorID() {
         return authorID;
+    }
+
+    public void setCategoryID(String categoryID) {
+        this.categoryID = categoryID;
+    }
+
+    public void setDescription(String Description) {
+        this.Description = Description;
+    }
+
+    public String getCategoryID() {
+        return categoryID;
+    }
+
+    public String getDescription() {
+        return Description;
     }
 
     public String getDuration() {
