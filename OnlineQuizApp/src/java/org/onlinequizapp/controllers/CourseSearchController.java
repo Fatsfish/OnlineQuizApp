@@ -7,11 +7,17 @@ package org.onlinequizapp.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.onlinequizapp.daos.CategoryDAO;
+import org.onlinequizapp.daos.CourseDAO;
+import org.onlinequizapp.dtos.CategoryDTO;
+import org.onlinequizapp.dtos.CourseDTO;
 
 /**
  *
@@ -19,6 +25,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "CourseSearchController", urlPatterns = {"/CourseSearchController"})
 public class CourseSearchController extends HttpServlet {
+
+    private static final String SUCCESS = "course.jsp";
+    private static final String ERROR = "404.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,17 +41,19 @@ public class CourseSearchController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CourseSearchController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CourseSearchController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String url = ERROR;
+        try {
+            String search = request.getParameter("search");
+            CourseDAO dao = new CourseDAO();
+            List<CourseDTO> list = dao.getListCourse(search);
+            if (list != null) {
+                request.setAttribute("LIST_COURSE", list);
+                url = SUCCESS;
+            }
+        } catch (SQLException e) {
+            log("Error at CategorySearchController: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

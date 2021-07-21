@@ -56,22 +56,24 @@ public class CourseDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Select courseID, courseName, authorID, duration , status "
+                String sql = "Select courseID, authorID, duration , status, categoryID, Name, Description "
                         + "from tblCourse "
-                        + "WHERE courseName like ?";
+                        + "WHERE name like ?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, "%" + search + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String courseID = rs.getString("courseID");
-                    String courseName = rs.getString("courseName");
+                    String courseName = rs.getString("Name");
                     String authorID = rs.getString("authorID");
                     String duration = rs.getString("duration");
                     String status = rs.getString("status");
+                    String cate = rs.getString("categoryID");
+                    String description = rs.getString("Description");
                     if (listCourse == null) {
                         listCourse = new ArrayList<>();
                     }
-                    listCourse.add(new CourseDTO(courseID, courseName, authorID, status, duration));
+                    listCourse.add(new CourseDTO(courseID, courseName, authorID, duration, status, cate, description));
 
                 }
             }
