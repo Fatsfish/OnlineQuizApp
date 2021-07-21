@@ -30,3 +30,5 @@ hs_err_pid*
 *.properties
 OnlineQuizApp/nbproject/project.properties
 OnlineQuizApp/src/java/org/onlinequizapp/utils/DBUtils.java
+*.properties
+OnlineQuizApp/nbproject/project.properties
