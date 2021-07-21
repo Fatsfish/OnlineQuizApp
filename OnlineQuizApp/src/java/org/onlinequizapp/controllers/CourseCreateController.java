@@ -45,6 +45,7 @@ public class CourseCreateController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String function = request.getParameter("function");
+        
         if (function.equals("quiz")) {
             CategoryDTO categoryDTO = new CategoryDTO("", "", "", "", "");
             try {
