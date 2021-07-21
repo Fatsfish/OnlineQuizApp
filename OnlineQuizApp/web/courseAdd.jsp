@@ -3,7 +3,11 @@
     Created on : Jul 19, 2021, 8:07:23 PM
     Author     : User-PC
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="org.onlinequizapp.daos.CategoryDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="org.onlinequizapp.dtos.CategoryDTO"%>
+<%@page import="org.onlinequizapp.dtos.CategoryBlogDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -279,6 +283,37 @@
                                 <a href="dashboardadmin.jsp" class="btn btn-danger">Cancel</a>
                             </form></div>
 
+
+                        <c:if test="${requestScope.LIST_QUIZ_CATEGORY != null && not empty requestScope.LIST_QUIZ_CATEGORY}">                       
+                            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                                <h4>Quiz Category</h4>
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Category ID</th>
+                                        <th>Category Name</th>
+                                        <th>Status</th>
+                                        <th>Level</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_QUIZ_CATEGORY}">
+                                    <form action="CategorySearchController">
+                                        <tr>
+                                            <td>${counter.count}</td>
+                                            <td>${category.categoryID}</td>
+                                            <td>${category.categoryName}</td>
+                                            <td>${category.status}</td>
+                                            <td>${category.level}</td>
+                                            <td>${category.description}</td>
+                                    </form>
+                                    </tr>
+                                    </tbody>
+                                </c:forEach>         
+                            </table>
+                        </c:if><br>
                     </div>
                     <!-- /.container-fluid -->
                 </div>

@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.onlinequizapp.daos.CategoryDAO;
+import org.onlinequizapp.daos.CourseDAO;
 import org.onlinequizapp.dtos.CategoryBlogDTO;
 import org.onlinequizapp.dtos.CategoryDTO;
+import org.onlinequizapp.dtos.CourseDTO;
 
 /**
  *
@@ -46,10 +48,11 @@ public class CourseCreateController extends HttpServlet {
         if (function.equals("quiz")) {
             CategoryDTO categoryDTO = new CategoryDTO("", "", "", "", "");
             try {
-                String categoryName = request.getParameter("categoryName");
+                String courseName = request.getParameter("Name");
                 String description = request.getParameter("description");
                 String status = request.getParameter("status");
-                String level = request.getParameter("level");
+                String level = request.getParameter("duration");
+                String catetegoryID = request.getParameter("categoryID");
                 if (status == null) {
                     status = "0";
                 } else if (status.equals("on")) {
@@ -58,7 +61,7 @@ public class CourseCreateController extends HttpServlet {
                     status = "0";
                 }
                 boolean flag = true;
-                if (categoryName.length() > 250 || categoryName.length() < 1) {
+                if (courseName.length() > 250 || courseName.length() < 1) {
                     flag = false;
                     categoryDTO.setCategoryName("Category Name must be [1-250]");
                 }
@@ -71,10 +74,9 @@ public class CourseCreateController extends HttpServlet {
                     categoryDTO.setCategoryName("Level must be Hard, Easy or Medium");
                 }
                 if (flag) {
-                    CategoryDAO dao = new CategoryDAO();
-
-                    CategoryDTO category = new CategoryDTO("", categoryName, description, status, level);
-                    dao.insertQ(category);
+                    CourseDAO dao = new CourseDAO();
+                    CourseDTO course = new CourseDTO("", courseName, description, status, level);
+                    //dao.insertQ(course);
                     url = SUCCESS;
 
                 } else {
@@ -89,7 +91,7 @@ public class CourseCreateController extends HttpServlet {
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
-        } else if (function.equals("blog")) {
+        } else if (function.equals("lecture")) {
             CategoryBlogDTO categoryBlogDTO = new CategoryBlogDTO("", "", "", "");
             try {
                 String categoryName = request.getParameter("categoryName");
