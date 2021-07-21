@@ -12,6 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.onlinequizapp.daos.BlogDAO;
+import org.onlinequizapp.dtos.BlogDTO;
+import org.onlinequizapp.dtos.BlogError;
 
 /**
  *
@@ -19,6 +22,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "BlogUpdateController", urlPatterns = {"/BlogUpdateController"})
 public class BlogUpdateController extends HttpServlet {
+
+    private static final String SUCCESS = "BlogSearchController";
+    private static final String ERROR = "updateBlog.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,19 +38,39 @@ public class BlogUpdateController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet BlogUpdateController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet BlogUpdateController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String url = ERROR;
+        BlogError BlogError = new BlogError("", "", "", "", "", "");
+        try {
+            String blogID = request.getParameter("blogID");
+            String Title = request.getParameter("Title");
+            BlogDAO dao = new BlogDAO();
+            BlogDTO dto = dao.checkBlog(blogID, Title);
+            boolean flag = true;
+            if (dto.getContent().length() < 1) {
+                flag = false;
+                BlogError.setContent("You must enter something to post ");
+            }
+            if (dto.getCategoryID() == null || dto.getCategoryID().isEmpty()) {
+                flag = false;
+                BlogError.setCategoryID("Please choose a category");
+            }
+            if (flag) {
+                boolean check = dao.update(dto);
+                if (check) {
+                    url = SUCCESS;
+                }
+            } else {
+                request.setAttribute("ERROR", BlogError);
+            }
+        } catch (Exception e) {
+
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
+
     }
+
+}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

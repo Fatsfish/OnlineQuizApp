@@ -1,6 +1,6 @@
 <%-- 
-    Document   : create-blog
-    Created on : Jul 19, 2021, 8:21:32 PM
+    Document   : updateBlog
+    Created on : Jul 20, 2021, 2:44:37 PM
     Author     : Admin
 --%>
 
@@ -17,13 +17,13 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-        <title>Create blog</title>
+        <title>Update blog</title>
     </head>
     <body>
 
         <div class="container">
-            <h1>Create blog</h1>
-            <form action="BlogCreateController">
+            <h1>Update blog</h1>
+            <form action="BlogUpdateController">
                 <div class="mb-3">
                     <label for="blogTitle" class="form-label">Blog Title</label>
                     <input type="text" class="form-control" id="blogTitle">

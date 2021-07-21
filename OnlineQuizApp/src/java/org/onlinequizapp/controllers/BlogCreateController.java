@@ -12,6 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.onlinequizapp.daos.BlogDAO;
+import org.onlinequizapp.dtos.BlogDTO;
+import org.onlinequizapp.dtos.UserDTO;
 
 /**
  *
@@ -19,6 +23,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "BlogCreateController", urlPatterns = {"/BlogCreateController"})
 public class BlogCreateController extends HttpServlet {
+
+    private static final String SUCCESS = "BlogSearchController";
+    private static final String ERROR = "blog.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,17 +39,66 @@ public class BlogCreateController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet BlogCreateController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet BlogCreateController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String url = ERROR;
+        String authorID;
+        HttpSession session = request.getSession();
+        if (session.getAttribute("LOGIN_USER") != null) {
+            authorID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
+        }
+        try {
+            BlogDAO dao = new BlogDAO();
+            String Title = request.getParameter("blogTitle");
+            String blogContent = request.getParameter("BlogContent");
+            //boolean agree = "on".equals(request.getParameter("agreement"));
+            boolean flag = true;
+            if (dto.get.length() > 20 || userID.length() < 1) {
+                flag = false;
+                userError.setUserIDError("UserID must be [1-5]");
+            }
+            if (fullName.length() > 250 || fullName.length() < 1) {
+                flag = false;
+                userError.setFullNameError("Full Name must be [1-250]");
+            }
+            if (roleID.length() > 2 || roleID.length() < 1 || (!roleID.equals("G") && !roleID.equals("M") && !roleID.equals("U"))) {
+                flag = false;
+                userError.setRoleIDError("RoleID must be [1-2] and must be G - guest, U - Unvalidated Member or M - member");
+            }
+            if (!password.equals(confirm)) {
+                flag = false;
+                userError.setConfirmError("2 passwords are not matched!");
+            }
+            /*if (!agree) {
+                flag = false;
+                userError.setConfirmError("Please hava a look at our policies and tick the agreement box");
+            }*/
+            if (flag) {
+                UserDAO dao = new UserDAO();
+
+                EmailDAO sm = new EmailDAO();
+                //get the 6-digit code
+                String code = sm.getRandom();
+                UserDTO user = new UserDTO(userID, fullName, roleID, password, phone, email, address, code);
+                dao.insertNew(user);
+                dao.updateCode(user, code);
+                boolean test = sm.sendEmail(user, code);
+                if (test) {
+                    url = SUCCESS;
+                } else {
+                    request.setAttribute("ERROR", userError);
+                }
+
+            } else {
+                request.setAttribute("ERROR", userError);
+            }
+        } catch (Exception e) {
+
+            log("Error at CreateController: " + e.toString());
+            if (e.toString().contains("duplicate")) {
+                userError.setUserIDError("User Name duplicate!");
+                request.setAttribute("ERROR", userError);
+            };
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

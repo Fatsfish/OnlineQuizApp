@@ -387,7 +387,7 @@
         
                 
                     <h1 class="h3 mb-2 text-gray-800">Blog Management</h1>
-                    <p class="mb-4">${requestScope.DELETE_ERROR}</p>
+                    <p class="mb-4">${requestScope.DELETE_BLOG_ERROR}</p>
                             <c:if test="${not empty param.search}">
                                 <form action="MainController">
                                     <p>Search</p> <input class="text" type="text" name="search" value="${param.search}"/>
@@ -416,7 +416,6 @@
                                                     <th>No</th>
                                                     <th>BlogID</th>
                                                     <th>Title</th>
-                                                    <th>Full Name</th>
                                                     <th>AuthorID</th>
                                                     <th>CategoryID</th>
                                                     <th>Content</th>
@@ -428,7 +427,6 @@
                                            <th>No</th>
                                                     <th>BlogID</th>
                                                     <th>Title</th>
-                                                    <th>Full Name</th>
                                                     <th>AuthorID</th>
                                                     <th>CategoryID</th>
                                                     <th>Content</th>
@@ -437,7 +435,7 @@
                                     </tfoot>
                                     <tbody>
                                             <c:forEach var="blog" varStatus="counter" items="${requestScope.LIST_BLOG}">
-                                                <form action="MainController">
+                                                <form action="BlogSearchController">
                                                     <tr>
                                                         <td>${counter.count}</td>
                                                         <td>${blog.blogID}</td>
