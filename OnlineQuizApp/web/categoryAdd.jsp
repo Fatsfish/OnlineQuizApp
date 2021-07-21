@@ -27,9 +27,6 @@
         <!-- Custom styles for this template-->
         <link href="Dashboard/css/sb-admin-2.min.css" rel="stylesheet">
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-
     </head>
 
     <body id="page-top">
@@ -259,13 +256,10 @@
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-
-                        <!-- Page Heading -->
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800" style="margin-left: 2rem" >Category Quiz Add</h1>
-                        </div>
+                        
 
                         <div class="container">
+                            <h1 class="h3 mb-2 text-gray-800" >Category Quiz Add</h1>
                             <form action="CategoryCreateController" method="POST">
                                 <div class="mb-3">
                                     <label for="categoryName" class="form-label">Category Name</label>
