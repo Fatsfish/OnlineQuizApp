@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.onlinequizapp.daos.CategoryDAO;
 import org.onlinequizapp.dtos.CategoryBlogDTO;
 import org.onlinequizapp.dtos.CategoryDTO;
@@ -26,6 +27,7 @@ import org.onlinequizapp.dtos.CategoryDTO;
 public class CategorySearchController extends HttpServlet {
 
     private static final String SUCCESS = "all-category.jsp";
+    private static final String COURSE = "courseAdd.jsp";
     private static final String ERROR = "404.html";
 
     /**
@@ -42,22 +44,39 @@ public class CategorySearchController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String check = request.getParameter("check");
-        String cate=request.getParameter("cate");
+        String cate = request.getParameter("cate");
+        HttpSession session = request.getSession();
         if (cate.equals("1")) {
-            try {
-                String search = request.getParameter("search");
-                CategoryDAO dao = new CategoryDAO();
-                List<CategoryDTO> list = dao.getListQ(search);
-                if (list != null) {
-                    request.setAttribute("LIST_QUIZ_CATEGORY", list);
-                    url = SUCCESS;
+            if (check.equals("Search")) {
+                try {
+                    String search = request.getParameter("search");
+                    CategoryDAO dao = new CategoryDAO();
+                    List<CategoryDTO> list = dao.getListQ(search);
+                    if (list != null) {
+                        request.setAttribute("LIST_QUIZ_CATEGORY", list);
+                        url = SUCCESS;
+                    }
+                } catch (SQLException e) {
+                    log("Error at CategorySearchController: " + e.toString());
+                } finally {
+                    request.getRequestDispatcher(url).forward(request, response);
                 }
-            } catch (SQLException e) {
-                log("Error at CategorySearchController: " + e.toString());
-            } finally {
-                request.getRequestDispatcher(url).forward(request, response);
             }
-
+            else if (check.equals("Course")) {
+                try {
+                    String search = request.getParameter("search");
+                    CategoryDAO dao = new CategoryDAO();
+                    List<CategoryDTO> list = dao.getListQ(search);
+                    if (list != null) {
+                        request.setAttribute("LIST_QUIZ_CATEGORY", list);
+                        url = COURSE;
+                    }
+                } catch (SQLException e) {
+                    log("Error at CategorySearchController: " + e.toString());
+                } finally {
+                    request.getRequestDispatcher(url).forward(request, response);
+                }
+            }
         } else if (cate.equals("2")) {
             try {
                 String search = request.getParameter("search");
@@ -72,8 +91,8 @@ public class CategorySearchController extends HttpServlet {
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
-        }else{
-             try {
+        } else {
+            try {
                 String search = request.getParameter("search");
                 CategoryDAO dao = new CategoryDAO();
                 List<CategoryDTO> list = dao.getListQ(search);

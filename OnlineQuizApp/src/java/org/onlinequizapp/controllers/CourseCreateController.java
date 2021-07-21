@@ -12,6 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.onlinequizapp.daos.CategoryDAO;
+import org.onlinequizapp.dtos.CategoryBlogDTO;
+import org.onlinequizapp.dtos.CategoryDTO;
 
 /**
  *
@@ -19,6 +22,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "CourseCreateController", urlPatterns = {"/CourseCreateController"})
 public class CourseCreateController extends HttpServlet {
+
+    private static final String SUCCESS = "courseAdd.jsp";
+    private static final String LECTURE = "courseLectureAdd.jsp";
+    private static final String SOURCE = "courseSourceAdd.jsp";
+    private static final String CLASS = "courseClassAdd.jsp";
+    private static final String ERROR = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +41,96 @@ public class CourseCreateController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        String url = ERROR;
+        String function = request.getParameter("function");
+        if (function.equals("quiz")) {
+            CategoryDTO categoryDTO = new CategoryDTO("", "", "", "", "");
+            try {
+                String categoryName = request.getParameter("categoryName");
+                String description = request.getParameter("description");
+                String status = request.getParameter("status");
+                String level = request.getParameter("level");
+                if (status == null) {
+                    status = "0";
+                } else if (status.equals("on")) {
+                    status = "1";
+                } else {
+                    status = "0";
+                }
+                boolean flag = true;
+                if (categoryName.length() > 250 || categoryName.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCategoryName("Category Name must be [1-250]");
+                }
+                if (description.length() > 250 || description.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCategoryName("Description must be [1-250]");
+                }
+                if (!level.equalsIgnoreCase("Hard") && !level.equalsIgnoreCase("Medium") && !level.equalsIgnoreCase("Easy")) {
+                    flag = false;
+                    categoryDTO.setCategoryName("Level must be Hard, Easy or Medium");
+                }
+                if (flag) {
+                    CategoryDAO dao = new CategoryDAO();
+
+                    CategoryDTO category = new CategoryDTO("", categoryName, description, status, level);
+                    dao.insertQ(category);
+                    url = SUCCESS;
+
+                } else {
+                    request.setAttribute("ERROR", categoryDTO);
+                }
+            } catch (Exception e) {
+                log("Error at CreateController: " + e.toString());
+                if (e.toString().contains("duplicate")) {
+                    categoryDTO.setCategoryID("Category Name duplicate!");
+                    request.setAttribute("ERROR", categoryDTO);
+                };
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
+        } else if (function.equals("blog")) {
+            CategoryBlogDTO categoryBlogDTO = new CategoryBlogDTO("", "", "", "");
+            try {
+                String categoryName = request.getParameter("categoryName");
+                String description = request.getParameter("description");
+                String status = request.getParameter("status");
+                if (status == null) {
+                    status = "0";
+                } else if (status.equals("on")) {
+                    status = "1";
+                } else {
+                    status = "0";
+                }
+                boolean flag = true;
+                if (categoryName.length() > 250 || categoryName.length() < 1) {
+                    flag = false;
+                    categoryBlogDTO.setCategoryName("Category Name must be [1-250]");
+                }
+                if (description.length() > 250 || description.length() < 1) {
+                    flag = false;
+                    categoryBlogDTO.setCategoryName("Description must be [1-250]");
+                }
+                if (flag) {
+                    CategoryDAO dao = new CategoryDAO();
+                    CategoryBlogDTO category = new CategoryBlogDTO("", categoryName, description, status);
+                    dao.insertB(category);
+                    url = SUCCESS;
+
+                } else {
+                    request.setAttribute("ERROR", categoryBlogDTO);
+                }
+            } catch (Exception e) {
+                log("Error at CreateController: " + e.toString());
+                if (e.toString().contains("duplicate")) {
+                    categoryBlogDTO.setCategoryID("Category Name duplicate!");
+                    request.setAttribute("ERROR", categoryBlogDTO);
+                };
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

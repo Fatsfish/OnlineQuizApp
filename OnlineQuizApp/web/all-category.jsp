@@ -29,6 +29,7 @@
         <!-- Custom styles for this page -->
         <link href="Dashboard/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
 
     <body id="page-top">
@@ -409,6 +410,7 @@
                         <c:if test="${not empty param.search}">
                             <form class="row g-3" action="CategorySearchController">
                                 <div class="col-auto">
+                                    <input type="hidden" name="check" value="Search" class="form-check-input" id="check">
                                     <input class="form-control" type="text" name="search" placeholder="Search.." value="${param.search}"/>
                                 </div>
                                 <div class="col-auto">
@@ -426,9 +428,10 @@
                         <c:if test="${empty param.search}">
                             <form class="row g-3" action="CategorySearchController">
                                 <div class="col-auto">
+                                    <input type="hidden" name="check" value="Search" class="form-check-input" id="check">
                                     <input class="form-control" type="text" name="search" placeholder="Search.." value=""/>
                                 </div>
-                                <div>
+                                <div class="col-auto">
                                     <select class="form-select" aria-label="Category select" name="cate">
                                         <option selected>All Categories</option>
                                         <option value="1">Quiz</option>
@@ -440,111 +443,96 @@
                                 </div>
                             </form>
                         </c:if>
-                        
+
                         <c:if test="${requestScope.LIST_QUIZ_CATEGORY != null && not empty requestScope.LIST_QUIZ_CATEGORY}">                       
-                            <!-- Page Heading -->
-
-<<<<<<< Updated upstream
-                            <!-- DataTales Example
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">-->
-                            <!--class="table table-bordered" id="dataTable"--><table class="table table-bordered table-hover" width="100%" cellspacing="0" >Quiz Category
-=======
-                            <table width="100%" cellspacing="0" >Quiz Category
->>>>>>> Stashed changes
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Category ID</th>
-                                        <th>Category Name</th>
-                                        <th>Status</th>
-                                        <th>Level</th>
-                                        <th>Description</th>
-                                        <th>Delete</th>
-                                        <th>Update</th>
-                                    </tr>
-                                </thead>
-                                
-                                <tbody>
-                                    <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_QUIZ_CATEGORY}">
-                                    <form action="CategorySearchController">
+                            <table class="table table-bordered table-hover" width="100%" cellspacing="0" >Quiz Category
+                                <table width="100%" cellspacing="0" >Quiz Category
+                                    <thead>
                                         <tr>
-                                            <td>${counter.count}</td>
-                                            <td>${category.categoryID}</td>
-                                            <td>${category.categoryName}</td>
-                                            <td>${category.status}</td>
-                                            <td>${category.level}</td>
-                                            <td>${category.description}</td>
-                                            <td
-                                                <input type="hidden" name="search" value="${param.search}"/>
-                                                <input type="hidden" name="categoryID" value="${category.categoryID}"/>
-<<<<<<< Updated upstream
-                                                <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
-=======
-                                                <input type="hidden" name="status" value="${category.status}"/>
-                                                <input type="submit" name="action" value="Delete"/>
->>>>>>> Stashed changes
-                                            </td>
-                                            <td>
-                                                <input type="submit" class="btn btn-success" name="action" value="Update"/>
-                                                <input type="hidden" name="categoryID" value="${category.categoryID}"/>
-                                                <input type="hidden" name="categoryName" value="${category.categoryName}"/>
-                                                <input type="hidden" name="status" value="${category.status}"/>
-                                                <input type="hidden" name="level" value="${category.level}"/>
-                                                <input type="hidden" name="description" value="${category.description}"/>
-                                                <input type="hidden" name="search" value="${param.search}"/>
-                                            </td>
-                                    </form>
-                                    </tr>
-                                    </tbody>
-                                </c:forEach>         
-                            </table>
-                        </c:if><br>
+                                            <th>No</th>
+                                            <th>Category ID</th>
+                                            <th>Category Name</th>
+                                            <th>Status</th>
+                                            <th>Level</th>
+                                            <th>Description</th>
+                                            <th>Delete</th>
+                                            <th>Update</th>
+                                        </tr>
+                                    </thead>
 
-                        <c:if test="${requestScope.LIST_BLOG_CATEGORY != null && not empty requestScope.LIST_BLOG_CATEGORY}">                    
-                            <table width="100%" cellspacing="0">Blog Category  
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Category ID</th>
-                                        <th>Category Name</th>
-                                        <th>Status</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                
-                                <tbody>
-                                    <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_BLOG_CATEGORY}">
-                                    <form action="CategorySearchController">
+                                    <tbody>
+                                        <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_QUIZ_CATEGORY}">
+                                        <form action="CategorySearchController">
+                                            <tr>
+                                                <td>${counter.count}</td>
+                                                <td>${category.categoryID}</td>
+                                                <td>${category.categoryName}</td>
+                                                <td>${category.status}</td>
+                                                <td>${category.level}</td>
+                                                <td>${category.description}</td>
+                                                <td
+                                                    <input type="hidden" name="search" value="${param.search}"/>
+                                                    <input type="hidden" name="categoryID" value="${category.categoryID}"/>
+                                                    <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
+                                                    <input type="hidden" name="status" value="${category.status}"/>
+                                                    <input type="submit" name="action" value="Delete"/>
+                                                </td>
+                                                <td>
+                                                    <input type="submit" class="btn btn-success" name="action" value="Update"/>
+                                                    <input type="hidden" name="categoryID" value="${category.categoryID}"/>
+                                                    <input type="hidden" name="categoryName" value="${category.categoryName}"/>
+                                                    <input type="hidden" name="status" value="${category.status}"/>
+                                                    <input type="hidden" name="level" value="${category.level}"/>
+                                                    <input type="hidden" name="description" value="${category.description}"/>
+                                                    <input type="hidden" name="search" value="${param.search}"/>
+                                                </td>
+                                        </form>
+                                        </tr>
+                                        </tbody>
+                                    </c:forEach>         
+                                </table>
+                            </c:if><br>
+
+                            <c:if test="${requestScope.LIST_BLOG_CATEGORY != null && not empty requestScope.LIST_BLOG_CATEGORY}">                    
+                                <table width="100%" cellspacing="0">Blog Category  
+                                    <thead>
                                         <tr>
-                                            <td>${counter.count}</td>
-                                            <td>${category.categoryID}</td>
-                                            <td>${category.categoryName}</td>
-                                            <td>${category.status}</td>
-                                            <td>${category.description}</td>
-                                            <td
-                                                <input type="hidden" name="search" value="${param.search}"/>
-                                                <input type="hidden" name="categoryID" value="${category.categoryID}"/>
-                                                <input type="submit" name="action" value="Delete"/>
-                                            </td>
-                                            <td>
-                                                <input type="submit" name="action" value="Update"/>
-                                                <input type="hidden" name="categoryID" value="${category.categoryID}"/>
-                                                <input type="hidden" name="categoryName" value="${category.categoryName}"/>
-                                                <input type="hidden" name="status" value="${category.status}"/>
-                                                <input type="hidden" name="description" value="${category.description}"/>
-                                                <input type="hidden" name="search" value="${param.search}"/>
-                                            </td>
-                                    </form>
-                                    </tr>
-                                    </tbody>
-                                </c:forEach>         
-                            </table>
-                        </c:if>
+                                            <th>No</th>
+                                            <th>Category ID</th>
+                                            <th>Category Name</th>
+                                            <th>Status</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_BLOG_CATEGORY}">
+                                        <form action="CategorySearchController">
+                                            <tr>
+                                                <td>${counter.count}</td>
+                                                <td>${category.categoryID}</td>
+                                                <td>${category.categoryName}</td>
+                                                <td>${category.status}</td>
+                                                <td>${category.description}</td>
+                                                <td
+                                                    <input type="hidden" name="search" value="${param.search}"/>
+                                                    <input type="hidden" name="categoryID" value="${category.categoryID}"/>
+                                                    <input type="submit" name="action" value="Delete"/>
+                                                </td>
+                                                <td>
+                                                    <input type="submit" name="action" value="Update"/>
+                                                    <input type="hidden" name="categoryID" value="${category.categoryID}"/>
+                                                    <input type="hidden" name="categoryName" value="${category.categoryName}"/>
+                                                    <input type="hidden" name="status" value="${category.status}"/>
+                                                    <input type="hidden" name="description" value="${category.description}"/>
+                                                    <input type="hidden" name="search" value="${param.search}"/>
+                                                </td>
+                                        </form>
+                                        </tr>
+                                        </tbody>
+                                    </c:forEach>         
+                                </table>
+                            </c:if>
                     </div>
                     <!--</div>
                 </div>
@@ -611,6 +599,9 @@
 
         <!-- Page level custom scripts -->
         <script src="Dashboard/js/demo/datatables-demo.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        s
 
     </body>
 

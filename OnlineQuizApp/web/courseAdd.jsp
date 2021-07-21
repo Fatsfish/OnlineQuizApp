@@ -245,36 +245,39 @@
                         </div>
 
                         <div class="container">
+                            <a href="CategorySearchController?cate=1&check=Course&search=" class="btn btn-primary mb-3"/>Filter Category</a>
                             <form action="CourseCreateController">
                                 <div class="mb-3">
                                     <label for="questionName" class="form-label">Course Name</label>
                                     <input type="text" class="form-control" id="questionName">
                                 </div>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Choose category</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
+                                <c:if test="${requestScope.LIST_QUIZ_CATEGORY != null && not empty requestScope.LIST_QUIZ_CATEGORY}">
+                                    <div>
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>Choose category</option>
+                                            <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_QUIZ_CATEGORY}">
+                                                <option value="${category.categoryID}">${counter.count} - ${category.categoryName}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </c:if>
                                 <div class="mb-3">
                                     <label for="QuestionDesc" class="form-label">Description</label>
                                     <textarea class="form-control" id="QuestionDesc" rows="3"></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="Duration" class="form-label">Duration</label>
-                                    <textarea class="form-control" id="Duration"></textarea>
+                                    <input class="form-control" id="Duration">
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" id="status">
                                     <label class="form-check-label" for="status">Active</label>
                                 </div>
-                                    <input type="hidden" name="function" value="course" class="form-check-input" id="status">
+                                <input type="hidden" name="function" value="course" class="form-check-input" id="status">
 
                                 <button type="submit" class="btn btn-primary">Create</button>
-                                <button type="submit" class="btn btn-primary">Cancel</button>
+                                <a href="dashboardadmin.jsp" class="btn btn-danger">Cancel</a>
                             </form></div>
-
-
 
                     </div>
                     <!-- /.container-fluid -->
@@ -285,7 +288,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2021</span>
+                            <span>Copyright &copy; Online Quiz App 2021</span>
                         </div>
                     </div>
                 </footer>
