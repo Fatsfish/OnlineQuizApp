@@ -25,7 +25,7 @@ import org.onlinequizapp.dtos.CategoryDTO;
 public class CategoryDeleteController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "CategoryController";
+    private static final String SUCCESS = "CategorySearchController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,50 +40,53 @@ public class CategoryDeleteController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        HttpSession session = request.getSession();
-        try {
-            if (!request.getParameter("status").equals("1")) {
-                String categoryID = request.getParameter("categoryID");
-                CategoryDAO dao = new CategoryDAO();
-                boolean check = dao.deleteQ(categoryID);
-                if (check) {
-                    url = SUCCESS;
+        String action = request.getParameter("action");
+        if (action.equals("Delete Quiz")) {
+            try {
+                if (!request.getParameter("status").equals("1")) {
+                    String categoryID = request.getParameter("categoryID");
+                    CategoryDAO dao = new CategoryDAO();
+                    boolean checkDelete = dao.deleteQ(categoryID);
+                    if (checkDelete) {
+                        request.setAttribute("DELETE_Q_SUCCESS", "Delete Success!");
+                        url = SUCCESS;
+                    } else {
+                        request.setAttribute("DELETE_Q_ERROR", "Cannot delete!");
+                        url = SUCCESS;
+                    }
                 } else {
-                    request.setAttribute("DELETE_Q_ERROR", "Cannot delete!");
+                    request.setAttribute("DELETE_Q_ERROR", "Category is being used!");
                     url = SUCCESS;
                 }
-            } else {
-                request.setAttribute("DELETE_Q_ERROR", "Category is being used!");
-                url = SUCCESS;
+            } catch (Exception e) {
+
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
             }
-        } catch (Exception e) {
 
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        }
-
-        if (session.getAttribute("categoryBlogID") != null) {
-            String categoryBlogID = ((CategoryBlogDTO) session.getAttribute("categoryBlogID")).getCategoryID();
-        }
-        try {
-            String categoryBlogID = request.getParameter("categoryBlogID");
-            if (!categoryBlogID.equals(categoryBlogID)) {
-                CategoryDAO dao = new CategoryDAO();
-                boolean check = dao.deleteQ(categoryBlogID);
-                if (check) {
-                    url = SUCCESS;
+        } else if (action.equals("Delete Blog")) {
+            try {
+                if (!request.getParameter("status").equals("1")) {
+                    String categoryID = request.getParameter("categoryID");
+                    CategoryDAO dao = new CategoryDAO();
+                    //session.setAttribute("categoryID", request.getParameter("categoryID"));
+                    boolean checkDelete = dao.deleteB(categoryID);
+                    if (checkDelete) {
+                        request.setAttribute("DELETE_B_SUCCESS", "Delete Success!");
+                        url = SUCCESS;
+                    } else {
+                        request.setAttribute("DELETE_B_ERROR", "Cannot delete!");
+                        url = SUCCESS;
+                    }
                 } else {
-                    request.setAttribute("DELETE_B_ERROR", "Cannot delete!");
+                    request.setAttribute("DELETE_B_ERROR", "Category is being used!");
                     url = SUCCESS;
                 }
-            } else {
-                request.setAttribute("DELETE_B_ERROR", "CategoryBlog is being used!");
-                url = SUCCESS;
-            }
-        } catch (Exception e) {
+            } catch (Exception e) {
 
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
         }
     }
 

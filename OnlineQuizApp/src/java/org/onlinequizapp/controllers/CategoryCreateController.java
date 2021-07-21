@@ -80,10 +80,12 @@ public class CategoryCreateController extends HttpServlet {
                     
                     CategoryDTO category = new CategoryDTO("", categoryName, description, status, level);
                     dao.insertQ(category);
+                    request.setAttribute("CREATE_Q_SUCCESS", "Create Success!");
                     url = SUCCESS;
 
                 } else {
-                    request.setAttribute("ERROR", categoryDTO);
+                    request.setAttribute("CREATE_Q_ERROR", "Create Fail!");
+                    url = SUCCESS;
                 }
             } catch (Exception e) {
                 log("Error at CreateController: " + e.toString());
@@ -122,10 +124,12 @@ public class CategoryCreateController extends HttpServlet {
                     
                     CategoryBlogDTO category = new CategoryBlogDTO("", categoryName, description, status);
                     dao.insertB(category);
+                    request.setAttribute("CREATE_B_SUCCESS", "Create Success!");
                     url = SUCCESS2;
 
                 } else {
-                    request.setAttribute("ERROR", categoryBlogDTO);
+                    request.setAttribute("CREATE_B_ERROR", "Create Fail!");
+                    url = SUCCESS2;
                 }
             } catch (Exception e) {
                 log("Error at CreateController: " + e.toString());

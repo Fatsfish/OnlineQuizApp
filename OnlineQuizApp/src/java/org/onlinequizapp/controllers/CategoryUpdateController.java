@@ -72,6 +72,7 @@ public class CategoryUpdateController extends HttpServlet {
                 if (flag) {
                     boolean update = dao.updateQ(category);
                     if (update) {
+                        request.setAttribute("UPDATE_Q_SUCCESS", "Update Success!");
                         url = SUCCESS;
                     }
                 } else {
@@ -112,6 +113,7 @@ public class CategoryUpdateController extends HttpServlet {
                 if (flag) {
                     boolean update = dao.updateB(category);
                     if (update) {
+                        request.setAttribute("UPDATE_B_SUCCESS", "Update Success!");
                         url2 = SUCCESS;
                     }
                 } else {
