@@ -476,7 +476,7 @@
                                             </td>
                                             <td>
                                                 <form action="CategoryUpdateController">
-                                                    <input type="submit" class="btn btn-success" name="action" value="Update"/>
+                                                    <input type="submit" class="btn btn-success" name="action" value="Update Quiz"/>
                                                     <input type="hidden" name="categoryID" value="${category.categoryID}"/>
                                                     <input type="hidden" name="categoryName" value="${category.categoryName}"/>
                                                     <input type="hidden" name="status" value="${category.status}"/>
@@ -518,17 +518,23 @@
                                             <td>${category.status}</td>
                                             <td>${category.description}</td>
                                             <td
-                                                <input type="hidden" name="search" value="${param.search}"/>
-                                                <input type="hidden" name="categoryID" value="${category.categoryID}"/>
-                                                <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
+                                                <form action="CategoryDeleteController">
+                                                    <input type="hidden" name="search" value="${param.search}"/>
+                                                    <input type="hidden" name="categoryID" value="${category.categoryID}"/>
+                                                    <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
+                                                </form>
                                             </td>
                                             <td>
-                                                <input type="submit" class="btn btn-success" name="action" value="Update"/>
-                                                <input type="hidden" name="categoryID" value="${category.categoryID}"/>
-                                                <input type="hidden" name="categoryName" value="${category.categoryName}"/>
-                                                <input type="hidden" name="status" value="${category.status}"/>
-                                                <input type="hidden" name="description" value="${category.description}"/>
-                                                <input type="hidden" name="search" value="${param.search}"/>
+                                                <form action="CategoryUpdateController">
+                                                    <input type="submit" class="btn btn-success" name="action" value="Update Blog"/>
+                                                    <input type="hidden" name="categoryID" value="${category.categoryID}"/>
+                                                    <input type="hidden" name="categoryName" value="${category.categoryName}"/>
+                                                    <input type="hidden" name="status" value="${category.status}"/>
+                                                    <input type="hidden" name="description" value="${category.description}"/>
+                                                    <input type="hidden" name="search" value="${param.search}"/>
+                                                    <input type="hidden" name="cate" value="${param.cate}"/>
+                                                    <input type="hidden" name="check" value="${param.check}"/>
+                                                </form>
                                             </td>
                                     </form>
                                     </tr>
