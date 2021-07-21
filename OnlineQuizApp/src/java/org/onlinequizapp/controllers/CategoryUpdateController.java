@@ -39,84 +39,86 @@ public class CategoryUpdateController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        String check = request.getParameter("check");
         CategoryDTO categoryDTO = new CategoryDTO("", "", "", "", "");
-        try {
-            String categoryID = request.getParameter("categoryID");
-            String categoryName = request.getParameter("categoryName");
-            String description = request.getParameter("description");
-            String status = request.getParameter("status");
-            String level = request.getParameter("level");
-            CategoryDAO dao = new CategoryDAO();
-            CategoryDTO category = new CategoryDTO(categoryID, categoryName, description, status, level);
-            boolean flag = true;
-            if (categoryName.length() > 250 || categoryName.length() < 1) {
-                flag = false;
-                categoryDTO.setCategoryName("Category Name must be [1-250]");
-            }
-            if (status.isEmpty() || !(status.equals(1)) || !(status.equals(0))) {
-                flag = false;
-                categoryDTO.setStatus("Status must be 0 or 1");
-            }
-            if (description.length() > 250 || description.length() < 1) {
-                flag = false;
-                categoryDTO.setCategoryName("Description must be [1-250]");
-            }
-            if (level.length() > 50 || level.length() < 1) {
-                flag = false;
-                categoryDTO.setCategoryName("Level must be [1-50]");
-            }
-            if (flag) {
-                boolean check = dao.updateQ(category);
-                if (check) {
-                    url = SUCCESS;
+        if (check.equals("quiz")) {
+            try {
+                String categoryName = request.getParameter("categoryName");
+                String description = request.getParameter("description");
+                String status = request.getParameter("status");
+                String level = request.getParameter("level");
+                CategoryDAO dao = new CategoryDAO();
+                CategoryDTO category = new CategoryDTO("", categoryName, description, status, level);
+                boolean flag = true;
+                if (categoryName.length() > 250 || categoryName.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCategoryName("Category Name must be [1-250]");
                 }
-            } else {
-                request.setAttribute("ERROR", categoryDTO);
-            }
-        } catch (Exception e) {
-
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        }
-
-        CategoryBlogDTO categoryBlogDTO = new CategoryBlogDTO("", "", "", "");
-        try {
-            String categoryID = request.getParameter("categoryID");
-            String categoryName = request.getParameter("categoryName");
-            String description = request.getParameter("description");
-            String status = request.getParameter("status");
-            CategoryDAO dao = new CategoryDAO();
-            CategoryBlogDTO category = new CategoryBlogDTO(categoryID, categoryName, description, status);
-            boolean flag = true;
-            if (categoryID.length() > 20 || categoryID.length() < 1) {
-                flag = false;
-                categoryDTO.setCategoryID("CategoryID must be [1-5]");
-            }
-            if (categoryName.length() > 250 || categoryName.length() < 1) {
-                flag = false;
-                categoryDTO.setCategoryName("Category Name must be [1-250]");
-            }
-            if (status.isEmpty() || !(status.equals(1)) || !(status.equals(0))) {
-                flag = false;
-                categoryDTO.setStatus("Status must be 0 or 1");
-            }
-            if (description.length() > 250 || description.length() < 1) {
-                flag = false;
-                categoryDTO.setCategoryName("Description must be [1-250]");
-            }
-            if (flag) {
-                boolean check = dao.updateB(category);
-                if (check) {
-                    url = SUCCESS;
+                if (status.isEmpty() || !(status.equals(1)) || !(status.equals(0))) {
+                    flag = false;
+                    categoryDTO.setStatus("Status must be 0 or 1");
                 }
-            } else {
-                request.setAttribute("ERROR", categoryDTO);
-            }
-        } catch (Exception e) {
+                if (description.length() > 250 || description.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCategoryName("Description must be [1-250]");
+                }
+                if (level.length() > 50 || level.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCategoryName("Level must be [1-50]");
+                }
+                if (flag) {
+                    boolean check = dao.updateQ(category);
+                    if (check) {
+                        url = SUCCESS;
+                    }
+                } else {
+                    request.setAttribute("ERROR", categoryDTO);
+                }
+            } catch (Exception e) {
 
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
         }
+//        
+//        CategoryBlogDTO categoryBlogDTO = new CategoryBlogDTO("", "", "", "");
+//        try {
+//            String categoryID = request.getParameter("categoryID");
+//            String categoryName = request.getParameter("categoryName");
+//            String description = request.getParameter("description");
+//            String status = request.getParameter("status");
+//            CategoryDAO dao = new CategoryDAO();
+//            CategoryBlogDTO category = new CategoryBlogDTO(categoryID, categoryName, description, status);
+//            boolean flag = true;
+//            if (categoryID.length() > 20 || categoryID.length() < 1) {
+//                flag = false;
+//                categoryDTO.setCategoryID("CategoryID must be [1-5]");
+//            }
+//            if (categoryName.length() > 250 || categoryName.length() < 1) {
+//                flag = false;
+//                categoryDTO.setCategoryName("Category Name must be [1-250]");
+//            }
+//            if (status.isEmpty() || !(status.equals(1)) || !(status.equals(0))) {
+//                flag = false;
+//                categoryDTO.setStatus("Status must be 0 or 1");
+//            }
+//            if (description.length() > 250 || description.length() < 1) {
+//                flag = false;
+//                categoryDTO.setCategoryName("Description must be [1-250]");
+//            }
+//            if (flag) {
+//                boolean check = dao.updateB(category);
+//                if (check) {
+//                    url = SUCCESS;
+//                }
+//            } else {
+//                request.setAttribute("ERROR", categoryDTO);
+//            }
+//        } catch (Exception e) {
+//
+//        } finally {
+//            request.getRequestDispatcher(url).forward(request, response);
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
