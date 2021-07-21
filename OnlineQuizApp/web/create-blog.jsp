@@ -3,6 +3,12 @@
     Created on : Jul 19, 2021, 9:20:29 PM
     Author     : ASUS
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="org.onlinequizapp.daos.CategoryDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="org.onlinequizapp.dtos.CategoryDTO"%>
+<%@page import="org.onlinequizapp.dtos.CategoryBlogDTO"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
