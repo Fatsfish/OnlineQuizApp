@@ -67,8 +67,8 @@ public class CategoryUpdateController extends HttpServlet {
                     categoryDTO.setCategoryName("Level must be [1-50]");
                 }
                 if (flag) {
-                    boolean check = dao.updateQ(category);
-                    if (check) {
+                    boolean update = dao.updateQ(category);
+                    if (update) {
                         url = SUCCESS;
                     }
                 } else {
