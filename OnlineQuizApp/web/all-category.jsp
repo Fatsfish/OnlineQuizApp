@@ -411,8 +411,8 @@
                                     <input type="hidden" name="check" value="Search" class="form-check-input" id="check">
                                     <input class="form-control" type="text" name="search" placeholder="Search.." value="${param.search}"/>
                                 </div>
-                                <div class="col-auto">
-                                    <select class="form-select" aria-label="Category select" name="cate">
+                                <div class="form-group">
+                                    <select class="form-control" aria-label="Category select" name="cate">
                                         <option selected>All Categories</option>
                                         <option value="1">Quiz</option>
                                         <option value="2">Blog</option>
@@ -429,8 +429,8 @@
                                     <input type="hidden" name="check" value="Search" class="form-check-input" id="check">
                                     <input class="form-control" type="text" name="search" placeholder="Search.." value=""/>
                                 </div>
-                                <div class="col-auto">
-                                    <select class="form-select" aria-label="Category select" name="cate">
+                                <div class="form-group">
+                                    <select class="form-control" aria-label="Category select" name="cate">
                                         <option selected>All Categories</option>
                                         <option value="1">Quiz</option>
                                         <option value="2">Blog</option>
