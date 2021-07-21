@@ -41,9 +41,11 @@
                         <label><span>Status (1,0)</span></br>
                             <input type="text" name="status" value="${param.status}" id="status" required=""/></br>    
                             <input type="hidden" name="search" value="${param.search}" required=""/></br>
-                            <input type="submit" name="action" value="Confirm"/>
+                            <input type="hidden" name="cate" value="${param.cate}"/>
+                            <input type="hidden" name="check" value="${param.check}"/>
+                            <input type="submit" name="action" value="Update"/>
+                        </label>
                     </form>
-                    </c:if>
                 </div>
             </div>
         </div>

@@ -39,7 +39,7 @@ public class CategoryUpdateController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        String check = request.getParameter("check");
+        String check = request.getParameter("action");
         CategoryDTO categoryDTO = new CategoryDTO("", "", "", "", "");
         if (check.equals("Update")) {
             try {
@@ -55,7 +55,7 @@ public class CategoryUpdateController extends HttpServlet {
                     flag = false;
                     categoryDTO.setCategoryName("Category Name must be [1-250]");
                 }
-                if (status.isEmpty() || (!(status.equals(1)) && !(status.equals(0)))) {
+                if (!(status.equals("1")) && !(status.equals("0"))) {
                     flag = false;
                     categoryDTO.setStatus("Status must be 0 or 1");
                 }

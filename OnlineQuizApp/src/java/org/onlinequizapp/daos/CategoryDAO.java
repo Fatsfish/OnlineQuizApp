@@ -185,7 +185,7 @@ public class CategoryDAO {
                 stm.setString(1, cate.getCategoryName());
                 stm.setString(2, cate.getDescription());
                 stm.setString(3, cate.getLevel());
-                stm.setString(4, cate.getStatus());
+                stm.setByte(4, (byte) Integer.parseInt(cate.getStatus()));
                 stm.setString(5, cate.getCategoryID());
                 check = stm.executeUpdate() > 0 ? true : false;
             }
