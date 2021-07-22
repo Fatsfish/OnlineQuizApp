@@ -23,7 +23,7 @@ import org.onlinequizapp.dtos.ClassDTO;
 @WebServlet(name = "ClassCreateController", urlPatterns = {"/ClassCreateController"})
 public class ClassCreateController extends HttpServlet {
 
-    private static final String SUCCESS = "class.jsp";
+    private static final String SUCCESS = "classAdd.jsp";
     private static final String ERROR = "error.jsp";
 
     /**

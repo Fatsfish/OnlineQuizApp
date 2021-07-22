@@ -18,7 +18,6 @@ public class ClassSearchController extends HttpServlet {
 
     private static final String SUCCESS = "class.jsp";
     private static final String COURSE = "courseAdd.jsp";
-    private static final String BLOG = "create-blog.jsp";
     private static final String ERROR = "404.html";
 
     /**
@@ -35,41 +34,41 @@ public class ClassSearchController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String check = request.getParameter("check");
-        String cate = request.getParameter("cate");
-        if (cate.equals("1")) {
-            if (check.equals("Search")) {
-                try {
-                    String search = request.getParameter("search");
-                    ClassDAO dao = new ClassDAO();
-                    List<ClassDTO> list = dao.getList(search);
-                    if (list != null) {
-                        request.setAttribute("LIST_CLASS", list);
-                        url = SUCCESS;
-                    }
-                } catch (SQLException e) {
-                    log("Error at ClassSearchController: " + e.toString());
-                } finally {
-                    request.getRequestDispatcher(url).forward(request, response);
+        if (check.equals("Search")) {
+            try {
+                String search = request.getParameter("search");
+                ClassDAO dao = new ClassDAO();
+                List<ClassDTO> list = dao.getList(search);
+                if (list != null) {
+                    request.setAttribute("LIST_CLASS", list);
+                    url = SUCCESS;
                 }
-            } else if (check.equals("Course")) {
-                try {
-                    String search = request.getParameter("search");
-                    ClassDAO dao = new ClassDAO();
-                    List<ClassDTO> list = dao.getList(search);
-                    if (list != null) {
-                        request.setAttribute("LIST_QUIZ_CATEGORY", list);
-                        url = COURSE;
-                    }
-                } catch (SQLException e) {
-                    log("Error at ClassSearchController: " + e.toString());
-                } finally {
-                    request.getRequestDispatcher(url).forward(request, response);
-                }
+            } catch (SQLException e) {
+                log("Error at ClassSearchController: " + e.toString());
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
             }
+        } else if (check.equals("Course")) {
+            try {
+                String search = request.getParameter("search");
+                ClassDAO dao = new ClassDAO();
+                List<ClassDTO> list = dao.getList(search);
+                if (list != null) {
+                    request.setAttribute("LIST_COURSE", list);
+                    url = COURSE;
+                }
+            } catch (SQLException e) {
+                log("Error at ClassSearchController: " + e.toString());
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
+        } else {
+            request.setAttribute("LIST_CLASS_ERROR", "ERROR at ClassSearchController");
+            url = ERROR;
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
