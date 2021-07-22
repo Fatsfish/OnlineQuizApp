@@ -31,7 +31,7 @@
         <!-- Custom styles for this template-->
         <link href="Dashboard/css/sb-admin-2.min.css" rel="stylesheet">
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        
 
 
     </head>
@@ -264,12 +264,8 @@
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
-                        <!-- Page Heading -->
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800" style="margin-left: 2rem" >Create Blog</h1>
-                        </div>
-
                         <div class="container">
+                            <h4>Create Blog</h4>
                             <p class="mb-4">${requestScope.CREATE_BLOG_ERROR}</p>
                             <a href="CategorySearchController?cate=2&check=Blog&search=" class="btn btn-primary mb-3"/>Filter Category</a>
                             <form action="BlogCreateController">
@@ -278,7 +274,7 @@
                                     <input type="text" class="form-control" id="blogTitle">
                                 </div>
                                 <div>
-                                    <select name="BlogCategory"  class="form-select" aria-label="Default select example">
+                                    <select name="BlogCategory"  class="form-control" aria-label="Default select example">
                                         <option selected>Choose category</option>
                                         <c:if test="${requestScope.LIST_BLOG_CATEGORY != null && not empty requestScope.LIST_BLOG_CATEGORY }">
                                             <c:forEach var="blogC" varStatus="counter" items="${requestScope.LIST_BLOG_CATEGORY}">
@@ -292,11 +288,13 @@
                                     <textarea class="form-control" id="BlogContent" rows="3"></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="formFile" class="form-label">Upload picture (optional)</label>
-                                    <input class="form-control" type="file" id="formFile">
+                                    <label for="blogImg" class="form-label">Upload picture (optional)</label>
+                                    <input class="form-control" type="text" placeholder="Please input picture's url" id="blogImg">
                                 </div>
+                                <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="status">
                                 <label class="form-check-label" for="status">Active</label><br>
+                                </div>
                                 <input type="hidden" name="BlogTitle" value="${param.blogTitle}">
                                 <input type="hidden" name="Status" value="${param.status}">
                                 <input type="hidden" name="Image" value="${param.formFile}">
