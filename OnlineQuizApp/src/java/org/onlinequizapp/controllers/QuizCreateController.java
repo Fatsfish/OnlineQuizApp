@@ -13,9 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.onlinequizapp.daos.CategoryDAO;
 import org.onlinequizapp.daos.EmailDAO;
 import org.onlinequizapp.daos.QuizDAO;
 import org.onlinequizapp.daos.UserDAO;
+import org.onlinequizapp.dtos.CategoryBlogDTO;
+import org.onlinequizapp.dtos.CategoryDTO;
 import org.onlinequizapp.dtos.QuizDTO;
 import org.onlinequizapp.dtos.UserDTO;
 import org.onlinequizapp.dtos.UserError;
@@ -44,69 +47,101 @@ public class QuizCreateController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
          response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        UserError userError = new UserError("", "", "", "", "", "", "", "");
-        try {
-            String userID = request.getParameter("userID");
-            String roleID = "U";
-            String fullName = request.getParameter("fullName");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
-            String address = request.getParameter("address");
-            String password = request.getParameter("password");
-            String confirm = request.getParameter("confirm");
-            //boolean agree = "on".equals(request.getParameter("agreement"));
-            boolean flag = true;
-            if (userID.length() > 20 || userID.length() < 1) {
-                flag = false;
-                userError.setUserIDError("UserID must be [1-5]");
-            }
-            if (fullName.length() > 250 || fullName.length() < 1) {
-                flag = false;
-                userError.setFullNameError("Full Name must be [1-250]");
-            }
-            if (roleID.length() > 2 || roleID.length() < 1 || (!roleID.equals("G") && !roleID.equals("M")&& !roleID.equals("U"))) {
-                flag = false;
-                userError.setRoleIDError("RoleID must be [1-2] and must be G - guest, U - Unvalidated Member or M - member");
-            }
-            if (!password.equals(confirm)) {
-                flag = false;
-                userError.setConfirmError("2 passwords are not matched!");
-            }
-            /*if (!agree) {
-                flag = false;
-                userError.setConfirmError("Please hava a look at our policies and tick the agreement box");
-            }*/
-            if (flag) {
-                UserDAO dao = new UserDAO();
-               
-                EmailDAO sm = new EmailDAO();
-                //get the 6-digit code
-                String code = sm.getRandom();
-                UserDTO user = new UserDTO(userID, fullName, roleID, password, phone, email, address, code);
-                dao.insertNew(user);
-                dao.updateCode(user, code);
-                boolean test = sm.sendEmail(user, code);
-                if (test) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("authcode", user);
-                    session.setAttribute("Pass", "Create");
-                    url = SUCCESS;
-                } else {
-                    request.setAttribute("ERROR", userError);
+        String check = request.getParameter("check");
+        
+        if (check.equals("quiz")) {
+            CategoryDTO categoryDTO = new CategoryDTO("", "", "", "", "");
+            try {
+                String categoryName = request.getParameter("categoryName");
+                String description = request.getParameter("description");
+                String status = request.getParameter("status");
+                String level = request.getParameter("level");
+                if(status==null){
+                        status="0";
+                    }
+                else if (status.equals("on")) {
+                    status = "1";
+                } else{
+                    status = "0";
                 }
+                boolean flag = true;
+                if (categoryName.length() > 250 || categoryName.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCategoryName("Category Name must be [1-250]");
+                }
+                if (description.length() > 250 || description.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCategoryName("Description must be [1-250]");
+                }
+                if (!level.equalsIgnoreCase("Hard") && !level.equalsIgnoreCase("Medium") && !level.equalsIgnoreCase("Easy")) {
+                    flag = false;
+                    categoryDTO.setCategoryName("Level must be Hard, Easy or Medium");
+                }
+                if (flag) {
+                    CategoryDAO dao = new CategoryDAO();
+                    
+                    CategoryDTO category = new CategoryDTO("", categoryName, description, status, level);
+                    dao.insertQ(category);
+                    request.setAttribute("CREATE_Q_SUCCESS", "Create Success!");
+                    url = SUCCESS;
 
-            } else {
-                request.setAttribute("ERROR", userError);
+                } else {
+                    request.setAttribute("CREATE_Q_ERROR", "Create Fail!");
+                    url = SUCCESS;
+                }
+            } catch (Exception e) {
+                log("Error at CreateController: " + e.toString());
+                if (e.toString().contains("duplicate")) {
+                    categoryDTO.setCategoryID("Category Name duplicate!");
+                    request.setAttribute("ERROR", categoryDTO);
+                };
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
             }
-        } catch (Exception e) {
+        } else if (check.equals("blog")) {
+            CategoryBlogDTO categoryBlogDTO = new CategoryBlogDTO("", "", "", "");
+            try {
+                String categoryName = request.getParameter("categoryName");
+                String description = request.getParameter("description");
+                String status = request.getParameter("status");
+                if(status==null){
+                        status="0";
+                    }
+                else if (status.equals("on")) {
+                    status = "1";
+                } else{
+                    status = "0";
+                }
+                boolean flag = true;
+                if (categoryName.length() > 250 || categoryName.length() < 1) {
+                    flag = false;
+                    categoryBlogDTO.setCategoryName("Category Name must be [1-250]");
+                }
+                if (description.length() > 250 || description.length() < 1) {
+                    flag = false;
+                    categoryBlogDTO.setCategoryName("Description must be [1-250]");
+                }
+                if (flag) {
+                    CategoryDAO dao = new CategoryDAO();
+                    
+                    CategoryBlogDTO category = new CategoryBlogDTO("", categoryName, description, status);
+                    dao.insertB(category);
+                    request.setAttribute("CREATE_B_SUCCESS", "Create Success!");
+                    url = SUCCESS;
 
-            log("Error at CreateController: " + e.toString());
-            if (e.toString().contains("duplicate")) {
-                userError.setUserIDError("User Name duplicate!");
-                request.setAttribute("ERROR", userError);
-            };
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+                } else {
+                    request.setAttribute("CREATE_B_ERROR", "Create Fail!");
+                    url = SUCCESS;
+                }
+            } catch (Exception e) {
+                log("Error at CreateController: " + e.toString());
+                if (e.toString().contains("duplicate")) {
+                    categoryBlogDTO.setCategoryID("Category Name duplicate!");
+                    request.setAttribute("ERROR", categoryBlogDTO);
+                };
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
         }
     }
 

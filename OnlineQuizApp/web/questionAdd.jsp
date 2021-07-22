@@ -1,13 +1,13 @@
 <%-- 
-    Document   : courseAdd
-    Created on : Jul 19, 2021, 8:07:23 PM
+    Document   : questionAdd
+    Created on : Jul 22, 2021, 9:53:36 AM
     Author     : User-PC
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="org.onlinequizapp.daos.CategoryDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="org.onlinequizapp.dtos.CategoryDTO"%>
-<%@page import="org.onlinequizapp.dtos.CategoryBlogDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,14 +20,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
-            <title>Admin - Dashboard</title>
-        </c:if>
-        <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1'}">
-            <title>Teacher - Dashboard</title>
-        </c:if>
-
-
+        <title>Admin - Dashboard</title>
 
         <!-- Custom fonts for this template-->
         <link href="Dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -252,11 +245,11 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Course Add</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Question Add</h1>
                         </div>
 
                         <div class="container">
-                            <a href="CategorySearchController?cate=1&check=Course&search=" class="btn btn-primary mb-3"/>Filter Category</a>
+                            <a href="CategorySearchController?cate=1&check=Question&search=" class="btn btn-primary mb-3"/>Filter Category</a>
                             <form action="CourseCreateController">
                                 <div class="mb-3">
                                     <label for="questionName" class="form-label">Course Name</label>
@@ -272,6 +265,7 @@
                                                 </c:if>
                                             </c:forEach>
                                         </c:if>
+
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -361,7 +355,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="/LogoutController">Logout</a>
+                        <a class="btn btn-primary" href="LogoutController">Logout</a>
                     </div>
                 </div>
             </div>
@@ -387,5 +381,4 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     </body>
-
 </html>
