@@ -5,8 +5,12 @@
  */
 package org.onlinequizapp.controllers;
 
+import com.google.common.hash.Hashing;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +51,22 @@ public class CodeVerify extends HttpServlet {
             String Pass = (String) session.getAttribute("Pass");
             String Password = request.getParameter("Password");
             String Confirm = request.getParameter("Confirm");
+            Pattern regex_3_1 = Pattern.compile("[^a-zA-Z0-9]");//check if password doesn't match the pattern
+            // Find match between given string
+            Matcher matcher_3_1 = regex_3_1.matcher(Password);
+            // condition: password must have atleast 1 caps/ 1 non-caps/ 1 numberic
+            if (matcher_3_1.matches()) {
+                url = ERROR;
+                request.setAttribute("ERROR", "Password must have at least 1 capital letter, 1 lower case letter, 1 number");
+            }
+            //check if password contain any special character
+            Pattern regex_spec_char = Pattern.compile("[$&+,:;=?@#|'<>.-^*()%!]");//check if password match the pattern 
+            Matcher matcher_spec_char = regex_spec_char.matcher(Password);
 
+            if (matcher_spec_char.matches()) {
+                url = ERROR;
+                request.setAttribute("ERROR", "Password must not contain any special character");
+            }
             if (code.equals(user.getVerification())) {
                 if (Pass.equalsIgnoreCase("Create")) {
                     UserDAO userdao = new UserDAO();
@@ -60,9 +79,10 @@ public class CodeVerify extends HttpServlet {
                     }
                 } else if (Pass.equalsIgnoreCase("Reset")) {
                     if (Password.equals(Confirm)) {
+                        String sha256hex = Hashing.sha256().hashString(Password, StandardCharsets.UTF_8).toString();
                         UserDAO userdao = new UserDAO();
-                        userdao.updatePass(user, Password);
-                        if (userdao.updatePass(user, Password)) {
+                        userdao.updatePass(user, sha256hex);
+                        if (userdao.updatePass(user, sha256hex)) {
                             url = SUCCESS;
                         } else {
                             url = ERROR1;
