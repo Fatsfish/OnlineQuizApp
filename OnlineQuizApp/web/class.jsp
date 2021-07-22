@@ -469,17 +469,20 @@
                                                 <form action="ClassDeleteController">
                                                     <input type="hidden" name="search" value="${param.search}"/>
                                                     <input type="hidden" name="classID" value="${lop.classID}"/>
-                                                    <input type="submit" class="btn btn-danger" name="action" value="Delete Class"/>
+                                                    <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
                                                     <input type="hidden" name="status" value="${lop.status}"/>
+                                                    <input type="hidden" name="check" value="${param.check}"/>
                                                 </form>
                                             </td>
                                             <td>
                                                 <form action="ClassUpdateController">
-                                                    <input type="submit" class="btn btn-success" name="action" value="Update Class"/>
-                                                    <input type="hidden" name="categoryID" value="${lop.classID}"/>
-                                                    <input type="hidden" name="categoryName" value="${lop.numberOfStudent}"/>
+                                                    <input type="submit" class="btn btn-success" name="action" value="Update"/>
+                                                    <input type="hidden" name="classID" value="${lop.classID}"/>
+                                                    <input type="hidden" name="numberOfStudent" value="${lop.numberOfStudent}"/>
                                                     <input type="hidden" name="status" value="${lop.status}"/>
                                                     <input type="hidden" name="search" value="${param.search}"/>
+                                                    <input type="hidden" name="cate" value="${param.cate}"/>
+                                                    <input type="hidden" name="check" value="${param.check}"/>
                                                 </form>
                                             </td>
                                         </tr>

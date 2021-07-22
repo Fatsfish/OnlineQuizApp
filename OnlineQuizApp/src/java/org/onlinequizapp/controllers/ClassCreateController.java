@@ -41,10 +41,10 @@ public class ClassCreateController extends HttpServlet {
         String url = ERROR;
         String check = request.getParameter("check");
         
-        if (check.equals("class")) {
+        if (check.equals("lop")) {
             ClassDTO classDTO = new ClassDTO("", "", "");
             try {
-                String NumberOfStudent = request.getParameter("NumberOfStudent");
+                String NumberOfStudent = request.getParameter("numberOfStudent");
                 String status = request.getParameter("status");
                 if(status==null){
                         status="0";

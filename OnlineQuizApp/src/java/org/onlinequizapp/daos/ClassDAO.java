@@ -96,8 +96,8 @@ public class ClassDAO {
                         + " Where classID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, cate.getNumberOfStudent());
-                stm.setByte(4, (byte) Integer.parseInt(cate.getStatus()));
-                stm.setString(5, cate.getClassID());
+                stm.setByte(2, (byte) Integer.parseInt(cate.getStatus()));
+                stm.setString(3, cate.getClassID());
                 check = stm.executeUpdate() > 0 ? true : false;
             }
 
@@ -158,7 +158,7 @@ public class ClassDAO {
                         + " VALUES(?,?)";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, cate.getNumberOfStudent());
-                stm.setByte(4, (byte)Integer.parseInt(cate.getStatus()));
+                stm.setByte(2, (byte)Integer.parseInt(cate.getStatus()));
                 stm.executeQuery();
             }
         } catch (Exception e) {

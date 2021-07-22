@@ -30,8 +30,9 @@ public class ClassDeleteController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        String check = request.getParameter("check");
         String action = request.getParameter("action");
-        if (action.equals("Delete Class")) {
+        if (action.equals("Delete")) {
             try {
                 if (!request.getParameter("status").equals("1")) {
                     String classID = request.getParameter("classID");
