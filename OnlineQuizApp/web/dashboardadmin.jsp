@@ -34,7 +34,6 @@
         <!-- Page Wrapper -->
         <div id="wrapper">
 
-            <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -190,8 +189,7 @@
 
             </ul>
             <!-- End of Sidebar -->
-            </c:if>
-            <
+            
 
 
 
