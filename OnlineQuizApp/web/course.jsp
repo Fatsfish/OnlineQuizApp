@@ -5,10 +5,8 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="org.onlinequizapp.daos.CourseDAO"%>
-<%@page import="org.onlinequizapp.daos.CategoryDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="org.onlinequizapp.dtos.CourseDTO"%>
-<%@page import="org.onlinequizapp.dtos.CategoryDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -474,19 +472,15 @@
                                                     <input type="hidden" name="Description" value="${course.Description}"/>
                                                     <input type="hidden" name="categoryID" value="${course.categoryID}"/>
                                                     <input type="hidden" name="search" value="${param.search}"/>
-                                                    <input type="hidden" name="cate" value="${param.cate}"/>
-                                                    <input type="hidden" name="check" value="${param.check}"/>
                                                 </form>
                                             </td>
                                         </tr>
                                     </tbody>
-                                </c:forEach>         
+                                </c:forEach>
                             </table>
                         </c:if><br>
                     </div>
-                    <!--</div>
-                </div>
-                </div>        
+                    <!--   
                 /.container-fluid -->
 
                 </div>

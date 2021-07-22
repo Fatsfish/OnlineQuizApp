@@ -49,7 +49,7 @@ public class CourseSearchController extends HttpServlet {
                 url = SUCCESS;
             }
         } catch (SQLException e) {
-            log("Error at CategorySearchController: " + e.toString());
+            log("Error at CourseSearchController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

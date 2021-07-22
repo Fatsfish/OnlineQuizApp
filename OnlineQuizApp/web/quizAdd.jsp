@@ -249,6 +249,7 @@
                         </div>
 
                         <div class="container">
+                            <a href="ClassSearchController?cate=1&check=Course&search=" class="btn btn-primary mb-3"/>Filter Category</a>
                             <form action="QuizCreateController">
                                 <div class="mb-3">
                                     <label for="questionName" class="form-label">Quiz Name</label>
@@ -262,6 +263,18 @@
                                     <label for="Duration" class="form-label">Total Mark</label>
                                     <input type="number" class="form-control" name="duration" id="Duration">
                                 </div>
+                                <c:if test="${requestScope.LIST_CLASS != null && not empty requestScope.LIST_CLASS}">
+                                    <div>
+                                        <select name="categoryID" class="form-select" aria-label="Default select example">
+                                            <option selected>Choose class</option>
+                                            <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_CLASS}">
+                                                <c:if test="${category.status==1}">
+                                                    <option value="${category.classID}">Class ID - ${category.classID}</option>
+                                                </c:if>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </c:if>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" name="status" class="form-check-input" id="status">
                                     <label class="form-check-label" for="status">Active</label>
@@ -273,29 +286,25 @@
                             </form></div>
 
 
-                        <c:if test="${requestScope.LIST_QUIZ_CATEGORY != null && not empty requestScope.LIST_QUIZ_CATEGORY}">                       
+                        <c:if test="${requestScope.LIST_CLASS != null && not empty requestScope.LIST_CLASS}">                       
                             <table class="table table-bordered table-hover" width="100%" cellspacing="0">
-                                <h4>Quiz Category</h4>
+                                <h4>Class list</h4>
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Category ID</th>
-                                        <th>Category Name</th>
+                                        <th>Class ID</th>
                                         <th>Status</th>
-                                        <th>Level</th>
-                                        <th>Description</th>
+                                        <th>Number of Students</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_QUIZ_CATEGORY}">
+                                    <c:forEach var="class" varStatus="counter" items="${requestScope.LIST_CLASS}">
                                         <tr>
                                             <td>${counter.count}</td>
-                                            <td>${category.categoryID}</td>
-                                            <td>${category.categoryName}</td>
-                                            <td>${category.status}</td>
-                                            <td>${category.level}</td>
-                                            <td>${category.description}</td>
+                                            <td>${class.classID}</td>
+                                            <td>${class.status}</td>
+                                            <td>${class.numberOfStudent}</td>
                                         </tr>
                                     </tbody>
                                 </c:forEach>         
