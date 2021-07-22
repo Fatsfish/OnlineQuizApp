@@ -19,7 +19,8 @@ import org.onlinequizapp.utils.DBUtils;
  * @author User-PC
  */
 public class QuestionDAO {
-        public List<QuestionDTO> getListQ(String search) throws SQLException {
+
+    public List<QuestionDTO> getListQ(String search) throws SQLException {
         List<QuestionDTO> listQuiz = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -47,7 +48,7 @@ public class QuestionDAO {
                     if (listQuiz == null) {
                         listQuiz = new ArrayList<>();
                     }
-                    listQuiz.add(new QuestionDTO(QuestionID, Name, Question1,Question2,Question3,Question4, Description , Answer, AuthorID, Status, categoryID));
+                    listQuiz.add(new QuestionDTO(QuestionID, Name, Question1, Question2, Question3, Question4, Description, Answer, AuthorID, Status, categoryID));
 
                 }
             }
@@ -68,8 +69,8 @@ public class QuestionDAO {
         }
         return listQuiz;
     }
-    
-        public boolean deleteQ(String ID) throws SQLException {
+
+    public boolean deleteQ(String ID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -99,8 +100,8 @@ public class QuestionDAO {
         }
         return check;
     }
-    
-        public boolean updateQ(QuestionDTO quiz) throws SQLException {
+
+    public boolean updateQ(QuestionDTO quiz) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -137,14 +138,14 @@ public class QuestionDAO {
         return check;
     }
 
-        public void insertQ(QuestionDTO quiz) throws SQLException {
+    public void insertQ(QuestionDTO quiz) throws SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "INSERT INTO tblQuestion(Name, Question1, Question2, Question3, Question4, Description, Answer, AuthorID, Status, CategoryID ) "
-                        + " VALUES(\'?\',\'?\',\'?\',\'?\',\'?\',\'?\',\'?\',\'?\',\'1\',\'?\')";
+                        + " VALUES(\'?\',\'?\',\'?\',\'?\',\'?\',\'?\',\'?\',\'?\',\'?\',\'?\')";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, quiz.getName());
                 stm.setString(2, quiz.getQuestion1());
@@ -152,9 +153,10 @@ public class QuestionDAO {
                 stm.setString(4, quiz.getQuestion3());
                 stm.setString(5, quiz.getQuestion4());
                 stm.setString(6, quiz.getDescription());
-                stm.setString(7, quiz.getAnswer());
+                stm.setInt(7, Integer.parseInt(quiz.getAnswer()));
                 stm.setString(8, quiz.getAuthorID());
-                stm.setString(9, quiz.getCategoryID());
+                stm.setString(9, quiz.getStatus());
+                stm.setInt(10, Integer.parseInt(quiz.getCategoryID()));
             }
         } catch (Exception e) {
 
@@ -167,8 +169,8 @@ public class QuestionDAO {
             }
         }
     }
-   
-        public boolean updateEnableQ(int ID, boolean status) throws SQLException {
+
+    public boolean updateEnableQ(int ID, boolean status) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;

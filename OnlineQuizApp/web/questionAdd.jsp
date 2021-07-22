@@ -250,9 +250,9 @@
 
                         <div class="container">
                             <a href="CategorySearchController?cate=1&check=Question&search=" class="btn btn-primary mb-3"/>Filter Category</a>
-                            <form action="CourseCreateController">
+                            <form action="QuestionCreateController">
                                 <div class="mb-3">
-                                    <label for="questionName" class="form-label">Course Name</label>
+                                    <label for="questionName" class="form-label">Your question</label>
                                     <input type="text" name="Name" class="form-control" id="questionName">
                                 </div>
                                 <div>
@@ -265,23 +265,41 @@
                                                 </c:if>
                                             </c:forEach>
                                         </c:if>
-
                                     </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Answer1" class="form-label">Answer 1</label>
+                                    <input type="text" name="answer1" class="form-control" id="Answer1">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Answer2" class="form-label">Answer 2</label>
+                                    <input type="text" name="answer2" class="form-control" id="Answer2">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Answer3" class="form-label">Answer 3</label>
+                                    <input type="text" name="answer3" class="form-control" id="Answer3">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Answer4" class="form-label">Answer 4 </label>
+                                    <input type="text" name="answer4" class="form-control" id="Answer4">
                                 </div>
                                 <div class="mb-3">
                                     <label for="QuestionDesc" class="form-label">Description</label>
                                     <textarea class="form-control" id="QuestionDesc" name="description" rows="3"></textarea>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="Duration" class="form-label">Duration</label>
-                                    <input class="form-control" name="duration" id="Duration">
+                                    <select name="answer" class="form-select" aria-label="Default select example">
+                                        <option selected>Choose Right Answer</option>
+                                        <option value="1">Answer 1</option>
+                                        <option value="2">Answer 2</option>
+                                        <option value="3">Answer 3</option>
+                                        <option value="4">Answer 4</option>
+                                    </select>
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" name="status" class="form-check-input" id="status">
                                     <label class="form-check-label" for="status">Active</label>
                                 </div>
-                                <input type="hidden" name="function" value="course" class="form-check-input" id="status">
-
+                                <input type="hidden" name="function" value="question" class="form-check-input" id="status">
                                 <button type="submit" class="btn btn-primary">Create</button>
                                 <a href="dashboardadmin.jsp" class="btn btn-danger">Cancel</a>
                             </form></div>

@@ -12,6 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.onlinequizapp.daos.CategoryDAO;
+import org.onlinequizapp.daos.QuestionDAO;
+import org.onlinequizapp.dtos.CategoryBlogDTO;
+import org.onlinequizapp.dtos.CourseDTO;
+import org.onlinequizapp.dtos.QuestionDTO;
+import org.onlinequizapp.dtos.UserDTO;
 
 /**
  *
@@ -19,6 +26,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "QuestionCreateController", urlPatterns = {"/QuestionCreateController"})
 public class QuestionCreateController extends HttpServlet {
+
+    private static final String SUCCESS = "courseAdd.jsp";
+    private static final String ERROR = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,18 +42,67 @@ public class QuestionCreateController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet QuestionCreateController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet QuestionCreateController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String url = ERROR;
+        String function = request.getParameter("function");
+        HttpSession session = request.getSession();
+        String LogID = "";
+        if (session.getAttribute("LOGIN_USER") != null) {
+            LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
         }
+        if (function.equals("course")) {
+            QuestionDTO categoryDTO = new QuestionDTO("", "", "", "", "","","","","","","");
+            try {
+                String Name = request.getParameter("Name");
+                String description = request.getParameter("description");
+                String status = request.getParameter("status");
+                String categoryID = request.getParameter("categoryID");
+                String answer = request.getParameter("answer");
+                String answer1 = request.getParameter("answer1");
+                String answer2 = request.getParameter("answer2");
+                String answer3 = request.getParameter("answer3");
+                String answer4 = request.getParameter("answer4");
+                if (status == null) {
+                    status = "0";
+                } else if (status.equals("on")) {
+                    status = "1";
+                } else {
+                    status = "0";
+                }
+                boolean flag = true;
+                if (Name.length() > 250 || Name.length() < 1) {
+                    flag = false;
+                    categoryDTO.setName("Question must be [1-250]");
+                }
+                if (description.length() > 250 || description.length() < 1) {
+                    flag = false;
+                    categoryDTO.setName("Description must be [1-250]");
+                }
+                if ((answer1.length() > 250 || answer1.length() < 1)&&(answer2.length() > 250 || answer2.length() < 1)&&(answer3.length() > 250 || answer3.length() < 1)&&(answer4.length() > 250 || answer4.length() < 1)) {
+                    flag = false;
+                    categoryDTO.setName("Answer must be [1-250]");
+                }
+                if(!answer.equals("1")&&!answer.equals("2")&&!answer.equals("3")&&!answer.equals("4")){
+                    flag = false;
+                    categoryDTO.setName("Answer must be 1,2,3 or 4!");
+                }
+                if (flag) {
+                    QuestionDAO dao = new QuestionDAO();
+                    QuestionDTO course = new QuestionDTO("", Name, answer1, answer2, answer3, answer4,description,answer, LogID, status, categoryID );
+                    dao.insertQ(course);
+                    url = SUCCESS;
+                } else {
+                    request.setAttribute("ERROR", categoryDTO);
+                }
+            } catch (Exception e) {
+                log("Error at CreateController: " + e.toString());
+                if (e.toString().contains("duplicate")) {
+                    categoryDTO.setCategoryID("Category Name duplicate!");
+                    request.setAttribute("ERROR", categoryDTO);
+                };
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
