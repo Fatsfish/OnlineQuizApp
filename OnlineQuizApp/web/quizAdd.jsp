@@ -1,6 +1,6 @@
 <%-- 
-    Document   : courseAdd
-    Created on : Jul 19, 2021, 8:07:23 PM
+    Document   : quizAdd
+    Created on : Jul 22, 2021, 6:09:43 AM
     Author     : User-PC
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -249,31 +249,18 @@
                         </div>
 
                         <div class="container">
-                            <a href="CategorySearchController?cate=1&check=Course&search=" class="btn btn-primary mb-3"/>Filter Category</a>
-                            <form action="CourseCreateController">
+                            <form action="QuizCreateController">
                                 <div class="mb-3">
-                                    <label for="questionName" class="form-label">Course Name</label>
+                                    <label for="questionName" class="form-label">Quiz Name</label>
                                     <input type="text" name="Name" class="form-control" id="questionName">
                                 </div>
-                                <c:if test="${requestScope.LIST_QUIZ_CATEGORY != null && not empty requestScope.LIST_QUIZ_CATEGORY}">
-                                    <div>
-                                        <select name="categoryID" class="form-select" aria-label="Default select example">
-                                            <option selected>Choose category</option>
-                                            <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_QUIZ_CATEGORY}">
-                                                <c:if test="${category.status==1}">
-                                                    <option value="${category.categoryID}">${counter.count} - ${category.categoryName}</option>
-                                                </c:if>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </c:if>
                                 <div class="mb-3">
                                     <label for="QuestionDesc" class="form-label">Description</label>
                                     <textarea class="form-control" id="QuestionDesc" name="description" rows="3"></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="Duration" class="form-label">Duration</label>
-                                    <input class="form-control" name="duration" id="Duration">
+                                    <label for="Duration" class="form-label">Total Mark</label>
+                                    <input type="number" class="form-control" name="duration" id="Duration">
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" name="status" class="form-check-input" id="status">
@@ -354,7 +341,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="/LogoutController">Logout</a>
+                        <a class="btn btn-primary" href="LogoutController">Logout</a>
                     </div>
                 </div>
             </div>

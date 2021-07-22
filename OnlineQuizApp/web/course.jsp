@@ -4,16 +4,16 @@
     Author     : User-PC
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="org.onlinequizapp.daos.CourseDAO"%>
 <%@page import="org.onlinequizapp.daos.CategoryDAO"%>
 <%@page import="java.util.List"%>
+<%@page import="org.onlinequizapp.dtos.CourseDTO"%>
 <%@page import="org.onlinequizapp.dtos.CategoryDTO"%>
-<%@page import="org.onlinequizapp.dtos.CategoryBlogDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -407,12 +407,11 @@
 
 
 
-                        <h1 class="h3 mb-2 text-gray-800" >Courses Management</h1>
+                        <h1 class="h3 mb-2 text-gray-800">Courses Management</h1>
                         <p class="mb-4">${requestScope.DELETE_C_ERROR}</p>
                         <c:if test="${not empty param.search}">
-                            <form class="row g-3" action="CategorySearchController">
+                            <form class="row g-3" action="CourseSearchController">
                                 <div class="col-auto">
-                                    <input type="hidden" name="check" value="Search" class="form-check-input" id="check">
                                     <input class="form-control" type="text" name="search" placeholder="Search.." value="${param.search}"/>
                                 </div>
                                 <div class="col-auto">
@@ -421,9 +420,8 @@
                             </form>
                         </c:if>
                         <c:if test="${empty param.search}">
-                            <form class="row g-3" action="CategorySearchController">
+                            <form class="row g-3" action="CourseSearchController">
                                 <div class="col-auto">
-                                    <input type="hidden" name="check" value="Search" class="form-check-input" id="check">
                                     <input class="form-control" type="text" name="search" placeholder="Search.." value=""/>
                                 </div>
                                 <div class="col-auto">
@@ -449,7 +447,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="course" varStatus="counter" items="${requestScope.LIST_QUIZ_CATEGORY}">
+                                    <c:forEach var="course" varStatus="counter" items="${requestScope.LIST_COURSE}">
                                         <tr>
                                             <td>${counter.count}</td>
                                             <td>${course.courseID}</td>
@@ -461,7 +459,7 @@
                                             <td>
                                                 <form action="CourseDeleteController">
                                                     <input type="hidden" name="search" value="${param.search}"/>
-                                                    <input type="hidden" name="categoryID" value="${course.courseID}"/>
+                                                    <input type="hidden" name="courseID" value="${course.courseID}"/>
                                                     <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
                                                     <input type="hidden" name="status" value="${course.status}"/>
                                                 </form>
@@ -469,11 +467,12 @@
                                             <td>
                                                 <form action="CourseUpdateController">
                                                     <input type="submit" class="btn btn-success" name="action" value="Update"/>
-                                                    <input type="hidden" name="categoryID" value="${course.categoryID}"/>
-                                                    <input type="hidden" name="categoryName" value="${course.categoryName}"/>
+                                                    <input type="hidden" name="courseID" value="${course.courseID}"/>
+                                                    <input type="hidden" name="courseName" value="${course.courseName}"/>
                                                     <input type="hidden" name="status" value="${course.status}"/>
-                                                    <input type="hidden" name="level" value="${course.level}"/>
-                                                    <input type="hidden" name="description" value="${course.description}"/>
+                                                    <input type="hidden" name="duration" value="${course.duration}"/>
+                                                    <input type="hidden" name="Description" value="${course.Description}"/>
+                                                    <input type="hidden" name="categoryID" value="${course.categoryID}"/>
                                                     <input type="hidden" name="search" value="${param.search}"/>
                                                     <input type="hidden" name="cate" value="${param.cate}"/>
                                                     <input type="hidden" name="check" value="${param.check}"/>
@@ -552,7 +551,7 @@
         <script src="Dashboard/js/demo/datatables-demo.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        s
+        
 
     </body>
 

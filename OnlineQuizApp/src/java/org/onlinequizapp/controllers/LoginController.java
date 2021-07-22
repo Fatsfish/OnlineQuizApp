@@ -37,14 +37,9 @@ public class LoginController extends HttpServlet {
             String userID = request.getParameter("userID");
             String password = request.getParameter("password");
             String sha256hex = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
-            UserDAO dao = new UserDAO();
-            UserDTO user = dao.checkLogin(userID, sha256hex);
-            if(user==null){
-                user= dao.checkMailLogin(userID, sha256hex);
-            }
             HttpSession session = request.getSession();
+            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
             if (user != null) {
-                session.setAttribute("LOGIN_USER", user);
                 if (user.getRole().contains("AD")) {
                     url = SUCCESS;
                 } else if (user.getRole().contains("T") || user.getRole().contains("T1")) {
@@ -54,6 +49,24 @@ public class LoginController extends HttpServlet {
                 } else {
                     url = SHOPPING;
                 }
+            } else {
+                UserDAO dao = new UserDAO();
+                user=dao.checkLogin(userID, sha256hex);
+                if (user == null) {
+                    user = dao.checkMailLogin(userID, sha256hex);
+                }
+                if (user != null) {
+                    session.setAttribute("LOGIN_USER", user);
+                    if (user.getRole().contains("AD")) {
+                        url = SUCCESS;
+                    } else if (user.getRole().contains("T") || user.getRole().contains("T1")) {
+                        url = Teacher;
+                    } else if (user.getRole().contains("S") || user.getRole().contains("S1")) {
+                        url = Student;
+                    } else {
+                        url = SHOPPING;
+                    }
+                }
             }
             String rememberLogin = request.getParameter("rememberMe");
             if ("on".equals(rememberLogin)) {
@@ -61,7 +74,7 @@ public class LoginController extends HttpServlet {
                 Cookie cookieID = new Cookie("USERID", userID);
                 cookieID.setMaxAge(0);
 
-                Cookie cookiePassWord = new Cookie("PASSWORD", password);
+                Cookie cookiePassWord = new Cookie("PASSWORD", sha256hex);
                 cookiePassWord.setMaxAge(0);
 
                 response.addCookie(cookieID);

@@ -14,9 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.onlinequizapp.daos.CategoryDAO;
 import org.onlinequizapp.daos.CourseDAO;
-import org.onlinequizapp.dtos.CategoryDTO;
 import org.onlinequizapp.dtos.CourseDTO;
 
 /**
