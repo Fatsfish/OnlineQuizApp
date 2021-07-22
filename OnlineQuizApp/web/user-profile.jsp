@@ -84,8 +84,9 @@
                 <div class="col-md-4">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center experience"><span>Account</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;${sessionScope.LOGIN_USER.role}</span></div><br>
-                        <div class="col-md-12"><label class="labels">Username</label><input type="text" class="form-control" placeholder="Username" value=""></div> <br>
-                        <div class="col-md-12"><label class="labels">Password</label><input type="text" class="form-control" placeholder="Password" value=""></div>
+                        <div class="col-md-12"><label class="labels">Username</label><input type="text" class="form-control" placeholder="Enter Username" value="${sessionScope.LOGIN_USER.userID}"></div> <br>
+                        <div class="col-md-12"><label class="labels">Password</label><input type="password" class="form-control" value="hellu" readonly></div>
+                        <a href="forgot-password.html">Reset password</a>
                     </div>
                 </div>
             </div>
