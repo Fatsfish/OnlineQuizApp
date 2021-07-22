@@ -27,7 +27,7 @@ public class ClassDAO {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String classID = rs.getString("classID");
-                    String NumberOfStudent = rs.getString("NumberOfStudent");
+                    String NumberOfStudent = rs.getString("numberOfStudent");
                     String status = rs.getString("status");
                     if (listCate == null) {
                         listCate = new ArrayList<>();

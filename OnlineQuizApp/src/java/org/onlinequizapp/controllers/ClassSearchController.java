@@ -34,9 +34,9 @@ public class ClassSearchController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String check = request.getParameter("check");
+        String search = request.getParameter("search");
         if (check.equals("Search")) {
             try {
-                String search = request.getParameter("search");
                 ClassDAO dao = new ClassDAO();
                 List<ClassDTO> list = dao.getList(search);
                 if (list != null) {
@@ -50,9 +50,9 @@ public class ClassSearchController extends HttpServlet {
             }
         } else if (check.equals("Course")) {
             try {
-                String search = request.getParameter("search");
+                String search2 = request.getParameter("search");
                 ClassDAO dao = new ClassDAO();
-                List<ClassDTO> list = dao.getList(search);
+                List<ClassDTO> list = dao.getList(search2);
                 if (list != null) {
                     request.setAttribute("LIST_COURSE", list);
                     url = COURSE;
