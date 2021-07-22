@@ -421,8 +421,6 @@
                 </div>
                 <!-- End of Main Content -->
 
-            </div>
-            <!-- End of Main Content -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
