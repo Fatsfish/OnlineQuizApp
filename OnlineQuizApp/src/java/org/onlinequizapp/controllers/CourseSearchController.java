@@ -14,7 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.onlinequizapp.daos.ClassDAO;
 import org.onlinequizapp.daos.CourseDAO;
+import org.onlinequizapp.dtos.ClassDTO;
 import org.onlinequizapp.dtos.CourseDTO;
 
 /**
@@ -24,7 +26,7 @@ import org.onlinequizapp.dtos.CourseDTO;
 @WebServlet(name = "CourseSearchController", urlPatterns = {"/CourseSearchController"})
 public class CourseSearchController extends HttpServlet {
 
-    private static final String SUCCESS = "course.jsp";
+    private static final String SUCCESS = "course1.jsp";
     private static final String ERROR = "404.html";
 
     /**
@@ -40,18 +42,38 @@ public class CourseSearchController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        String check = request.getParameter("check");
         String search = request.getParameter("search");
-        try {
-            CourseDAO dao = new CourseDAO();
-            List<CourseDTO> list = dao.getListCourse(search);
-            if (list != null) {
-                request.setAttribute("LIST_COURSE", list);
-                url = SUCCESS;
+        if (check.equals("Search")) {
+            try {
+                CourseDAO dao = new CourseDAO();
+                List<CourseDTO> list = dao.getListCourse(search);
+                if (list != null) {
+                    request.setAttribute("LIST_COURSE", list);
+                    url = SUCCESS;
+                }
+            } catch (SQLException e) {
+                log("Error at ClassSearchController: " + e.toString());
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
             }
-        } catch (SQLException e) {
-            log("Error at CourseSearchController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+        } else if (check.equals("Course")) {
+            try {
+                String search2 = request.getParameter("search");
+                CourseDAO dao = new CourseDAO();
+                List<CourseDTO> list = dao.getListCourse(search2);
+                if (list != null) {
+                    request.setAttribute("LIST_COURSE", list);
+                    url = ERROR;
+                }
+            } catch (SQLException e) {
+                log("Error at ClassSearchController: " + e.toString());
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
+        } else {
+            request.setAttribute("LIST_CLASS_ERROR", "ERROR at CourseSearchController");
+            url = ERROR;
         }
     }
 

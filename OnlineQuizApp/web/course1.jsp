@@ -1,3 +1,8 @@
+<%-- 
+    Document   : course1
+    Created on : Jul 22, 2021, 2:19:11 PM
+    Author     : User-PC
+--%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="org.onlinequizapp.daos.ClassDAO"%>
 <%@page import="java.util.List"%>

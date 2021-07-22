@@ -1,3 +1,11 @@
+<%-- 
+    Document   : index
+    Created on : Jul 22, 2021, 2:49:31 PM
+    Author     : User-PC
+--%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- Created By CodingNepal - www.codingnepalweb.com  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -65,6 +73,7 @@
         <div class="complete_text">You've completed the Quiz!</div>
         <div class="score_text">
             <!-- Here I've inserted Score Result from JavaScript -->
+            <c:set var="grade" value="${param.userScore}" scope="session" />
         </div>
         <div class="buttons">
             <button class="restart">Replay Quiz</button>
