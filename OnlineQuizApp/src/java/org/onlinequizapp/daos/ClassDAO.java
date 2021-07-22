@@ -19,7 +19,7 @@ public class ClassDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Select NumberOfStudent, status"
+                String sql = "Select classID, NumberOfStudent, status "
                         + "from tblClass "
                         + "WHERE classID like ?";
                 stm = conn.prepareStatement(sql);
