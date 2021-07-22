@@ -118,7 +118,7 @@
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
                            aria-expanded="false" aria-controls="collapseCategories">
-                            <i class="fas fa-fw fa-edit"></i>
+                            <i class="fas fa-fw fa-list"></i>
                             <span>Categories</span>
                         </a>
                         <div id="collapseCategories" class="collapse" aria-labelledby="headingQuizzes"
@@ -393,7 +393,7 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="user-profile.html">
+                                    <a class="dropdown-item" href="user-profile.jsp">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
                                     </a>
