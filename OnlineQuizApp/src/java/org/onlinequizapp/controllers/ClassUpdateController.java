@@ -29,12 +29,13 @@ public class ClassUpdateController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        String check = request.getParameter("action");
+        String check = request.getParameter("check");
+        String action = request.getParameter("action");
         ClassDTO categoryDTO = new ClassDTO("", "", "");
-        if (check.equals("Confirm Update Class")) {
+        if (action.equals("Confirm Update Class")) {
             try {
                 String categoryID = request.getParameter("classID");
-                String NumberOfStudent = request.getParameter("NumberOfStudent");
+                String NumberOfStudent = request.getParameter("numberOfStudent");
                 String status = request.getParameter("status");
                 ClassDAO dao = new ClassDAO();
                 ClassDTO category = new ClassDTO(categoryID, NumberOfStudent, status);
@@ -61,7 +62,7 @@ public class ClassUpdateController extends HttpServlet {
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
-        } else if (check.equals("Update Class")) {
+        } else if (action.equals("Update")) {
             request.getRequestDispatcher(url).forward(request, response);
         }
 
