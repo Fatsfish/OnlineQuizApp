@@ -51,7 +51,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="dashboardteacher.jsp">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -122,7 +122,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
                        aria-expanded="false" aria-controls="collapseCategories">
-                        <i class="fas fa-fw fa-edit"></i>
+                        <i class="fas fa-fw fa-list"></i>
                         <span>Categories</span>
                     </a>
                     <div id="collapseCategories" class="collapse" aria-labelledby="headingQuizzes"
