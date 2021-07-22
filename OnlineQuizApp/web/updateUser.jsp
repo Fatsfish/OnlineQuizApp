@@ -45,7 +45,7 @@
                                 User ID<input type="text" name="userID" value="${param.userID}" readonly=""/></br>
                                 <label><span>Full Name </span></br><input type="text" name="fullName" value="${param.fullName}" required=""/></br>
                                 </label>
-                                <label><span>Role ID (AD, M, G)</span></br><input type="text" name="roleID" value="${param.roleID}" required=""/></br>    
+                                <label><span>Role ID (AD, T, T1, S, S1, U)</span></br><input type="text" name="roleID" value="${param.roleID}" required=""/></br>    
                                     <input type="hidden" name="search" value="${param.search}" required=""/></br>
                                     <input type="submit" name="action" value="Confirm"/>
                             </form>
