@@ -215,7 +215,8 @@ public class CategoryDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, cate.getCategoryName());
                 stm.setString(2, cate.getDescription());
-                stm.setString(3, cate.getStatus());
+                stm.setByte(3, (byte) Integer.parseInt(cate.getStatus()));
+                stm.setString(4, cate.getCategoryID());
                 check = stm.executeUpdate() > 0 ? true : false;
             }
 

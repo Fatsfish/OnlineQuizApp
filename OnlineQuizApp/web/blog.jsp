@@ -141,7 +141,7 @@
                             <a class="collapse-item" href="blog.jsp">My Blogs</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="blogAdd.html">Create Blog</a>
+                            <a class="collapse-item" href="create-blog.jsp">Create Blog</a>
                         </div>
                     </div>
                 </li>
@@ -345,19 +345,19 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
-                        <!-- Nav Item - blog Information -->
+                        <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="blogDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_blog.fullname}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.fullname}</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
-                            <!-- Dropdown - blog Information -->
+                            <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="blogDropdown">
+                                aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
-                                    <i class="fas fa-blog fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-User fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
                                 <a class="dropdown-item" href="#">
@@ -395,7 +395,7 @@
                                 </form>
                             </c:if>
                             <c:if test="${empty param.search}">
-                                <form action="MainController">
+                                <form action="BlogSearchController">
                                     <p>Search</p> <input class="text" type="text" name="search" value=""/>
                                     <input type="submit" name="action" value="Search"/>
                                 </form>

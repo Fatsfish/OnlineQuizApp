@@ -256,7 +256,7 @@
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-                        
+
 
                         <div class="container">
                             <h1 class="h3 mb-2 text-gray-800" >Category Quiz Add</h1>
@@ -270,20 +270,26 @@
                                     <textarea name="description" class="form-control" id="description" rows="3"></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="level" class="form-label">Level</label>
+                                    <label for="level" class="form-label">Level (Hard/Medium/Easy)</label>
                                     <textarea name="level" class="form-control" id="level" ></textarea>
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input name="status" type="checkbox" class="form-check-input" id="active">
                                     <label class="form-check-label" for="status">Active</label>
                                 </div>
-                                    <input type="hidden" name="check" value="quiz" class="form-check-input" id="check">
+                                <input type="hidden" name="check" value="quiz" class="form-check-input" id="check">
 
                                 <button type="submit" class="btn btn-primary">Create</button>
                                 <a href="dashboardadmin.jsp" class="btn btn-danger">Cancel</a>
+                                <div style="color: green" class="h5 mt-3">
+                                    <p class="mb-4">${requestScope.CREATE_Q_SUCCESS}</p>
+                                </div>
+                                <div style="color: red" class="h5 mt-3" >
+                                    <p class="mb-4">${requestScope.CREATE_Q_ERROR}</p>
+                                </div>
                             </form>
                         </div>
-                        
+
                     </div>
                     <!-- /.container-fluid -->
                 </div>

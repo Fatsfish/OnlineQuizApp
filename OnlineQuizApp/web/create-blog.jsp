@@ -162,7 +162,7 @@
                             <a class="collapse-item" href="blog.jsp">My Blogs</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="blogAdd.html">Create Blog</a>
+                            <a class="collapse-item" href="create-blog.jsp">Create Blog</a>
                         </div>
                     </div>
                 </li>
@@ -298,6 +298,8 @@
                                 <input type="checkbox" class="form-check-input" id="status">
                                 <label class="form-check-label" for="status">Active</label><br>
                                 <input type="hidden" name="BlogTitle" value="${param.blogTitle}">
+                                <input type="hidden" name="Status" value="${param.status}">
+                                <input type="hidden" name="Image" value="${param.formFile}">
                                 <input type="hidden" name="BlogCategoryID" value="${blogC.categoryID}">
                                 <input type="hidden" name="BlogCategoryName" value="${blogC.categoryName}">
                                 <button type="submit" class="btn btn-primary">Create</button>

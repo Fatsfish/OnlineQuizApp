@@ -23,16 +23,13 @@
     </head>
     <body>
         <form action="CategoryUpdateController" name="check" value="1" method="POST">
-            <h1 align="center">UPDATE ${sessionScope.LIST_QUIZ_CATEGORY.categoryName}</h1>
+            <h1 align="center">UPDATE ${sessionScope.LIST_BLOG_CATEGORY.categoryName}</h1>
             <div class="main-agileinfo">
                 <div class="agileits-top">
                     <h2 style="text-align: center">Category Search and Edit page</h2>
                     Category ID<input type="text" name="categoryID" value="${param.categoryID}" id="categoryID" readonly=""/></br>
                     <label>
                         <span>Category Name</span></br><input type="text" name="categoryName" value="${param.categoryName}" id="categoryName" required=""/></br>
-                    </label>
-                    <label>
-                        <span>Level (Hard, Medium, Easy)</span></br><input type="text" name="level"  value="${param.level}" required=""/></br>
                     </label>
                     <label>
                         <span>Description</span></br><input type="text" name="description" id="description" value="${param.description}" required=""/></br>
@@ -42,7 +39,7 @@
                         <input type="hidden" name="search" value="${param.search}" required=""/></br>
                         <input type="hidden" name="cate" value="${param.cate}"/>
                         <input type="hidden" name="check" value="${param.check}"/>
-                        <input type="submit" name="action" value="Confirm Update Quiz"/>
+                        <input type="submit" name="action" value="Confirm Update Blog"/>
                     </label>
                 </div>
             </div>

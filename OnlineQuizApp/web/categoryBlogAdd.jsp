@@ -279,6 +279,12 @@
 
                                 <button type="submit" class="btn btn-primary">Create</button>
                                 <a href="dashboardadmin.jsp" class="btn btn-danger">Cancel</a>
+                                <div style="color: green" class="h5 mt-3">
+                                    <p class="mb-4">${requestScope.CREATE_B_SUCCESS}</p>
+                                </div>
+                                <div style="color: red" class="h5 mt-3" >
+                                    <p class="mb-4">${requestScope.CREATE_B_ERROR}</p>
+                                </div>
                             </form>
                         </div>
 

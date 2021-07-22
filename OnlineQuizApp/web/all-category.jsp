@@ -403,8 +403,16 @@
 
 
                         <h1 class="h3 mb-2 text-gray-800" >Categories Management</h1>
-                        <p class="mb-4">${requestScope.DELETE_Q_ERROR}</p>
-                        <p class="mb-4">${requestScope.DELETE_B_ERROR}</p>
+                        <div style="color: red" class="h5 mt-3" >
+                            <p class="mb-4">${requestScope.DELETE_Q_ERROR}</p>
+                            <p class="mb-4">${requestScope.DELETE_B_ERROR}</p>
+                        </div>
+                        <div style="color: green" class="h5 mt-3">
+                            <p class="mb-4">${requestScope.DELETE_Q_SUCCESS}</p>
+                            <p class="mb-4">${requestScope.DELETE_B_SUCCESS}</p>
+                            <p class="mb-4">${requestScope.UPDATE_Q_SUCCESS}</p>
+                            <p class="mb-4">${requestScope.UPDATE_B_SUCCESS}</p>
+                        </div>
                         <c:if test="${not empty param.search}">
                             <form class="row g-3" action="CategorySearchController">
                                 <div class="col-auto">
@@ -469,14 +477,16 @@
                                             <td>
                                                 <form action="CategoryDeleteController">
                                                     <input type="hidden" name="search" value="${param.search}"/>
+                                                    <input type="hidden" name="cate" value="${param.cate}"/>
+                                                    <input type="hidden" name="check" value="${param.check}"/>
                                                     <input type="hidden" name="categoryID" value="${category.categoryID}"/>
-                                                    <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
+                                                    <input type="submit" class="btn btn-danger" name="action" value="Delete Quiz"/>
                                                     <input type="hidden" name="status" value="${category.status}"/>
                                                 </form>
                                             </td>
                                             <td>
                                                 <form action="CategoryUpdateController">
-                                                    <input type="submit" class="btn btn-success" name="action" value="Update"/>
+                                                    <input type="submit" class="btn btn-success" name="action" value="Update Quiz"/>
                                                     <input type="hidden" name="categoryID" value="${category.categoryID}"/>
                                                     <input type="hidden" name="categoryName" value="${category.categoryName}"/>
                                                     <input type="hidden" name="status" value="${category.status}"/>
@@ -510,28 +520,35 @@
 
                                 <tbody>
                                     <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_BLOG_CATEGORY}">
-                                    <form action="CategorySearchController">
                                         <tr>
                                             <td>${counter.count}</td>
                                             <td>${category.categoryID}</td>
                                             <td>${category.categoryName}</td>
                                             <td>${category.status}</td>
                                             <td>${category.description}</td>
-                                            <td
-                                                <input type="hidden" name="search" value="${param.search}"/>
-                                                <input type="hidden" name="categoryID" value="${category.categoryID}"/>
-                                                <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
+                                            <td>
+                                                <form action="CategoryDeleteController">
+                                                    <input type="hidden" name="search" value="${param.search}"/>
+                                                    <input type="hidden" name="cate" value="${param.cate}"/>
+                                                    <input type="hidden" name="check" value="${param.check}"/>
+                                                    <input type="hidden" name="categoryID" value="${category.categoryID}"/>
+                                                    <input type="hidden" name="status" value="${category.status}"/>
+                                                    <input type="submit" class="btn btn-danger" name="action" value="Delete Blog"/>
+                                                </form>
                                             </td>
                                             <td>
-                                                <input type="submit" class="btn btn-success" name="action" value="Update"/>
-                                                <input type="hidden" name="categoryID" value="${category.categoryID}"/>
-                                                <input type="hidden" name="categoryName" value="${category.categoryName}"/>
-                                                <input type="hidden" name="status" value="${category.status}"/>
-                                                <input type="hidden" name="description" value="${category.description}"/>
-                                                <input type="hidden" name="search" value="${param.search}"/>
+                                                <form action="CategoryUpdateController">
+                                                    <input type="submit" class="btn btn-success" name="action" value="Update Blog"/>
+                                                    <input type="hidden" name="categoryID" value="${category.categoryID}"/>
+                                                    <input type="hidden" name="categoryName" value="${category.categoryName}"/>
+                                                    <input type="hidden" name="status" value="${category.status}"/>
+                                                    <input type="hidden" name="description" value="${category.description}"/>
+                                                    <input type="hidden" name="search" value="${param.search}"/>
+                                                    <input type="hidden" name="cate" value="${param.cate}"/>
+                                                    <input type="hidden" name="check" value="${param.check}"/>
+                                                </form>
                                             </td>
-                                    </form>
-                                    </tr>
+                                        </tr>
                                     </tbody>
                                 </c:forEach>         
                             </table>

@@ -25,6 +25,7 @@ public class CategoryUpdateController extends HttpServlet {
 
     private static final String SUCCESS = "CategorySearchController";
     private static final String ERROR = "updateCategory.jsp";
+    private static final String ERROR2 = "updateCategoryBlog.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,9 +40,10 @@ public class CategoryUpdateController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        String url2 = ERROR2;
         String check = request.getParameter("action");
         CategoryDTO categoryDTO = new CategoryDTO("", "", "", "", "");
-        if (check.equals("Update")) {
+        if (check.equals("Confirm Update Quiz")) {
             try {
                 String categoryID = request.getParameter("categoryID");
                 String categoryName = request.getParameter("categoryName");
@@ -70,56 +72,61 @@ public class CategoryUpdateController extends HttpServlet {
                 if (flag) {
                     boolean update = dao.updateQ(category);
                     if (update) {
+                        request.setAttribute("UPDATE_Q_SUCCESS", "Update Success!");
                         url = SUCCESS;
                     }
                 } else {
                     request.setAttribute("ERROR", categoryDTO);
                 }
-            } catch (Exception e) {
+            } 
+            catch (Exception e) {
 
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
+        } else if (check.equals("Update Quiz")){
+            request.getRequestDispatcher(url).forward(request, response);
         }
-//        
-//        CategoryBlogDTO categoryBlogDTO = new CategoryBlogDTO("", "", "", "");
-//        try {
-//            String categoryID = request.getParameter("categoryID");
-//            String categoryName = request.getParameter("categoryName");
-//            String description = request.getParameter("description");
-//            String status = request.getParameter("status");
-//            CategoryDAO dao = new CategoryDAO();
-//            CategoryBlogDTO category = new CategoryBlogDTO(categoryID, categoryName, description, status);
-//            boolean flag = true;
-//            if (categoryID.length() > 20 || categoryID.length() < 1) {
-//                flag = false;
-//                categoryDTO.setCategoryID("CategoryID must be [1-5]");
-//            }
-//            if (categoryName.length() > 250 || categoryName.length() < 1) {
-//                flag = false;
-//                categoryDTO.setCategoryName("Category Name must be [1-250]");
-//            }
-//            if (status.isEmpty() || !(status.equals(1)) || !(status.equals(0))) {
-//                flag = false;
-//                categoryDTO.setStatus("Status must be 0 or 1");
-//            }
-//            if (description.length() > 250 || description.length() < 1) {
-//                flag = false;
-//                categoryDTO.setCategoryName("Description must be [1-250]");
-//            }
-//            if (flag) {
-//                boolean check = dao.updateB(category);
-//                if (check) {
-//                    url = SUCCESS;
-//                }
-//            } else {
-//                request.setAttribute("ERROR", categoryDTO);
-//            }
-//        } catch (Exception e) {
-//
-//        } finally {
-//            request.getRequestDispatcher(url).forward(request, response);
-//        }
+        
+        CategoryBlogDTO categoryBlogDTO = new CategoryBlogDTO("", "", "", "");
+        if (check.equals("Confirm Update Blog")) {
+            try {
+                String categoryID = request.getParameter("categoryID");
+                String categoryName = request.getParameter("categoryName");
+                String description = request.getParameter("description");
+                String status = request.getParameter("status");
+                CategoryDAO dao = new CategoryDAO();
+                CategoryBlogDTO category = new CategoryBlogDTO(categoryID, categoryName, description, status);
+                boolean flag = true;
+                if (categoryName.length() > 250 || categoryName.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCategoryName("Category Name must be [1-250]");
+                }
+                if (!(status.equals("1")) && !(status.equals("0"))) {
+                    flag = false;
+                    categoryDTO.setStatus("Status must be 0 or 1");
+                }
+                if (description.length() > 250 || description.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCategoryName("Description must be [1-250]");
+                }
+                if (flag) {
+                    boolean update = dao.updateB(category);
+                    if (update) {
+                        request.setAttribute("UPDATE_B_SUCCESS", "Update Success!");
+                        url2 = SUCCESS;
+                    }
+                } else {
+                    request.setAttribute("ERROR", categoryBlogDTO);
+                }
+            } catch (Exception e) {
+
+            } finally {
+                request.getRequestDispatcher(url2).forward(request, response);
+            }
+        } else if (check.equals("Update Blog")){
+            request.getRequestDispatcher(url2).forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
