@@ -20,6 +20,9 @@ public class ClassDTO {
         this.numberOfStudent = numberOfStudent;
         this.status = status;
     }
+    
+    public ClassDTO() {
+    }
 
     public String getClassID() {
         return classID;
