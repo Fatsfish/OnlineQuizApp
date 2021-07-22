@@ -10,17 +10,17 @@ public class BlogDTO implements Serializable {
     private String categoryID;
     private String content;
     private String Image;
-    
+    private String Status;
     
    
-    public BlogDTO(String blogID, String Title, String authorID, String categoryID, String content, String Image) {
+    public BlogDTO(String blogID, String Title, String authorID, String categoryID, String content, String Image, String Status) {
         this.blogID = blogID;
         this.Title = Title;
         this.authorID = authorID;
         this.categoryID = categoryID;
         this.content = content;
         this.Image = Image;
-        
+        this.Status = Status;
     }
 
     public BlogDTO() {
@@ -72,6 +72,14 @@ public class BlogDTO implements Serializable {
 
     public void setImage(String Image) {
         this.Image = Image;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String Status) {
+        this.Status = Status;
     }
     
 

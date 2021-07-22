@@ -31,7 +31,7 @@
         <!-- Custom styles for this template-->
         <link href="Dashboard/css/sb-admin-2.min.css" rel="stylesheet">
 
-        
+
 
 
     </head>
@@ -266,11 +266,12 @@
 
                         <div class="container">
                             <h4>Create Blog</h4>
+                            <p class="mb-4">${requestScope.CREATE_BLOG_SUCCESS}</p>
                             <p class="mb-4">${requestScope.CREATE_BLOG_ERROR}</p>
                             <a href="CategorySearchController?cate=2&check=Blog&search=" class="btn btn-primary mb-3"/>Filter Category</a>
                             <form action="BlogCreateController">
                                 <div class="mb-3">
-                                    <label for="blogTitle" class="form-label">Blog Title</label>
+                                    <label for="BlogTitle" class="form-label">Blog Title</label>
                                     <input type="text" class="form-control" id="blogTitle">
                                 </div>
                                 <div>
@@ -284,27 +285,31 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="BlogContent" class="form-label">Blog Content</label>
+                                    <label for="content" class="form-label">Blog Content</label>
                                     <textarea class="form-control" id="BlogContent" rows="3"></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="blogImg" class="form-label">Upload picture (optional)</label>
+                                    <label for="Image" class="form-label">Upload picture (optional)</label>
                                     <input class="form-control" type="text" placeholder="Please input picture's url" id="blogImg">
                                 </div>
                                 <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="status">
-                                <label class="form-check-label" for="status">Active</label><br>
+                                    <input type="checkbox" class="form-check-input" id="status">
+                                    <label class="form-check-label" for="status">Active</label><br>
                                 </div>
-                                <input type="hidden" name="BlogTitle" value="${param.blogTitle}">
-                                <input type="hidden" name="Status" value="${param.status}">
-                                <input type="hidden" name="Image" value="${param.formFile}">
-                                <input type="hidden" name="BlogCategoryID" value="${blogC.categoryID}">
-                                <input type="hidden" name="BlogCategoryName" value="${blogC.categoryName}">
-                                <button type="submit" class="btn btn-primary">Create</button>
-                                <button type="submit" class="btn btn-danger">Cancel</button>
+                                <div>
+                                    <input type="hidden" name="Title" value="${param.Title}">
+                                    <input type="hidden" name="status" value="${param.status}">
+                                    <input type="hidden" name="Image" value="${param.formFile}">
+                                    <input type="hidden" name="content" value="${param.content}">
+                                    <input type="hidden" name="categoryID" value="${blogC.categoryID}">
+                                    <input type="hidden" name="check" value="blogCreate" class="form-check-input" id="check">
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                    <button type="submit" class="btn btn-danger">Cancel</button>
+                                </div>
+                        </form>
                         </div>
 
-                        </form>
+                        
                     </div>
                     <!-- /.container-fluid -->
                 </div>

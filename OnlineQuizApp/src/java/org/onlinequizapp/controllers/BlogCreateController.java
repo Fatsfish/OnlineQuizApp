@@ -39,44 +39,58 @@ public class BlogCreateController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+   response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        String authorID="";
-        BlogError BlogError = new BlogError("", "", "", "", "", "");
-        HttpSession session = request.getSession();
+        String check = request.getParameter("check");
+            String LogID="";
+            HttpSession session = request.getSession();
         if (session.getAttribute("LOGIN_USER") != null) {
-            authorID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
+            LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
         }
-        try {
-            String Title = request.getParameter("blogTitle");
-            String blogContent = request.getParameter("BlogContent");
-            String categoryID = request.getParameter("categoryID");
-            String img = request.getParameter("Image");
-            String status = request.getParameter("Status");
-            //boolean agree = "on".equals(request.getParameter("agreement"));
-            boolean flag = true;
-           if(categoryID == null)
-           {
-               flag = false;
-               BlogError.setCategoryID("You must choose a category for your Blog");
-           }
-               /*if (!agree) {
-                flag = false;
-                userError.setConfirmError("Please hava a look at our policies and tick the agreement box");
-            }*/
-            if (flag) {
-                BlogDAO dao = new BlogDAO();
-                BlogDTO dto = new BlogDTO("", Title, authorID, categoryID, blogContent, img);
-                dao.insert(dto);
-                url = SUCCESS;
+        if (check.equals("blogCreate")) {
+            BlogDTO BlogDTO = new BlogDTO("", "", "", "", "", "", "");
+            try {
+                String Title = request.getParameter("Title");
+                String content = request.getParameter("content");
+                String Image = request.getParameter("Image");
+                String BlogCategoryID = request.getParameter("categoryID");
+                String status = request.getParameter("status");
+                if(status==null){
+                        status="0";
+                    }
+                else if (status.equals("on")) {
+                    status = "1";
+                } else{
+                    status = "0";
+                }
+                boolean flag = true;
+                if (Title.isEmpty() || Title.length() > 250) {
+                    flag = false;
+                    BlogDTO.setTitle("Title must be [1-250]");
+                }
+                
+                if (flag) {
+                    BlogDAO dao = new BlogDAO();
+                    
+                    BlogDTO cate = new BlogDTO("", Title, LogID, BlogCategoryID, content, Image, status);
+                    
+                    dao.insert(cate);
+                    request.setAttribute("CREATE_BLOG_SUCCESS", "Create Success!");
+                    url = SUCCESS;
 
-            } else {
-                request.setAttribute("BLOG_CREATE_ERROR", BlogError);
+                } else {
+                    request.setAttribute("CREATE_BLOG_ERROR", "Create Fail!");
+                    url = SUCCESS;
+                }
+            } catch (Exception e) {
+                log("Error at CreateController: " + e.toString());
+                if (e.toString().contains("duplicate")) {
+                    BlogDTO.setTitle("Title duplicate!");
+                    request.setAttribute("ERROR", BlogDTO);
+                };
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
             }
-        } catch (Exception e) {
-
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

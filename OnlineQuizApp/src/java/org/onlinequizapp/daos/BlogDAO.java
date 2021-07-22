@@ -29,7 +29,8 @@ public class BlogDAO {
                     String content = rs.getString("content");
                     String authorID = rs.getString("authorID");
                     String Image = rs.getString("Image");
-                    Blog = new BlogDTO(BlogID, Title, authorID, categoryID, content, Image);
+                    String Status = rs.getString("Status");
+                    Blog = new BlogDTO(BlogID, Title, authorID, categoryID, content, Image, Status);
                 }
             }
         } catch (ClassNotFoundException | SQLException e) {
@@ -69,7 +70,8 @@ public class BlogDAO {
                     String content = rs.getString("content");
                     String authorID = rs.getString("authorID");
                     String Image = rs.getString("Image");
-                    Blog = new BlogDTO(BlogID, Title, authorID, categoryID, content, Image);
+                    String Status = rs.getString("Status");
+                    Blog = new BlogDTO(BlogID, Title, authorID, categoryID, content, Image, Status);
                 }
             }
         } catch (ClassNotFoundException | SQLException e) {
@@ -110,10 +112,11 @@ public class BlogDAO {
                     String categoryID = rs.getString("categoryID");
                     String content = rs.getString("content");
                     String Image = rs.getString("Image");
+                    String Status = rs.getString("Status");
                     if (listBlog == null) {
                         listBlog = new ArrayList<>();
                     }
-                    listBlog.add(new BlogDTO(BlogID, Title, authorID, content, categoryID, Image));
+                    listBlog.add(new BlogDTO(BlogID, Title, authorID, content, categoryID, Image, Status));
 
                 }
             }
@@ -237,8 +240,8 @@ public class BlogDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblBlog(BlogID, Title, authorID, categoryID, content, Image) "
-                        + " VALUES(\'?\',\'?\',\'?\',\'?\',\'?\',\'?\')";
+                String sql = "INSERT INTO tblBlog( Title, authorID, categoryID, content, Image, Status) " +
+                        "VALUES(?,?,?,?,?, ?,?) ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, Blog.getBlogID());
                 stm.setString(2, Blog.getAuthorID());
@@ -246,6 +249,8 @@ public class BlogDAO {
                 stm.setString(4, Blog.getContent());
                 stm.setString(5, Blog.getTitle());
                 stm.setString(6, Blog.getImage());
+                stm.setByte(7, (byte)Integer.parseInt(Blog.getStatus()));
+                stm.executeQuery();
             }
         } catch (Exception e) {
 
