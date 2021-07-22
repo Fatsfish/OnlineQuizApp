@@ -3,11 +3,11 @@
     Created on : Jul 22, 2021, 6:09:43 AM
     Author     : User-PC
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="org.onlinequizapp.daos.CategoryDAO"%>
+<%@page import="org.onlinequizapp.daos.CourseDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="org.onlinequizapp.dtos.CategoryDTO"%>
-<%@page import="org.onlinequizapp.dtos.CategoryBlogDTO"%>
+<%@page import="org.onlinequizapp.dtos.ClassDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
