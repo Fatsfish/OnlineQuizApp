@@ -445,32 +445,32 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="course" varStatus="counter" items="${requestScope.LIST_COURSE}">
+                                    <c:forEach var="course1" varStatus="counter" items="${requestScope.LIST_COURSE}">
                                         <tr>
                                             <td>${counter.count}</td>
-                                            <td>${course.courseID}</td>
-                                            <td>${course.courseName}</td>
-                                            <td>${course.status}</td>
-                                            <td>${course.duration}</td>
-                                            <td>${course.Description}</td>
-                                            <td>${course.categoryID}</td>
+                                            <td>${course1.courseID}</td>
+                                            <td>${course1.courseName}</td>
+                                            <td>${course1.status}</td>
+                                            <td>${course1.duration}</td>
+                                            <td>${course1.Description}</td>
+                                            <td>${course1.categoryID}</td>
                                             <td>
                                                 <form action="CourseDeleteController">
                                                     <input type="hidden" name="search" value="${param.search}"/>
-                                                    <input type="hidden" name="courseID" value="${course.courseID}"/>
+                                                    <input type="hidden" name="courseID" value="${course1.courseID}"/>
                                                     <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
-                                                    <input type="hidden" name="status" value="${course.status}"/>
+                                                    <input type="hidden" name="status" value="${course1.status}"/>
                                                 </form>
                                             </td>
                                             <td>
                                                 <form action="CourseUpdateController">
                                                     <input type="submit" class="btn btn-success" name="action" value="Update"/>
-                                                    <input type="hidden" name="courseID" value="${course.courseID}"/>
-                                                    <input type="hidden" name="courseName" value="${course.courseName}"/>
-                                                    <input type="hidden" name="status" value="${course.status}"/>
-                                                    <input type="hidden" name="duration" value="${course.duration}"/>
-                                                    <input type="hidden" name="Description" value="${course.Description}"/>
-                                                    <input type="hidden" name="categoryID" value="${course.categoryID}"/>
+                                                    <input type="hidden" name="courseID" value="${course1.courseID}"/>
+                                                    <input type="hidden" name="courseName" value="${course1.courseName}"/>
+                                                    <input type="hidden" name="status" value="${course1.status}"/>
+                                                    <input type="hidden" name="duration" value="${course1.duration}"/>
+                                                    <input type="hidden" name="Description" value="${course1.Description}"/>
+                                                    <input type="hidden" name="categoryID" value="${course1.categoryID}"/>
                                                     <input type="hidden" name="search" value="${param.search}"/>
                                                 </form>
                                             </td>
@@ -543,9 +543,6 @@
 
         <!-- Page level custom scripts -->
         <script src="Dashboard/js/demo/datatables-demo.js"></script>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
 
     </body>
 

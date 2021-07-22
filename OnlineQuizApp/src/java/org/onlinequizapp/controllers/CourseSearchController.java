@@ -40,8 +40,8 @@ public class CourseSearchController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        String search = request.getParameter("search");
         try {
-            String search = request.getParameter("search");
             CourseDAO dao = new CourseDAO();
             List<CourseDTO> list = dao.getListCourse(search);
             if (list != null) {
