@@ -52,7 +52,7 @@ public class UserUpdateController extends HttpServlet {
                 flag = false;
                 userError.setFullNameError("Full Name must be [1-250]");
             }
-            if (roleID.length() > 2 || roleID.length() < 1 || (!roleID.equals("G") && !roleID.equals("M") && !roleID.equals("AD"))) {
+            if (roleID.length() > 2 || roleID.length() < 1 || (!roleID.equals("G") && !roleID.equals("M") && !roleID.equals("AD")&& !roleID.equals("T") && !roleID.equals("T1") &&!roleID.equals("S") && !roleID.equals("S1")&& !roleID.equals("U"))) {
                 flag = false;
                 userError.setRoleIDError("RoleID must be [1-2] and must be G - guest, M - member or AD - admin");
             }
