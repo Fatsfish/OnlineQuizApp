@@ -20,7 +20,14 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Admin - Dashboard</title>
+        <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
+            <title>Admin - Dashboard</title>
+        </c:if>
+        <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1'}">
+            <title>Teacher - Dashboard</title>
+        </c:if>
+
+
 
         <!-- Custom fonts for this template-->
         <link href="Dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

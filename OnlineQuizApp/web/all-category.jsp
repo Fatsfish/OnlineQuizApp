@@ -36,155 +36,330 @@
         <!-- Page Wrapper -->
         <div id="wrapper">
 
-            <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
+                <!-- Sidebar -->
+                <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                    <div class="sidebar-brand-icon">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <div class="sidebar-brand-text mx-3">Admin</div>
-                </a>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0">
-
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item">
-                    <a class="nav-link" href="dashboardadmin.jsp">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Learn
-                </div>
-
-                <!-- Nav Item - Courses Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourses"
-                       aria-expanded="false" aria-controls="collapseCourses">
-                        <i class="fas fa-fw fa-book"></i>
-                        <span>Courses</span>
-                    </a>
-                    <div id="collapseCourses" class="collapse" aria-labelledby="headingCourses" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Courses:</h6>
-                            <a class="collapse-item" href="all-course.html">All Courses</a>
-                            <a class="collapse-item" href="course.jsp">My Courses</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="courseAdd.jsp">Create Course</a>
+                    <!-- Sidebar - Brand -->
+                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                        <div class="sidebar-brand-icon">
+                            <i class="fas fa-crown"></i>
                         </div>
-                    </div>
-                </li>
-
-                <!-- Nav Item - Quizzes Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
-                       aria-expanded="false" aria-controls="collapseQuizzes">
-                        <i class="fas fa-fw fa-edit"></i>
-                        <span>Quizzes</span>
+                        <div class="sidebar-brand-text mx-3">Admin</div>
                     </a>
-                    <div id="collapseQuizzes" class="collapse" aria-labelledby="headingQuizzes"
-                         data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Quizzes:</h6>
-                            <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
-                            <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
-                        </div>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider my-0">
+
+                    <!-- Nav Item - Dashboard -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboardadmin.jsp">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Dashboard</span></a>
+                    </li>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Learn
                     </div>
-                </li>
+
+                    <!-- Nav Item - Courses Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourses"
+                           aria-expanded="false" aria-controls="collapseCourses">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Courses</span>
+                        </a>
+                        <div id="collapseCourses" class="collapse" aria-labelledby="headingCourses" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Courses:</h6>
+                                <a class="collapse-item" href="all-course.html">All Courses</a>
+                                <a class="collapse-item" href="course.jsp">My Courses</a>
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Create:</h6>
+                                <a class="collapse-item" href="courseAdd.jsp">Create Course</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Quizzes Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
+                           aria-expanded="false" aria-controls="collapseQuizzes">
+                            <i class="fas fa-fw fa-edit"></i>
+                            <span>Quizzes</span>
+                        </a>
+                        <div id="collapseQuizzes" class="collapse" aria-labelledby="headingQuizzes"
+                             data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Quizzes:</h6>
+                                <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
+                                <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Create:</h6>
+                                <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
+                            </div>
+                        </div>
+                    </li>
 
 
-                <!-- Nav Item - Marks -->
-                <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Marks</span></a>
-                </li>
+                    <!-- Nav Item - Marks -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="charts.html">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>Marks</span></a>
+                    </li>
 
-                <!-- Nav Item - Category Collapse Menu -->
+                    <!-- Nav Item - Category Collapse Menu -->
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
-                       aria-expanded="false" aria-controls="collapseCategories">
-                        <i class="fas fa-fw fa-edit"></i>
-                        <span>Categories</span>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
+                           aria-expanded="false" aria-controls="collapseCategories">
+                            <i class="fas fa-fw fa-edit"></i>
+                            <span>Categories</span>
+                        </a>
+                        <div id="collapseCategories" class="collapse" aria-labelledby="headingQuizzes"
+                             data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Categories:</h6>
+                                <a class="collapse-item" href="all-category.jsp">All Categories</a>
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Create:</h6>
+                                <a class="collapse-item" href="categoryAdd.jsp">Create Quiz Category</a>
+                                <a class="collapse-item" href="categoryBlogAdd.jsp">Create Blog Category</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Community
+                    </div>
+
+
+                    <!-- Nav Item - Blogs Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs"
+                           aria-expanded="false" aria-controls="collapseBlogs">
+                            <i class="fas fa-fw fa-users"></i>
+                            <span>Blogs</span>
+                        </a>
+                        <div id="collapseBlogs" class="collapse" aria-labelledby="headingBlogs"
+                             data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Blogs:</h6>
+                                <a class="collapse-item" href="all-blog.html">All Blogs</a>
+                                <a class="collapse-item" href="blog.jsp">My Blogs</a>
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Create:</h6>
+                                <a class="collapse-item" href="blogAdd.html">Create Blog</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Charts -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="ranking.jsp">
+                            <i class="fas fa-fw fa-trophy"></i>
+                            <span>Ranking</span></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="search.jsp">
+                            <i class="fas fa-fw fa-table"></i>
+                            <span>User Management</span></a>
+                    </li>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider d-none d-md-block">
+
+                    <!-- Sidebar Toggler (Sidebar) -->
+                    <div class="text-center d-none d-md-inline">
+                        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                    </div>
+
+                </ul>
+                <!-- End of Sidebar -->
+            </c:if>
+            <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1'}">
+                <!-- Sidebar -->
+                <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+                    <!-- Sidebar - Brand -->
+                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                        <div class="sidebar-brand-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="sidebar-brand-text mx-3">Teacher</div>
                     </a>
-                    <div id="collapseCategories" class="collapse" aria-labelledby="headingQuizzes"
-                         data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Categories:</h6>
-                            <a class="collapse-item" href="all-category.jsp">All Categories</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="categoryAdd.jsp">Create Quiz Category</a>
-                            <a class="collapse-item" href="categoryBlogAdd.jsp">Create Blog Category</a>
-                        </div>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider my-0">
+
+                    <!-- Nav Item - Dashboard -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Dashboard</span></a>
+                    </li>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Learn
                     </div>
-                </li>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Community
-                </div>
-
-
-                <!-- Nav Item - Blogs Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs"
-                       aria-expanded="false" aria-controls="collapseBlogs">
-                        <i class="fas fa-fw fa-users"></i>
-                        <span>Blogs</span>
-                    </a>
-                    <div id="collapseBlogs" class="collapse" aria-labelledby="headingBlogs"
-                         data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Blogs:</h6>
-                            <a class="collapse-item" href="all-blog.html">All Blogs</a>
-                            <a class="collapse-item" href="blog.jsp">My Blogs</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="blogAdd.html">Create Blog</a>
+                    <!-- Nav Item - Courses Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourses"
+                           aria-expanded="true" aria-controls="collapseCourses">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Courses</span>
+                        </a>
+                        <div id="collapseCourses" class="collapse" aria-labelledby="headingCourses" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Courses:</h6>
+                                <a class="collapse-item" href="buttons.html">All Courses</a>
+                                <a class="collapse-item" href="cards.html">My Courses</a>
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Create:</h6>
+                                <a class="collapse-item" href="404.html">Create Course</a>
+                            </div>
                         </div>
+                    </li>
+
+                    <!-- Nav Item - Quizzes Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
+                           aria-expanded="true" aria-controls="collapseQuizzes">
+                            <i class="fas fa-fw fa-edit"></i>
+                            <span>Quizzes</span>
+                        </a>
+                        <div id="collapseQuizzes" class="collapse" aria-labelledby="headingQuizzes"
+                             data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Quizzes:</h6>
+                                <a class="collapse-item" href="utilities-color.html">All Quizzes</a>
+                                <a class="collapse-item" href="utilities-border.html">My Quizzes</a>
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Create:</h6>
+                                <a class="collapse-item" href="404.html">Create Quiz</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Students -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-fw fa-user-graduate"></i>
+                            <span>Students</span></a>
+                    </li>
+
+                    <!-- Nav Item - Marks -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="charts.html">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>Marks</span></a>
+                    </li>
+
+                    <!-- Nav Item - Category Collapse Menu -->
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
+                           aria-expanded="false" aria-controls="collapseCategories">
+                            <i class="fas fa-fw fa-edit"></i>
+                            <span>Categories</span>
+                        </a>
+                        <div id="collapseCategories" class="collapse" aria-labelledby="headingQuizzes"
+                             data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Categories:</h6>
+                                <a class="collapse-item" href="all-category.jsp">All Categories</a>
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Create:</h6>
+                                <a class="collapse-item" href="categoryAdd.jsp">Create Quiz Category</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Community
                     </div>
-                </li>
 
-                <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="ranking.jsp">
-                        <i class="fas fa-fw fa-trophy"></i>
-                        <span>Ranking</span></a>
-                </li>
+                    <!-- Nav Item - Blogs Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs" aria-expanded="false"
+                           aria-controls="collapseBlogs">
+                            <i class="fas fa-fw fa-users"></i>
+                            <span>Blogs</span>
+                        </a>
+                        <div id="collapseBlogs" class="collapse" aria-labelledby="headingBlogs"
+                             data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Blogs:</h6>
+                                <a class="collapse-item" href="#">All Blogs</a>
+                                <a class="collapse-item" href="#">My Blogs</a>
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Create:</h6>
+                                <a class="collapse-item" href="404.html">Create Blog</a>
+                            </div>
+                        </div>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="search.jsp">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>User Management</span></a>
-                </li>
+                    <!-- Nav Item - Charts -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-fw fa-trophy"></i>
+                            <span>Ranking</span></a>
+                    </li>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
+                    <!-- Nav Item - Tables -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="tables.html">
+                            <i class="fas fa-fw fa-table"></i>
+                            <span>Tables</span></a>
+                    </li>
 
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
 
-            </ul>
-            <!-- End of Sidebar -->
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Others
+                    </div>
+
+                    <!-- Nav Item - Billing -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="billing.html">
+                            <i class="fas fa-fw fa-receipt"></i>
+                            <span>Billing</span></a>
+                    </li>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider d-none d-md-block">
+
+                    <!-- Sidebar Toggler (Sidebar) -->
+                    <div class="text-center d-none d-md-inline">
+                        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                    </div>
+
+                </ul>
+                <!-- End of Sidebar -->  
+            </c:if>
+
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
 
@@ -201,163 +376,9 @@
                             </button>
                         </form>
 
-                        <!-- Topbar Search -->
-                        <form
-                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                       aria-label="Search" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
 
-                            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                            <li class="nav-item dropdown no-arrow d-sm-none">
-                                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-search fa-fw"></i>
-                                </a>
-                                <!-- Dropdown - Messages -->
-                                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                     aria-labelledby="searchDropdown">
-                                    <form class="form-inline mr-auto w-100 navbar-search">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control bg-light border-0 small"
-                                                   placeholder="Search for..." aria-label="Search"
-                                                   aria-describedby="basic-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="button">
-                                                    <i class="fas fa-search fa-sm"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
-
-                            <!-- Nav Item - Alerts -->
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-bell fa-fw"></i>
-                                    <!-- Counter - Alerts -->
-                                    <span class="badge badge-danger badge-counter">3+</span>
-                                </a>
-                                <!-- Dropdown - Alerts -->
-                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                     aria-labelledby="alertsDropdown">
-                                    <h6 class="dropdown-header">
-                                        Alerts Center
-                                    </h6>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-primary">
-                                                <i class="fas fa-file-alt text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 12, 2019</div>
-                                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-success">
-                                                <i class="fas fa-donate text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 7, 2019</div>
-                                            $290.29 has been deposited into your account!
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-warning">
-                                                <i class="fas fa-exclamation-triangle text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 2, 2019</div>
-                                            Spending Alert: We've noticed unusually high spending for your account.
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                                </div>
-                            </li>
-
-                            <!-- Nav Item - Messages -->
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-envelope fa-fw"></i>
-                                    <!-- Counter - Messages -->
-                                    <span class="badge badge-danger badge-counter">7</span>
-                                </a>
-                                <!-- Dropdown - Messages -->
-                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                     aria-labelledby="messagesDropdown">
-                                    <h6 class="dropdown-header">
-                                        Message Center
-                                    </h6>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="Dashboard/img/undraw_profile_1.svg"
-                                                 alt="...">
-                                            <div class="status-indicator bg-success"></div>
-                                        </div>
-                                        <div class="font-weight-bold">
-                                            <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                                problem I've been having.</div>
-                                            <div class="small text-gray-500">Emily Fowler Â· 58m</div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="Dashboard/img/undraw_profile_2.svg"
-                                                 alt="...">
-                                            <div class="status-indicator"></div>
-                                        </div>
-                                        <div>
-                                            <div class="text-truncate">I have the photos that you ordered last month, how
-                                                would you like them sent to you?</div>
-                                            <div class="small text-gray-500">Jae Chun Â· 1d</div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="Dashboard/img/undraw_profile_3.svg"
-                                                 alt="...">
-                                            <div class="status-indicator bg-warning"></div>
-                                        </div>
-                                        <div>
-                                            <div class="text-truncate">Last month's report looks great, I am very happy with
-                                                the progress so far, keep up the good work!</div>
-                                            <div class="small text-gray-500">Morgan Alvarez Â· 2d</div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                                 alt="...">
-                                            <div class="status-indicator bg-success"></div>
-                                        </div>
-                                        <div>
-                                            <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                                told me that people say this to all dogs, even if they aren't good...</div>
-                                            <div class="small text-gray-500">Chicken the Dog Â· 2w</div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                                </div>
-                            </li>
 
                             <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -367,22 +388,14 @@
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.fullname}</span>
                                     <img class="img-profile rounded-circle"
-                                         src="img/undraw_profile.svg">
+                                         src="Dashboard/img/undraw_profile.svg">
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="user-profile.html">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Activity Log
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -423,7 +436,10 @@
                                     <select class="form-control" aria-label="Category select" name="cate">
                                         <option selected>All Categories</option>
                                         <option value="1">Quiz</option>
-                                        <option value="2">Blog</option>
+                                        <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
+                                            <option value="2">Blog</option>
+                                        </c:if>
+
                                     </select>
                                 </div>
                                 <div class="col-auto">
@@ -441,7 +457,9 @@
                                     <select class="form-control" aria-label="Category select" name="cate">
                                         <option selected>All Categories</option>
                                         <option value="1">Quiz</option>
-                                        <option value="2">Blog</option>
+                                        <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
+                                            <option value="2">Blog</option>
+                                        </c:if>
                                     </select>
                                 </div>
                                 <div class="col-auto">
@@ -502,56 +520,57 @@
                                 </c:forEach>         
                             </table>
                         </c:if><br>
-
-                        <c:if test="${requestScope.LIST_BLOG_CATEGORY != null && not empty requestScope.LIST_BLOG_CATEGORY}">                    
-                            <table class="table table-bordered table-hover" width="100%" cellspacing="0" >
-                                <h4>Blog Category</h4>
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Category ID</th>
-                                        <th>Category Name</th>
-                                        <th>Status</th>
-                                        <th>Description</th>
-                                        <th>Delete</th>
-                                        <th>Update</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_BLOG_CATEGORY}">
+                        <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
+                            <c:if test="${requestScope.LIST_BLOG_CATEGORY != null && not empty requestScope.LIST_BLOG_CATEGORY}">                    
+                                <table class="table table-bordered table-hover" width="100%" cellspacing="0" >
+                                    <h4>Blog Category</h4>
+                                    <thead>
                                         <tr>
-                                            <td>${counter.count}</td>
-                                            <td>${category.categoryID}</td>
-                                            <td>${category.categoryName}</td>
-                                            <td>${category.status}</td>
-                                            <td>${category.description}</td>
-                                            <td>
-                                                <form action="CategoryDeleteController">
-                                                    <input type="hidden" name="search" value="${param.search}"/>
-                                                    <input type="hidden" name="cate" value="${param.cate}"/>
-                                                    <input type="hidden" name="check" value="${param.check}"/>
-                                                    <input type="hidden" name="categoryID" value="${category.categoryID}"/>
-                                                    <input type="hidden" name="status" value="${category.status}"/>
-                                                    <input type="submit" class="btn btn-danger" name="action" value="Delete Blog"/>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="CategoryUpdateController">
-                                                    <input type="submit" class="btn btn-success" name="action" value="Update Blog"/>
-                                                    <input type="hidden" name="categoryID" value="${category.categoryID}"/>
-                                                    <input type="hidden" name="categoryName" value="${category.categoryName}"/>
-                                                    <input type="hidden" name="status" value="${category.status}"/>
-                                                    <input type="hidden" name="description" value="${category.description}"/>
-                                                    <input type="hidden" name="search" value="${param.search}"/>
-                                                    <input type="hidden" name="cate" value="${param.cate}"/>
-                                                    <input type="hidden" name="check" value="${param.check}"/>
-                                                </form>
-                                            </td>
+                                            <th>No</th>
+                                            <th>Category ID</th>
+                                            <th>Category Name</th>
+                                            <th>Status</th>
+                                            <th>Description</th>
+                                            <th>Delete</th>
+                                            <th>Update</th>
                                         </tr>
-                                    </tbody>
-                                </c:forEach>         
-                            </table>
+                                    </thead>
+
+                                    <tbody>
+                                        <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_BLOG_CATEGORY}">
+                                            <tr>
+                                                <td>${counter.count}</td>
+                                                <td>${category.categoryID}</td>
+                                                <td>${category.categoryName}</td>
+                                                <td>${category.status}</td>
+                                                <td>${category.description}</td>
+                                                <td>
+                                                    <form action="CategoryDeleteController">
+                                                        <input type="hidden" name="search" value="${param.search}"/>
+                                                        <input type="hidden" name="cate" value="${param.cate}"/>
+                                                        <input type="hidden" name="check" value="${param.check}"/>
+                                                        <input type="hidden" name="categoryID" value="${category.categoryID}"/>
+                                                        <input type="hidden" name="status" value="${category.status}"/>
+                                                        <input type="submit" class="btn btn-danger" name="action" value="Delete Blog"/>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form action="CategoryUpdateController">
+                                                        <input type="submit" class="btn btn-success" name="action" value="Update Blog"/>
+                                                        <input type="hidden" name="categoryID" value="${category.categoryID}"/>
+                                                        <input type="hidden" name="categoryName" value="${category.categoryName}"/>
+                                                        <input type="hidden" name="status" value="${category.status}"/>
+                                                        <input type="hidden" name="description" value="${category.description}"/>
+                                                        <input type="hidden" name="search" value="${param.search}"/>
+                                                        <input type="hidden" name="cate" value="${param.cate}"/>
+                                                        <input type="hidden" name="check" value="${param.check}"/>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </c:forEach>         
+                                </table>
+                            </c:if>
                         </c:if>
                     </div>
                     <!--</div>
@@ -591,7 +610,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">x</span>
+                            <span aria-hidden="true">X</span>
                         </button>
                     </div>
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
@@ -621,7 +640,7 @@
         <script src="Dashboard/js/demo/datatables-demo.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        
+
 
     </body>
 

@@ -34,6 +34,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
+        <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1'}">
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -115,6 +116,26 @@
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Marks</span></a>
             </li>
+            
+            <!-- Nav Item - Category Collapse Menu -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
+                       aria-expanded="false" aria-controls="collapseCategories">
+                        <i class="fas fa-fw fa-edit"></i>
+                        <span>Categories</span>
+                    </a>
+                    <div id="collapseCategories" class="collapse" aria-labelledby="headingQuizzes"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Categories:</h6>
+                            <a class="collapse-item" href="all-category.jsp">All Categories</a>
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Create:</h6>
+                            <a class="collapse-item" href="categoryAdd.jsp">Create Quiz Category</a>
+                        </div>
+                    </div>
+                </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -157,6 +178,7 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
             </li>
+            
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -183,6 +205,7 @@
 
         </ul>
         <!-- End of Sidebar -->
+        </c:if>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
