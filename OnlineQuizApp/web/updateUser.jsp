@@ -47,6 +47,7 @@
                                 </label>
                                 <label><span>Role ID (AD, T, T1, S, S1, U)</span></br><input type="text" name="roleID" value="${param.roleID}" required=""/></br>    
                                     <input type="hidden" name="search" value="${param.search}" required=""/></br>
+                                    <input type="hidden" name="check" value="admin">
                                     <input type="submit" name="action" value="Confirm"/>
                             </form>
                         </c:if>
