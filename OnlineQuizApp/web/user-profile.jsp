@@ -59,9 +59,6 @@
                             <div class="p-3 py-5">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h4 class="text-right">Profile Settings</h4>
-                                    <h4 class="text-right">${requestScope.SUCCESS}</h4>
-                                    <h4 class="text-right">${requestScope.ERROR.fullNameError}</h4>
-
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12"><label class="labels">Full Name</label><input type="text" class="form-control" placeholder="Enter Full Name" name="Name" value="${sessionScope.LOGIN_USER.fullname}"></div>
@@ -93,6 +90,12 @@
                                 <div class="col-md-12"><label class="labels">Password</label><input type="password" class="form-control" value="hellu" readonly></div>
                                 <a href="forgot-password.html">Reset password</a>
                             </div>
+                        </div>
+                        <div class="text-success text-center">
+                            ${requestScope.SUCCESS}
+                        </div>
+                        <div class="text-danger text-center">
+                            ${requestScope.ERROR.fullNameError}
                         </div>
                     </div>
                 </form>
