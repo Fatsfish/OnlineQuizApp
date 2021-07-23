@@ -40,29 +40,56 @@ public class UserUpdateController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         UserError userError = new UserError("", "", "", "", "", "", "", "");
+        String function= request.getParameter("check");
         try {
-            String userID = request.getParameter("userID");
-            String fullName = request.getParameter("fullName");
-            String roleID = request.getParameter("roleID");
-            String email = request.getParameter("Email");
-            UserDAO dao = new UserDAO();
-            UserDTO user = new UserDTO(userID, fullName, roleID, "",email);
-            boolean flag = true;
-            if (fullName.length() > 250 || fullName.length() < 1) {
-                flag = false;
-                userError.setFullNameError("Full Name must be [1-250]");
-            }
-            if (roleID.length() > 2 || roleID.length() < 1 || (!roleID.equals("G") && !roleID.equals("M") && !roleID.equals("AD")&& !roleID.equals("T") && !roleID.equals("T1") &&!roleID.equals("S") && !roleID.equals("S1")&& !roleID.equals("U"))) {
-                flag = false;
-                userError.setRoleIDError("RoleID must be [1-2] and must be G - guest, M - member, T/T1 - teacher, S/S1 - student, or AD - admin");
-            }
-            if (flag) {
-                boolean check = dao.update(user);
-                if (check) {
-                    url = SUCCESS;
+            if (function.equals("Admin")) {
+                String userID = request.getParameter("userID");
+                String fullName = request.getParameter("fullName");
+                String roleID = request.getParameter("roleID");
+                String email = request.getParameter("Email");
+                UserDAO dao = new UserDAO();
+                UserDTO user = new UserDTO(userID, fullName, roleID, "", email);
+                boolean flag = true;
+                if (fullName.length() > 250 || fullName.length() < 1) {
+                    flag = false;
+                    userError.setFullNameError("Full Name must be [1-250]");
                 }
-            } else {
-                request.setAttribute("ERROR", userError);
+                if (roleID.length() > 2 || roleID.length() < 1 || (!roleID.equals("G") && !roleID.equals("M") && !roleID.equals("AD") && !roleID.equals("T") && !roleID.equals("T1") && !roleID.equals("S") && !roleID.equals("S1") && !roleID.equals("U"))) {
+                    flag = false;
+                    userError.setRoleIDError("RoleID must be [1-2] and must be G - guest, M - member or AD - admin");
+                }
+                if (flag) {
+                    boolean check = dao.update(user);
+                    if (check) {
+                        url = SUCCESS;
+                    }
+                } else {
+                    request.setAttribute("ERROR", userError);
+                }
+            } else if (function.equals("Admin")) {
+                String userID = request.getParameter("userID");
+                String fullName = request.getParameter("fullName");
+                String roleID = request.getParameter("roleID");
+                String email = request.getParameter("Email");
+                UserDAO dao = new UserDAO();
+                UserDTO user = new UserDTO(userID, fullName, roleID, "", email);
+                boolean flag = true;
+                if (fullName.length() > 250 || fullName.length() < 1) {
+                    flag = false;
+                    userError.setFullNameError("Full Name must be [1-250]");
+                }
+                if (roleID.length() > 2 || roleID.length() < 1 || (!roleID.equals("G") && !roleID.equals("M") && !roleID.equals("AD") && !roleID.equals("T") && !roleID.equals("T1") && !roleID.equals("S") && !roleID.equals("S1") && !roleID.equals("U"))) {
+                    flag = false;
+                    userError.setRoleIDError("RoleID must be [1-2] and must be G - guest, M - member or AD - admin");
+                }
+                if (flag) {
+                    boolean check = dao.update(user);
+                    if (check) {
+                        url = SUCCESS;
+                    }
+                } else {
+                    request.setAttribute("ERROR", userError);
+                }
             }
         } catch (Exception e) {
 
