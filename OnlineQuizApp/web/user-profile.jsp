@@ -60,10 +60,10 @@
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col-md-12"><label class="labels">Full Name</label><input type="text" class="form-control" placeholder="Enter Full Name" value="${sessionScope.LOGIN_USER.fullname}"></div>
-                            <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" placeholder="Enter Phone number" value="${sessionScope.LOGIN_USER.phone}"></div>
-                            <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="Enter Email" value="${sessionScope.LOGIN_USER.email}"></div>
-                            <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control" placeholder="Enter Address" value="${sessionScope.LOGIN_USER.address}"></div>
+                            <div class="col-md-12"><label class="labels">Full Name</label><input type="text" class="form-control" placeholder="Enter Full Name" name="Name" value="${sessionScope.LOGIN_USER.fullname}"></div>
+                            <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" placeholder="Enter Phone number" name="Phone" value="${sessionScope.LOGIN_USER.phone}"></div>
+                            <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="Enter Email" name="Mail" value="${sessionScope.LOGIN_USER.email}"></div>
+                            <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control" placeholder="Enter Address" name="Address" value="${sessionScope.LOGIN_USER.address}"></div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-6 mt-5"><button class="btn btn-primary" type="button">Save Profile</button></div>
@@ -84,7 +84,7 @@
                 <div class="col-md-4">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center experience"><span>Account</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;${sessionScope.LOGIN_USER.role}</span></div><br>
-                        <div class="col-md-12"><label class="labels">Username</label><input type="text" class="form-control" placeholder="Enter Username" value="${sessionScope.LOGIN_USER.userID}"></div> <br>
+                        <div class="col-md-12"><label class="labels">Username</label><input type="text" class="form-control" placeholder="Enter Username" name="Username" value="${sessionScope.LOGIN_USER.userID}"></div> <br>
                         <div class="col-md-12"><label class="labels">Password</label><input type="password" class="form-control" value="hellu" readonly></div>
                         <a href="forgot-password.html">Reset password</a>
                     </div>

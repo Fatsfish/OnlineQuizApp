@@ -54,7 +54,7 @@ public class UserUpdateController extends HttpServlet {
             }
             if (roleID.length() > 2 || roleID.length() < 1 || (!roleID.equals("G") && !roleID.equals("M") && !roleID.equals("AD")&& !roleID.equals("T") && !roleID.equals("T1") &&!roleID.equals("S") && !roleID.equals("S1")&& !roleID.equals("U"))) {
                 flag = false;
-                userError.setRoleIDError("RoleID must be [1-2] and must be G - guest, M - member or AD - admin");
+                userError.setRoleIDError("RoleID must be [1-2] and must be G - guest, M - member, T/T1 - teacher, S/S1 - student, or AD - admin");
             }
             if (flag) {
                 boolean check = dao.update(user);
