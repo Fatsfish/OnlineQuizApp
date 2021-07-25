@@ -93,22 +93,7 @@ public class CategorySearchController extends HttpServlet {
                 } finally {
                     request.getRequestDispatcher(url).forward(request, response);
                 }
-            } else if (check.equals("Question1")) {
-                try {
-                    String search = request.getParameter("search");
-                    CategoryDAO dao = new CategoryDAO();
-                    List<CategoryDTO> list = dao.getListQ(search);
-                    if (list != null) {
-                        request.setAttribute("LIST_QUIZ_CATEGORY", list);
-                        url = Question;
-                    }
-                } catch (SQLException e) {
-                    log("Error at CategorySearchController: " + e.toString());
-                } finally {
-                    request.getRequestDispatcher(url).forward(request, response);
-                }
-            }
-
+            } 
         } else if (cate.equals("2")) {
             if (check.equals("Search")) {
                 try {
