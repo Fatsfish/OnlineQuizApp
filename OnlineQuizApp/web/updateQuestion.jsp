@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="org.onlinequizapp.dtos.QuestionDTO"%>
 <%@page import="org.onlinequizapp.daos.CategoryDAO"%>
 <%@page import="java.util.List"%>
