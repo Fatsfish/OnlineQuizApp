@@ -145,7 +145,7 @@ public class QuestionDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "INSERT INTO tblQuestion(Name, Question1, Question2, Question3, Question4, Description, Answer, AuthorID, Status, CategoryID ) "
-                        + " VALUES(\'?\',\'?\',\'?\',\'?\',\'?\',\'?\',\'?\',\'?\',\'?\',\'?\')";
+                        + " VALUES(?,?,?,?,?,?,?,?,?,?) ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, quiz.getName());
                 stm.setString(2, quiz.getQuestion1());
@@ -156,7 +156,8 @@ public class QuestionDAO {
                 stm.setInt(7, Integer.parseInt(quiz.getAnswer()));
                 stm.setString(8, quiz.getAuthorID());
                 stm.setString(9, quiz.getStatus());
-                stm.setInt(10, Integer.parseInt(quiz.getCategoryID()));
+                stm.setString(10, quiz.getCategoryID());
+                stm.executeQuery();
             }
         } catch (Exception e) {
 

@@ -27,7 +27,7 @@ import org.onlinequizapp.dtos.UserDTO;
 @WebServlet(name = "QuestionCreateController", urlPatterns = {"/QuestionCreateController"})
 public class QuestionCreateController extends HttpServlet {
 
-    private static final String SUCCESS = "courseAdd.jsp";
+    private static final String SUCCESS = "questionAdd.jsp";
     private static final String ERROR = "error.jsp";
 
     /**
@@ -49,7 +49,7 @@ public class QuestionCreateController extends HttpServlet {
         if (session.getAttribute("LOGIN_USER") != null) {
             LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
         }
-        if (function.equals("course")) {
+        if (function.equals("question")) {
             QuestionDTO categoryDTO = new QuestionDTO("", "", "", "", "","","","","","","");
             try {
                 String Name = request.getParameter("Name");
@@ -87,11 +87,13 @@ public class QuestionCreateController extends HttpServlet {
                 }
                 if (flag) {
                     QuestionDAO dao = new QuestionDAO();
-                    QuestionDTO course = new QuestionDTO("", Name, answer1, answer2, answer3, answer4,description,answer, LogID, status, categoryID );
+                    QuestionDTO course = new QuestionDTO("", Name, answer1, answer2, answer3, answer4, description, answer, LogID, status, categoryID );
                     dao.insertQ(course);
+                    request.setAttribute("CREATE_SUCCESS", "Create Success!");
                     url = SUCCESS;
                 } else {
-                    request.setAttribute("ERROR", categoryDTO);
+                    request.setAttribute("CREATE_ERROR", "Create Fail!");
+                    url = SUCCESS;
                 }
             } catch (Exception e) {
                 log("Error at CreateController: " + e.toString());

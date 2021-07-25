@@ -247,10 +247,15 @@
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Question Add</h1>
                         </div>
-
+                        <div style="color: green" class="h5 mt-3">
+                            <p class="mb-4">${requestScope.CREATE_SUCCESS}</p>
+                        </div>
+                        <div style="color: red" class="h5 mt-3" >
+                            <p class="mb-4">${requestScope.CREATE_ERROR}</p>
+                        </div>
                         <div class="container">
                             <a href="CategorySearchController?cate=1&check=Question&search=" class="btn btn-primary mb-3"/>Filter Category</a>
-                            <form action="QuestionCreateController">
+                            <form action="QuestionCreateController" method="POST">
                                 <div class="mb-3">
                                     <label for="questionName" class="form-label">Your question</label>
                                     <input type="text" name="Name" class="form-control" id="questionName">
@@ -287,6 +292,7 @@
                                     <label for="QuestionDesc" class="form-label">Description</label>
                                     <textarea class="form-control" id="QuestionDesc" name="description" rows="3"></textarea>
                                 </div>
+                                <div>
                                     <select name="answer" class="form-select" aria-label="Default select example">
                                         <option selected>Choose Right Answer</option>
                                         <option value="1">Answer 1</option>
@@ -302,7 +308,8 @@
                                 <input type="hidden" name="function" value="question" class="form-check-input" id="status">
                                 <button type="submit" class="btn btn-primary">Create</button>
                                 <a href="dashboardadmin.jsp" class="btn btn-danger">Cancel</a>
-                            </form></div>
+                            </form>
+                        </div>
 
 
                         <c:if test="${requestScope.LIST_QUIZ_CATEGORY != null && not empty requestScope.LIST_QUIZ_CATEGORY}">                       
