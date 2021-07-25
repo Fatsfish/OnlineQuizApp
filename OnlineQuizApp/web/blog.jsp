@@ -401,16 +401,7 @@
                             </form>
                         </c:if>
                         <c:if test="${requestScope.LIST_BLOG != null && not empty requestScope.LIST_BLOG}">                       
-                            <!-- Page Heading -->
-
-                            <!-- DataTales Example
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">-->
-                            <!--class="table table-bordered" id="dataTable"--><table width="100%" cellspacing="0">
+                            <table width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -437,7 +428,6 @@
                                 </tfoot>
                                 <tbody>
                                     <c:forEach var="blog" varStatus="counter" items="${requestScope.LIST_BLOG}">
-                                    <form action="BlogSearchController">
                                         <tr>
                                             <td>${counter.count}</td>
                                             <td>${blog.blogID}</td>
@@ -447,21 +437,29 @@
                                             <td>${blog.content}</td>
                                             <td>${blog.image}</td>
                                             <td>${blog.status}</td>
-                                            <td
-                                                <input type="hidden" name="search" value="${param.search}"/>
-                                                <input type="hidden" name="blogID" value="${blog.blogID}"/>
-                                                <input type="hidden" name="authorID" value="${blog.authorID}"/>
-                                                <input type="submit" name="action" value="Delete"/>
+                                            <td>                                    
+                                                <form action="BlogDeleteController">
+                                                    <input type="hidden" name="search" value="${param.search}"/>
+                                                    <input type="hidden" name="blogID" value="${blog.blogID}"/>
+                                                    <input type="hidden" name="status" value="${blog.status}"/>
+                                                    <input type="submit" name="action" value="Delete"/>
+                                                </form>
                                             </td>
                                             <td>
-                                                <input type="submit" name="action" value="Update"/>
-                                                <input type="hidden" name="blogID" value="${blog.blogID}"/>
-                                                <input type="hidden" name="title" value="${blog.title}"/>
-                                                <input type="hidden" name="authorID" value="${blog.authorID}"/>
-                                                <input type="hidden" name="search" value="${param.search}"/>
+                                                <form action="BlogUpdateController">
+                                                    <input type="submit" name="action" value="Update"/>
+                                                    <input type="hidden" name="blogID" value="${blog.blogID}"/>
+                                                    <input type="hidden" name="title" value="${blog.title}"/>
+                                                    <input type="hidden" name="authorID" value="${blog.authorID}"/>
+                                                    <input type="hidden" name="categoryID" value="${blog.categoryID}"/>
+                                                    <input type="hidden" name="content" value="${blog.content}"/>
+                                                    <input type="hidden" name="image" value="${blog.image}"/>
+                                                    <input type="hidden" name="status" value="${blog.status}"/>
+                                                    <input type="hidden" name="search" value="${param.search}"/>
+                                                </form>
                                             </td>
-                                    </form>
-                                    </tr>
+                                            </form>
+                                        </tr>
                                     </tbody>
                                 </c:forEach>         
                             </table>

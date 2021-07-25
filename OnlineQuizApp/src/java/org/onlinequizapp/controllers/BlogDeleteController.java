@@ -41,26 +41,40 @@ public class BlogDeleteController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         HttpSession session = request.getSession();
-                String LogID = "";
+        String LogID = "";
+        String role = "";
         if (session.getAttribute("LOGIN_USER") != null) {
             LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
+            role = ((UserDTO) session.getAttribute("LOGIN_USER")).getRole();
         }
         try {
             String blogID = request.getParameter("blogID");
-
+            String status = request.getParameter("status");
             BlogDAO dao = new BlogDAO();
             BlogDTO dto = dao.checkBlogAuthor(LogID);
-
-            if (dto.getAuthorID().equals(LogID)) {
-                boolean check = dao.deleteBlog(blogID);
-                if (check) {
+            if (dto != null) {
+                if (dto.getAuthorID().equals(LogID) || role.contains("AD")) {
+                    if (!status.equals("1")) {
+                        boolean check = dao.deleteBlog(blogID);
+                        if (check) {
+                            url = SUCCESS;
+                        }
+                    }
+                } else {
+                    request.setAttribute("DELETE_ERROR", "Cannot delete other user blog!");
                     url = SUCCESS;
                 }
-            } else {
-                request.setAttribute("DELETE_ERROR", "Cannot delete other user blog!");
-                url = SUCCESS;
+            } else if (role.contains("AD")) {
+                if (!status.equals("1")) {
+                    boolean check = dao.deleteBlog(blogID);
+                    if (check) {
+                        url = SUCCESS;
+                    }
+                } else {
+                    request.setAttribute("DELETE_ERROR", "Cannot delete other user blog!");
+                    url = SUCCESS;
+                }
             }
-
         } catch (Exception e) {
             log("Error at BlogDelete Controller");
         } finally {

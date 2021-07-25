@@ -41,7 +41,7 @@ public class ScoreSearchController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        try {
+        /*try {
             String search = request.getParameter("search");
             ScoreDAO dao = new ScoreDAO();
             List<ScoreDTO> list = dao.getList(search);
@@ -53,7 +53,7 @@ public class ScoreSearchController extends HttpServlet {
             log("Error at SearchController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
-        }
+        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
