@@ -491,7 +491,7 @@
                                                     <input type="hidden" name="duration" value="${lop.duration}"/>
                                                     <input type="hidden" name="status" value="${lop.status}"/>
                                                     <input type="hidden" name="categoryID" value="${lop.categoryID}"/>
-                                                    <input type="hidden" name="Description" value="${lop.description}"/>
+                                                    <input type="hidden" name="description" value="${lop.description}"/>
                                                 </form>
                                             </td>
                                         </tr>

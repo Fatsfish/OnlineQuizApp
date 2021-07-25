@@ -7,6 +7,7 @@ package org.onlinequizapp.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.onlinequizapp.daos.CategoryDAO;
 import org.onlinequizapp.daos.ClassDAO;
 import org.onlinequizapp.daos.CourseDAO;
 import org.onlinequizapp.dtos.CategoryDTO;
@@ -47,6 +49,17 @@ public class CourseUpdateController extends HttpServlet {
         String url = ERROR;
         String check = request.getParameter("check");
         String action = request.getParameter("action");
+        CategoryDAO dao1 = new CategoryDAO();
+        List<CategoryDTO> list = null;
+        try {
+            list = dao1.getListQ("");
+        } catch (SQLException e) {
+            log("Error at CategorySearchController: " + e.toString());
+        } finally {
+            if (list != null) {
+                request.setAttribute("LIST_QUIZ_CATEGORY", list);
+            }
+        }
         if (action.equals("Confirm")) {
             try {
                 String LogID = request.getParameter("authorID");
