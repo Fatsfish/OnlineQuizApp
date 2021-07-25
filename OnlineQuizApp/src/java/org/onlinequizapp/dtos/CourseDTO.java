@@ -9,7 +9,7 @@ public class CourseDTO {
     private String duration;
     private String status;
     private String categoryID;
-    private String Description;
+    private String description;
     
     
     public CourseDTO() {
@@ -22,7 +22,7 @@ public class CourseDTO {
         this.duration = duration;
         this.status = status;
         this.categoryID = categoryID;
-        this.Description = Description;
+        this.description = Description;
     }
     
     public CourseDTO(String courseID, String courseName, String authorID, String duration, String status) {
@@ -72,7 +72,7 @@ public class CourseDTO {
     }
 
     public void setDescription(String Description) {
-        this.Description = Description;
+        this.description = Description;
     }
 
     public String getCategoryID() {
@@ -80,7 +80,7 @@ public class CourseDTO {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public String getDuration() {

@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="org.onlinequizapp.daos.ClassDAO"%>
+<%@page import="org.onlinequizapp.daos.CourseDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="org.onlinequizapp.dtos.ClassDTO"%>
+<%@page import="org.onlinequizapp.dtos.CourseDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -470,23 +470,18 @@
                                             <td>${lop.duration}</td>
                                             <td>${lop.status}</td>
                                             <td>${lop.categoryID}</td>
-                                            <td>${lop.Description}</td>
+                                            <td>${lop.description}</td>
                                             <td>
-                                                <form action="ClassDeleteController">
+                                                <form action="CourseDeleteController">
                                                     <input type="hidden" name="check" value="${param.check}"/>
                                                     <input type="hidden" name="search" value="${param.search}"/>
                                                     <input type="hidden" name="courseID" value="${lop.courseID}"/>
-                                                    <input type="hidden" name="courseName" value="${lop.courseName}"/>
-                                                    <input type="hidden" name="duration" value="${lop.duration}"/>
-                                                    <input type="hidden" name="status" value="${lop.status}"/>
-                                                    <input type="hidden" name="categoryID" value="${lop.categoryID}"/>
-                                                    <input type="hidden" name="Description" value="${lop.Description}"/>
                                                     <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
 
                                                 </form>
                                             </td>
                                             <td>
-                                                <form action="ClassUpdateController">
+                                                <form action="CourseUpdateController">
                                                     <input type="submit" class="btn btn-success" name="action" value="Update"/>
                                                      <input type="hidden" name="check" value="${param.check}"/>
                                                     <input type="hidden" name="search" value="${param.search}"/>
@@ -495,7 +490,7 @@
                                                     <input type="hidden" name="duration" value="${lop.duration}"/>
                                                     <input type="hidden" name="status" value="${lop.status}"/>
                                                     <input type="hidden" name="categoryID" value="${lop.categoryID}"/>
-                                                    <input type="hidden" name="Description" value="${lop.Description}"/>
+                                                    <input type="hidden" name="Description" value="${lop.description}"/>
                                                 </form>
                                             </td>
                                         </tr>

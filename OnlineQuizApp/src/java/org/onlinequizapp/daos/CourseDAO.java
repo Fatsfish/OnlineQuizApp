@@ -95,7 +95,7 @@ public class CourseDAO {
         return listCourse;
     }
 
-    public boolean deleteUser(String courseID) throws SQLException {
+    public boolean delete(String courseID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;

@@ -26,7 +26,7 @@ import org.onlinequizapp.dtos.CourseDTO;
 @WebServlet(name = "CourseSearchController", urlPatterns = {"/CourseSearchController"})
 public class CourseSearchController extends HttpServlet {
 
-    private static final String SUCCESS = "course1.jsp";
+    private static final String SUCCESS = "course.jsp";
     private static final String ERROR = "404.html";
 
     /**
