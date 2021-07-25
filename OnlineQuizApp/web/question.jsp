@@ -499,7 +499,6 @@
                                                     <input type="hidden" name="answer2" value="${question.question2}"/>
                                                     <input type="hidden" name="answer3" value="${question.question3}"/>
                                                     <input type="hidden" name="answer4" value="${question.question4}"/>
-                                                    <input type="hidden" name="answer3" value="${question.question3}"/>
                                                     <input type="hidden" name="answer" value="${question.answer}"/>
                                                     <input type="hidden" name="description" value="${question.description}"/>
                                                     <input type="hidden" name="authorID" value="${question.authorID}"/>

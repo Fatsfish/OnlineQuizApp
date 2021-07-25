@@ -68,7 +68,7 @@
                                 </c:forEach>
                             </c:if>
                         </select>
-                    </div> <br>
+                    </div><br>
                     <label>
                         <span>Status (1,0)</span></br>
                         <input type="text" name="status" value="${param.status}" id="status" required=""/></br>    

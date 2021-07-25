@@ -6,7 +6,6 @@
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -14,14 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.onlinequizapp.daos.CategoryDAO;
-import org.onlinequizapp.daos.ClassDAO;
 import org.onlinequizapp.daos.CourseDAO;
 import org.onlinequizapp.dtos.CategoryDTO;
-import org.onlinequizapp.dtos.ClassDTO;
 import org.onlinequizapp.dtos.CourseDTO;
-import org.onlinequizapp.dtos.UserDTO;
 
 /**
  *
