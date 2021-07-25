@@ -139,10 +139,10 @@ public class CourseDAO {
                 stm.setString(1, course.getCourseName());
                 stm.setString(2, course.getAuthorID());
                 stm.setString(3, course.getDuration());
-                stm.setString(4, course.getStatus());
-                stm.setString(5, course.getCategoryID());
+                stm.setByte(4, (byte) Integer.parseInt(course.getStatus()));
+                stm.setInt(5, Integer.parseInt(course.getCategoryID()));
                 stm.setString(6, course.getDescription());
-                stm.setString(7, course.getCourseID());
+                stm.setInt(7, Integer.parseInt(course.getCourseID()));
                 check = stm.executeUpdate() > 0 ? true : false;
             }
 

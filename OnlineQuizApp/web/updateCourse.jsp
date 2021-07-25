@@ -49,6 +49,7 @@
                         </div><br>
                         Description<input type="text" name="description" value="${param.description}"/>
                         <input type="hidden" name="search" value="${param.search}" required=""/></br>
+                        <input type="hidden" name="check" value="Search" required=""/></br>
                         <input type="hidden" name="authorID" value="${param.authorID}" required=""/></br>
                         <input type="submit" name="action" value="Confirm"/>
                     </form>

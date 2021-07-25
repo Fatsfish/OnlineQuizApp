@@ -34,6 +34,7 @@ public class QuestionUpdateController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String check = request.getParameter("check");
+        String cate = request.getParameter("cate");
         String action = request.getParameter("action");
         CategoryDAO dao1 = new CategoryDAO();
         List<CategoryDTO> list = null;

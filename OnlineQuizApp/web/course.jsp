@@ -486,7 +486,7 @@
                                                     <input type="hidden" name="check" value="${param.check}"/>
                                                     <input type="hidden" name="search" value="${param.search}"/>
                                                     <input type="hidden" name="courseID" value="${lop.courseID}"/>
-                                                    <input type="hidden" name="courseID" value="${lop.authorID}"/>
+                                                    <input type="hidden" name="authorID" value="${lop.authorID}"/>
                                                     <input type="hidden" name="courseName" value="${lop.courseName}"/>
                                                     <input type="hidden" name="duration" value="${lop.duration}"/>
                                                     <input type="hidden" name="status" value="${lop.status}"/>
