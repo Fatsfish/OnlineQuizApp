@@ -77,9 +77,15 @@
                             <h6 class="collapse-header">Courses:</h6>
                             <a class="collapse-item" href="all-course.html">All Courses</a>
                             <a class="collapse-item" href="course.jsp">My Courses</a>
+                            <a class="collapse-item" href="lecture.jsp">My Lectures</a>
+                            <a class="collapse-item" href="source.jsp">My Resources</a>
+                            <a class="collapse-item" href="class.jsp">My Classes</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="courseAdd.jsp">Create Course</a>
+                            <a class="collapse-item" href="lectureAdd.jsp">Create Lecture</a>
+                            <a class="collapse-item" href="sourceAdd.jsp">Create Resource</a>
+                            <a class="collapse-item" href="classAdd.jsp">Create Class</a>
                         </div>
                     </div>
                 </li>
@@ -95,11 +101,14 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Quizzes:</h6>
+                            <a class="collapse-item" href="question.jsp">All Question</a>
                             <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
                             <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
+                            
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
+                            <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
                         </div>
                     </div>
                 </li>
@@ -157,7 +166,7 @@
                             <a class="collapse-item" href="blog.jsp">My Blogs</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="blogAdd.html">Create Blog</a>
+                            <a class="collapse-item" href="create-blog.jsp">Create Blog</a>
                         </div>
                     </div>
                 </li>
