@@ -289,7 +289,15 @@
                                 <input type="hidden" name="function" value="course" class="form-check-input" id="status">
 
                                 <button type="submit" class="btn btn-primary">Create</button>
-                                <a href="dashboardadmin.jsp" class="btn btn-danger">Cancel</a>
+                                <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
+                                    <a class="btn btn-danger" href="dashboardadmin.jsp" role="button">Cancel</a>
+                                </c:if>
+                                <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1' }">
+                                    <a class="btn btn-danger" href="dashboardteacher.jsp" role="button">Cancel</a>
+                                </c:if>
+                                <c:if test="${sessionScope.LOGIN_USER.role =='S' || sessionScope.LOGIN_USER.role =='S1' }">
+                                    <a class="btn btn-danger" href="dashboardstudent.jsp" role="button">Cancel</a>
+                                </c:if>   
                             </form></div>
 
 

@@ -49,8 +49,8 @@ public class BlogDAO {
         }
         return Blog;
     }
-    
-        public BlogDTO checkBlogAuthor(String auID) throws SQLException {
+
+    public BlogDTO checkBlogAuthor(String auID) throws SQLException {
         BlogDTO Blog = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -64,7 +64,7 @@ public class BlogDAO {
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 if (rs.next()) {
-                    String BlogID  = rs.getString("BlogID");
+                    String BlogID = rs.getString("BlogID");
                     String Title = rs.getString("Title");
                     String categoryID = rs.getString("categoryID");
                     String content = rs.getString("content");
@@ -91,7 +91,7 @@ public class BlogDAO {
         return Blog;
     }
 
-    public List<BlogDTO> getListBlog (String search) throws SQLException {
+    public List<BlogDTO> getListBlog(String search) throws SQLException {
         List<BlogDTO> listBlog = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -240,16 +240,15 @@ public class BlogDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblBlog( Title, authorID, categoryID, content, Image, Status) " +
-                        "VALUES(?,?,?,?,?, ?,?) ";
+                String sql = "INSERT INTO tblBlog( Title, authorID, categoryID, content, Image, Status) "
+                        + "VALUES(?,?,?,?,?,?) ";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, Blog.getBlogID());
+                stm.setString(1, Blog.getTitle());
                 stm.setString(2, Blog.getAuthorID());
-                stm.setString(3, Blog.getCategoryID());
+                stm.setInt(3, Integer.parseInt(Blog.getCategoryID()));
                 stm.setString(4, Blog.getContent());
-                stm.setString(5, Blog.getTitle());
-                stm.setString(6, Blog.getImage());
-                stm.setByte(7, (byte)Integer.parseInt(Blog.getStatus()));
+                stm.setString(5, Blog.getImage());
+                stm.setByte(6, (byte) Integer.parseInt(Blog.getStatus()));
                 stm.executeQuery();
             }
         } catch (Exception e) {

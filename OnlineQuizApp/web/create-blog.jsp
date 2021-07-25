@@ -272,7 +272,7 @@
                             <form action="BlogCreateController">
                                 <div class="mb-3">
                                     <label for="BlogTitle" class="form-label">Blog Title</label>
-                                    <input type="text" class="form-control" id="blogTitle">
+                                    <input type="text" class="form-control" name="Title" id="blogTitle">
                                 </div>
                                 <div>
                                     <select name="BlogCategory"  class="form-control" aria-label="Default select example">
@@ -286,30 +286,33 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="content" class="form-label">Blog Content</label>
-                                    <textarea class="form-control" id="BlogContent" rows="3"></textarea>
+                                    <textarea class="form-control" id="BlogContent" name="content" rows="3"></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="Image" class="form-label">Upload picture (optional)</label>
-                                    <input class="form-control" type="text" placeholder="Please input picture's url" id="blogImg">
+                                    <input class="form-control" type="text" placeholder="Please input picture's url" name="Image" id="blogImg">
                                 </div>
                                 <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="status">
-                                    <label class="form-check-label" for="status">Active</label><br>
+                                    <input type="checkbox" class="form-check-input" id="status" name="status">
+                                    <label class="form-check-label" >Active</label><br>
                                 </div>
                                 <div>
-                                    <input type="hidden" name="Title" value="${param.Title}">
-                                    <input type="hidden" name="status" value="${param.status}">
-                                    <input type="hidden" name="Image" value="${param.formFile}">
-                                    <input type="hidden" name="content" value="${param.content}">
-                                    <input type="hidden" name="categoryID" value="${blogC.categoryID}">
                                     <input type="hidden" name="check" value="blogCreate" class="form-check-input" id="check">
                                     <button type="submit" class="btn btn-primary">Create</button>
-                                    <button type="submit" class="btn btn-danger">Cancel</button>
+                                    <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
+                                        <a class="btn btn-danger" href="dashboardadmin.jsp" role="button">Cancel</a>
+                                    </c:if>
+                                    <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1' }">
+                                        <a class="btn btn-danger" href="dashboardteacher.jsp" role="button">Cancel</a>
+                                    </c:if>
+                                    <c:if test="${sessionScope.LOGIN_USER.role =='S' || sessionScope.LOGIN_USER.role =='S1' }">
+                                        <a class="btn btn-danger" href="dashboardstudent.jsp" role="button">Cancel</a>
+                                    </c:if>                                   
                                 </div>
-                        </form>
+                            </form>
                         </div>
 
-                        
+
                     </div>
                     <!-- /.container-fluid -->
                 </div>

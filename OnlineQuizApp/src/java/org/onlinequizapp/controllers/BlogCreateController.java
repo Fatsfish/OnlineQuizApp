@@ -25,8 +25,8 @@ import org.onlinequizapp.dtos.UserDTO;
 @WebServlet(name = "BlogCreateController", urlPatterns = {"/BlogCreateController"})
 public class BlogCreateController extends HttpServlet {
 
-    private static final String SUCCESS = "BlogSearchController";
-    private static final String ERROR = "blog.jsp";
+    private static final String SUCCESS = "create-blog.jsp";
+    private static final String ERROR = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,11 +39,11 @@ public class BlogCreateController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-   response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String check = request.getParameter("check");
-            String LogID="";
-            HttpSession session = request.getSession();
+        String LogID = "";
+        HttpSession session = request.getSession();
         if (session.getAttribute("LOGIN_USER") != null) {
             LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
         }
@@ -53,14 +53,13 @@ public class BlogCreateController extends HttpServlet {
                 String Title = request.getParameter("Title");
                 String content = request.getParameter("content");
                 String Image = request.getParameter("Image");
-                String BlogCategoryID = request.getParameter("categoryID");
+                String BlogCategoryID = request.getParameter("BlogCategory");
                 String status = request.getParameter("status");
-                if(status==null){
-                        status="0";
-                    }
-                else if (status.equals("on")) {
+                if (status == null) {
+                    status = "0";
+                } else if (status.equals("on")) {
                     status = "1";
-                } else{
+                } else {
                     status = "0";
                 }
                 boolean flag = true;
@@ -68,12 +67,9 @@ public class BlogCreateController extends HttpServlet {
                     flag = false;
                     BlogDTO.setTitle("Title must be [1-250]");
                 }
-                
                 if (flag) {
                     BlogDAO dao = new BlogDAO();
-                    
                     BlogDTO cate = new BlogDTO("", Title, LogID, BlogCategoryID, content, Image, status);
-                    
                     dao.insert(cate);
                     request.setAttribute("CREATE_BLOG_SUCCESS", "Create Success!");
                     url = SUCCESS;
