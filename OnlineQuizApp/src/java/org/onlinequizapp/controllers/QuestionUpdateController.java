@@ -35,7 +35,6 @@ public class QuestionUpdateController extends HttpServlet {
         String url = ERROR;
         String check = request.getParameter("check");
         String action = request.getParameter("action");
-        QuestionDTO question = new QuestionDTO("", "", "", "", "", "", "", "", "", "", "");
         CategoryDAO dao1 = new CategoryDAO();
         List<CategoryDTO> list = null;
         try {
@@ -61,7 +60,7 @@ public class QuestionUpdateController extends HttpServlet {
                 String answer4 = request.getParameter("answer4");
                 String authorID = request.getParameter("authorID");
                 QuestionDAO dao = new QuestionDAO();
-                QuestionDTO ques = new QuestionDTO(questionID, name, answer1, answer2, answer3, answer4, description, answer, authorID, status, categoryID);
+                QuestionDTO question = new QuestionDTO(questionID, name, answer1, answer2, answer3, answer4, description, answer, authorID, status, categoryID);
                 boolean flag = true;
                 if (name.length() > 250 || name.length() < 1) {
                     flag = false;
@@ -92,13 +91,13 @@ public class QuestionUpdateController extends HttpServlet {
                     question.setStatus("Status must be 0 or 1");
                 }
                 if (flag) {
-                    boolean update = dao.updateQ(ques);
+                    boolean update = dao.updateQ(question);
                     if (update) {
                         request.setAttribute("UPDATE_SUCCESS", "Update Success!");
                         url = SUCCESS;
                     }
                 } else {
-                    request.setAttribute("ERROR", ques);
+                    request.setAttribute("ERROR", question);
                 }
             } catch (Exception e) {
 

@@ -35,7 +35,8 @@
                         Status<input type="text" name="status" value="${param.status}" id="status" required=""/></br>
                         Course Name<input type="text" name="courseName" value="${param.courseName}"/><br>
                         Duration<input type="text" name="duration" value="${param.duration}"/><br>
-                        <div>Category ID<select name="categoryID" class="form-control" aria-label="Default select example">
+                        <div>Category ID
+                            <select name="categoryID" class="form-control" aria-label="Default select example">
                                 <option selected>${param.categoryID}</option>
                                 <c:if test="${requestScope.LIST_QUIZ_CATEGORY != null && not empty requestScope.LIST_QUIZ_CATEGORY}">
                                     <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_QUIZ_CATEGORY}">
@@ -45,7 +46,7 @@
                                     </c:forEach>
                                 </c:if>
                             </select>
-                        </div>
+                        </div><br>
                         Description<input type="text" name="Description" value="${param.description}"/>
                         <input type="hidden" name="search" value="${param.search}" required=""/></br>
                         <input type="submit" name="action" value="Confirm"/>

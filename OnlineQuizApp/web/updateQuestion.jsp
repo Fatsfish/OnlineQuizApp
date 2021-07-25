@@ -1,4 +1,8 @@
 <%@page import="org.onlinequizapp.dtos.QuestionDTO"%>
+<%@page import="org.onlinequizapp.daos.CategoryDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="org.onlinequizapp.dtos.CategoryDTO"%>
+<%@page import="org.onlinequizapp.dtos.CategoryBlogDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +20,7 @@
     </head>
     <body>
         <form action="QuestionUpdateController" name="check" value="1" method="POST">
-            <h1 align="center">UPDATE ${sessionScope.LIST_QUESTION.Name}</h1>
+            <h1 align="center">UPDATE ${sessionScope.LIST_QUESTION.name}</h1>
             <div class="main-agileinfo">
                 <div class="agileits-top">
                     <h2 style="text-align: center">Question Search and Edit page</h2>
@@ -53,11 +57,20 @@
                         <span>Author ID</span></br>
                         <input type="text" name="authorID" value="${param.authorID}" id="authorID" required=""/></br>
                     </label>
+                    <div>Category ID
+                        <select name="categoryID" class="form-control" aria-label="Default select example">
+                            <option selected>${param.categoryID}</option>
+                            <c:if test="${requestScope.LIST_QUIZ_CATEGORY != null && not empty requestScope.LIST_QUIZ_CATEGORY}">
+                                <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_QUIZ_CATEGORY}">
+                                    <c:if test="${category.status==1}">
+                                        <option value="${category.categoryID}">${counter.count} - ${category.categoryName}</option>
+                                    </c:if>
+                                </c:forEach>
+                            </c:if>
+                        </select>
+                    </div> <br>
                     <label>
-                        <span>Category ID</span></br>
-                        <input type="text" name="categoryID" value="${param.categoryID}" id="categoryID" required=""/></br>
-                    </label>
-                    <label><span>Status (1,0)</span></br>
+                        <span>Status (1,0)</span></br>
                         <input type="text" name="status" value="${param.status}" id="status" required=""/></br>    
                         <input type="hidden" name="search" value="${param.search}" required=""/></br>
                         <input type="hidden" name="cate" value="${param.cate}"/>
