@@ -453,10 +453,6 @@
                                         <th>No</th>
                                         <th>ID</th>
                                         <th>Name</th>
-                                        <th>Ans 1</th>
-                                        <th>Ans 2</th>
-                                        <th>Ans 3</th>
-                                        <th>Ans 4</th>
                                         <th>Description</th>
                                         <th>Answer</th>
                                         <th>Status</th>
@@ -472,10 +468,6 @@
                                             <td>${counter.count}</td>
                                             <td>${question.questionID}</td>
                                             <td>${question.name}</td>
-                                            <td>${question.question1}</td>
-                                            <td>${question.question3}</td>
-                                            <td>${question.question3}</td>
-                                            <td>${question.question4}</td>
                                             <td>${question.description}</td>
                                             <td>${question.answer}</td>
                                             <td>${question.status}</td>

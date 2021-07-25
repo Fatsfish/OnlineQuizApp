@@ -12,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.onlinequizapp.daos.CourseDAO;
+import org.onlinequizapp.daos.QuestionDAO;
 
 /**
  *
@@ -19,6 +21,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "QuestionDeleteController", urlPatterns = {"/QuestionDeleteController"})
 public class QuestionDeleteController extends HttpServlet {
+
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "QuestionSearchController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,17 +37,30 @@ public class QuestionDeleteController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet QuestionDeleteController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet QuestionDeleteController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String url = ERROR;
+        String action = request.getParameter("action");
+        if (action.equals("Delete")) {
+            try {
+                if (!request.getParameter("status").equals("1")) {
+                    String QuestionID = request.getParameter("QuestionID");
+                    QuestionDAO dao = new QuestionDAO();
+                    boolean checkDelete = dao.deleteQ(QuestionID);
+                    if (checkDelete) {
+                        request.setAttribute("DELETE_SUCCESS", "Delete Success!");
+                        url = SUCCESS;
+                    } else {
+                        request.setAttribute("DELETE_ERROR", "Cannot delete!");
+                        url = SUCCESS;
+                    }
+                } else {
+                    request.setAttribute("DELETE_ERROR", "Question is being used!");
+                    url = SUCCESS;
+                }
+            } catch (Exception e) {
+
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
         }
     }
 
