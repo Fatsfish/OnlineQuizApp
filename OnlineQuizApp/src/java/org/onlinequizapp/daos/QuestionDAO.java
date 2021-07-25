@@ -108,8 +108,8 @@ public class QuestionDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPdaTE tblQuestion SET Name=?,Question1=?,Question2=?,Question3=?, Question4=? Description=?, Answer=?, AuthorID=?, Status=?, categoryID=? "
-                        + " Where quizID=?";
+                String sql = "UPDATE tblQuestion SET Name=?, Question1=?, Question2=?, Question3=?, Question4=?, Description=?, Answer=?, AuthorID=?, Status=?, categoryID=? "
+                        + " Where questionID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, quiz.getName());
                 stm.setString(2, quiz.getQuestion1());

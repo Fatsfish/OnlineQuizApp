@@ -493,8 +493,17 @@
                                             <td>
                                                 <form action="QuestionUpdateController">
                                                     <input type="submit" class="btn btn-success" name="action" value="Update"/>
-                                                    <input type="hidden" name="QuestionID" value="${question.questionID}"/>
-                                                    <input type="hidden" name="Name" value="${question.name}"/>
+                                                    <input type="hidden" name="questionID" value="${question.questionID}"/>
+                                                    <input type="hidden" name="name" value="${question.name}"/>
+                                                    <input type="hidden" name="answer1" value="${question.question1}"/>
+                                                    <input type="hidden" name="answer2" value="${question.question2}"/>
+                                                    <input type="hidden" name="answer3" value="${question.question3}"/>
+                                                    <input type="hidden" name="answer4" value="${question.question4}"/>
+                                                    <input type="hidden" name="answer3" value="${question.question3}"/>
+                                                    <input type="hidden" name="answer" value="${question.answer}"/>
+                                                    <input type="hidden" name="description" value="${question.description}"/>
+                                                    <input type="hidden" name="authorID" value="${question.authorID}"/>
+                                                    <input type="hidden" name="categoryID" value="${question.categoryID}"/>
                                                     <input type="hidden" name="status" value="${question.status}"/>
                                                     <input type="hidden" name="search" value="${param.search}"/>
                                                     <input type="hidden" name="cate" value="${param.cate}"/>
