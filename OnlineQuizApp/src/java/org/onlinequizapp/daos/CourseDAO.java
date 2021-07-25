@@ -133,7 +133,7 @@ public class CourseDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPDATE tblCourse SET courseName=?, authorID=?, duration=?, status=?, categoryID=?, description=?  "
+                String sql = "UPDATE tblCourse SET Name=?, authorID=?, duration=?, status=?, categoryID=?, description=?  "
                         + " Where courseID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, course.getCourseName());

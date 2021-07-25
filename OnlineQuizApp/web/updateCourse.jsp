@@ -31,7 +31,7 @@
             <div class="main-agileinfo">
                 <div class="agileits-top">
                     <form action="CourseUpdateController">
-                        Course ID<input type="text" name="classID" value="${param.courseID}" id="categoryID" readonly=""/><br>
+                        Course ID<input type="text" name="courseID" value="${param.courseID}" id="categoryID" readonly=""/><br>
                         Status<input type="text" name="status" value="${param.status}" id="status" required=""/></br>
                         Course Name<input type="text" name="courseName" value="${param.courseName}"/><br>
                         Duration<input type="text" name="duration" value="${param.duration}"/><br>
@@ -47,8 +47,9 @@
                                 </c:if>
                             </select>
                         </div><br>
-                        Description<input type="text" name="Description" value="${param.description}"/>
+                        Description<input type="text" name="description" value="${param.description}"/>
                         <input type="hidden" name="search" value="${param.search}" required=""/></br>
+                        <input type="hidden" name="authorID" value="${param.authorID}" required=""/></br>
                         <input type="submit" name="action" value="Confirm"/>
                     </form>
                 </div>
