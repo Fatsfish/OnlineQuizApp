@@ -7,11 +7,19 @@ package org.onlinequizapp.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.onlinequizapp.daos.ClassDAO;
+import org.onlinequizapp.daos.CourseDAO;
+import org.onlinequizapp.dtos.CategoryDTO;
+import org.onlinequizapp.dtos.ClassDTO;
+import org.onlinequizapp.dtos.CourseDTO;
+import org.onlinequizapp.dtos.UserDTO;
 
 /**
  *
@@ -20,7 +28,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "CourseUpdateController", urlPatterns = {"/CourseUpdateController"})
 public class CourseUpdateController extends HttpServlet {
 
+    private static final String SUCCESS = "CourseSearchController";
+    private static final String ERROR = "updateCourse.jsp";
+
     /**
+     * /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -32,17 +44,53 @@ public class CourseUpdateController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CourseUpdateController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CourseUpdateController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String url = ERROR;
+        String check = request.getParameter("check");
+        String action = request.getParameter("action");
+        if (action.equals("Confirm")) {
+            try {
+                String LogID = request.getParameter("authorID");
+                String courseID = request.getParameter("courseID");
+                String courseName = request.getParameter("courseName");
+                String duration = request.getParameter("duration");
+                String status = request.getParameter("status");
+                String categoryID = request.getParameter("categoryID");
+                String description = request.getParameter("description");
+                CourseDAO dao = new CourseDAO();
+                CourseDTO categoryDTO = new CourseDTO(courseID, courseName, LogID, duration, status, categoryID, description);
+                boolean flag = true;
+                if (courseName.length() > 250 || courseName.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCourseName("Course Name must be [1-250]");
+                }
+                if (duration.length() > 250 || duration.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCourseName("Duration must be [1-250]");
+                }
+                if (description.length() > 250 || description.length() < 1) {
+                    flag = false;
+                    categoryDTO.setCourseName("Description must be [1-250]");
+                }
+                if (!(status.equals("1")) && !(status.equals("0"))) {
+                    flag = false;
+                    categoryDTO.setStatus("Status must be 0 or 1");
+                }
+                if (flag) {
+                    boolean update = dao.update(categoryDTO);
+                    if (update) {
+                        request.setAttribute("UPDATE_SUCCESS", "Update Success!");
+                        url = SUCCESS;
+                    }
+                } else {
+                    request.setAttribute("ERROR", categoryDTO);
+                }
+            } catch (Exception e) {
+
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
+        } else if (action.equals("Update")) {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
