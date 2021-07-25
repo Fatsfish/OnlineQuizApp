@@ -99,11 +99,14 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Quizzes:</h6>
+                            <a class="collapse-item" href="question.jsp">All Question</a>
                             <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
                             <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
+                            
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
+                            <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
                         </div>
                     </div>
                 </li>
