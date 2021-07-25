@@ -58,9 +58,9 @@ public class BlogDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Select BlogID, Title, authorID "
+                String sql = "Select BlogID, Title, content, Image, categoryID , authorID, Status  "
                         + "FROM tblBlog "
-                        + "Where authorID=\'" + auID + "\'";
+                        + "Where authorID=\'%" + auID + "%\'";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 if (rs.next()) {
@@ -116,7 +116,7 @@ public class BlogDAO {
                     if (listBlog == null) {
                         listBlog = new ArrayList<>();
                     }
-                    listBlog.add(new BlogDTO(BlogID, title, authorID, content, categoryID, Image, Status));
+                    listBlog.add(new BlogDTO(BlogID, title, authorID, categoryID, content, Image, Status));
 
                 }
             }

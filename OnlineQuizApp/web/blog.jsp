@@ -391,13 +391,13 @@
                         <c:if test="${not empty param.search}">
                             <form action="BlogSearchController">
                                 <p>Search</p> <input class="text" type="text" name="searchBlog" value="${param.search}"/>
-                                <input type="submit" name="action" value="Search"/>
+                                <input type="submit" value="Search"/>
                             </form>
                         </c:if>
                         <c:if test="${empty param.search}">
                             <form action="BlogSearchController">
                                 <p>Search</p> <input class="text" type="text" name="searchBlog" value=""/>
-                                <input type="submit" name="action" value="Search"/>
+                                <input type="submit" value="Search"/>
                             </form>
                         </c:if>
                         <c:if test="${requestScope.LIST_BLOG != null && not empty requestScope.LIST_BLOG}">                       
@@ -439,7 +439,7 @@
                                             <td>${blog.status}</td>
                                             <td>                                    
                                                 <form action="BlogDeleteController">
-                                                    <input type="hidden" name="search" value="${param.search}"/>
+                                                    <input type="hidden" name="searchBlog" value="${param.search}"/>
                                                     <input type="hidden" name="blogID" value="${blog.blogID}"/>
                                                     <input type="hidden" name="status" value="${blog.status}"/>
                                                     <input type="submit" name="action" value="Delete"/>
@@ -455,13 +455,13 @@
                                                     <input type="hidden" name="content" value="${blog.content}"/>
                                                     <input type="hidden" name="image" value="${blog.image}"/>
                                                     <input type="hidden" name="status" value="${blog.status}"/>
-                                                    <input type="hidden" name="search" value="${param.search}"/>
+                                                    <input type="hidden" name="searchBlog" value="${param.search}"/>
                                                 </form>
                                             </td>
                                             </form>
                                         </tr>
-                                    </tbody>
-                                </c:forEach>         
+                                    </c:forEach>    
+                                </tbody>
                             </table>
                         </c:if>
                     </div>
