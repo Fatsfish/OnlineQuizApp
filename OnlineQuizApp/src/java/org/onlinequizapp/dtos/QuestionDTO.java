@@ -24,12 +24,12 @@ public class QuestionDTO implements Serializable {
         this.Description = Description;
         this.Answer = Answer;
         this.AuthorID = AuthorID;
-        this.QuestionID = Question1;
-        this.Name = Question2;
-        this.Description = Question3;
-        this.Answer = Question4;
-        this.AuthorID = Status;
-        this.AuthorID = categoryID;
+        this.Question1 = Question1;
+        this.Question2 = Question2;
+        this.Question3 = Question3;
+        this.Question4 = Question4;
+        this.Status = Status;
+        this.categoryID = categoryID;
         
     }
 
