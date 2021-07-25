@@ -69,8 +69,8 @@ public class BlogCreateController extends HttpServlet {
                 }
                 if (flag) {
                     BlogDAO dao = new BlogDAO();
-                    BlogDTO cate = new BlogDTO("", Title, LogID, BlogCategoryID, content, Image, status);
-                    dao.insert(cate);
+                    BlogDTO dto = new BlogDTO("", Title, LogID, BlogCategoryID, content, Image, status);
+                    dao.insert(dto);
                     request.setAttribute("CREATE_BLOG_SUCCESS", "Create Success!");
                     url = SUCCESS;
 

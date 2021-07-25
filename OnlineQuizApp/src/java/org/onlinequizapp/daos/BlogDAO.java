@@ -99,7 +99,7 @@ public class BlogDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Select BlogID, Title, authorID, categoryID , content "
+                String sql = "Select BlogID, Title, content, Image, categoryID , authorID, Status  "
                         + "from tblBlog "
                         + "WHERE Title like ?";
                 stm = conn.prepareStatement(sql);
@@ -107,7 +107,7 @@ public class BlogDAO {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String BlogID = rs.getString("BlogID");
-                    String Title = rs.getString("Title");
+                    String title = rs.getString("title");
                     String authorID = rs.getString("authorID");
                     String categoryID = rs.getString("categoryID");
                     String content = rs.getString("content");
@@ -116,7 +116,7 @@ public class BlogDAO {
                     if (listBlog == null) {
                         listBlog = new ArrayList<>();
                     }
-                    listBlog.add(new BlogDTO(BlogID, Title, authorID, content, categoryID, Image, Status));
+                    listBlog.add(new BlogDTO(BlogID, title, authorID, content, categoryID, Image, Status));
 
                 }
             }
@@ -176,14 +176,15 @@ public class BlogDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPDATE tblBlog SET Title=?, authorID=? "
-                        + " Where BlogID=?";
+                String sql = "UPDATE tblBlog SET Title=?, categoryID=?, Content=?, image=? "
+                        + " Where BlogID=? " ;
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, Blog.getBlogID());
-                stm.setString(2, Blog.getAuthorID());
-                stm.setString(3, Blog.getCategoryID());
-                stm.setString(4, Blog.getContent());
-                stm.setString(5, Blog.getImage());
+                stm.setString(1, Blog.getTitle());
+                stm.setInt(2, Integer.parseInt(Blog.getCategoryID()));
+                stm.setString(3, Blog.getContent());
+                stm.setString(4, Blog.getImage());
+                stm.setByte(5, (byte) Integer.parseInt(Blog.getStatus()));
+                stm.setString(6, Blog.getBlogID());
                 check = stm.executeUpdate() > 0 ? true : false;
             }
 

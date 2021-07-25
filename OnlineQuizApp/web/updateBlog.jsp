@@ -267,7 +267,7 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800" style="margin-left: 2rem" >Category Quiz Add</h1>
+                            <h1 class="h3 mb-0 text-gray-800" style="margin-left: 2rem" >Update Blog</h1>
                         </div>
 
                         <div class="container">
@@ -275,10 +275,10 @@
                             <form action="BlogUpdateController">
                                 <div class="mb-3">
                                     <label for="blogTitle" class="form-label">Blog Title</label>
-                                    <input type="text" class="form-control" id="blogTitle">
+                                    <input type="text" class="form-control" name="Title" id="blogTitle" value="${param.Title}">
                                 </div>
-                                <select name="BlogCategory"  class="form-select" aria-label="Default select example">
-                                    <option selected>Choose category</option>
+                                <select name="BlogCategory"  class="form-select" aria-label="Default select example" >
+                                    <option selected >${param.categoryName}</option>
                                     <c:if test="${requestScope.LIST_BLOG_CATEGORY != null && not empty requestScope.LIST_BLOG_CATEGORY }">
                                         <c:forEach var="blogC" varStatus="counter" items="${requestScope.LIST_BLOG_CATEGORY}">
                                             <form action="CategorySearchController">
@@ -290,16 +290,26 @@
                                 </select>
                                 <div class="mb-3">
                                     <label for="BlogContent" class="form-label">Blog Content</label>
-                                    <textarea class="form-control" id="BlogContent" rows="3"></textarea>
+                                    <textarea class="form-control" id="BlogContent" name="content" rows="3" >${param.content}</textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label">Upload picture (optional)</label>
-                                    <input class="form-control" type="file" id="formFile">
+                                    <input class="form-control" type="text" placeholder="Please input picture's url" name="Image" id="blogImg">
                                 </div>
                                 <input type="checkbox" class="form-check-input" id="status">
+                                <input type="hidden" name="BlogID" value="${param.blogID}">
                                 <label class="form-check-label" for="status">Active</label><br>
+                                <input type="hidden" name="check" value="blogUpdate" class="form-check-input" id="check">
                                 <button type="submit" class="btn btn-primary">Create</button>
-                                <button type="submit" class="btn btn-danger">Cancel</button>
+                                <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
+                                    <a class="btn btn-danger" href="dashboardadmin.jsp" role="button">Cancel</a>
+                                </c:if>
+                                <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1' }">
+                                    <a class="btn btn-danger" href="dashboardteacher.jsp" role="button">Cancel</a>
+                                </c:if>
+                                <c:if test="${sessionScope.LOGIN_USER.role =='S' || sessionScope.LOGIN_USER.role =='S1' }">
+                                    <a class="btn btn-danger" href="dashboardstudent.jsp" role="button">Cancel</a>
+                                </c:if> 
                         </div>
 
                         </form>

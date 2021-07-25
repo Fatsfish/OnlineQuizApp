@@ -39,21 +39,19 @@ public class BlogSearchController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String url = ERROR;
-            try {
-                String search = request.getParameter("search");
-                BlogDAO dao = new BlogDAO();
-                List<BlogDTO> list = dao.getListBlog(search);
-                if (list != null) {
-                    request.setAttribute("LIST_BLOG", list);
-                    url = SUCCESS;
-                }
-            } catch (SQLException e) {
-                log("Error at SearchController: " + e.toString());
-            } finally {
-                request.getRequestDispatcher(url).forward(request, response);
+        String url = ERROR;
+        try {
+            String search = request.getParameter("searchBlog");
+            BlogDAO dao = new BlogDAO();
+            List<BlogDTO> list = dao.getListBlog(search);
+            if (list != null) {
+                request.setAttribute("LIST_BLOG", list);
+                url = SUCCESS;
             }
+        } catch (SQLException e) {
+            log("Error at BlogSearchController: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

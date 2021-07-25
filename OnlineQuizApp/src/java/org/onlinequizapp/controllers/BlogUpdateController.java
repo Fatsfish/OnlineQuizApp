@@ -12,8 +12,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.onlinequizapp.daos.BlogDAO;
 import org.onlinequizapp.dtos.BlogDTO;
+import org.onlinequizapp.dtos.BlogError;
+import org.onlinequizapp.dtos.UserDTO;
 //import org.onlinequizapp.dtos.BlogError;
 
 /**
@@ -23,8 +26,8 @@ import org.onlinequizapp.dtos.BlogDTO;
 @WebServlet(name = "BlogUpdateController", urlPatterns = {"/BlogUpdateController"})
 public class BlogUpdateController extends HttpServlet {
 
-    private static final String SUCCESS = "BlogSearchController";
-    private static final String ERROR = "updateBlog.jsp";
+    private static final String SUCCESS = "updateBlog.jsp";
+    private static final String ERROR = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,41 +41,51 @@ public class BlogUpdateController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        /*String url = ERROR;
-        BlogError BlogError = new BlogError("", "", "", "", "", "");
-        try {
-            String blogID = request.getParameter("blogID");
-            String Title = request.getParameter("Title");
-            BlogDAO dao = new BlogDAO();
-            BlogDTO dto = dao.checkBlog(blogID, Title);
-            boolean flag = true;
-            if (dto.getContent().length() < 1) {
-                flag = false;
-                BlogError.setContent("You must enter something to post ");
-            }
-            if (dto.getCategoryID() == null || dto.getCategoryID().isEmpty()) {
-                flag = false;
-                BlogError.setCategoryID("Please choose a category");
-            }
-            if (flag) {
-                boolean check = dao.update(dto);
-                if (check) {
+        String url = ERROR;
+        String check = request.getParameter("check");
+        String LogID = "";
+        HttpSession session = request.getSession();
+        if (session.getAttribute("LOGIN_USER") != null) {
+            LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
+        }
+        if (check.equals("blogUpdate")) {
+            BlogDTO BlogDTO = new BlogDTO("", "", "", "", "", "", "");
+            try {
+                String BlogID = request.getParameter("BlogID");
+                String Title = request.getParameter("title");
+                String content = request.getParameter("content");
+                String Image = request.getParameter("Image");
+                String BlogCategoryID = request.getParameter("BlogCategory");
+                String status = request.getParameter("status");
+                boolean flag = true;
+                if (content.length() < 1) {
+                    flag = false;
+                    BlogDTO.setContent("You must enter something to post ");
+                }
+                if (BlogCategoryID == null || BlogCategoryID.isEmpty()) {
+                    flag = false;
+                    BlogDTO.setCategoryID("Please choose a category");
+                }
+                if (flag) {
+                    BlogDAO dao = new BlogDAO();
+                    BlogDTO dto = new BlogDTO(BlogID, Title, LogID, BlogCategoryID, content, Image, status);
+                    dao.update(dto);
+
+                    url = SUCCESS;
+
+                } else {
+                    request.setAttribute("UPDATE_BLOG_ERROR", "Update fail");
                     url = SUCCESS;
                 }
-            } else {
-                request.setAttribute("ERROR", BlogError);
+            } catch (Exception e) {
+
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
             }
-        } catch (Exception e) {
-
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
         }
-
     }
-*/
-}
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
