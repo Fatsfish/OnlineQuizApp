@@ -74,11 +74,13 @@
                 <div id="collapseCourses" class="collapse" aria-labelledby="headingCourses" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Courses:</h6>
-                        <a class="collapse-item" href="buttons.html">All Courses</a>
-                        <a class="collapse-item" href="cards.html">My Courses</a>
+                        <a class="collapse-item" href="all-course.html">All Courses</a>
+                        <a class="collapse-item" href="course.jsp">My Courses</a>
+                        <a class="collapse-item" href="class.jsp">My Classes</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Create:</h6>
-                        <a class="collapse-item" href="404.html">Create Course</a>
+                        <a class="collapse-item" href="courseAdd.jsp">Create Course</a>
+                        <a class="collapse-item" href="classAdd.jsp">Create Class</a>
                     </div>
                 </div>
             </li>
