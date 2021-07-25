@@ -1,9 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="org.onlinequizapp.daos.QuestionDAO"%>
 <%@page import="java.util.List"%>
+<%@page import="org.onlinequizapp.daos.QuestionDAO"%>
 <%@page import="org.onlinequizapp.dtos.QuestionDTO"%>
-<%@page import="org.onlinequizapp.dtos.CategoryDTO"%>
-<%@page import="org.onlinequizapp.daos.CategoryDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -469,45 +467,45 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="ques" varStatus="counter" items="${requestScope.LIST_QUESTION}">
+                                    <c:forEach var="question" varStatus="counter" items="${requestScope.LIST_QUESTION}">
                                         <tr>
                                             <td>${counter.count}</td>
-                                            <td>${ques.QuestionID}</td>
-                                            <td>${ques.Name}</td>
-                                            <td>${ques.Question1}</td>
-                                            <td>${ques.Question3}</td>
-                                            <td>${ques.Question3}</td>
-                                            <td>${ques.Question4}</td>
-                                            <td>${ques.Description}</td>
-                                            <td>${ques.Answer}</td>
-                                            <td>${ques.status}</td>
-                                            <td>${ques.AuthorID}</td>
-                                            <td>${ques.categoryID}</td>
+                                            <td>${question.questionID}</td>
+                                            <td>${question.name}</td>
+                                            <td>${question.question1}</td>
+                                            <td>${question.question3}</td>
+                                            <td>${question.question3}</td>
+                                            <td>${question.question4}</td>
+                                            <td>${question.description}</td>
+                                            <td>${question.answer}</td>
+                                            <td>${question.status}</td>
+                                            <td>${question.authorID}</td>
+                                            <td>${question.categoryID}</td>
                                             <td>
                                                 <form action="QuestionDeleteController">
                                                     <input type="hidden" name="search" value="${param.search}"/>
-                                                    <input type="hidden" name="QuestionID" value="${ques.QuestionID}"/>
+                                                    <input type="hidden" name="QuestionID" value="${question.questionID}"/>
                                                     <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
-                                                    <input type="hidden" name="status" value="${ques.status}"/>
+                                                    <input type="hidden" name="status" value="${question.status}"/>
                                                     <input type="hidden" name="check" value="${param.check}"/>
                                                 </form>
                                             </td>
                                             <td>
                                                 <form action="QuestionUpdateController">
                                                     <input type="submit" class="btn btn-success" name="action" value="Update"/>
-                                                    <input type="hidden" name="QuestionID" value="${ques.QuestionID}"/>
-                                                    <input type="hidden" name="Name" value="${ques.Name}"/>
-                                                    <input type="hidden" name="status" value="${ques.status}"/>
+                                                    <input type="hidden" name="QuestionID" value="${question.questionID}"/>
+                                                    <input type="hidden" name="Name" value="${question.name}"/>
+                                                    <input type="hidden" name="status" value="${question.status}"/>
                                                     <input type="hidden" name="search" value="${param.search}"/>
                                                     <input type="hidden" name="cate" value="${param.cate}"/>
                                                     <input type="hidden" name="check" value="${param.check}"/>
                                                 </form>
                                             </td>
                                         </tr>
-                                    </tbody>
-                                </c:forEach>         
+                                    </c:forEach>         
+                                </tbody>
                             </table>
-                        </c:if><br>
+                        </c:if>
                     </div>
                     <!--</div>
                 </div>
