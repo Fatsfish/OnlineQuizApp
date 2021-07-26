@@ -117,11 +117,11 @@ public class QuestionDAO {
                 stm.setString(4, quiz.getQuestion3());
                 stm.setString(5, quiz.getQuestion4());
                 stm.setString(6, quiz.getDescription());
-                stm.setString(7, quiz.getAnswer());
+                stm.setInt(7, Integer.parseInt(quiz.getAnswer()));
                 stm.setString(8, quiz.getAuthorID());
                 stm.setString(9, quiz.getStatus());
-                stm.setString(10, quiz.getCategoryID());
-                stm.setString(11, quiz.getQuestionID());
+                stm.setInt(10, Integer.parseInt(quiz.getCategoryID()));
+                stm.setInt(11, Integer.parseInt(quiz.getQuestionID()));
                 check = stm.executeUpdate() > 0 ? true : false;
             }
 

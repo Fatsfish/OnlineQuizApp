@@ -4,72 +4,72 @@ import java.io.Serializable;
 
 public class LectureDTO implements Serializable {
 
-    private String LectureID;
-    private String CourseID;
-    private String LectureName;
-    private String Description;
-    private String Status;
-    private String ClassID;
+    private String lectureID;
+    private String courseID;
+    private String lectureName;
+    private String description;
+    private String status;
+    private String classID;
     
     public LectureDTO(String LectureID, String CourseID, String LectureName, String ClassID, String Description, String Status) {
         
-        this.LectureName = LectureID;
-        this.CourseID = CourseID;
-        this.LectureName = LectureName;
-        this.Status = LectureName;
-        this.Description = Description;
-        this.ClassID = ClassID;
+        this.lectureName = LectureID;
+        this.courseID = CourseID;
+        this.lectureName = LectureName;
+        this.status = LectureName;
+        this.description = Description;
+        this.classID = ClassID;
     }
 
     public LectureDTO() {
     }
 
     public String getLectureID() {
-        return LectureID;
+        return lectureID;
     }
 
     public void setLectureID(String LectureID) {
-        this.LectureID = LectureID;
+        this.lectureID = LectureID;
     }
 
     public String getCourseID() {
-        return CourseID;
+        return courseID;
     }
 
     public void setCourseID(String CourseID) {
-        this.CourseID = CourseID;
+        this.courseID = CourseID;
     }
 
     public String getLectureName() {
-        return LectureName;
+        return lectureName;
     }
 
     public void setLectureName(String LectureName) {
-        this.LectureName = LectureName;
+        this.lectureName = LectureName;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String Description) {
-        this.Description = Description;
+        this.description = Description;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String Status) {
-        this.Status = Status;
+        this.status = Status;
     }
 
     public String getClassID() {
-        return ClassID;
+        return classID;
     }
 
     public void setClassID(String ClassID) {
-        this.ClassID = ClassID;
+        this.classID = ClassID;
     }
     
     
