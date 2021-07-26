@@ -7,6 +7,8 @@ package org.onlinequizapp.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,11 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.onlinequizapp.daos.CategoryDAO;
+import org.onlinequizapp.daos.ClassDAO;
 import org.onlinequizapp.daos.EmailDAO;
 import org.onlinequizapp.daos.QuizDAO;
 import org.onlinequizapp.daos.UserDAO;
 import org.onlinequizapp.dtos.CategoryBlogDTO;
 import org.onlinequizapp.dtos.CategoryDTO;
+import org.onlinequizapp.dtos.ClassDTO;
 import org.onlinequizapp.dtos.QuizDTO;
 import org.onlinequizapp.dtos.UserDTO;
 import org.onlinequizapp.dtos.UserError;
@@ -30,8 +34,8 @@ import org.onlinequizapp.dtos.UserError;
 @WebServlet(name = "QuizCreateController", urlPatterns = {"/QuizCreateController"})
 public class QuizCreateController extends HttpServlet {
 
-    private static final String SUCCESS = "verify.jsp";
-    private static final String ERROR = "register.jsp";
+    private static final String SUCCESS = "quizAdd.jsp";
+    private static final String ERROR = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,46 +49,62 @@ public class QuizCreateController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String check = request.getParameter("check");
-        
+        List<ClassDTO> list = null;
+        HttpSession session = request.getSession();
+        String LogID = "";
+        if (session.getAttribute("LOGIN_USER") != null) {
+            LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
+        }
+        try {
+            ClassDAO dao = new ClassDAO();
+            list = dao.getList("");
+            if (list != null) {
+                request.setAttribute("LIST_CLASS", list);
+                url = SUCCESS;
+            }
+        } catch (SQLException e) {
+            log("Error at ClassSearchController: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
         if (check.equals("quiz")) {
-            CategoryDTO categoryDTO = new CategoryDTO("", "", "", "", "");
+            QuizDTO categoryDTO = new QuizDTO("", "", "", "", "", "", "", "");
             try {
-                String categoryName = request.getParameter("categoryName");
+                String Name = request.getParameter("Name");
                 String description = request.getParameter("description");
                 String status = request.getParameter("status");
-                String level = request.getParameter("level");
-                if(status==null){
-                        status="0";
-                    }
-                else if (status.equals("on")) {
+                String classID = request.getParameter("classID");
+                String mark = request.getParameter("mark");
+                if (status == null) {
+                    status = "0";
+                } else if (status.equals("on")) {
                     status = "1";
-                } else{
+                } else {
                     status = "0";
                 }
                 boolean flag = true;
-                if (categoryName.length() > 250 || categoryName.length() < 1) {
+                if (Name.length() > 250 || Name.length() < 1) {
                     flag = false;
-                    categoryDTO.setCategoryName("Category Name must be [1-250]");
+                    categoryDTO.setName("Name must be [1-250]");
                 }
                 if (description.length() > 250 || description.length() < 1) {
                     flag = false;
-                    categoryDTO.setCategoryName("Description must be [1-250]");
-                }
-                if (!level.equalsIgnoreCase("Hard") && !level.equalsIgnoreCase("Medium") && !level.equalsIgnoreCase("Easy")) {
-                    flag = false;
-                    categoryDTO.setCategoryName("Level must be Hard, Easy or Medium");
+                    categoryDTO.setDescription("Description must be [1-250]");
                 }
                 if (flag) {
-                    CategoryDAO dao = new CategoryDAO();
-                    
-                    CategoryDTO category = new CategoryDTO("", categoryName, description, status, level);
-                    dao.insertQ(category);
+                    QuizDAO dao = new QuizDAO();
+                    categoryDTO.setAuthorID(LogID);
+                    categoryDTO.setClassID(classID);
+                    categoryDTO.setDescription(description);
+                    categoryDTO.setName(Name);
+                    categoryDTO.setStatus(status);
+                    categoryDTO.setTotalMark(mark);
+                    categoryDTO.setNumberOfQuestions("0");
+                    dao.insertQ(categoryDTO);
                     request.setAttribute("CREATE_Q_SUCCESS", "Create Success!");
                     url = SUCCESS;
-
                 } else {
                     request.setAttribute("CREATE_Q_ERROR", "Create Fail!");
                     url = SUCCESS;
@@ -92,52 +112,8 @@ public class QuizCreateController extends HttpServlet {
             } catch (Exception e) {
                 log("Error at CreateController: " + e.toString());
                 if (e.toString().contains("duplicate")) {
-                    categoryDTO.setCategoryID("Category Name duplicate!");
+                    categoryDTO.setQuizID("Category Name duplicate!");
                     request.setAttribute("ERROR", categoryDTO);
-                };
-            } finally {
-                request.getRequestDispatcher(url).forward(request, response);
-            }
-        } else if (check.equals("blog")) {
-            CategoryBlogDTO categoryBlogDTO = new CategoryBlogDTO("", "", "", "");
-            try {
-                String categoryName = request.getParameter("categoryName");
-                String description = request.getParameter("description");
-                String status = request.getParameter("status");
-                if(status==null){
-                        status="0";
-                    }
-                else if (status.equals("on")) {
-                    status = "1";
-                } else{
-                    status = "0";
-                }
-                boolean flag = true;
-                if (categoryName.length() > 250 || categoryName.length() < 1) {
-                    flag = false;
-                    categoryBlogDTO.setCategoryName("Category Name must be [1-250]");
-                }
-                if (description.length() > 250 || description.length() < 1) {
-                    flag = false;
-                    categoryBlogDTO.setCategoryName("Description must be [1-250]");
-                }
-                if (flag) {
-                    CategoryDAO dao = new CategoryDAO();
-                    
-                    CategoryBlogDTO category = new CategoryBlogDTO("", categoryName, description, status);
-                    dao.insertB(category);
-                    request.setAttribute("CREATE_B_SUCCESS", "Create Success!");
-                    url = SUCCESS;
-
-                } else {
-                    request.setAttribute("CREATE_B_ERROR", "Create Fail!");
-                    url = SUCCESS;
-                }
-            } catch (Exception e) {
-                log("Error at CreateController: " + e.toString());
-                if (e.toString().contains("duplicate")) {
-                    categoryBlogDTO.setCategoryID("Category Name duplicate!");
-                    request.setAttribute("ERROR", categoryBlogDTO);
                 };
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);

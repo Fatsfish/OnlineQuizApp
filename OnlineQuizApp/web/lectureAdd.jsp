@@ -248,8 +248,6 @@
                             <p class="mb-4">${requestScope.CREATE_ERROR}</p>
                         </div>
                         <div class="container">
-                            <a href="CourseSearchController?check=Lecture&search=" class="btn btn-primary mb-3"/>Filter Course</a>
-                            <a href="ClassSearchController?check=Lecture&search=" class="btn btn-primary mb-3"/>Filter Class</a>
                             <form action="LectureCreateController" method="POST">
                                 <div class="mb-3">
                                     <label for="lectureName" class="form-label">Lecture Name</label>
@@ -324,7 +322,7 @@
                                 </c:forEach>         
                             </table>
                         </c:if><br>
-                        
+
                         <c:if test="${requestScope.LIST_CLASS != null && not empty requestScope.LIST_CLASS}">                       
                             <table class="table table-bordered table-hover" width="100%" cellspacing="0">
                                 <h4>Class List</h4>
@@ -334,7 +332,7 @@
                                         <th>Class ID</th>
                                         <th>Number of Student</th>
                                         <th>Status</th>
-                                        </tr>
+                                    </tr>
                                 </thead>
 
                                 <tbody>

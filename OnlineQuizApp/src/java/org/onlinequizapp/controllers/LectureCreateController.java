@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Boolean.TRUE;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,7 +18,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.onlinequizapp.daos.CategoryDAO;
+import org.onlinequizapp.daos.ClassDAO;
+import org.onlinequizapp.daos.CourseDAO;
 import org.onlinequizapp.daos.LectureDAO;
+import org.onlinequizapp.dtos.CategoryDTO;
+import org.onlinequizapp.dtos.ClassDTO;
+import org.onlinequizapp.dtos.CourseDTO;
 import org.onlinequizapp.dtos.LectureDTO;
 
 @WebServlet(name = "LectureCreateController", urlPatterns = {"/LectureCreateController"})
@@ -40,21 +47,43 @@ public class LectureCreateController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String check = request.getParameter("check");
-        
-        if (check.equals("lecture")) {    
-            LectureDTO classDTO = new LectureDTO("", "", "", "", "","");
+        CourseDAO dao1 = new CourseDAO();
+        List<CourseDTO> list = null;
+        List<ClassDTO> list1 = null;
+        try {
+            list = dao1.getListCourse("");
+        } catch (SQLException e) {
+            log("Error at CategorySearchController: " + e.toString());
+        } finally {
+            if (list != null) {
+                request.setAttribute("LIST_COURSE", list);
+            }
+        }
+        try {
+            ClassDAO dao = new ClassDAO();
+            list1 = dao.getList("");
+            if (list1 != null) {
+                request.setAttribute("LIST_CLASS", list1);
+                url = SUCCESS;
+            }
+        } catch (SQLException e) {
+            log("Error at ClassSearchController: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
+        if (check.equals("lecture")) {
+            LectureDTO classDTO = new LectureDTO("", "", "", "", "", "");
             try {
-                String LectureName = request.getParameter("lectureName");
+                String LectureName = request.getParameter("Name");
                 String status = request.getParameter("status");
                 String Description = request.getParameter("description");
                 String CourseID = request.getParameter("courseID");
                 String ClassID = request.getParameter("classID");
-                if(status==null){
-                        status="0";
-                    }
-                else if (status.equals("on")) {
+                if (status == null) {
+                    status = "0";
+                } else if (status.equals("on")) {
                     status = "1";
-                } else{
+                } else {
                     status = "0";
                 }
                 boolean flag = true;
@@ -64,8 +93,7 @@ public class LectureCreateController extends HttpServlet {
                 }
                 if (flag) {
                     LectureDAO dao = new LectureDAO();
-                    
-                    LectureDTO cate = new LectureDTO("", LectureName, Description, CourseID, ClassID, status );
+                    LectureDTO cate = new LectureDTO("", CourseID, LectureName, ClassID,Description,   status);
                     dao.insert(cate);
                     request.setAttribute("CREATE_SUCCESS", "Create Success!");
                     url = SUCCESS;

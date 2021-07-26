@@ -246,10 +246,16 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Course Add</h1>
+                            <div style="color: green" class="h5 mt-3">
+                                <p class="mb-4">${requestScope.CREATE_Q_SUCCESS}</p>
+                            </div>
+                            <div style="color: red" class="h5 mt-3" >
+                                <p class="mb-4">${requestScope.CREATE_Q_ERROR}</p>
+                            </div>                           
                         </div>
 
                         <div class="container">
-                            <a href="ClassSearchController?cate=1&check=Course&search=" class="btn btn-primary mb-3"/>Filter Category</a>
+                            <a href="QuizCreateController?check=quiz" class="btn btn-primary mb-3"/>Filter Category</a>
                             <form action="QuizCreateController">
                                 <div class="mb-3">
                                     <label for="questionName" class="form-label">Quiz Name</label>
@@ -261,12 +267,13 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="Duration" class="form-label">Total Mark</label>
-                                    <input type="number" class="form-control" name="duration" id="Duration">
+                                    <input type="number" class="form-control" name="mark" id="Duration">
                                 </div>
                                 <c:if test="${requestScope.LIST_CLASS != null && not empty requestScope.LIST_CLASS}">
                                     <div>
-                                        <select name="categoryID" class="form-select" aria-label="Default select example">
+                                        <select name="classID" class="form-select" aria-label="Default select example">
                                             <option selected>Choose class</option>
+                                            <option value="vvvv">None</option>
                                             <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_CLASS}">
                                                 <c:if test="${category.status==1}">
                                                     <option value="${category.classID}">Class ID - ${category.classID}</option>
@@ -282,34 +289,17 @@
                                 <input type="hidden" name="function" value="course" class="form-check-input" id="status">
 
                                 <button type="submit" class="btn btn-primary">Create</button>
-                                <a href="dashboardadmin.jsp" class="btn btn-danger">Cancel</a>
-                            </form></div>
-
-
-                        <c:if test="${requestScope.LIST_CLASS != null && not empty requestScope.LIST_CLASS}">                       
-                            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
-                                <h4>Class list</h4>
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Class ID</th>
-                                        <th>Status</th>
-                                        <th>Number of Students</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <c:forEach var="class" varStatus="counter" items="${requestScope.LIST_CLASS}">
-                                        <tr>
-                                            <td>${counter.count}</td>
-                                            <td>${class.classID}</td>
-                                            <td>${class.status}</td>
-                                            <td>${class.numberOfStudent}</td>
-                                        </tr>
-                                    </tbody>
-                                </c:forEach>         
-                            </table>
-                        </c:if><br>
+                                <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
+                                    <a class="btn btn-danger" href="dashboardadmin.jsp" role="button">Cancel</a>
+                                </c:if>
+                                <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1' }">
+                                    <a class="btn btn-danger" href="dashboardteacher.jsp" role="button">Cancel</a>
+                                </c:if>
+                                <c:if test="${sessionScope.LOGIN_USER.role =='S' || sessionScope.LOGIN_USER.role =='S1' }">
+                                    <a class="btn btn-danger" href="dashboardstudent.jsp" role="button">Cancel</a>
+                                </c:if> 
+                            </form>
+                        </div>
                     </div>
                     <!-- /.container-fluid -->
                 </div>

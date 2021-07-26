@@ -46,7 +46,7 @@ public class QuizDAO {
                     if (listQuiz == null) {
                         listQuiz = new ArrayList<>();
                     }
-                    listQuiz.add(new QuizDTO(QuizID, Name, NumberOfQuestions, Description , TotalMark, AuthorID, Status, ClassID));
+                    listQuiz.add(new QuizDTO(QuizID, Name, NumberOfQuestions, Description, TotalMark, AuthorID, Status, ClassID));
 
                 }
             }
@@ -247,15 +247,16 @@ public class QuizDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "INSERT INTO tblQuiz(Name, NumberOfQuestions, Description, TotalMark, AuthorID, Status, ClassID ) "
-                        + " VALUES(\'?\',\'?\',\'?\',\'?\',\'?\',\'1\',\'?\')";
+                        + " VALUES(\'?\',\'?\',\'?\',\'?\',\'?\',\'?\',\'?\')";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, quiz.getName());
                 stm.setString(2, quiz.getNumberOfQuestions());
                 stm.setString(3, quiz.getDescription());
                 stm.setString(4, quiz.getTotalMark());
-                stm.setString(5, quiz.getTotalMark());
-                stm.setString(6, quiz.getAuthorID());
-                stm.setString(7, quiz.getClassID());
+                stm.setString(5, quiz.getAuthorID());
+                stm.setByte(5, (byte) Integer.parseInt(quiz.getStatus()));
+                stm.setString(6, quiz.getClassID());
+                stm.executeUpdate();
             }
         } catch (Exception e) {
 
@@ -268,7 +269,7 @@ public class QuizDAO {
             }
         }
     }
-    
+
     public void insertQD(QuizDetailDTO quiz) throws SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -282,7 +283,7 @@ public class QuizDAO {
                 stm.setString(2, quiz.getQuestionID());
                 stm.setString(3, quiz.getTime());
                 stm.setString(4, quiz.getMark());
-              
+
             }
         } catch (Exception e) {
 

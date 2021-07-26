@@ -35,7 +35,7 @@ public class LectureDAO {
                     if (listCate == null) {
                         listCate = new ArrayList<>();
                     }
-                    listCate.add(new LectureDTO(lectureID, lectureName, description, courseID, classID, status ));
+                    listCate.add(new LectureDTO(lectureID, lectureName, description, courseID, classID, status));
 
                 }
             }
@@ -88,7 +88,7 @@ public class LectureDAO {
         return check;
     }
 
-    public boolean update (LectureDTO cate) throws SQLException {
+    public boolean update(LectureDTO cate) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -163,10 +163,10 @@ public class LectureDAO {
                         + " VALUES(?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, cate.getLectureName());
-                stm.setString(2, cate.getStatus());
-                stm.setString(3, cate.getClassID());
-                stm.setString(4, cate.getDescription());
-                stm.setString(5, cate.getCourseID());
+                stm.setByte(5, (byte) Integer.parseInt(cate.getStatus()));
+                stm.setString(4, cate.getClassID());
+                stm.setString(2, cate.getDescription());
+                stm.setString(3, cate.getCourseID());
                 stm.executeQuery();
             }
         } catch (Exception e) {
