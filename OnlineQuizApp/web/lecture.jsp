@@ -483,11 +483,11 @@
                                             <td>
                                                 <form action="LectureUpdateController">
                                                     <input type="submit" class="btn btn-success" name="action" value="Update"/>
-                                                    <input type="hidden" name="questionID" value="${question.lectureID}"/>
-                                                    <input type="hidden" name="name" value="${question.lectureName}"/>
+                                                    <input type="hidden" name="lectureID" value="${question.lectureID}"/>
+                                                    <input type="hidden" name="lectureName" value="${question.lectureName}"/>
                                                     <input type="hidden" name="description" value="${question.description}"/>
-                                                    <input type="hidden" name="authorID" value="${question.courseID}"/>
-                                                    <input type="hidden" name="categoryID" value="${question.classID}"/>
+                                                    <input type="hidden" name="courseID" value="${question.courseID}"/>
+                                                    <input type="hidden" name="classID" value="${question.classID}"/>
                                                     <input type="hidden" name="status" value="${question.status}"/>
                                                     <input type="hidden" name="search" value="${param.search}"/>
                                                     <input type="hidden" name="cate" value="${param.cate}"/>

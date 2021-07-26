@@ -8,14 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.onlinequizapp.daos.ClassDAO;
-import org.onlinequizapp.dtos.ClassDTO;
+import org.onlinequizapp.daos.LectureDAO;
 
-@WebServlet(name = "ClassDeleteController", urlPatterns = {"/ClassDeleteController"})
+@WebServlet(name = "LectureDeleteController", urlPatterns = {"/LectureDeleteController"})
 public class LectureDeleteController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "ClassSearchController";
+    private static final String SUCCESS = "LectureSearchController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,8 +34,8 @@ public class LectureDeleteController extends HttpServlet {
         if (action.equals("Delete")) {
             try {
                 if (!request.getParameter("status").equals("1")) {
-                    String classID = request.getParameter("classID");
-                    ClassDAO dao = new ClassDAO();
+                    String classID = request.getParameter("lectureID");
+                    LectureDAO dao = new LectureDAO();
                     boolean checkDelete = dao.delete(classID);
                     if (checkDelete) {
                         request.setAttribute("DELETE_SUCCESS", "Delete Success!");
@@ -46,7 +45,7 @@ public class LectureDeleteController extends HttpServlet {
                         url = SUCCESS;
                     }
                 } else {
-                    request.setAttribute("DELETE_ERROR", "Class is being used!");
+                    request.setAttribute("DELETE_ERROR", "Lecture is available!");
                     url = SUCCESS;
                 }
             } catch (Exception e) {
