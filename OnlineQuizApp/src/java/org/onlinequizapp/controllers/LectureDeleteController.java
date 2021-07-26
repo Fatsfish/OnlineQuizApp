@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
@@ -12,18 +7,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.onlinequizapp.daos.ClassDAO;
-import org.onlinequizapp.daos.CourseDAO;
+import org.onlinequizapp.dtos.ClassDTO;
 
-/**
- *
- * @author User-PC
- */
-@WebServlet(name = "CourseDeleteController", urlPatterns = {"/CourseDeleteController"})
-public class CourseDeleteController extends HttpServlet {
+@WebServlet(name = "ClassDeleteController", urlPatterns = {"/ClassDeleteController"})
+public class LectureDeleteController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "CourseSearchController";
+    private static final String SUCCESS = "ClassSearchController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,12 +30,13 @@ public class CourseDeleteController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        String check = request.getParameter("check");
         String action = request.getParameter("action");
         if (action.equals("Delete")) {
             try {
                 if (!request.getParameter("status").equals("1")) {
-                    String classID = request.getParameter("courseID");
-                    CourseDAO dao = new CourseDAO();
+                    String classID = request.getParameter("classID");
+                    ClassDAO dao = new ClassDAO();
                     boolean checkDelete = dao.delete(classID);
                     if (checkDelete) {
                         request.setAttribute("DELETE_SUCCESS", "Delete Success!");
@@ -53,7 +46,7 @@ public class CourseDeleteController extends HttpServlet {
                         url = SUCCESS;
                     }
                 } else {
-                    request.setAttribute("DELETE_ERROR", "Course is being used!");
+                    request.setAttribute("DELETE_ERROR", "Class is being used!");
                     url = SUCCESS;
                 }
             } catch (Exception e) {

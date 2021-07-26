@@ -1,29 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.onlinequizapp.daos.ClassDAO;
-import org.onlinequizapp.daos.CourseDAO;
+import org.onlinequizapp.dtos.ClassDTO;
 
-/**
- *
- * @author User-PC
- */
-@WebServlet(name = "CourseDeleteController", urlPatterns = {"/CourseDeleteController"})
-public class CourseDeleteController extends HttpServlet {
+@WebServlet(name = "ClassSearchController", urlPatterns = {"/ClassSearchController"})
+public class LectureSearchController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "CourseSearchController";
+    private static final String SUCCESS = "class.jsp";
+    private static final String COURSE = "courseAdd.jsp";
+    private static final String ERROR = "404.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,33 +33,42 @@ public class CourseDeleteController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        String action = request.getParameter("action");
-        if (action.equals("Delete")) {
+        String check = request.getParameter("check");
+        String search = request.getParameter("search");
+        if (check.equals("Search")) {
             try {
-                if (!request.getParameter("status").equals("1")) {
-                    String classID = request.getParameter("courseID");
-                    CourseDAO dao = new CourseDAO();
-                    boolean checkDelete = dao.delete(classID);
-                    if (checkDelete) {
-                        request.setAttribute("DELETE_SUCCESS", "Delete Success!");
-                        url = SUCCESS;
-                    } else {
-                        request.setAttribute("DELETE_ERROR", "Cannot delete!");
-                        url = SUCCESS;
-                    }
-                } else {
-                    request.setAttribute("DELETE_ERROR", "Course is being used!");
+                ClassDAO dao = new ClassDAO();
+                List<ClassDTO> list = dao.getList(search);
+                if (list != null) {
+                    request.setAttribute("LIST_CLASS", list);
                     url = SUCCESS;
                 }
-            } catch (Exception e) {
-
+            } catch (SQLException e) {
+                log("Error at ClassSearchController: " + e.toString());
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
+        } else if (check.equals("Course")) {
+            try {
+                String search2 = request.getParameter("search");
+                ClassDAO dao = new ClassDAO();
+                List<ClassDTO> list = dao.getList(search2);
+                if (list != null) {
+                    request.setAttribute("LIST_COURSE", list);
+                    url = COURSE;
+                }
+            } catch (SQLException e) {
+                log("Error at ClassSearchController: " + e.toString());
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
+        } else {
+            request.setAttribute("LIST_CLASS_ERROR", "ERROR at ClassSearchController");
+            url = ERROR;
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

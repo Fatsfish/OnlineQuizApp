@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
@@ -13,17 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.onlinequizapp.daos.ClassDAO;
-import org.onlinequizapp.daos.CourseDAO;
+import org.onlinequizapp.dtos.ClassDTO;
 
-/**
- *
- * @author User-PC
- */
-@WebServlet(name = "CourseDeleteController", urlPatterns = {"/CourseDeleteController"})
-public class CourseDeleteController extends HttpServlet {
+@WebServlet(name = "ClassUpdateController", urlPatterns = {"/ClassUpdateController"})
+public class LectureUpdateController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "CourseSearchController";
+    private static final String SUCCESS = "ClassSearchController";
+    private static final String ERROR = "updateClass.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,33 +29,46 @@ public class CourseDeleteController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        String check = request.getParameter("check");
         String action = request.getParameter("action");
-        if (action.equals("Delete")) {
+        ClassDTO categoryDTO = new ClassDTO("", "", "");
+        if (action.equals("Confirm Update Class")) {
             try {
-                if (!request.getParameter("status").equals("1")) {
-                    String classID = request.getParameter("courseID");
-                    CourseDAO dao = new CourseDAO();
-                    boolean checkDelete = dao.delete(classID);
-                    if (checkDelete) {
-                        request.setAttribute("DELETE_SUCCESS", "Delete Success!");
-                        url = SUCCESS;
-                    } else {
-                        request.setAttribute("DELETE_ERROR", "Cannot delete!");
+                String categoryID = request.getParameter("classID");
+                String NumberOfStudent = request.getParameter("numberOfStudent");
+                String status = request.getParameter("status");
+                ClassDAO dao = new ClassDAO();
+                ClassDTO category = new ClassDTO(categoryID, NumberOfStudent, status);
+                boolean flag = true;
+                if (NumberOfStudent.length() > 250 || NumberOfStudent.length() < 1) {
+                    flag = false;
+                    categoryDTO.setNumberOfStudent("Number Of Student must be [1-250]");
+                }
+                if (!(status.equals("1")) && !(status.equals("0"))) {
+                    flag = false;
+                    categoryDTO.setStatus("Status must be 0 or 1");
+                }
+                if (flag) {
+                    boolean update = dao.update(category);
+                    if (update) {
+                        request.setAttribute("UPDATE_SUCCESS", "Update Success!");
                         url = SUCCESS;
                     }
                 } else {
-                    request.setAttribute("DELETE_ERROR", "Course is being used!");
-                    url = SUCCESS;
+                    request.setAttribute("ERROR", categoryDTO);
                 }
             } catch (Exception e) {
 
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
+        } else if (action.equals("Update")) {
+            request.getRequestDispatcher(url).forward(request, response);
         }
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
