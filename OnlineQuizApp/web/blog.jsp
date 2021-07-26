@@ -434,39 +434,41 @@
                                 </thead>
                                 <tbody>
                                     <c:forEach var="blog" varStatus="counter" items="${requestScope.LIST_BLOG}">
-                                        <tr>
-                                            <td>${counter.count}</td>
-                                            <td>${blog.blogID}</td>
-                                            <td>${blog.title}</td>
-                                            <td>${blog.authorID}</td>
-                                            <td>${blog.categoryID}</td>
-                                            <td>${blog.content}</td>
-                                            <td>${blog.image}</td>
-                                            <td>${blog.status}</td>
-                                            <td>                                    
-                                                <form action="BlogDeleteController">
-                                                    <input type="hidden" name="searchBlog" value="${param.search}"/>
-                                                    <input type="hidden" name="blogID" value="${blog.blogID}"/>
-                                                    <input type="hidden" name="status" value="${blog.status}"/>
-                                                    <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
+                                        <c:if test="${blog.authorID eq sessionScope.LOGIN_USER.userID || blog.authorID == sessionScope.LOGIN_USER.userID}">
+                                            <tr>
+                                                <td>${counter.count}</td>
+                                                <td>${blog.blogID}</td>
+                                                <td>${blog.title}</td>
+                                                <td>${blog.authorID}</td>
+                                                <td>${blog.categoryID}</td>
+                                                <td>${blog.content}</td>
+                                                <td>${blog.image}</td>
+                                                <td>${blog.status}</td>
+                                                <td>                                    
+                                                    <form action="BlogDeleteController">
+                                                        <input type="hidden" name="searchBlog" value="${param.search}"/>
+                                                        <input type="hidden" name="blogID" value="${blog.blogID}"/>
+                                                        <input type="hidden" name="status" value="${blog.status}"/>
+                                                        <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form action="BlogUpdateController">
+                                                        <input type="submit" class="btn btn-success" name="action" value="Update"/>
+                                                        <input type="hidden" name="check" value="updateBlog" >
+                                                        <input type="hidden" name="blogID" value="${blog.blogID}"/>
+                                                        <input type="hidden" name="title" value="${blog.title}"/>
+                                                        <input type="hidden" name="authorID" value="${blog.authorID}"/>
+                                                        <input type="hidden" name="categoryID" value="${blog.categoryID}"/>
+                                                        <input type="hidden" name="content" value="${blog.content}"/>
+                                                        <input type="hidden" name="image" value="${blog.image}"/>
+                                                        <input type="hidden" name="status" value="${blog.status}"/>
+                                                        <input type="hidden" name="searchBlog" value="${param.search}"/>
+                                                    </form>
+                                                </td>
                                                 </form>
-                                            </td>
-                                            <td>
-                                                <form action="BlogUpdateController">
-                                                    <input type="submit" class="btn btn-success" name="action" value="Update"/>
-                                                    <input type="hidden" name="check" value="updateBlog" >
-                                                    <input type="hidden" name="blogID" value="${blog.blogID}"/>
-                                                    <input type="hidden" name="title" value="${blog.title}"/>
-                                                    <input type="hidden" name="authorID" value="${blog.authorID}"/>
-                                                    <input type="hidden" name="categoryID" value="${blog.categoryID}"/>
-                                                    <input type="hidden" name="content" value="${blog.content}"/>
-                                                    <input type="hidden" name="image" value="${blog.image}"/>
-                                                    <input type="hidden" name="status" value="${blog.status}"/>
-                                                    <input type="hidden" name="searchBlog" value="${param.search}"/>
-                                                </form>
-                                            </td>
-                                            </form>
-                                        </tr>
+                                            </tr>
+                                        </c:if>
                                     </c:forEach>    
                                 </tbody>
                             </table>
