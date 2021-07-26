@@ -2,6 +2,8 @@
 <%@page import="org.onlinequizapp.daos.LectureDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="org.onlinequizapp.dtos.LectureDTO"%>
+<%@page import="org.onlinequizapp.dtos.CourseDTO"%>
+<%@page import="org.onlinequizapp.dtos.ClassDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -289,63 +291,61 @@
                                 <button type="submit" class="btn btn-primary">Create</button>
                                 <a href="dashboardadmin.jsp" class="btn btn-danger">Cancel</a>
                             </form>
-                        </div>
-
-                        <br>
-                        <c:if test="${requestScope.LIST_COURSE != null && not empty requestScope.LIST_COURSE}">                       
-                            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
-                                <h4>Course List</h4>
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Course ID</th>
-                                        <th>Author ID</th>
-                                        <th>Status</th>
-                                        <th>Category ID</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_COURSE}">
+                            <c:if test="${requestScope.LIST_COURSE != null && not empty requestScope.LIST_COURSE}">                       
+                                <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                                    <h4>Course List</h4>
+                                    <thead>
                                         <tr>
-                                            <td>${counter.count}</td>
-                                            <td>${category.courseID}</td>
-                                            <td>${category.authorID}</td>
-                                            <td>${category.status}</td>
-                                            <td>${category.categoryID}</td>
-                                            <td>${category.courseName}</td>
-                                            <td>${category.description}</td>
+                                            <th>No</th>
+                                            <th>Course ID</th>
+                                            <th>Author ID</th>
+                                            <th>Status</th>
+                                            <th>Category ID</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
                                         </tr>
-                                    </tbody>
-                                </c:forEach>         
-                            </table>
-                        </c:if><br>
+                                    </thead>
 
-                        <c:if test="${requestScope.LIST_CLASS != null && not empty requestScope.LIST_CLASS}">                       
-                            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
-                                <h4>Class List</h4>
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Class ID</th>
-                                        <th>Number of Student</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
+                                    <tbody>
+                                        <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_COURSE}">
+                                            <tr>
+                                                <td>${counter.count}</td>
+                                                <td>${category.courseID}</td>
+                                                <td>${category.authorID}</td>
+                                                <td>${category.status}</td>
+                                                <td>${category.categoryID}</td>
+                                                <td>${category.courseName}</td>
+                                                <td>${category.description}</td>
+                                            </tr>
+                                        </tbody>
+                                    </c:forEach>         
+                                </table>
+                            </c:if><br>
 
-                                <tbody>
-                                    <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_CLASS}">
+                            <c:if test="${requestScope.LIST_CLASS != null && not empty requestScope.LIST_CLASS}">                       
+                                <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                                    <h4>Class List</h4>
+                                    <thead>
                                         <tr>
-                                            <td>${counter.count}</td>
-                                            <td>${category.classID}</td>
-                                            <td>${category.numberOfStudent}</td>
-                                            <td>${category.status}</td></tr>
+                                            <th>No</th>
+                                            <th>Class ID</th>
+                                            <th>Number of Student</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_CLASS}">
+                                            <tr>
+                                                <td>${counter.count}</td>
+                                                <td>${category.classID}</td>
+                                                <td>${category.numberOfStudent}</td>
+                                                <td>${category.status}</td></tr>
+                                            </c:forEach>   
                                     </tbody>
-                                </c:forEach>         
-                            </table>
-                        </c:if><br>
+                                </table>
+                            </c:if>
+                        </div>
                     </div>
                     <!-- /.container-fluid -->
                 </div>

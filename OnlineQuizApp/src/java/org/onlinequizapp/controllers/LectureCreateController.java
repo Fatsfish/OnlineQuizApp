@@ -62,14 +62,14 @@ public class LectureCreateController extends HttpServlet {
         try {
             ClassDAO dao = new ClassDAO();
             list1 = dao.getList("");
+
+        } catch (SQLException e) {
+            log("Error at ClassSearchController: " + e.toString());
+        } finally {
             if (list1 != null) {
                 request.setAttribute("LIST_CLASS", list1);
                 url = SUCCESS;
             }
-        } catch (SQLException e) {
-            log("Error at ClassSearchController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
         }
         if (check.equals("lecture")) {
             LectureDTO classDTO = new LectureDTO("", "", "", "", "", "");
@@ -88,6 +88,10 @@ public class LectureCreateController extends HttpServlet {
                 }
                 boolean flag = true;
                 if (LectureName.length() > 250 || LectureName.length() < 1) {
+                    flag = false;
+                    classDTO.setLectureName("Lecture Name must be [1-250]");
+                }
+                if (Description.length() > 250 || Description.length() < 1) {
                     flag = false;
                     classDTO.setLectureName("Lecture Name must be [1-250]");
                 }
@@ -111,6 +115,8 @@ public class LectureCreateController extends HttpServlet {
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
+        } else {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

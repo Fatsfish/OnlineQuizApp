@@ -81,7 +81,7 @@
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="courseAdd.jsp">Create Course</a>
-                            <a class="collapse-item" href="LectureCreateController">Create Lecture</a>
+                            <a class="collapse-item" href="LectureCreateController?check=">Create Lecture</a>
                             <a class="collapse-item" href="sourceAdd.jsp">Create Resource</a>
                             <a class="collapse-item" href="classAdd.jsp">Create Class</a>
                         </div>
