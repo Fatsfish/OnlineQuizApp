@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
@@ -9,16 +14,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.onlinequizapp.daos.CategoryDAO;
 import org.onlinequizapp.daos.LectureDAO;
-import org.onlinequizapp.dtos.LectureDTO;
 import org.onlinequizapp.daos.SourceDAO;
+import org.onlinequizapp.dtos.CategoryBlogDTO;
+import org.onlinequizapp.dtos.CourseDTO;
+import org.onlinequizapp.dtos.LectureDTO;
 import org.onlinequizapp.dtos.SourceDTO;
+import org.onlinequizapp.dtos.UserDTO;
 
-@WebServlet(name = "SourceUpdateController", urlPatterns = {"/SourceUpdateController"})
-public class SourceUpdateController extends HttpServlet {
+/**
+ *
+ * @author User-PC
+ */
+@WebServlet(name = "SourceCreateController", urlPatterns = {"/SourceCreateController"})
+public class SourceCreateController extends HttpServlet {
 
-    private static final String SUCCESS = "SourceSearchController";
-    private static final String ERROR = "updateSource.jsp";
+    private static final String SUCCESS = "sourceAdd.jsp";
+    private static final String ERROR = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,69 +47,80 @@ public class SourceUpdateController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        String check = request.getParameter("check");
-        String cate = request.getParameter("cate");
-        String action = request.getParameter("action");
+        String function = request.getParameter("function");
         LectureDAO dao1 = new LectureDAO();
-        List<LectureDTO> list = null;
+        List<LectureDTO> list1 = null;
         try {
-            list = dao1.getList("");
+            LectureDAO dao = new LectureDAO();
+            list1 = dao.getList("");
+
         } catch (SQLException e) {
-            log("Error at CategorySearchController: " + e.toString());
+            log("Error at ClassSearchController: " + e.toString());
         } finally {
-            if (list != null) {
-                request.setAttribute("LIST_SOURCE", list);
+            if (list1 != null) {
+                request.setAttribute("LIST_CLASS", list1);
+                url = SUCCESS;
             }
         }
-        if (action.equals("Confirm Update Source")) {
+        if (function.equals("source")) {
+            SourceDTO source = new SourceDTO("", "", "", "", "","","");
             try {
-                String SourceID = request.getParameter("SourceID");
-                String LectureID = request.getParameter("LectureID");
-                String FileDoc = request.getParameter("FileDoc");
-                String FilePic = request.getParameter("FilePic");
-                String FileVid = request.getParameter("FileVid");
-                String Reference = request.getParameter("Reference");
-                String Status = request.getParameter("Status");
-                SourceDAO dao = new SourceDAO();
-                SourceDTO question = new SourceDTO(SourceID, LectureID, FileDoc, FilePic, FileVid, Reference, Status);
+                String SourceID = request.getParameter("sourceID");
+                String LectureID = request.getParameter("lectureID");
+                String FileDoc = request.getParameter("fileDoc");
+                String FilePic = request.getParameter("filePic");
+                String FileVid = request.getParameter("fileVid");
+                String Reference = request.getParameter("feference");
+                String Status = request.getParameter("status");
+                if (Status == null) {
+                    Status = "0";
+                } else if (Status.equals("on")) {
+                    Status = "1";
+                } else {
+                    Status = "0";
+                }
                 boolean flag = true;
                 if (FileDoc.length() > 250 || FileDoc.length() < 1) {
                     flag = false;
-                    question.setFileDoc("File must be [1-250]");
+                    source.setFileDoc("File must be [1-250]");
                 }
                 if (FilePic.length() > 250 || FilePic.length() < 1) {
                     flag = false;
-                    question.setFilePic("File must be [1-250]");
+                    source.setFilePic("File must be [1-250]");
                 }
                 if (FileVid.length() > 250 || FileVid.length() < 1) {
                     flag = false;
-                    question.setFileVid("File must be [1-250]");
+                    source.setFileVid("File must be [1-250]");
                 }
                 if (!(Status.equals("1")) && !(Status.equals("0"))) {
                     flag = false;
-                    question.setStatus("Status must be 0 or 1");
+                    source.setStatus("Status must be 0 or 1");
                 }
                 if (flag) {
-                    boolean update = dao.update(question);
-                    if (update) {
-                        request.setAttribute("UPDATE_SUCCESS", "Update Success!");
-                        url = SUCCESS;
-                    }
+                    SourceDAO dao = new SourceDAO();
+                    SourceDTO course = new SourceDTO("", LectureID, FileDoc, FilePic, FileVid, Reference, Status);
+                    dao.insert(course);
+                    request.setAttribute("CREATE_SUCCESS", "Create Success!");
+                    url = SUCCESS;
                 } else {
-                    request.setAttribute("ERROR", question);
+                    request.setAttribute("CREATE_ERROR", "Create Fail!");
+                    url = SUCCESS;
                 }
             } catch (Exception e) {
-
+                log("Error at CreateController: " + e.toString());
+                if (e.toString().contains("duplicate")) {
+                    source.setSourceID("Source duplicate!");
+                    request.setAttribute("ERROR", source);
+                };
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
-        } else if (action.equals("Update")) {
+        } else {
             request.getRequestDispatcher(url).forward(request, response);
-        }
-
+        } 
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
