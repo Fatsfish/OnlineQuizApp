@@ -114,7 +114,7 @@
 
                 <!-- Nav Item - Marks -->
                 <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" href="score.jsp">
                         <i class="fas fa-fw fa-chart-area"></i>
                         <span>Marks</span></a>
                 </li>

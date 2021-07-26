@@ -10,18 +10,18 @@ import java.time.format.DateTimeFormatter;
  */
 public class ScoreDTO implements Serializable{
 
-    private String QuizID;
-    private String UserID;
-    private Timestamp StartTime;
-    private Timestamp EndTime;
-    private String Mark;
+    private String quizID;
+    private String userID;
+    private Timestamp startTime;
+    private Timestamp endTime;
+    private String mark;
 
     public ScoreDTO(String QuizID, String UserID, Timestamp StartTime, Timestamp EndTime, String Mark) {
-        this.QuizID = QuizID;
-        this.UserID = UserID;
-        this.StartTime = StartTime;
-        this.EndTime = EndTime;
-        this.Mark = Mark;
+        this.quizID = QuizID;
+        this.userID = UserID;
+        this.startTime = StartTime;
+        this.endTime = EndTime;
+        this.mark = Mark;
 
     }
     
@@ -29,43 +29,43 @@ public class ScoreDTO implements Serializable{
     }
 
     public String getQuizID() {
-        return QuizID;
+        return quizID;
     }
 
     public void setQuizID(String QuizID) {
-        this.QuizID = QuizID;
+        this.quizID = QuizID;
     }
 
     public String getUserID() {
-        return UserID;
+        return userID;
     }
 
     public void setUserID(String UserID) {
-        this.UserID = UserID;
+        this.userID = UserID;
     }
 
     public Timestamp getStartTime() {
-        return StartTime;
+        return startTime;
     }
 
     public void setStartTime(Timestamp StartTime) {
-        this.StartTime = StartTime;
+        this.startTime = StartTime;
     }
 
     public Timestamp getEndTime() {
-        return EndTime;
+        return endTime;
     }
 
     public void setEndTime(Timestamp EndTime) {
-        this.EndTime = EndTime;
+        this.endTime = EndTime;
     }
 
     public String getMark() {
-        return Mark;
+        return mark;
     }
 
     public void setMark(String Mark) {
-        this.Mark = Mark;
+        this.mark = Mark;
     }
     
 }

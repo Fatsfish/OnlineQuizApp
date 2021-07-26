@@ -458,9 +458,9 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Quiz ID</th>
-                                        <th>UserID</th>
-                                        <th>StartTime</th>
-                                        <th>EndTime</th>
+                                        <th>User ID</th>
+                                        <th>Start Time</th>
+                                        <th>End Time</th>
                                         <th>Mark</th>
                                     </tr>
                                 </thead>
@@ -468,29 +468,11 @@
                                     <c:forEach var="lop" varStatus="counter" items="${requestScope.LIST_SCORE}">
                                         <tr>
                                             <td>${counter.count}</td>
-                                            <td>${lop.classID}</td>
-                                            <td>${lop.numberOfStudent}</td>
-                                            <td>${lop.status}</td>
-                                            <td>
-                                                <form action="ClassDeleteController">
-                                                    <input type="hidden" name="search" value="${param.search}"/>
-                                                    <input type="hidden" name="classID" value="${lop.classID}"/>
-                                                    <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
-                                                    <input type="hidden" name="status" value="${lop.status}"/>
-                                                    <input type="hidden" name="check" value="${param.check}"/>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="ClassUpdateController">
-                                                    <input type="submit" class="btn btn-success" name="action" value="Update"/>
-                                                    <input type="hidden" name="classID" value="${lop.classID}"/>
-                                                    <input type="hidden" name="numberOfStudent" value="${lop.numberOfStudent}"/>
-                                                    <input type="hidden" name="status" value="${lop.status}"/>
-                                                    <input type="hidden" name="search" value="${param.search}"/>
-                                                    <input type="hidden" name="cate" value="${param.cate}"/>
-                                                    <input type="hidden" name="check" value="${param.check}"/>
-                                                </form>
-                                            </td>
+                                            <td>${lop.quizID}</td>
+                                            <td>${lop.userID}</td>
+                                            <td>${lop.startTime}</td>
+                                            <td>${lop.endTime}</td>
+                                            <td>${lop.mark}</td>
                                         </tr>
                                     </tbody>
                                 </c:forEach>         

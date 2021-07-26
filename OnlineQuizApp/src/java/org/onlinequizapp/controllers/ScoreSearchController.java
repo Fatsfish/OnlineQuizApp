@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -13,15 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.onlinequizapp.daos.ScoreDAO;
-import org.onlinequizapp.daos.UserDAO;
 import org.onlinequizapp.dtos.ScoreDTO;
-import org.onlinequizapp.dtos.UserDTO;
 
-/**
- *
- * @author Mr Hien Khoa
- */
 @WebServlet(name = "ScoreSearchController", urlPatterns = {"/ScoreSearchController"})
 public class ScoreSearchController extends HttpServlet {
 
@@ -41,22 +32,28 @@ public class ScoreSearchController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        /*try {
-            String search = request.getParameter("search");
-            ScoreDAO dao = new ScoreDAO();
-            List<ScoreDTO> list = dao.getList(search);
-            if (list != null) {
-                request.setAttribute("LIST_SCORE", list);
-                url = SUCCESS;
+        String check = request.getParameter("check");
+        String search = request.getParameter("search");
+        if (check.equals("Search")) {
+            try {
+                ScoreDAO dao = new ScoreDAO();
+                List<ScoreDTO> list = dao.getList(search);
+                if (list != null) {
+                    request.setAttribute("LIST_SCORE", list);
+                    url = SUCCESS;
+                }
+            } catch (SQLException e) {
+                log("Error at ClassSearchController: " + e.toString());
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
             }
-        } catch (SQLException e) {
-            log("Error at SearchController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        }*/
+        } else {
+            request.setAttribute("LIST_SCORE_ERROR", "ERROR at ClassSearchController");
+            url = ERROR;
+        }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

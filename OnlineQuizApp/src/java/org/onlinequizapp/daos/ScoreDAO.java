@@ -158,8 +158,48 @@ public class ScoreDAO {
         }
     }
 
-    public List<ScoreDTO> getList(String search) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<ScoreDTO> getList(String search) throws SQLException {
+        List<ScoreDTO> listScore = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Select QuizID, Name, userID, startTime, endTime, Mark "
+                        + " from tblScore WHERE UserID like ?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, "%" + search + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String QuizID = rs.getString("quizID");
+                    String UserID = rs.getString("userID");
+                    Timestamp StartTime = rs.getTimestamp("startTime");
+                    Timestamp EndTime = rs.getTimestamp("endTime");
+                    String Mark = rs.getString("mark");
+                    if (listScore == null) {
+                        listScore = new ArrayList<>();
+                    }
+                    listScore.add(new ScoreDTO(QuizID, UserID, StartTime, EndTime, Mark));
+
+                }
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return listScore;
     }
 
 }
