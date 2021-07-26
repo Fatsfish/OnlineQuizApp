@@ -434,7 +434,7 @@
                                 </thead>
                                 <tbody>
                                     <c:forEach var="blog" varStatus="counter" items="${requestScope.LIST_BLOG}">
-                                        <c:if test="${lop.authorID eq sessionScope.LOGIN_USER.userID || lop.authorID == sessionScope.LOGIN_USER.userID}">
+                                        <c:if test="${blog.authorID eq sessionScope.LOGIN_USER.userID || blog.authorID == sessionScope.LOGIN_USER.userID}">
                                             <tr>
                                                 <td>${counter.count}</td>
                                                 <td>${blog.blogID}</td>
