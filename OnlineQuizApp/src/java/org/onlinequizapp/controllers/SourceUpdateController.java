@@ -44,18 +44,18 @@ public class SourceUpdateController extends HttpServlet {
             log("Error at CategorySearchController: " + e.toString());
         } finally {
             if (list != null) {
-                request.setAttribute("LIST_SOURCE", list);
+                request.setAttribute("LIST_LECTURE", list);
             }
         }
         if (action.equals("Confirm Update Source")) {
             try {
-                String SourceID = request.getParameter("SourceID");
-                String LectureID = request.getParameter("LectureID");
-                String FileDoc = request.getParameter("FileDoc");
-                String FilePic = request.getParameter("FilePic");
-                String FileVid = request.getParameter("FileVid");
-                String Reference = request.getParameter("Reference");
-                String Status = request.getParameter("Status");
+                String SourceID = request.getParameter("sourceID");
+                String LectureID = request.getParameter("lectureID");
+                String FileDoc = request.getParameter("fileDoc");
+                String FilePic = request.getParameter("filePic");
+                String FileVid = request.getParameter("fileVid");
+                String Reference = request.getParameter("reference");
+                String Status = request.getParameter("status");
                 SourceDAO dao = new SourceDAO();
                 SourceDTO question = new SourceDTO(SourceID, LectureID, FileDoc, FilePic, FileVid, Reference, Status);
                 boolean flag = true;

@@ -48,7 +48,6 @@ public class SourceCreateController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String function = request.getParameter("function");
-        LectureDAO dao1 = new LectureDAO();
         List<LectureDTO> list1 = null;
         try {
             LectureDAO dao = new LectureDAO();
@@ -58,19 +57,17 @@ public class SourceCreateController extends HttpServlet {
             log("Error at ClassSearchController: " + e.toString());
         } finally {
             if (list1 != null) {
-                request.setAttribute("LIST_CLASS", list1);
-                url = SUCCESS;
+                request.setAttribute("LIST_LECTURE", list1);
             }
         }
         if (function.equals("source")) {
-            SourceDTO source = new SourceDTO("", "", "", "", "","","");
+            SourceDTO source = new SourceDTO("", "", "", "", "", "", "");
             try {
-                String SourceID = request.getParameter("sourceID");
                 String LectureID = request.getParameter("lectureID");
                 String FileDoc = request.getParameter("fileDoc");
                 String FilePic = request.getParameter("filePic");
                 String FileVid = request.getParameter("fileVid");
-                String Reference = request.getParameter("feference");
+                String Reference = request.getParameter("reference");
                 String Status = request.getParameter("status");
                 if (Status == null) {
                     Status = "0";
@@ -116,8 +113,8 @@ public class SourceCreateController extends HttpServlet {
                 request.getRequestDispatcher(url).forward(request, response);
             }
         } else {
-            request.getRequestDispatcher(url).forward(request, response);
-        } 
+            request.getRequestDispatcher(SUCCESS).forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

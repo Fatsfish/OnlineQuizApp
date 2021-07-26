@@ -8,6 +8,7 @@
 <%@page import="org.onlinequizapp.daos.SourceDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="org.onlinequizapp.dtos.SourceDTO"%>
+<%@page import="org.onlinequizapp.dtos.LectureDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -261,7 +262,7 @@
                                         <c:if test="${requestScope.LIST_LECTURE != null && not empty requestScope.LIST_LECTURE}">
                                             <c:forEach var="course" varStatus="counter" items="${requestScope.LIST_LECTURE}">
                                                 <c:if test="${course.status==1}">
-                                                    <option value="${course.LectureID}">${counter.count} - ${course.lectureName}</option>
+                                                    <option value="${course.lectureID}">${counter.count} - ${course.lectureName}</option>
                                                 </c:if>
                                             </c:forEach>
                                         </c:if>
@@ -291,7 +292,7 @@
                                 <button type="submit" class="btn btn-primary">Create</button>
                                 <a href="dashboardadmin.jsp" class="btn btn-danger">Cancel</a>
                             </form>
-                        </div>
+                        </div><br>
 
 
                         <c:if test="${requestScope.LIST_LECTURE != null && not empty requestScope.LIST_LECTURE}">                       

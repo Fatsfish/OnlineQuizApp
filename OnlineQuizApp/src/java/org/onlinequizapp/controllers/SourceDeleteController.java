@@ -42,7 +42,7 @@ public class SourceDeleteController extends HttpServlet {
         if (action.equals("Delete")) {
             try {
                 if (!request.getParameter("status").equals("1")) {
-                    String QuestionID = request.getParameter("SourceID");
+                    String QuestionID = request.getParameter("sourceID");
                     SourceDAO dao = new SourceDAO();
                     boolean checkDelete = dao.deleteSource(QuestionID);
                     if (checkDelete) {

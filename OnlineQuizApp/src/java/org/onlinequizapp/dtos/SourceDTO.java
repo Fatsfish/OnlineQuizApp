@@ -13,81 +13,81 @@ import java.io.Serializable;
  */
 public class SourceDTO implements Serializable{
 
-    private String SourceID;
-    private String LectureID;
-    private String FileDoc;
-    private String FilePic;
-    private String FileVid;
-    private String Reference;
-    private String Status;
+    private String sourceID;
+    private String lectureID;
+    private String fileDoc;
+    private String filePic;
+    private String fileVid;
+    private String reference;
+    private String status;
 
     public SourceDTO(String SourceID, String LectureID, String FileDoc, String FilePic, String FileVid, String Reference, String Status) {
-        this.SourceID = SourceID;
-        this.LectureID = LectureID;
-        this.FileDoc = FileDoc;
-        this.FilePic = FilePic;
-        this.FileVid = FileVid;
-        this.Reference = Reference;
-        this.Status = Status;
+        this.sourceID = SourceID;
+        this.lectureID = LectureID;
+        this.fileDoc = FileDoc;
+        this.filePic = FilePic;
+        this.fileVid = FileVid;
+        this.reference = Reference;
+        this.status = Status;
     }
     
     public SourceDTO(){
     }
 
     public String getSourceID() {
-        return SourceID;
+        return sourceID;
     }
 
     public void setSourceID(String SourceID) {
-        this.SourceID = SourceID;
+        this.sourceID = SourceID;
     }
 
     public String getLectureID() {
-        return LectureID;
+        return lectureID;
     }
 
     public void setLectureID(String LectureID) {
-        this.LectureID = LectureID;
+        this.lectureID = LectureID;
     }
 
     public String getFileDoc() {
-        return FileDoc;
+        return fileDoc;
     }
 
     public void setFileDoc(String FileDoc) {
-        this.FileDoc = FileDoc;
+        this.fileDoc = FileDoc;
     }
 
     public String getFilePic() {
-        return FilePic;
+        return filePic;
     }
 
     public void setFilePic(String FilePic) {
-        this.FilePic = FilePic;
+        this.filePic = FilePic;
     }
 
     public String getFileVid() {
-        return FileVid;
+        return fileVid;
     }
 
     public void setFileVid(String FileVid) {
-        this.FileVid = FileVid;
+        this.fileVid = FileVid;
     }
 
     public String getReference() {
-        return Reference;
+        return reference;
     }
 
     public void setReference(String Reference) {
-        this.Reference = Reference;
+        this.reference = Reference;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String Status) {
-        this.Status = Status;
+        this.status = Status;
     }
     
 }

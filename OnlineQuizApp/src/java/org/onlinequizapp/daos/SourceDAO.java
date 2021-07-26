@@ -210,7 +210,7 @@ public class SourceDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblBlog( LectureID, FileDoc, FilePic, FileVid , Reference, Status) "
+                String sql = "INSERT INTO tblSource( LectureID, FileDoc, FilePic, FileVid , Reference, Status) "
                         + "VALUES(?,?,?,?,?,?) ";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, Integer.parseInt(source.getLectureID()));
