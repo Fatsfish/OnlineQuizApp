@@ -483,7 +483,7 @@
                             <table class="table table-bordered table-hover" width="100%" cellspacing="0">
                                 <h4>Quiz Category</h4>
                                 <thead>
-                                    <tr>
+                                    <tr class="text-center">
                                         <th>No</th>
                                         <th>Category ID</th>
                                         <th>Category Name</th>

@@ -387,23 +387,39 @@
 
 
                         <h1 class="h3 mb-2 text-gray-800">Blog Management</h1>
-                        <p class="mb-4">${requestScope.DELETE_BLOG_ERROR}</p>
+                        <div style="color: red" class="h5 mt-3" >
+                            <p class="mb-4">${requestScope.DELETE_ERROR}</p>
+                        </div>
+                        <div style="color: green" class="h5 mt-3">
+                            <p class="mb-4">${requestScope.DELETE_SUCCESS}</p>
+                            <p class="mb-4">${requestScope.UPDATE_SUCCESS}</p>
+                        </div>
                         <c:if test="${not empty param.search}">
-                            <form action="BlogSearchController">
-                                <p>Search</p> <input class="text" type="text" name="searchBlog" value="${param.search}"/>
-                                <input type="submit" value="Search"/>
+                            <form class="row g-3" action="BlogSearchController">
+                                <div class="col-auto">
+                                    <input type="hidden" name="check" value="Search" class="form-check-input" id="check">
+                                    <input class="form-control" type="text" name="searchBlog" placeholder="Search.." value="${param.search}"/>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="submit" class="btn btn-primary mb-3" value="Search"/>
+                                </div>
                             </form>
                         </c:if>
                         <c:if test="${empty param.search}">
-                            <form action="BlogSearchController">
-                                <p>Search</p> <input class="text" type="text" name="searchBlog" value=""/>
-                                <input type="submit" value="Search"/>
+                            <form class="row g-3" action="BlogSearchController">
+                                <div class="col-auto">
+                                    <input type="hidden" name="check" value="Search" class="form-check-input" id="check">
+                                    <input class="form-control" type="text" name="searchBlog" placeholder="Search.." value=""/>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="submit" class="btn btn-primary mb-3" value="Search"/>
+                                </div>
                             </form>
-                        </c:if>
+                        </c:if><br>
                         <c:if test="${requestScope.LIST_BLOG != null && not empty requestScope.LIST_BLOG}">                       
-                            <table width="100%" cellspacing="0">
+                            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
                                 <thead>
-                                    <tr>
+                                    <tr class="text-center">
                                         <th>No</th>
                                         <th>BlogID</th>
                                         <th>Title</th>
@@ -412,20 +428,10 @@
                                         <th>Content</th>
                                         <th>Image</th>
                                         <th>Status</th>
+                                        <th>Delete</th>
+                                        <th>Update</th>
                                     </tr>
                                 </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>BlogID</th>
-                                        <th>Title</th>
-                                        <th>AuthorID</th>
-                                        <th>CategoryID</th>
-                                        <th>Content</th>
-                                        <th>Image</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </tfoot>
                                 <tbody>
                                     <c:forEach var="blog" varStatus="counter" items="${requestScope.LIST_BLOG}">
                                         <tr>
@@ -442,12 +448,12 @@
                                                     <input type="hidden" name="searchBlog" value="${param.search}"/>
                                                     <input type="hidden" name="blogID" value="${blog.blogID}"/>
                                                     <input type="hidden" name="status" value="${blog.status}"/>
-                                                    <input type="submit" name="action" value="Delete"/>
+                                                    <input type="submit" class="btn btn-danger" name="action" value="Delete"/>
                                                 </form>
                                             </td>
                                             <td>
                                                 <form action="BlogUpdateController">
-                                                    <input type="submit" name="action" value="Update"/>
+                                                    <input type="submit" class="btn btn-success" name="action" value="Update"/>
                                                     <input type="hidden" name="check" value="updateBlog" >
                                                     <input type="hidden" name="blogID" value="${blog.blogID}"/>
                                                     <input type="hidden" name="title" value="${blog.title}"/>

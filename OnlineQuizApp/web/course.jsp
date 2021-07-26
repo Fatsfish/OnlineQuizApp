@@ -460,7 +460,7 @@
                             <table class="table table-bordered table-hover" width="100%" cellspacing="0">
                                 <h4>List of all Classes</h4>
                                 <thead>
-                                    <tr>
+                                    <tr class="text-center">
                                         <th>No</th>
                                         <th>Course ID</th>
                                         <th>Name</th>

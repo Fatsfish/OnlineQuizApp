@@ -292,7 +292,7 @@
                             <div class="table-responsive">-->
                      <!--class="table table-bordered" id="dataTable"--><table class="table table-bordered table-hover" width="100%" cellspacing="0">
                                       <thead>
-                                                <tr>
+                                                <tr class="text-center">
                                                     <th>No</th>
                                                     <th>User ID</th>
                                                     <th>Full Name</th>
@@ -302,17 +302,6 @@
                                                     <th>Update</th>
                                                 </tr>
                                         </thead>
-                                    <tfoot>
-                                        <tr>
-                                           <th>No</th>
-                                                    <th>User ID</th>
-                                                    <th>Full Name</th>
-                                                    <th>Role ID</th>
-                                                    <th>Password</th>
-                                                    <th>Delete</th>
-                                                    <th>Update</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                             <c:forEach var="user" varStatus="counter" items="${requestScope.LIST_USER}">
                                                 <form action="MainController">
