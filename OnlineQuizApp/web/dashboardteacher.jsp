@@ -87,23 +87,26 @@
 
             <!-- Nav Item - Quizzes Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
-                    aria-expanded="true" aria-controls="collapseQuizzes">
-                    <i class="fas fa-fw fa-edit"></i>
-                    <span>Quizzes</span>
-                </a>
-                <div id="collapseQuizzes" class="collapse" aria-labelledby="headingQuizzes"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Quizzes:</h6>
-                        <a class="collapse-item" href="utilities-color.html">All Quizzes</a>
-                        <a class="collapse-item" href="utilities-border.html">My Quizzes</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Create:</h6>
-                        <a class="collapse-item" href="404.html">Create Quiz</a>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
+                       aria-expanded="false" aria-controls="collapseQuizzes">
+                        <i class="fas fa-fw fa-edit"></i>
+                        <span>Quizzes</span>
+                    </a>
+                    <div id="collapseQuizzes" class="collapse" aria-labelledby="headingQuizzes"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Quizzes:</h6>
+                            <a class="collapse-item" href="question.jsp">All Question</a>
+                            <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
+                            <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
+                            
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Create:</h6>
+                            <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
+                            <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
 
             <!-- Nav Item - Students -->
             <li class="nav-item">
@@ -113,11 +116,11 @@
             </li>
 
             <!-- Nav Item - Marks -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Marks</span></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="score.jsp">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Marks</span></a>
+                </li>
             
             <!-- Nav Item - Category Collapse Menu -->
 
@@ -149,23 +152,23 @@
 
             <!-- Nav Item - Blogs Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs" aria-expanded="false"
-                    aria-controls="collapseBlogs">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Blogs</span>
-                </a>
-                <div id="collapseBlogs" class="collapse" aria-labelledby="headingBlogs"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Blogs:</h6>
-                        <a class="collapse-item" href="#">All Blogs</a>
-                        <a class="collapse-item" href="#">My Blogs</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Create:</h6>
-                        <a class="collapse-item" href="create-blog.jsp">Create Blog</a>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs"
+                       aria-expanded="false" aria-controls="collapseBlogs">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Blogs</span>
+                    </a>
+                    <div id="collapseBlogs" class="collapse" aria-labelledby="headingBlogs"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Blogs:</h6>
+                            <a class="collapse-item" href="all-blog.html">All Blogs</a>
+                            <a class="collapse-item" href="blog.jsp">My Blogs</a>
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Create:</h6>
+                            <a class="collapse-item" href="create-blog.jsp">Create Blog</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
