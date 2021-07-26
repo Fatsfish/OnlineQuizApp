@@ -245,7 +245,7 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Course Add</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Quiz Add</h1>
                             <div style="color: green" class="h5 mt-3">
                                 <p class="mb-4">${requestScope.CREATE_Q_SUCCESS}</p>
                             </div>
@@ -269,19 +269,19 @@
                                     <label for="Duration" class="form-label">Total Mark</label>
                                     <input type="number" class="form-control" name="mark" id="Duration">
                                 </div>
-                                <c:if test="${requestScope.LIST_CLASS != null && not empty requestScope.LIST_CLASS}">
-                                    <div>
-                                        <select name="classID" class="form-select" aria-label="Default select example">
-                                            <option selected>Choose class</option>
-                                            <option value="vvvv">None</option>
+                                <div>
+                                    <select name="classID" class="form-select" aria-label="Default select example">
+                                        <option selected>Choose class</option>
+                                        <option value="">None</option>
+                                        <c:if test="${requestScope.LIST_CLASS != null && not empty requestScope.LIST_CLASS}">
                                             <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_CLASS}">
                                                 <c:if test="${category.status==1}">
                                                     <option value="${category.classID}">Class ID - ${category.classID}</option>
                                                 </c:if>
                                             </c:forEach>
-                                        </select>
-                                    </div>
-                                </c:if>
+                                        </c:if>
+                                    </select>
+                                </div>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" name="status" class="form-check-input" id="status">
                                     <label class="form-check-label" for="status">Active</label>

@@ -24,6 +24,7 @@ import org.onlinequizapp.dtos.CategoryBlogDTO;
 import org.onlinequizapp.dtos.CategoryDTO;
 import org.onlinequizapp.dtos.ClassDTO;
 import org.onlinequizapp.dtos.QuizDTO;
+import org.onlinequizapp.dtos.QuizDetailDTO;
 import org.onlinequizapp.dtos.UserDTO;
 import org.onlinequizapp.dtos.UserError;
 
@@ -35,6 +36,7 @@ import org.onlinequizapp.dtos.UserError;
 public class QuizCreateController extends HttpServlet {
 
     private static final String SUCCESS = "quizAdd.jsp";
+    private static final String SUCCESS1 = "quizAdd.jsp";
     private static final String ERROR = "error.jsp";
 
     /**
@@ -60,14 +62,13 @@ public class QuizCreateController extends HttpServlet {
         try {
             ClassDAO dao = new ClassDAO();
             list = dao.getList("");
-            if (list != null) {
-                request.setAttribute("LIST_CLASS", list);
-                url = SUCCESS;
-            }
+
         } catch (SQLException e) {
             log("Error at ClassSearchController: " + e.toString());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            if (list != null) {
+                request.setAttribute("LIST_CLASS", list);
+            }
         }
         if (check.equals("quiz")) {
             QuizDTO categoryDTO = new QuizDTO("", "", "", "", "", "", "", "");
@@ -92,6 +93,9 @@ public class QuizCreateController extends HttpServlet {
                 if (description.length() > 250 || description.length() < 1) {
                     flag = false;
                     categoryDTO.setDescription("Description must be [1-250]");
+                }
+                if (Integer.parseInt(mark) < 0) {
+                    mark = "0";
                 }
                 if (flag) {
                     QuizDAO dao = new QuizDAO();
@@ -118,6 +122,45 @@ public class QuizCreateController extends HttpServlet {
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
+        } else if (check.equals("detail")) {
+            QuizDetailDTO quiz = new QuizDetailDTO("", "", "", "");
+            try {
+                String quizID = request.getParameter("quizID");
+                String questionID = request.getParameter("questionID");
+                String time = request.getParameter("time");
+                String mark = request.getParameter("mark");
+                boolean flag = true;
+                if (time.length() > 250 || time.length() < 1) {
+                    flag = false;
+                    quiz.setTime("Time must be [1-250]");
+                }
+                if (Integer.parseInt(mark) < 0) {
+                    mark = "0";
+                }
+                if (flag) {
+                    QuizDAO dao = new QuizDAO();
+                    quiz.setQuizID(quizID);
+                    quiz.setQuestionID(questionID);
+                    quiz.setTime(time);
+                    quiz.setMark(mark);
+                    dao.insertQD(quiz);
+                    request.setAttribute("CREATE_QD_SUCCESS", "Create Success!");
+                    url = SUCCESS1;
+                } else {
+                    request.setAttribute("CREATE_QD_ERROR", "Create Fail!");
+                    url = SUCCESS1;
+                }
+            } catch (Exception e) {
+                log("Error at CreateController: " + e.toString());
+                if (e.toString().contains("duplicate")) {
+                    quiz.setQuizID("Category Name duplicate!");
+                    request.setAttribute("ERROR", quiz);
+                };
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
+        } else {
+            request.getRequestDispatcher(SUCCESS).forward(request, response);
         }
     }
 

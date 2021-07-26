@@ -140,6 +140,37 @@
                 </c:forEach>
             </c:if>
         </div>
+        <div class="container rounded mt-5 mb-5">
+            <form action="ScoreUpdate" method="post" id="quiz">
+                <li>
+
+                    <h3>CSS Stands for...</h3>
+
+                    <div>
+                        <input type="radio" name="question-1-answers" id="question-1-answers-A" value="A" />
+                        <label for="question-1-answers-A">A) Computer Styled Sections </label>
+                    </div>
+
+                    <div>
+                        <input type="radio" name="question-1-answers" id="question-1-answers-B" value="B" />
+                        <label for="question-1-answers-B">B) Cascading Style Sheets</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" name="question-1-answers" id="question-1-answers-C" value="C" />
+                        <label for="question-1-answers-C">C) Crazy Solid Shapes</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" name="question-1-answers" id="question-1-answers-D" value="D" />
+                        <label for="question-1-answers-D">D) None of the above</label>
+                    </div>
+
+                </li>
+
+                <input type="submit" value="Submit Quiz" />
+            </form>
+        </div>
         <div class="row mt-3">
             <div class="col-auto mt-5 mb-5" id="prev"> <button class="btn btn-primary">Previous</button> </div>
             <div class="col-auto mt-5 mb-5"> <button class="btn btn-success">Next</button> </div>
