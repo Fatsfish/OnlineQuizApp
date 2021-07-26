@@ -93,7 +93,7 @@ public class LectureCreateController extends HttpServlet {
                 }
                 if (flag) {
                     LectureDAO dao = new LectureDAO();
-                    LectureDTO cate = new LectureDTO("", CourseID, LectureName, ClassID,Description,   status);
+                    LectureDTO cate = new LectureDTO("", CourseID, LectureName, ClassID, Description, status);
                     dao.insert(cate);
                     request.setAttribute("CREATE_SUCCESS", "Create Success!");
                     url = SUCCESS;

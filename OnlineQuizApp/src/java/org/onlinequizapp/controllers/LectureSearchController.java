@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.onlinequizapp.daos.ClassDAO;
-import org.onlinequizapp.dtos.ClassDTO;
+import org.onlinequizapp.daos.LectureDAO;
+import org.onlinequizapp.dtos.LectureDTO;
 
-@WebServlet(name = "ClassSearchController", urlPatterns = {"/ClassSearchController"})
+@WebServlet(name = "LectureSearchController", urlPatterns = {"/LectureSearchController"})
 public class LectureSearchController extends HttpServlet {
 
-    private static final String SUCCESS = "class.jsp";
-    private static final String COURSE = "courseAdd.jsp";
+    private static final String SUCCESS = "lecture.jsp";
+    private static final String LECTURE = "lectureAdd.jsp";
     private static final String ERROR = "404.html";
 
     /**
@@ -37,25 +37,25 @@ public class LectureSearchController extends HttpServlet {
         String search = request.getParameter("search");
         if (check.equals("Search")) {
             try {
-                ClassDAO dao = new ClassDAO();
-                List<ClassDTO> list = dao.getList(search);
+                LectureDAO dao = new LectureDAO();
+                List<LectureDTO> list = dao.getList(search);
                 if (list != null) {
-                    request.setAttribute("LIST_CLASS", list);
+                    request.setAttribute("LIST_LECTURE", list);
                     url = SUCCESS;
                 }
             } catch (SQLException e) {
-                log("Error at ClassSearchController: " + e.toString());
+                log("Error at LectureSearchController: " + e.toString());
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
         } else if (check.equals("Course")) {
             try {
                 String search2 = request.getParameter("search");
-                ClassDAO dao = new ClassDAO();
-                List<ClassDTO> list = dao.getList(search2);
+                LectureDAO dao = new LectureDAO();
+                List<LectureDTO> list = dao.getList(search2);
                 if (list != null) {
                     request.setAttribute("LIST_COURSE", list);
-                    url = COURSE;
+                    url = LECTURE;
                 }
             } catch (SQLException e) {
                 log("Error at ClassSearchController: " + e.toString());

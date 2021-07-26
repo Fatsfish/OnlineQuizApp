@@ -2,19 +2,25 @@ package org.onlinequizapp.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.onlinequizapp.daos.ClassDAO;
+import org.onlinequizapp.daos.CourseDAO;
+import org.onlinequizapp.daos.LectureDAO;
 import org.onlinequizapp.dtos.ClassDTO;
+import org.onlinequizapp.dtos.CourseDTO;
+import org.onlinequizapp.dtos.LectureDTO;
 
-@WebServlet(name = "ClassUpdateController", urlPatterns = {"/ClassUpdateController"})
+@WebServlet(name = "LectureUpdateController", urlPatterns = {"/LectureUpdateController"})
 public class LectureUpdateController extends HttpServlet {
 
-    private static final String SUCCESS = "ClassSearchController";
-    private static final String ERROR = "updateClass.jsp";
+    private static final String SUCCESS = "LectureSearchController";
+    private static final String ERROR = "updateLecture.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,18 +37,45 @@ public class LectureUpdateController extends HttpServlet {
         String url = ERROR;
         String check = request.getParameter("check");
         String action = request.getParameter("action");
-        ClassDTO categoryDTO = new ClassDTO("", "", "");
-        if (action.equals("Confirm Update Class")) {
+        LectureDTO categoryDTO = new LectureDTO("", "", "", "", "", "");
+        CourseDAO dao1 = new CourseDAO();
+        List<CourseDTO> list = null;
+        List<ClassDTO> list1 = null;
+        try {
+            list = dao1.getListCourse("");
+        } catch (SQLException e) {
+            log("Error at CategorySearchController: " + e.toString());
+        } finally {
+            if (list != null) {
+                request.setAttribute("LIST_COURSE", list);
+            }
+        }
+        try {
+            ClassDAO dao = new ClassDAO();
+            list1 = dao.getList("");
+            if (list1 != null) {
+                request.setAttribute("LIST_CLASS", list1);
+                url = SUCCESS;
+            }
+        } catch (SQLException e) {
+            log("Error at ClassSearchController: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
+        if (action.equals("Confirm Update Lecture")) {
             try {
-                String categoryID = request.getParameter("classID");
-                String NumberOfStudent = request.getParameter("numberOfStudent");
+                String lectureID = request.getParameter("lectureID");
+                String LectureName = request.getParameter("Name");
                 String status = request.getParameter("status");
-                ClassDAO dao = new ClassDAO();
-                ClassDTO category = new ClassDTO(categoryID, NumberOfStudent, status);
+                String Description = request.getParameter("description");
+                String CourseID = request.getParameter("courseID");
+                String ClassID = request.getParameter("classID");
+                LectureDAO dao = new LectureDAO();
+                LectureDTO category = new LectureDTO(lectureID , CourseID, LectureName, ClassID, Description, status);
                 boolean flag = true;
-                if (NumberOfStudent.length() > 250 || NumberOfStudent.length() < 1) {
+                if (LectureName.length() > 250 || LectureName.length() < 1) {
                     flag = false;
-                    categoryDTO.setNumberOfStudent("Number Of Student must be [1-250]");
+                    categoryDTO.setLectureName("Number Of Student must be [1-250]");
                 }
                 if (!(status.equals("1")) && !(status.equals("0"))) {
                     flag = false;

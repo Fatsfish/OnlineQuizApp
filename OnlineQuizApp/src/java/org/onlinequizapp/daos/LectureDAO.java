@@ -35,7 +35,7 @@ public class LectureDAO {
                     if (listCate == null) {
                         listCate = new ArrayList<>();
                     }
-                    listCate.add(new LectureDTO(lectureID, lectureName, description, courseID, classID, status));
+                    listCate.add(new LectureDTO(lectureID, courseID, lectureName, classID, description, status));
 
                 }
             }

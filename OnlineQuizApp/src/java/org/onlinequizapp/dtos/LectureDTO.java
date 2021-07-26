@@ -13,10 +13,10 @@ public class LectureDTO implements Serializable {
     
     public LectureDTO(String LectureID, String CourseID, String LectureName, String ClassID, String Description, String Status) {
         
-        this.lectureName = LectureID;
+        this.lectureID = LectureID;
         this.courseID = CourseID;
         this.lectureName = LectureName;
-        this.status = LectureName;
+        this.status = Status;
         this.description = Description;
         this.classID = ClassID;
     }
