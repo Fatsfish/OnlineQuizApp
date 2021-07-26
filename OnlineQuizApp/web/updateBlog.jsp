@@ -308,7 +308,7 @@
                                     <label class="form-check-label" for="status">Active</label><br>
                                 </div>
                                 <div>
-                                    <input type="hidden" name="search" value="${param.search}"> 
+                                    <input type="hidden" name="searchBlog" value="${param.search}"> 
                                     <input type="hidden" name="BlogID" value="${param.blogID}"> 
                                      <input type="hidden" name="authorID" value="${param.authorID}"> 
                                     <input type="hidden" name="check" value="confirm" class="form-check-input" id="check">
