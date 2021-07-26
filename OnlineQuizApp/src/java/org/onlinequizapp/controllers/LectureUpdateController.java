@@ -37,11 +37,10 @@ public class LectureUpdateController extends HttpServlet {
         String url = ERROR;
         String check = request.getParameter("check");
         String action = request.getParameter("action");
-        LectureDTO categoryDTO = new LectureDTO("", "", "", "", "", "");
-        CourseDAO dao1 = new CourseDAO();
         List<CourseDTO> list = null;
         List<ClassDTO> list1 = null;
         try {
+            CourseDAO dao1 = new CourseDAO();
             list = dao1.getListCourse("");
         } catch (SQLException e) {
             log("Error at CategorySearchController: " + e.toString());
@@ -53,33 +52,32 @@ public class LectureUpdateController extends HttpServlet {
         try {
             ClassDAO dao = new ClassDAO();
             list1 = dao.getList("");
-            if (list1 != null) {
-                request.setAttribute("LIST_CLASS", list1);
-                url = SUCCESS;
-            }
+
         } catch (SQLException e) {
             log("Error at ClassSearchController: " + e.toString());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            if (list1 != null) {
+                request.setAttribute("LIST_CLASS", list1);
+            }
         }
         if (action.equals("Confirm Update Lecture")) {
             try {
                 String lectureID = request.getParameter("lectureID");
-                String LectureName = request.getParameter("Name");
+                String LectureName = request.getParameter("lectureName");
                 String status = request.getParameter("status");
                 String Description = request.getParameter("description");
                 String CourseID = request.getParameter("courseID");
                 String ClassID = request.getParameter("classID");
                 LectureDAO dao = new LectureDAO();
-                LectureDTO category = new LectureDTO(lectureID , CourseID, LectureName, ClassID, Description, status);
+                LectureDTO category = new LectureDTO(lectureID, CourseID, LectureName, ClassID, Description, status);
                 boolean flag = true;
                 if (LectureName.length() > 250 || LectureName.length() < 1) {
                     flag = false;
-                    categoryDTO.setLectureName("Number Of Student must be [1-250]");
+                    category.setLectureName("Number Of Student must be [1-250]");
                 }
                 if (!(status.equals("1")) && !(status.equals("0"))) {
                     flag = false;
-                    categoryDTO.setStatus("Status must be 0 or 1");
+                    category.setStatus("Status must be 0 or 1");
                 }
                 if (flag) {
                     boolean update = dao.update(category);
@@ -88,7 +86,7 @@ public class LectureUpdateController extends HttpServlet {
                         url = SUCCESS;
                     }
                 } else {
-                    request.setAttribute("ERROR", categoryDTO);
+                    request.setAttribute("ERROR", category);
                 }
             } catch (Exception e) {
 

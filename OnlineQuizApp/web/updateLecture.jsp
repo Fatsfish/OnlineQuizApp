@@ -23,10 +23,10 @@
     </head>
     <body>
         <form action="LectureUpdateController" name="check" value="1" method="POST">
-            <h1 align="center">UPDATE ${sessionScope.LIST_LECTURE.Name}</h1>
+            <h1 align="center">UPDATE ${sessionScope.LIST_LECTURE.lectureName}</h1>
             <div class="main-agileinfo">
                 <div class="agileits-top">
-                    <h2 style="text-align: center">Lecture Search and Edit page</h2>
+                    <h2 style="text-align: center">Lecture Edit page</h2>
                     Lecture ID <input type="text" name="lectureID" value="${param.lectureID}" id="lectureID" readonly=""/></br>
                     <label>
                         <span>Lecture Name</span></br>
@@ -34,7 +34,7 @@
                     </label>
                     <div>Course ID
                         <select name="courseID" class="form-select" aria-label="Default select example">
-                            <option selected>Choose Course</option>
+                            <option selected>${param.courseID}</option>
                             <c:if test="${requestScope.LIST_COURSE != null && not empty requestScope.LIST_COURSE}">
                                 <c:forEach var="course" varStatus="counter" items="${requestScope.LIST_COURSE}">
                                     <c:if test="${course.status==1}">
@@ -46,7 +46,7 @@
                     </div><br>
                     <div>Class ID
                         <select name="classID" class="form-select" aria-label="Default select example">
-                            <option selected>Choose Class</option>
+                            <option selected>${param.classID}</option>
                             <c:if test="${requestScope.LIST_CLASS != null && not empty requestScope.LIST_CLASS}">
                                 <c:forEach var="lop" varStatus="counter" items="${requestScope.LIST_CLASS}">
                                     <c:if test="${lop.status==1}">

@@ -65,8 +65,8 @@ public class LectureDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "DELETE tblLcture "
-                        + "Where LectureName=?";
+                String sql = "DELETE tblLecture "
+                        + "Where LectureID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, Name);
                 check = stm.executeUpdate() > 0 ? true : false;
@@ -95,14 +95,15 @@ public class LectureDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPDATE tblClass SET LectureName=?, Description=?, CourseID=?, ClassID=?, Status=? "
+                String sql = "UPDATE tblLecture SET LectureName=?, Description=?, CourseID=?, ClassID=?, Status=? "
                         + " Where lectureID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, cate.getLectureName());
-                stm.setString(2, cate.getStatus());
-                stm.setString(3, cate.getClassID());
-                stm.setString(4, cate.getDescription());
-                stm.setString(5, cate.getCourseID());
+                stm.setString(2, cate.getDescription());
+                stm.setInt(3, Integer.parseInt(cate.getCourseID()));
+                stm.setInt(4, Integer.parseInt(cate.getClassID()));
+                stm.setString(5, cate.getStatus());
+                stm.setInt(6, Integer.parseInt(cate.getLectureID()));
                 check = stm.executeUpdate() > 0 ? true : false;
             }
 
