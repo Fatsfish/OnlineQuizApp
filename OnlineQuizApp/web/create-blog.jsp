@@ -465,7 +465,9 @@
                                         <option selected>Choose category</option>
                                         <c:if test="${requestScope.LIST_BLOG_CATEGORY != null && not empty requestScope.LIST_BLOG_CATEGORY }">
                                             <c:forEach var="blogC" varStatus="counter" items="${requestScope.LIST_BLOG_CATEGORY}">
-                                                <option value="${blogC.categoryID}">${blogC.categoryName}</option>
+                                                <c:if test="${blogC.status==1}">
+                                                    <option value="${blogC.categoryID}">${blogC.categoryName}</option>
+                                                </c:if>
                                             </c:forEach>
                                         </c:if>
                                     </select>
