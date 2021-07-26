@@ -448,6 +448,7 @@
                                             <td>
                                                 <form action="BlogUpdateController">
                                                     <input type="submit" name="action" value="Update"/>
+                                                    <input type="hidden" name="check" value="updateBlog" >
                                                     <input type="hidden" name="blogID" value="${blog.blogID}"/>
                                                     <input type="hidden" name="title" value="${blog.title}"/>
                                                     <input type="hidden" name="authorID" value="${blog.authorID}"/>

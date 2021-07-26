@@ -275,10 +275,10 @@
                             <form action="BlogUpdateController">
                                 <div class="mb-3">
                                     <label for="blogTitle" class="form-label">Blog Title</label>
-                                    <input type="text" class="form-control" name="Title" id="blogTitle" value="${param.Title}">
+                                    <input type="text" class="form-control" name="Title" id="blogTitle" value="${param.title}">
                                 </div>
                                 <select name="BlogCategory"  class="form-select" aria-label="Default select example" >
-                                    <option selected >${param.categoryName}</option>
+                                    <option selected >${param.categoryID}</option>
                                     <c:if test="${requestScope.LIST_BLOG_CATEGORY != null && not empty requestScope.LIST_BLOG_CATEGORY }">
                                         <c:forEach var="blogC" varStatus="counter" items="${requestScope.LIST_BLOG_CATEGORY}">
                                             <form action="CategorySearchController">
@@ -294,22 +294,35 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label">Upload picture (optional)</label>
-                                    <input class="form-control" type="text" placeholder="Please input picture's url" name="Image" id="blogImg">
+                                    <input class="form-control" type="text" placeholder="Please input picture's url" name="Image" value="${param.image}"id="blogImg">
                                 </div>
-                                <input type="checkbox" class="form-check-input" id="status">
-                                <input type="hidden" name="BlogID" value="${param.blogID}">
-                                <label class="form-check-label" for="status">Active</label><br>
-                                <input type="hidden" name="check" value="blogUpdate" class="form-check-input" id="check">
-                                <button type="submit" class="btn btn-primary">Create</button>
-                                <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
-                                    <a class="btn btn-danger" href="dashboardadmin.jsp" role="button">Cancel</a>
-                                </c:if>
-                                <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1' }">
-                                    <a class="btn btn-danger" href="dashboardteacher.jsp" role="button">Cancel</a>
-                                </c:if>
-                                <c:if test="${sessionScope.LOGIN_USER.role =='S' || sessionScope.LOGIN_USER.role =='S1' }">
-                                    <a class="btn btn-danger" href="dashboardstudent.jsp" role="button">Cancel</a>
-                                </c:if> 
+                                <div class="mb-3 form-check">
+                                    
+                                    <c:if test="${param.status != null }" >
+                                        <input name="status" type="checkbox" class="form-check-input" checked="" id="status">
+                                    </c:if>
+                                    <c:if  test="${param.status == null}">
+                                        <input name="status" type="checkbox" class="form-check-input" id="status">
+                                    </c:if>
+
+                                    <label class="form-check-label" for="status">Active</label><br>
+                                </div>
+                                <div>
+                                    <input type="hidden" name="search" value="${param.search}"> 
+                                    <input type="hidden" name="BlogID" value="${param.blogID}"> 
+                                     <input type="hidden" name="authorID" value="${param.authorID}"> 
+                                    <input type="hidden" name="check" value="confirm" class="form-check-input" id="check">
+                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                    <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
+                                        <a class="btn btn-danger" href="dashboardadmin.jsp" role="button">Cancel</a>
+                                    </c:if>
+                                    <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1' }">
+                                        <a class="btn btn-danger" href="dashboardteacher.jsp" role="button">Cancel</a>
+                                    </c:if>
+                                    <c:if test="${sessionScope.LOGIN_USER.role =='S' || sessionScope.LOGIN_USER.role =='S1' }">
+                                        <a class="btn btn-danger" href="dashboardstudent.jsp" role="button">Cancel</a>
+                                    </c:if>
+                                </div>
                         </div>
 
                         </form>

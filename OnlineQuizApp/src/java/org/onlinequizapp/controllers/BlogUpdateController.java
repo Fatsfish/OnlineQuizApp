@@ -26,8 +26,8 @@ import org.onlinequizapp.dtos.UserDTO;
 @WebServlet(name = "BlogUpdateController", urlPatterns = {"/BlogUpdateController"})
 public class BlogUpdateController extends HttpServlet {
 
-    private static final String SUCCESS = "updateBlog.jsp";
-    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "BlogSearchController";
+    private static final String ERROR = "updateBlog.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,16 +48,24 @@ public class BlogUpdateController extends HttpServlet {
         if (session.getAttribute("LOGIN_USER") != null) {
             LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
         }
-        if (check.equals("blogUpdate")) {
+        if (check.equals("confirm")) {
             BlogDTO BlogDTO = new BlogDTO("", "", "", "", "", "", "");
             try {
+                String authorID = request.getParameter("authorID");
                 String BlogID = request.getParameter("BlogID");
-                String Title = request.getParameter("title");
+                String Title = request.getParameter("Title");
                 String content = request.getParameter("content");
                 String Image = request.getParameter("Image");
                 String BlogCategoryID = request.getParameter("BlogCategory");
                 String status = request.getParameter("status");
                 boolean flag = true;
+                if (status == null) {
+                    status = "0";
+                } else if (status.equals("on")) {
+                    status = "1";
+                } else {
+                    status = "0";
+                }
                 if (content.length() < 1) {
                     flag = false;
                     BlogDTO.setContent("You must enter something to post ");
@@ -68,20 +76,30 @@ public class BlogUpdateController extends HttpServlet {
                 }
                 if (flag) {
                     BlogDAO dao = new BlogDAO();
-                    BlogDTO dto = new BlogDTO(BlogID, Title, LogID, BlogCategoryID, content, Image, status);
-                    dao.update(dto);
+                    BlogDTO dto = new BlogDTO(BlogID, Title, authorID, BlogCategoryID, content, Image, status);
 
-                    url = SUCCESS;
+                    dao.update(dto);
+                    if (dao.update(dto)) {
+                        request.setAttribute("UPDATE_BLOG_SUCCESS", "Update");
+                        url = SUCCESS;
+                    } else {
+                        request.setAttribute("UPDATE_BLOG_ERROR", "Update fail");
+                        url = ERROR;
+                    }
 
                 } else {
                     request.setAttribute("UPDATE_BLOG_ERROR", "Update fail");
-                    url = SUCCESS;
+                    url = ERROR;
                 }
             } catch (Exception e) {
 
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
+
+        } else if (check.equals("updateBlog")) {
+
+            request.getRequestDispatcher(ERROR).forward(request, response);
         }
     }
 

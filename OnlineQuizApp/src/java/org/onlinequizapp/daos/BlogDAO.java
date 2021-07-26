@@ -176,15 +176,16 @@ public class BlogDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPDATE tblBlog SET Title=?, categoryID=?, Content=?, image=? "
-                        + " Where BlogID=? " ;
+                String sql = "UPDATE tblBlog SET  Title=?, content=?, Image=?, categoryID=? , authorID=?, Status=? "
+                        + " Where BlogID=? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, Blog.getTitle());
-                stm.setInt(2, Integer.parseInt(Blog.getCategoryID()));
-                stm.setString(3, Blog.getContent());
-                stm.setString(4, Blog.getImage());
-                stm.setByte(5, (byte) Integer.parseInt(Blog.getStatus()));
-                stm.setString(6, Blog.getBlogID());
+                stm.setString(2, Blog.getContent());
+                stm.setString(3, Blog.getImage());
+                stm.setInt(4, Integer.parseInt(Blog.getCategoryID()));
+                stm.setString(5, Blog.getAuthorID());
+                stm.setByte(6, (byte) Integer.parseInt(Blog.getStatus()));
+                stm.setInt(7, Integer.parseInt(Blog.getBlogID()));
                 check = stm.executeUpdate() > 0 ? true : false;
             }
 
