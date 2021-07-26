@@ -265,9 +265,15 @@
                     <div class="container-fluid">
 
                         <div class="container">
-                            <h4>Create Blog</h4>
-                            <p class="mb-4">${requestScope.CREATE_BLOG_SUCCESS}</p>
-                            <p class="mb-4">${requestScope.CREATE_BLOG_ERROR}</p>
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                <h1 class="h3 mb-0 text-gray-800">Create Blog</h1>
+                            </div>
+                            <div style="color: green" class="h5 mt-3">
+                                <p class="mb-4">${requestScope.CREATE_BLOG_SUCCESS}</p>
+                            </div>
+                            <div style="color: red" class="h5 mt-3" >
+                                <p class="mb-4">${requestScope.CREATE_BLOG_ERROR}</p>
+                            </div>
                             <a href="CategorySearchController?cate=2&check=Blog&search=" class="btn btn-primary mb-3"/>Filter Category</a>
                             <form action="BlogCreateController">
                                 <div class="mb-3">
