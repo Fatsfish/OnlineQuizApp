@@ -122,26 +122,26 @@
     </head>
     <body>
         <div class="container rounded mt-5 mb-5">
-            <form action="ScoreCreateController" method="post" id="quiz">
+            <form action="ScoreCreateController" method="get" id="quiz">
                 <c:if test="${requestScope.LIST_QUESTION != null && not empty requestScope.LIST_QUESTION }">
                     <c:forEach var="question" varStatus="counter" items="${requestScope.LIST_QUESTION}">
                         <c:if test="${question.status==1}">
                             <li>
                                 <h3>${conter.count} - ${question.name}</h3>
                                 <div>
-                                    <input type="radio" name="${question.questionID}" id="question-1-answers-A" value="1" />
+                                    <input type="radio" name="${question.questionID}" id="question-1-answers-A" value="1" required=""/>
                                     <label for="question-1-answers-A">A) ${question.question1}</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="${question.questionID}" id="question-1-answers-B" value="2" />
+                                    <input type="radio" name="${question.questionID}" id="question-1-answers-B" value="2" required=""/>
                                     <label for="question-1-answers-B">B) ${question.question2}</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="${question.questionID}" id="question-1-answers-C" value="3" />
+                                    <input type="radio" name="${question.questionID}" id="question-1-answers-C" value="3" required=""/>
                                     <label for="question-1-answers-C">C) ${question.question3}</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="${question.questionID}" id="question-1-answers-D" value="4" />
+                                    <input type="radio" name="${question.questionID}" id="question-1-answers-D" value="4" required=""/>
                                     <label for="question-1-answers-D">D) ${question.question4}</label>
                                 </div>
                             </li>
@@ -150,10 +150,10 @@
                 </c:if>
                 <input type="submit" value="Submit Quiz" />
             </form>
+            <h3>${requestScope.Finish} - ${requestScope.Score}</h3>
         </div>
         <div class="row mt-3">
-            <div class="col-auto mt-5 mb-5" id="prev"> <button class="btn btn-primary">Previous</button> </div>
-            <div class="col-auto mt-5 mb-5"> <button class="btn btn-success">Next</button> </div>
+            <div class="col-auto mt-5 mb-5"> <a href='/OnlineQuizApp/all-quiz.html'>Return to home page</a></div>
         </div>
     </body>
 </html>
