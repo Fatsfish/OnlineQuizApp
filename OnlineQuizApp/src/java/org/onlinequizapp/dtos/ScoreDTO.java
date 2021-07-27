@@ -24,6 +24,12 @@ public class ScoreDTO implements Serializable{
         this.mark = Mark;
 
     }
+
+    public ScoreDTO(String quizID, String userID, String mark) {
+        this.quizID = quizID;
+        this.userID = userID;
+        this.mark = mark;
+    }
     
     public ScoreDTO(){
     }
