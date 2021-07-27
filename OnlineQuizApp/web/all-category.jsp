@@ -246,9 +246,12 @@
             <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1'}">
                 <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -259,6 +262,9 @@
             </a>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
@@ -277,6 +283,7 @@
                 Learn
             </div>
 
+<<<<<<< HEAD
 =======
 
 =======
@@ -336,6 +343,8 @@
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
 =======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
+=======
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
             <!-- Nav Item - Courses Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourses"
@@ -377,6 +386,7 @@
                             <a class="collapse-item" href="quizAdd.jsp">Create Quiz</a>
                             <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
                             <a class="collapse-item" href="QuizCreateController?check=quiz2">Add Question to Quiz</a>
+<<<<<<< HEAD
                         </div>
                     </div>
                 </li>
@@ -595,6 +605,11 @@
                         </div>
                     </div>
                 </li>
+=======
+                        </div>
+                    </div>
+                </li>
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
 
             <!-- Nav Item - Students -->
             <li class="nav-item">
@@ -638,7 +653,10 @@
                 Community
             </div>
 
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
             <!-- Nav Item - Blogs Collapse Menu -->
             <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs"
@@ -688,6 +706,7 @@
                     <i class="fas fa-fw fa-receipt"></i>
                     <span>Billing</span></a>
             </li>
+<<<<<<< HEAD
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -738,6 +757,19 @@
 =======
                 <!-- End of Sidebar -->  
 >>>>>>> parent of b80fe2f (update 1 đống jsp :>)
+=======
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
             </c:if>
 
             <!-- Content Wrapper -->

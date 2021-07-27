@@ -536,6 +536,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <!-- End of Sidebar -->
 =======
         </ul>
@@ -607,6 +608,9 @@
 
         </ul>
 >>>>>>> parent of b80fe2f (update 1 đống jsp :>)
+                <!-- End of Sidebar -->  
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
+=======
                 <!-- End of Sidebar -->  
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
             </c:if>

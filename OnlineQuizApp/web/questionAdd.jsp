@@ -194,6 +194,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -235,6 +236,8 @@
             </li>
 
 =======
+=======
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -249,6 +252,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+<<<<<<< HEAD
 =======
 
             <!-- Divider -->
@@ -270,6 +274,13 @@
                 Learn
             </div>
 
+=======
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Learn
+            </div>
+
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
             <!-- Nav Item - Courses Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourses"
@@ -290,6 +301,7 @@
                     </div>
                 </div>
             </li>
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
@@ -320,6 +332,21 @@
 =======
 =======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
+=======
+
+            <!-- Nav Item - Quizzes Collapse Menu -->
+            <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
+                       aria-expanded="false" aria-controls="collapseQuizzes">
+                        <i class="fas fa-fw fa-edit"></i>
+                        <span>Quizzes</span>
+                    </a>
+                    <div id="collapseQuizzes" class="collapse" aria-labelledby="headingQuizzes"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Quizzes:</h6>
+                            <a class="collapse-item" href="question.jsp">All Question</a>
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
                             <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
                             <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
                             
@@ -327,6 +354,7 @@
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
                             <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
                         </div>
@@ -383,6 +411,9 @@
             </li>
 =======
                         </div>
+=======
+                        </div>
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
                     </div>
                 </li>
 
@@ -392,6 +423,7 @@
                     <i class="fas fa-fw fa-user-graduate"></i>
                     <span>Students</span></a>
             </li>
+<<<<<<< HEAD
 
             <!-- Nav Item - Marks -->
                 <li class="nav-item">
@@ -505,6 +537,41 @@
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="categoryAdd.jsp">Create Quiz Category</a>
 =======
+=======
+
+            <!-- Nav Item - Marks -->
+                <li class="nav-item">
+                    <a class="nav-link" href="score.jsp">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Marks</span></a>
+                </li>
+            
+            <!-- Nav Item - Category Collapse Menu -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
+                       aria-expanded="false" aria-controls="collapseCategories">
+                        <i class="fas fa-fw fa-list"></i>
+                        <span>Categories</span>
+                    </a>
+                    <div id="collapseCategories" class="collapse" aria-labelledby="headingQuizzes"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Categories:</h6>
+                            <a class="collapse-item" href="all-category.jsp">All Categories</a>
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Create:</h6>
+                            <a class="collapse-item" href="categoryAdd.jsp">Create Quiz Category</a>
+                        </div>
+                    </div>
+                </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
                 Community
             </div>
 
@@ -524,11 +591,15 @@
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="create-blog.jsp">Create Blog</a>
+<<<<<<< HEAD
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
+=======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
                         </div>
                     </div>
                 </li>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -641,6 +712,41 @@
             <hr class="sidebar-divider d-none d-md-block">
 
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
+=======
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-trophy"></i>
+                    <span>Ranking</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span></a>
+            </li>
+            
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Others
+            </div>
+
+            <!-- Nav Item - Billing -->
+            <li class="nav-item">
+                <a class="nav-link" href="billing.html">
+                    <i class="fas fa-fw fa-receipt"></i>
+                    <span>Billing</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -649,9 +755,12 @@
         </ul>
                 <!-- End of Sidebar -->  
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
 =======
                 <!-- End of Sidebar -->  
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
+=======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
 =======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
