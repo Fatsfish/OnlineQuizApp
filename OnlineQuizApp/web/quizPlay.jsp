@@ -122,51 +122,32 @@
     </head>
     <body>
         <div class="container rounded mt-5 mb-5">
-
-            <c:if test="${requestScope.LIST_QUESTION != null && not empty requestScope.LIST_QUESTION }">
-                <c:forEach var="question" varStatus="counter" items="${requestScope.LIST_QUESTION}">
-                    <c:if test="${question.status==1}">
-                        <div class="question ml-sm-5 pl-sm-5 pt-2">
-                            <div class="py-2 h5" id="question"><b>${conter.count} - ${question.name}</b></div>
-                            <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
-                                <label class="options">${question.question1}<input type="radio" name="${question.questionID}"> <span class="checkmark"></span> </label>
-                                <label class="options">${question.question2}<input type="radio" name="${question.questionID}"> <span class="checkmark"></span> </label> 
-                                <label class="options">${question.question3}<input type="radio" name="${question.questionID}"> <span class="checkmark"></span> </label> 
-                                <label class="options">${question.question4}<input type="radio" name="${question.questionID}"> <span class="checkmark"></span> </label> 
-                            </div>
-                        </div>
-                    </c:if>
-                </c:forEach>
-            </c:if>
-        </div>
-        <div class="container rounded mt-5 mb-5">
-            <form action="ScoreUpdate" method="post" id="quiz">
-                <li>
-
-                    <h3>CSS Stands for...</h3>
-
-                    <div>
-                        <input type="radio" name="question-1-answers" id="question-1-answers-A" value="A" />
-                        <label for="question-1-answers-A">A) Computer Styled Sections </label>
-                    </div>
-
-                    <div>
-                        <input type="radio" name="question-1-answers" id="question-1-answers-B" value="B" />
-                        <label for="question-1-answers-B">B) Cascading Style Sheets</label>
-                    </div>
-
-                    <div>
-                        <input type="radio" name="question-1-answers" id="question-1-answers-C" value="C" />
-                        <label for="question-1-answers-C">C) Crazy Solid Shapes</label>
-                    </div>
-
-                    <div>
-                        <input type="radio" name="question-1-answers" id="question-1-answers-D" value="D" />
-                        <label for="question-1-answers-D">D) None of the above</label>
-                    </div>
-
-                </li>
-
+            <form action="ScoreCreateController" method="post" id="quiz">
+                <c:if test="${requestScope.LIST_QUESTION != null && not empty requestScope.LIST_QUESTION }">
+                    <c:forEach var="question" varStatus="counter" items="${requestScope.LIST_QUESTION}">
+                        <c:if test="${question.status==1}">
+                            <li>
+                                <h3>${conter.count} - ${question.name}</h3>
+                                <div>
+                                    <input type="radio" name="${question.questionID}" id="question-1-answers-A" value="1" />
+                                    <label for="question-1-answers-A">A) ${question.question1}</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="${question.questionID}" id="question-1-answers-B" value="2" />
+                                    <label for="question-1-answers-B">B) ${question.question2}</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="${question.questionID}" id="question-1-answers-C" value="3" />
+                                    <label for="question-1-answers-C">C) ${question.question3}</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="${question.questionID}" id="question-1-answers-D" value="4" />
+                                    <label for="question-1-answers-D">D) ${question.question4}</label>
+                                </div>
+                            </li>
+                        </c:if>
+                    </c:forEach>
+                </c:if>
                 <input type="submit" value="Submit Quiz" />
             </form>
         </div>

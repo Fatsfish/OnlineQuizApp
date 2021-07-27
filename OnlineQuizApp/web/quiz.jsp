@@ -495,7 +495,7 @@
                                                 <td>${lop.description}</td>
                                                 <td>${lop.classID}</td>
                                                 <td>
-                                                    <form action="CourseDeleteController">
+                                                    <form action="QuizDeleteController">
                                                         <input type="hidden" name="check" value="${param.check}"/>
                                                         <input type="hidden" name="search" value="${param.search}"/>
                                                         <input type="hidden" name="courseID" value="${lop.quizID}"/>
@@ -505,7 +505,7 @@
                                                     </form>
                                                 </td>
                                                 <td>
-                                                    <form action="CourseUpdateController">
+                                                    <form action="QuizUpdateController">
                                                         <input type="submit" class="btn btn-success" name="action" value="Update"/>
                                                         <input type="hidden" name="check" value="${param.check}"/>
                                                         <input type="hidden" name="search" value="${param.search}"/>
