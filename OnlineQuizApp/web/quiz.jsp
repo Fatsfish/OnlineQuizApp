@@ -509,13 +509,14 @@
                                                         <input type="submit" class="btn btn-success" name="action" value="Update"/>
                                                         <input type="hidden" name="check" value="${param.check}"/>
                                                         <input type="hidden" name="search" value="${param.search}"/>
-                                                        <input type="hidden" name="courseID" value="${lop.courseID}"/>
+                                                        <input type="hidden" name="quizID" value="${lop.quizID}"/>
                                                         <input type="hidden" name="authorID" value="${lop.authorID}"/>
-                                                        <input type="hidden" name="courseName" value="${lop.courseName}"/>
-                                                        <input type="hidden" name="duration" value="${lop.duration}"/>
+                                                        <input type="hidden" name="name" value="${lop.name}"/>
+                                                        <input type="hidden" name="totalMark" value="${lop.totalMark}"/>
                                                         <input type="hidden" name="status" value="${lop.status}"/>
-                                                        <input type="hidden" name="categoryID" value="${lop.categoryID}"/>
+                                                        <input type="hidden" name="numberOfQuestions" value="${lop.numberOfQuestions}"/>
                                                         <input type="hidden" name="description" value="${lop.description}"/>
+                                                        <input type="hidden" name="classID" value="${lop.classID}"/>
                                                     </form>
                                                 </td>
                                             </tr>
