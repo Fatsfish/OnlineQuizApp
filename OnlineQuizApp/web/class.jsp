@@ -454,11 +454,15 @@
 <<<<<<< Updated upstream
                 </ul>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <!-- End of Sidebar -->
 =======
         </ul>
                 <!-- End of Sidebar -->  
 >>>>>>> Stashed changes
+=======
+                <!-- End of Sidebar -->  
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
 =======
                 <!-- End of Sidebar -->  
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)

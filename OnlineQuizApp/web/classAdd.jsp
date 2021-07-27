@@ -72,6 +72,7 @@
                 </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <!-- Nav Item - Courses Collapse Menu -->
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourses"
@@ -144,6 +145,8 @@
                             <a class="collapse-item" href="QuizCreateController?check=quiz2">Add Question to Quiz</a>
 >>>>>>> Stashed changes
 =======
+=======
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
                 <!-- Nav Item - Courses Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourses"
@@ -165,6 +168,9 @@
                             <a class="collapse-item" href="LectureCreateController?check=">Create Lecture</a>
                             <a class="collapse-item" href="SourceCreateController?function=">Create Resource</a>
                             <a class="collapse-item" href="classAdd.jsp">Create Class</a>
+<<<<<<< HEAD
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
+=======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
                         </div>
                     </div>
@@ -189,6 +195,7 @@
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="quizAdd.jsp">Create Quiz</a>
                             <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
+<<<<<<< HEAD
                         </div>
                     </div>
                 </li>
@@ -225,12 +232,51 @@
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
+=======
+                        </div>
+                    </div>
+                </li>
+
+
+                <!-- Nav Item - Marks -->
+                <li class="nav-item">
+                    <a class="nav-link" href="score.jsp">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Marks</span></a>
+                </li>
+
+                <!-- Nav Item - Category Collapse Menu -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
+                       aria-expanded="false" aria-controls="collapseCategories">
+                        <i class="fas fa-fw fa-list"></i>
+                        <span>Categories</span>
+                    </a>
+                    <div id="collapseCategories" class="collapse" aria-labelledby="headingQuizzes"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Categories:</h6>
+                            <a class="collapse-item" href="all-category.jsp">All Categories</a>
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Create:</h6>
+                            <a class="collapse-item" href="categoryAdd.jsp">Create Quiz Category</a>
+                            <a class="collapse-item" href="categoryBlogAdd.jsp">Create Blog Category</a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
                 <!-- Heading -->
                 <div class="sidebar-heading">
                     Community
                 </div>
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< Updated upstream
                     <!-- Nav Item - Blogs Collapse Menu -->
@@ -253,6 +299,8 @@
 =======
 =======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
+=======
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
                 <!-- Nav Item - Blogs Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs"
@@ -265,7 +313,11 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Blogs:</h6>
 <<<<<<< HEAD
+<<<<<<< HEAD
                             <a class="collapse-item" href="all-blog.html">All Blogs</a>
+=======
+                            <a class="collapse-item" href="all-blog.jsp">All Blogs</a>
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
 =======
                             <a class="collapse-item" href="all-blog.jsp">All Blogs</a>
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
@@ -274,7 +326,10 @@
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="create-blog.jsp">Create Blog</a>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
 =======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
                         </div>
@@ -331,6 +386,7 @@
             <hr class="sidebar-divider">
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <!-- Heading -->
                     <div class="sidebar-heading">
                         Learn
@@ -362,6 +418,13 @@
                 Learn
             </div>
 
+=======
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Learn
+            </div>
+
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
             <!-- Nav Item - Courses Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourses"
@@ -380,6 +443,9 @@
                         <a class="collapse-item" href="courseAdd.jsp">Create Course</a>
                         <a class="collapse-item" href="classAdd.jsp">Create Class</a>
                     </div>
+<<<<<<< HEAD
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
+=======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
                 </div>
             </li>
@@ -396,6 +462,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Quizzes:</h6>
                             <a class="collapse-item" href="question.jsp">All Question</a>
+<<<<<<< HEAD
 <<<<<<< HEAD
                             <a class="collapse-item" href="all-quiz.jsp">All Quizzes</a>
                             <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
@@ -458,6 +525,8 @@
                                 <a class="collapse-item" href="categoryAdd.jsp">Create Quiz Category</a>
                             </div>
 =======
+=======
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
                             <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
                             <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
                             
@@ -465,6 +534,9 @@
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
                             <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
+<<<<<<< HEAD
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
+=======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
                         </div>
                     </div>
