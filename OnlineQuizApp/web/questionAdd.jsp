@@ -31,7 +31,7 @@
         <!-- Custom styles for this template-->
         <link href="Dashboard/css/sb-admin-2.min.css" rel="stylesheet">
 
-       
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 
     </head>
@@ -41,9 +41,8 @@
         <!-- Page Wrapper -->
         <div id="wrapper">
 
-            <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
-                <!-- Sidebar -->
-                <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar -->
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -81,17 +80,11 @@
                     <div id="collapseCourses" class="collapse" aria-labelledby="headingCourses" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Courses:</h6>
-                            <a class="collapse-item" href="all-course.jsp">All Courses</a>
+                            <a class="collapse-item" href="all-course.html">All Courses</a>
                             <a class="collapse-item" href="course.jsp">My Courses</a>
-                            <a class="collapse-item" href="lecture.jsp">My Lectures</a>
-                            <a class="collapse-item" href="source.jsp">My Resources</a>
-                            <a class="collapse-item" href="class.jsp">My Classes</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="courseAdd.jsp">Create Course</a>
-                            <a class="collapse-item" href="LectureCreateController?check=">Create Lecture</a>
-                            <a class="collapse-item" href="SourceCreateController?function=">Create Resource</a>
-                            <a class="collapse-item" href="classAdd.jsp">Create Class</a>
                         </div>
                     </div>
                 </li>
@@ -107,15 +100,20 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Quizzes:</h6>
-                            <a class="collapse-item" href="question.jsp">All Question</a>
-                            <a class="collapse-item" href="all-quiz.jsp">All Quizzes</a>
+                            <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
                             <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
+<<<<<<< HEAD
 
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="quizAdd.jsp">Create Quiz</a>
                             <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
                             <a class="collapse-item" href="QuizCreateController?check=quiz2">Add Question to Quiz</a>
+=======
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Create:</h6>
+                            <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
+>>>>>>> parent of b80fe2f (update 1 đống jsp :>)
                         </div>
                     </div>
                 </li>
@@ -123,30 +121,9 @@
 
                 <!-- Nav Item - Marks -->
                 <li class="nav-item">
-                    <a class="nav-link" href="score.jsp">
+                    <a class="nav-link" href="charts.html">
                         <i class="fas fa-fw fa-chart-area"></i>
                         <span>Marks</span></a>
-                </li>
-
-                <!-- Nav Item - Category Collapse Menu -->
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
-                       aria-expanded="false" aria-controls="collapseCategories">
-                        <i class="fas fa-fw fa-list"></i>
-                        <span>Categories</span>
-                    </a>
-                    <div id="collapseCategories" class="collapse" aria-labelledby="headingQuizzes"
-                         data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Categories:</h6>
-                            <a class="collapse-item" href="all-category.jsp">All Categories</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="categoryAdd.jsp">Create Quiz Category</a>
-                            <a class="collapse-item" href="categoryBlogAdd.jsp">Create Blog Category</a>
-                        </div>
-                    </div>
                 </li>
 
                 <!-- Divider -->
@@ -173,7 +150,7 @@
                             <a class="collapse-item" href="blog.jsp">My Blogs</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="create-blog.jsp">Create Blog</a>
+                            <a class="collapse-item" href="blogAdd.html">Create Blog</a>
                         </div>
                     </div>
                 </li>
@@ -200,6 +177,7 @@
                 </div>
 
             </ul>
+<<<<<<< HEAD
                 <!-- End of Sidebar -->
             </c:if>
             <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1'}">
@@ -678,6 +656,9 @@
 =======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
             </c:if>
+=======
+            <!-- End of Sidebar -->
+>>>>>>> parent of b80fe2f (update 1 đống jsp :>)
 
 
 
@@ -770,7 +751,7 @@
                                     <input type="text" name="Name" class="form-control" id="questionName">
                                 </div>
                                 <div>
-                                    <select name="categoryID" class="form-control" aria-label="Default select example">
+                                    <select name="categoryID" class="form-select" aria-label="Default select example">
                                         <option selected>Choose category</option>
                                         <c:if test="${requestScope.LIST_QUIZ_CATEGORY != null && not empty requestScope.LIST_QUIZ_CATEGORY}">
                                             <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_QUIZ_CATEGORY}">
@@ -802,7 +783,7 @@
                                     <textarea class="form-control" id="QuestionDesc" name="description" rows="3"></textarea>
                                 </div>
                                 <div>
-                                    <select name="answer" class="form-control" aria-label="Default select example">
+                                    <select name="answer" class="form-select" aria-label="Default select example">
                                         <option selected>Choose Right Answer</option>
                                         <option value="1">Answer 1</option>
                                         <option value="2">Answer 2</option>

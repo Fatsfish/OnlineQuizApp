@@ -251,7 +251,7 @@
                     <!-- Nav Item - Quizzes Collapse Menu -->
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
-                           aria-expanded="false" aria-controls="collapseQuizzes">
+                           aria-expanded="true" aria-controls="collapseQuizzes">
                             <i class="fas fa-fw fa-edit"></i>
                             <span>Quizzes</span>
                         </a>
@@ -259,14 +259,11 @@
                              data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Quizzes:</h6>
-                                <a class="collapse-item" href="question.jsp">All Question</a>
-                                <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
-                                <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
-
+                                <a class="collapse-item" href="utilities-color.html">All Quizzes</a>
+                                <a class="collapse-item" href="utilities-border.html">My Quizzes</a>
                                 <div class="collapse-divider"></div>
                                 <h6 class="collapse-header">Create:</h6>
-                                <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
-                                <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
+                                <a class="collapse-item" href="404.html">Create Quiz</a>
                             </div>
                         </div>
                     </li>
@@ -280,7 +277,7 @@
 
                     <!-- Nav Item - Marks -->
                     <li class="nav-item">
-                        <a class="nav-link" href="score.jsp">
+                        <a class="nav-link" href="charts.html">
                             <i class="fas fa-fw fa-chart-area"></i>
                             <span>Marks</span></a>
                     </li>
@@ -347,6 +344,7 @@
 >>>>>>> Stashed changes
                         </div>
                     </div>
+<<<<<<< HEAD
                 </li>
 
             <!-- Nav Item - Students -->
@@ -379,6 +377,26 @@
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="categoryAdd.jsp">Create Quiz Category</a>
+=======
+
+                    <!-- Nav Item - Blogs Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs" aria-expanded="false"
+                           aria-controls="collapseBlogs">
+                            <i class="fas fa-fw fa-users"></i>
+                            <span>Blogs</span>
+                        </a>
+                        <div id="collapseBlogs" class="collapse" aria-labelledby="headingBlogs"
+                             data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Blogs:</h6>
+                                <a class="collapse-item" href="#">All Blogs</a>
+                                <a class="collapse-item" href="#">My Blogs</a>
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Create:</h6>
+                                <a class="collapse-item" href="404.html">Create Blog</a>
+                            </div>
+>>>>>>> parent of b80fe2f (update 1 đống jsp :>)
                         </div>
                     </div>
                 </li>
@@ -650,13 +668,13 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
+                            <span aria-hidden="true">X</span>
                         </button>
                     </div>
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="LogoutController">Logout</a>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
                     </div>
                 </div>
             </div>

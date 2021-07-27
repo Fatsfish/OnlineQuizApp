@@ -41,36 +41,18 @@
         <!-- Page Wrapper -->
         <div id="wrapper">
 
-            <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
-                <!-- Sidebar -->
-                <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar -->
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-                    <!-- Sidebar - Brand -->
-                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                        <div class="sidebar-brand-icon">
-                            <i class="fas fa-crown"></i>
-                        </div>
-                        <div class="sidebar-brand-text mx-3">Admin</div>
-                    </a>
-
-                    <!-- Divider -->
-                    <hr class="sidebar-divider my-0">
-
-                    <!-- Nav Item - Dashboard -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="dashboardadmin.jsp">
-                            <i class="fas fa-fw fa-tachometer-alt"></i>
-                            <span>Dashboard</span></a>
-                    </li>
-
-                    <!-- Divider -->
-                    <hr class="sidebar-divider">
-
-                    <!-- Heading -->
-                    <div class="sidebar-heading">
-                        Learn
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                    <div class="sidebar-brand-icon">
+                        <i class="fas fa-crown"></i>
                     </div>
+                    <div class="sidebar-brand-text mx-3">Admin</div>
+                </a>
 
+<<<<<<< HEAD
                     <!-- Nav Item - Courses Collapse Menu -->
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourses"
@@ -148,56 +130,44 @@
                             </div>
                         </div>
                     </li>
+=======
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
+>>>>>>> parent of b80fe2f (update 1 đống jsp :>)
 
-                    <!-- Divider -->
-                    <hr class="sidebar-divider">
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboardadmin.jsp">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
 
-                    <!-- Heading -->
-                    <div class="sidebar-heading">
-                        Community
-                    </div>
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Learn
+                </div>
 
-                    <!-- Nav Item - Blogs Collapse Menu -->
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs"
-                           aria-expanded="false" aria-controls="collapseBlogs">
-                            <i class="fas fa-fw fa-users"></i>
-                            <span>Blogs</span>
-                        </a>
-                        <div id="collapseBlogs" class="collapse" aria-labelledby="headingBlogs"
-                             data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Blogs:</h6>
-                                <a class="collapse-item" href="all-blog.html">All Blogs</a>
-                                <a class="collapse-item" href="blog.jsp">My Blogs</a>
-                                <div class="collapse-divider"></div>
-                                <h6 class="collapse-header">Create:</h6>
-                                <a class="collapse-item" href="create-blog.jsp">Create Blog</a>
-                            </div>
+                <!-- Nav Item - Courses Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourses"
+                       aria-expanded="false" aria-controls="collapseCourses">
+                        <i class="fas fa-fw fa-book"></i>
+                        <span>Courses</span>
+                    </a>
+                    <div id="collapseCourses" class="collapse" aria-labelledby="headingCourses" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Courses:</h6>
+                            <a class="collapse-item" href="all-course.html">All Courses</a>
+                            <a class="collapse-item" href="course.jsp">My Courses</a>
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Create:</h6>
+                            <a class="collapse-item" href="courseAdd.jsp">Create Course</a>
                         </div>
-                    </li>
-
-                    <!-- Nav Item - Charts -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="ranking.jsp">
-                            <i class="fas fa-fw fa-trophy"></i>
-                            <span>Ranking</span></a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="search.jsp">
-                            <i class="fas fa-fw fa-table"></i>
-                            <span>User Management</span></a>
-                    </li>
-
-                    <!-- Divider -->
-                    <hr class="sidebar-divider d-none d-md-block">
-
-                    <!-- Sidebar Toggler (Sidebar) -->
-                    <div class="text-center d-none d-md-inline">
-                        <button class="rounded-circle border-0" id="sidebarToggle"></button>
                     </div>
+<<<<<<< HEAD
 
                 </ul>
                 <!-- End of Sidebar -->
@@ -255,6 +225,12 @@
 
             <!-- Nav Item - Quizzes Collapse Menu -->
             <li class="nav-item">
+=======
+                </li>
+
+                <!-- Nav Item - Quizzes Collapse Menu -->
+                <li class="nav-item">
+>>>>>>> parent of b80fe2f (update 1 đống jsp :>)
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
                        aria-expanded="false" aria-controls="collapseQuizzes">
                         <i class="fas fa-fw fa-edit"></i>
@@ -264,6 +240,7 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Quizzes:</h6>
+<<<<<<< HEAD
                             <a class="collapse-item" href="question.jsp">All Question</a>
                             <a class="collapse-item" href="all-quiz.jsp">All Quizzes</a>
                             <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
@@ -310,10 +287,21 @@
                         </div>
                     </div>
                 </li>
+=======
+                            <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
+                            <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Create:</h6>
+                            <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
+                        </div>
+                    </div>
+                </li>
+>>>>>>> parent of b80fe2f (update 1 đống jsp :>)
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+<<<<<<< HEAD
             <!-- Heading -->
             <div class="sidebar-heading">
                 Community
@@ -380,6 +368,67 @@
         </ul>
         <!-- End of Sidebar -->
             </c:if>
+=======
+                <!-- Nav Item - Marks -->
+                <li class="nav-item">
+                    <a class="nav-link" href="charts.html">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Marks</span></a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Community
+                </div>
+
+
+                <!-- Nav Item - Blogs Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs"
+                       aria-expanded="false" aria-controls="collapseBlogs">
+                        <i class="fas fa-fw fa-blogs"></i>
+                        <span>Blogs</span>
+                    </a>
+                    <div id="collapseBlogs" class="collapse" aria-labelledby="headingBlogs"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Blogs:</h6>
+                            <a class="collapse-item" href="all-blog.html">All Blogs</a>
+                            <a class="collapse-item" href="blog.jsp">My Blogs</a>
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Create:</h6>
+                            <a class="collapse-item" href="create-blog.jsp">Create Blog</a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Charts -->
+                <li class="nav-item">
+                    <a class="nav-link" href="ranking.jsp">
+                        <i class="fas fa-fw fa-trophy"></i>
+                        <span>Ranking</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="search.jsp">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>blog Management</span></a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
+
+            </ul>
+            <!-- End of Sidebar -->
+>>>>>>> parent of b80fe2f (update 1 đống jsp :>)
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
 
@@ -697,7 +746,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Online Quiz App 2021</span>
+                            <span>Copyright &copy; Your Website 2020</span>
                         </div>
                     </div>
                 </footer>
@@ -722,13 +771,13 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
+                            <span aria-hidden="true">Ã</span>
                         </button>
                     </div>
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="LogoutController">Logout</a>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
                     </div>
                 </div>
             </div>
