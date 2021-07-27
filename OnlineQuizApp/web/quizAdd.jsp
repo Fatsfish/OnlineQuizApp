@@ -200,6 +200,7 @@
 
             </ul>
             <!-- End of Sidebar -->
+<<<<<<< HEAD
             <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1'}">
              <!-- Sidebar -->
                 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -378,6 +379,9 @@
         </ul>
                 <!-- End of Sidebar -->
             </c:if>
+=======
+
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
 
 
             <!-- Content Wrapper -->

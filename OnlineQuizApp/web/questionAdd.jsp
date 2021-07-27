@@ -203,7 +203,7 @@
                 <!-- End of Sidebar -->
             </c:if>
             <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1'}">
-               <!-- Sidebar -->
+                <!-- Sidebar -->
                 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
@@ -213,6 +213,7 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">Teacher</div>
             </a>
+<<<<<<< HEAD
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -253,6 +254,48 @@
                 </div>
             </li>
 
+=======
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="dashboardteacher.jsp">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Learn
+            </div>
+
+            <!-- Nav Item - Courses Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourses"
+                    aria-expanded="true" aria-controls="collapseCourses">
+                    <i class="fas fa-fw fa-book"></i>
+                    <span>Courses</span>
+                </a>
+                <div id="collapseCourses" class="collapse" aria-labelledby="headingCourses" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Courses:</h6>
+                        <a class="collapse-item" href="all-course.html">All Courses</a>
+                        <a class="collapse-item" href="course.jsp">My Courses</a>
+                        <a class="collapse-item" href="class.jsp">My Classes</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Create:</h6>
+                        <a class="collapse-item" href="courseAdd.jsp">Create Course</a>
+                        <a class="collapse-item" href="classAdd.jsp">Create Class</a>
+                    </div>
+                </div>
+            </li>
+
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
             <!-- Nav Item - Quizzes Collapse Menu -->
             <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
@@ -265,6 +308,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Quizzes:</h6>
                             <a class="collapse-item" href="question.jsp">All Question</a>
+<<<<<<< HEAD
                             <a class="collapse-item" href="all-quiz.jsp">All Quizzes</a>
                             <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
 
@@ -273,6 +317,15 @@
                             <a class="collapse-item" href="quizAdd.jsp">Create Quiz</a>
                             <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
                             <a class="collapse-item" href="QuizCreateController?check=quiz2">Add Question to Quiz</a>
+=======
+                            <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
+                            <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
+                            
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Create:</h6>
+                            <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
+                            <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
                         </div>
                     </div>
                 </li>
@@ -371,6 +424,7 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
+<<<<<<< HEAD
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -379,6 +433,16 @@
 
         </ul>
                 <!-- End of Sidebar -->
+=======
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+                <!-- End of Sidebar -->  
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
             </c:if>
 
 

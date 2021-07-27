@@ -266,6 +266,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Quizzes:</h6>
                             <a class="collapse-item" href="question.jsp">All Question</a>
+<<<<<<< HEAD
                             <a class="collapse-item" href="all-quiz.jsp">All Quizzes</a>
                             <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
 
@@ -274,6 +275,15 @@
                             <a class="collapse-item" href="quizAdd.jsp">Create Quiz</a>
                             <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
                             <a class="collapse-item" href="QuizCreateController?check=quiz2">Add Question to Quiz</a>
+=======
+                            <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
+                            <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
+                            
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Create:</h6>
+                            <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
+                            <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
                         </div>
                     </div>
                 </li>
@@ -379,7 +389,11 @@
             </div>
 
         </ul>
+<<<<<<< HEAD
                 <!-- End of Sidebar -->
+=======
+                <!-- End of Sidebar -->  
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
             </c:if>
 
 
