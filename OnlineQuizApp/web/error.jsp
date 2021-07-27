@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="org.onlinequizapp.dtos.UserError"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
@@ -46,11 +47,16 @@
         <h2 align="center">Navigations to other services:</h2>
         <div align="center" class="u-custom-menu u-nav-container">
             <ul class="u-nav u-unstyled u-nav-1">
-                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html">Home</a></li>
-                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Beauty-Care.html">Beauty Care</a></li>
-                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="X-mas.html">X-mas</a></li>
-                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="About-James.html" target="_blank">About James</a></li>
-                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="TEDxFPTUniversityHCMC.html" target="_blank">TEDxFPTUniversityHCMC</a></li>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="index.html">Home</a></li>
+                <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
+                    <li class="u-nav-item"><a class="u-button-style u-nav-link" href="dashboardadmin.jsp" >Dashboard</a></li>
+                </c:if>
+                <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1' }">
+                    <li class="u-nav-item"><a class="u-button-style u-nav-link" href="dashboardteacher.jsp" >Dashboard</a></li>
+                </c:if>
+                <c:if test="${sessionScope.LOGIN_USER.role =='S' || sessionScope.LOGIN_USER.role =='S1' }">
+                    <li class="u-nav-item"> <a class="u-button-style u-nav-link" href="dashboardstudent.jsp" >Dashboard</a></li>
+                </c:if>   
             </ul>
         </div></body>
 </html>

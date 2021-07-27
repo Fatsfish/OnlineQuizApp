@@ -96,7 +96,7 @@
             </div>
         </div>
         <div class="colorlibcopy-agile">
-            <p>© 2021 Flower shop. All rights reserved | Design by <a href="About-James.html" target="_blank">James</a></p>
+            <p>© 2021 Online Quiz App. All rights reserved</p>
         </div>
         <!-- //copyright -->
         <ul class="colorlib-bubbles">

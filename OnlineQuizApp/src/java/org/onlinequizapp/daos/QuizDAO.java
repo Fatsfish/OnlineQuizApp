@@ -68,6 +68,56 @@ public class QuizDAO {
         return listQuiz;
     }
 
+    public QuizDTO getQ(String search) throws SQLException {
+        QuizDTO listQuiz = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Select QuizID, Name, Description , NumberOfQuestions, TotalMark, Status, "
+                        + "AuthorID, ClassID from tblQuiz WHERE QuizID like ?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, "%" + search + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String QuizID = rs.getString("QuizID");
+                    String Name = rs.getString("Name");
+                    String Description = rs.getString("Description");
+                    String NumberOfQuestions = rs.getString("NumberOfQuestions");
+                    String TotalMark = rs.getString("TotalMark");
+                    String Status = rs.getString("Status");
+                    String AuthorID = rs.getString("AuthorID");
+                    String ClassID = rs.getString("ClassID");
+                    listQuiz.setAuthorID(AuthorID);
+                    listQuiz.setClassID(ClassID);
+                    listQuiz.setDescription(Description);
+                    listQuiz.setName(Name);
+                    listQuiz.setStatus(Status);
+                    listQuiz.setTotalMark(TotalMark);
+                    listQuiz.setNumberOfQuestions(NumberOfQuestions);
+                    listQuiz.setQuizID(QuizID);
+                }
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return listQuiz;
+    }
+
     public List<QuizDetailDTO> getListQD(String search) throws SQLException {
         List<QuizDetailDTO> listQuiz = null;
         Connection conn = null;
@@ -187,12 +237,12 @@ public class QuizDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, quiz.getName());
                 stm.setString(2, quiz.getDescription());
-                stm.setString(3, quiz.getNumberOfQuestions());
-                stm.setString(4, quiz.getTotalMark());
+                stm.setInt(3, Integer.parseInt(quiz.getNumberOfQuestions()));
+                stm.setFloat(4, Float.parseFloat(quiz.getTotalMark()));
                 stm.setString(5, quiz.getAuthorID());
                 stm.setString(6, quiz.getStatus());
-                stm.setString(7, quiz.getClassID());
-                stm.setString(8, quiz.getQuizID());
+                stm.setInt(7, Integer.parseInt(quiz.getClassID()));
+                stm.setInt(8, Integer.parseInt(quiz.getQuizID()));
                 check = stm.executeUpdate() > 0 ? true : false;
             }
 
@@ -247,15 +297,15 @@ public class QuizDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "INSERT INTO tblQuiz(Name, NumberOfQuestions, Description, TotalMark, AuthorID, Status, ClassID ) "
-                        + " VALUES(\'?\',\'?\',\'?\',\'?\',\'?\',\'?\',\'?\')";
+                        + " VALUES(?,?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, quiz.getName());
-                stm.setString(2, quiz.getNumberOfQuestions());
+                stm.setInt(2, Integer.parseInt(quiz.getNumberOfQuestions()));
                 stm.setString(3, quiz.getDescription());
-                stm.setString(4, quiz.getTotalMark());
+                stm.setFloat(4, Float.parseFloat(quiz.getTotalMark()));
                 stm.setString(5, quiz.getAuthorID());
-                stm.setByte(5, (byte) Integer.parseInt(quiz.getStatus()));
-                stm.setString(6, quiz.getClassID());
+                stm.setString(6, quiz.getStatus());
+                stm.setInt(7, Integer.parseInt(quiz.getClassID()));
                 stm.executeUpdate();
             }
         } catch (Exception e) {
@@ -277,13 +327,13 @@ public class QuizDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "INSERT INTO tblQuizDetail(QuizID, QuestionID, Time, Mark ) "
-                        + " VALUES(\'?\',\'?\',\'?\',\'?\')";
+                        + " VALUES(?,?,?,?)";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, quiz.getQuizID());
-                stm.setString(2, quiz.getQuestionID());
+                stm.setInt(1, Integer.parseInt(quiz.getQuizID()));
+                stm.setInt(2, Integer.parseInt(quiz.getQuestionID()));
                 stm.setString(3, quiz.getTime());
-                stm.setString(4, quiz.getMark());
-
+                stm.setFloat(4, Float.parseFloat(quiz.getMark()));
+                stm.executeUpdate();
             }
         } catch (Exception e) {
 

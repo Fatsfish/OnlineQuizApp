@@ -7,11 +7,17 @@ package org.onlinequizapp.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.onlinequizapp.daos.QuestionDAO;
+import org.onlinequizapp.daos.QuizDAO;
+import org.onlinequizapp.dtos.QuestionDTO;
+import org.onlinequizapp.dtos.QuizDTO;
 
 /**
  *
@@ -19,6 +25,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "QuizSearchController", urlPatterns = {"/QuizSearchController"})
 public class QuizSearchController extends HttpServlet {
+
+    private static final String SUCCESS = "quiz.jsp";
+    private static final String QUIZ = "quizAdd.jsp";
+    private static final String ERROR = "404.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,17 +42,25 @@ public class QuizSearchController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet QuizSearchController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet QuizSearchController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String url = ERROR;
+        String check = request.getParameter("check");
+        String search = request.getParameter("search");
+        if (check.equals("Search")) {
+            try {
+                QuizDAO dao = new QuizDAO();
+                List<QuizDTO> list = dao.getListQ(search);
+                if (list != null) {
+                    request.setAttribute("LIST_QUIZ", list);
+                    url = SUCCESS;
+                }
+            } catch (SQLException e) {
+                log("Error at ClassSearchController: " + e.toString());
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
+        } else {
+            request.setAttribute("LIST_QUIZ_ERROR", "ERROR at ClassSearchController");
+            url = ERROR;
         }
     }
 

@@ -1,13 +1,13 @@
 <%-- 
-    Document   : quizAdd
-    Created on : Jul 22, 2021, 6:09:43 AM
+    Document   : quizDetailAdd
+    Created on : Jul 27, 2021, 5:50:06 AM
     Author     : User-PC
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="org.onlinequizapp.daos.CourseDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="org.onlinequizapp.dtos.ClassDTO"%>
+<%@page import="org.onlinequizapp.dtos.QuizDTO"%>
+<%@page import="org.onlinequizapp.dtos.QuestionDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -247,44 +247,49 @@
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Quiz Add</h1>
                             <div style="color: green" class="h5 mt-3">
-                                <p class="mb-4">${requestScope.CREATE_Q_SUCCESS}</p>
+                                <p class="mb-4">${requestScope.CREATE_QD_SUCCESS}</p>
                             </div>
                             <div style="color: red" class="h5 mt-3" >
-                                <p class="mb-4">${requestScope.CREATE_Q_ERROR}</p>
+                                <p class="mb-4">${requestScope.CREATE_QD_ERROR}</p>
                             </div>                           
                         </div>
 
                         <div class="container">
-                            <a href="QuizCreateController?check=quiz1" class="btn btn-primary mb-3"/>Filter Category</a>
                             <form action="QuizCreateController">
-                                <div class="mb-3">
-                                    <label for="questionName" class="form-label">Quiz Name</label>
-                                    <input type="text" name="Name" class="form-control" id="questionName">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="QuestionDesc" class="form-label">Description</label>
-                                    <textarea class="form-control" id="QuestionDesc" name="description" rows="3"></textarea>
-                                </div>
                                 
+                                <div class="mb-3">
+                                    <label for="QuestionDesc" class="form-label">Time (in seconds or none)</label>
+                                    <input type="number" class="form-control" name="time" id="Duration">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Duration" class="form-label">Mark</label>
+                                    <input type="number" class="form-control" name="mark" id="Duration">
+                                </div>
                                 <div>
-                                    <select name="classID" class="form-select" aria-label="Default select example">
-                                        <option selected>Choose class</option>
-                                        <option value="">None</option>
-                                        <c:if test="${requestScope.LIST_CLASS != null && not empty requestScope.LIST_CLASS}">
-                                            <c:forEach var="category" varStatus="counter" items="${requestScope.LIST_CLASS}">
-                                                <c:if test="${category.status==1}">
-                                                    <option value="${category.classID}">Class ID - ${category.classID}</option>
+                                    <select name="quizID" class="form-control" aria-label="Default select example">
+                                        <option selected>Choose Quiz</option>
+                                        <c:if test="${requestScope.LIST_QUIZ != null && not empty requestScope.LIST_QUIZ}">
+                                            <c:forEach var="course" varStatus="counter" items="${requestScope.LIST_QUIZ}">
+                                                <c:if test="${course.status==1}">
+                                                    <option value="${course.quizID}">${counter.count} - ${course.name}</option>
                                                 </c:if>
                                             </c:forEach>
                                         </c:if>
                                     </select>
-                                </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" name="status" class="form-check-input" id="status">
-                                    <label class="form-check-label" for="status">Active</label>
-                                </div>
-                                <input type="hidden" name="check" value="quiz" class="form-check-input" id="status">
-
+                                </div><br>
+                                <div>
+                                    <select name="questionID" class="form-control" aria-label="Default select example">
+                                        <option selected>Choose Question</option>
+                                        <c:if test="${requestScope.LIST_QUESTION != null && not empty requestScope.LIST_QUESTION}">
+                                            <c:forEach var="lop" varStatus="counter" items="${requestScope.LIST_QUESTION}">
+                                                <c:if test="${lop.status==1}">
+                                                    <option value="${lop.questionID}">${counter.count} - ${lop.name}</option>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:if>
+                                    </select>
+                                </div><br>
+                                <input type="hidden" name="check" value="detail" class="form-check-input" id="status">
                                 <button type="submit" class="btn btn-primary">Create</button>
                                 <c:if test="${sessionScope.LOGIN_USER.role =='AD'}">
                                     <a class="btn btn-danger" href="dashboardadmin.jsp" role="button">Cancel</a>
