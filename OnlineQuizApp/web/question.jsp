@@ -451,8 +451,13 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         </ul>
                 <!-- End of Sidebar -->
+=======
+                </ul>
+                <!-- End of Sidebar -->  
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
 =======
                 </ul>
                 <!-- End of Sidebar -->  

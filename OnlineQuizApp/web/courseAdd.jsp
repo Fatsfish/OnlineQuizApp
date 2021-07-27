@@ -229,6 +229,7 @@
                     <span>Dashboard</span></a>
             </li>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -244,6 +245,17 @@
                 Learn
             </div>
 
+=======
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Learn
+            </div>
+
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
             <!-- Nav Item - Courses Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourses"
@@ -265,6 +277,7 @@
                 </div>
             </li>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< Updated upstream
@@ -291,6 +304,8 @@
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
 =======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
+=======
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
             <!-- Nav Item - Quizzes Collapse Menu -->
             <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
@@ -303,6 +318,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Quizzes:</h6>
                             <a class="collapse-item" href="question.jsp">All Question</a>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
                             <a class="collapse-item" href="all-quiz.jsp">All Quizzes</a>
@@ -368,6 +384,8 @@
 =======
 =======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
+=======
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
                             <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
                             <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
                             
@@ -376,6 +394,9 @@
                             <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
                             <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
+=======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
 =======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)

@@ -201,6 +201,7 @@
                 <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 <<<<<<< HEAD
+<<<<<<< HEAD
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -230,6 +231,9 @@
 
 =======
 
+=======
+
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon">
@@ -256,6 +260,9 @@
                 Learn
             </div>
 
+<<<<<<< HEAD
+>>>>>>> parent of 2a7a80d (Fix Teacher UI)
+=======
 >>>>>>> parent of 2a7a80d (Fix Teacher UI)
             <!-- Nav Item - Courses Collapse Menu -->
             <li class="nav-item">
