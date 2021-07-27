@@ -161,7 +161,7 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Blogs:</h6>
-                            <a class="collapse-item" href="all-blog.jsp">All Blogs</a>
+                            <a class="collapse-item" href="all-blog.html">All Blogs</a>
                             <a class="collapse-item" href="blog.jsp">My Blogs</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
