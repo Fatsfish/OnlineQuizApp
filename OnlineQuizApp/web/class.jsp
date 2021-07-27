@@ -196,7 +196,7 @@
                 <!-- End of Sidebar -->
             </c:if>
             <c:if test="${sessionScope.LOGIN_USER.role =='T' || sessionScope.LOGIN_USER.role =='T1'}">
-                <!-- Sidebar -->
+                 <!-- Sidebar -->
                 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                     <!-- Sidebar - Brand -->
@@ -258,22 +258,16 @@
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Quizzes:</h6>
                                 <a class="collapse-item" href="question.jsp">All Question</a>
-                                <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
+                                <a class="collapse-item" href="all-quiz.jsp">All Quizzes</a>
                                 <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
 
                                 <div class="collapse-divider"></div>
                                 <h6 class="collapse-header">Create:</h6>
-                                <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
+                                <a class="collapse-item" href="quizAdd.jsp">Create Quiz</a>
                                 <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
+                                <a class="collapse-item" href="QuizCreateController?check=quiz2">Add Question to Quiz</a>
                             </div>
                         </div>
-                    </li>
-
-                    <!-- Nav Item - Students -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-fw fa-user-graduate"></i>
-                            <span>Students</span></a>
                     </li>
 
                     <!-- Nav Item - Marks -->
@@ -370,7 +364,7 @@
                     </div>
 
                 </ul>
-                <!-- End of Sidebar -->  
+                <!-- End of Sidebar -->
             </c:if>
 
             <!-- Content Wrapper -->
