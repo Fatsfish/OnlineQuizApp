@@ -296,6 +296,30 @@
                                     <a class="btn btn-danger" href="dashboardstudent.jsp" role="button">Cancel</a>
                                 </c:if> 
                             </form>
+                        
+                        <c:if test="${requestScope.LIST_CLASS != null && not empty requestScope.LIST_CLASS}">                       
+                            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                                <h4>List of all Classes</h4>
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>No</th>
+                                        <th>Class ID</th>
+                                        <th>Number Of Student</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="lop" varStatus="counter" items="${requestScope.LIST_CLASS}">
+                                        <tr>
+                                            <td>${counter.count}</td>
+                                            <td>${lop.classID}</td>
+                                            <td>${lop.numberOfStudent}</td>
+                                            <td>${lop.status}</td>
+                                        </tr>
+                                    </tbody>
+                                </c:forEach>         
+                            </table>
+                        </c:if><br>
                         </div>
                     </div>
                     <!-- /.container-fluid -->
