@@ -18,8 +18,6 @@ public class QuestionSearchController extends HttpServlet {
 
     private static final String SUCCESS = "question.jsp";
     private static final String QUESTION = "questionAdd.jsp";
-    private static final String Quiz = "quizPlay.jsp";
-
     private static final String ERROR = "404.html";
 
     /**
@@ -44,19 +42,6 @@ public class QuestionSearchController extends HttpServlet {
                 if (list != null) {
                     request.setAttribute("LIST_QUESTION", list);
                     url = SUCCESS;
-                }
-            } catch (SQLException e) {
-                log("Error at ClassSearchController: " + e.toString());
-            } finally {
-                request.getRequestDispatcher(url).forward(request, response);
-            }
-        } else if (check.equals("Play")) {
-            try {
-                QuestionDAO dao = new QuestionDAO();
-                List<QuestionDTO> list = dao.getListQ(search);
-                if (list != null) {
-                    request.setAttribute("LIST_QUESTION", list);
-                    url = Quiz;
                 }
             } catch (SQLException e) {
                 log("Error at ClassSearchController: " + e.toString());

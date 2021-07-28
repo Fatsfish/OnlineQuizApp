@@ -22,8 +22,8 @@ import org.onlinequizapp.utils.DBUtils;
  */
 public class ScoreDAO {
 
-    public ScoreDTO getListS(String search, String search1) throws SQLException {
-        ScoreDTO listQuiz = null;
+    public List<ScoreDTO> getListS(String search) throws SQLException {
+        List<ScoreDTO> listQuiz = null;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -32,22 +32,21 @@ public class ScoreDAO {
             if (conn != null) {
                 String sql = "Select QuizID, UserID, StartTime, EndTime, Mark "
                         + "from tblScore "
-                        + "WHERE quizID like ? and userId like ?";
+                        + "WHERE quizID like ?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, "%" + search + "%");
-                stm.setString(2, "%" + search1 + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String QuizID = rs.getString("QuizID");
-                    String userID = rs.getString("userID");
+                    String questionID = rs.getString("userID");
                     Timestamp STime = rs.getTimestamp("StartTime");
                     Timestamp ETime = rs.getTimestamp("EndTime");
                     String Mark = rs.getString("Mark");
-                    listQuiz.setEndTime(ETime);
-                    listQuiz.setMark(Mark);
-                    listQuiz.setUserID(userID);
-                    listQuiz.setQuizID(QuizID);
-                    listQuiz.setStartTime(STime);
+                    if (listQuiz == null) {
+                        listQuiz = new ArrayList<>();
+                    }
+                    listQuiz.add(new ScoreDTO(QuizID, questionID, STime, ETime, Mark));
+
                 }
             }
 
@@ -99,7 +98,7 @@ public class ScoreDAO {
         }
         return check;
     }
-
+    
     public boolean updateS(ScoreDTO quiz) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -107,12 +106,14 @@ public class ScoreDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPdaTE tblSccore SET StartTime='CURRENT_TIMESTAMP', EndTime='CURRENT_TIMESTAMP', Mark=? "
+                String sql = "UPdaTE tblSccore SET StartTime=?, EndTime=?, Mark=? "
                         + " Where QuizID=? and UserID=? ";
                 stm = conn.prepareStatement(sql);
-                stm.setFloat(1, Float.parseFloat(quiz.getMark()));
-                stm.setString(2, quiz.getQuizID());
-                stm.setInt(3, Integer.parseInt(quiz.getUserID()));
+                stm.setTimestamp(1, quiz.getStartTime());
+                stm.setTimestamp(1, quiz.getEndTime());
+                stm.setString(2, quiz.getMark());
+                stm.setString(3, quiz.getQuizID());
+                stm.setString(4, quiz.getUserID());
                 check = stm.executeUpdate() > 0 ? true : false;
             }
 
@@ -136,12 +137,14 @@ public class ScoreDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "INSERT INTO tblScore(QuizID, UserID, StartTime,EndTime, Mark ) "
-                        + " VALUES(?,?,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,?)";
+                        + " VALUES(\'?\',\'?\',\'?\',\'?\',\'?\')";
                 stm = conn.prepareStatement(sql);
-                stm.setInt(1, Integer.parseInt(quiz.getQuizID()));
+                stm.setString(1, quiz.getQuizID());
                 stm.setString(2, quiz.getUserID());
-                stm.setFloat(3, Float.parseFloat(quiz.getMark()));
-                stm.executeUpdate();
+                stm.setTimestamp(3, quiz.getStartTime());
+                stm.setTimestamp(4, quiz.getEndTime());
+                stm.setString(5, quiz.getMark());
+
             }
         } catch (Exception e) {
 

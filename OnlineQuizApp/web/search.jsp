@@ -74,7 +74,7 @@
                     <div id="collapseCourses" class="collapse" aria-labelledby="headingCourses" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Courses:</h6>
-                            <a class="collapse-item" href="all-course.html">All Courses</a>
+                            <a class="collapse-item" href="all-course.jsp">All Courses</a>
                             <a class="collapse-item" href="course.jsp">My Courses</a>
                             <a class="collapse-item" href="lecture.jsp">My Lectures</a>
                             <a class="collapse-item" href="source.jsp">My Resources</a>
@@ -82,8 +82,8 @@
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="courseAdd.jsp">Create Course</a>
-                            <a class="collapse-item" href="lectureAdd.jsp">Create Lecture</a>
-                            <a class="collapse-item" href="sourceAdd.jsp">Create Resource</a>
+                            <a class="collapse-item" href="LectureCreateController?check=">Create Lecture</a>
+                            <a class="collapse-item" href="SourceCreateController?function=">Create Resource</a>
                             <a class="collapse-item" href="classAdd.jsp">Create Class</a>
                         </div>
                     </div>
@@ -100,20 +100,14 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Quizzes:</h6>
-                            <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
+                            <a class="collapse-item" href="question.jsp">All Question</a>
+                            <a class="collapse-item" href="all-quiz.jsp">All Quizzes</a>
                             <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
-<<<<<<< HEAD
-
+                            
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
                             <a class="collapse-item" href="quizAdd.jsp">Create Quiz</a>
                             <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
-                            <a class="collapse-item" href="QuizCreateController?check=quiz2">Add Question to Quiz</a>
-=======
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
->>>>>>> parent of b80fe2f (update 1 đống jsp :>)
                         </div>
                     </div>
                 </li>
@@ -121,7 +115,7 @@
 
                 <!-- Nav Item - Marks -->
                 <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" href="score.jsp">
                         <i class="fas fa-fw fa-chart-area"></i>
                         <span>Marks</span></a>
                 </li>
@@ -167,7 +161,7 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Blogs:</h6>
-                            <a class="collapse-item" href="all-blog.html">All Blogs</a>
+                            <a class="collapse-item" href="all-blog.jsp">All Blogs</a>
                             <a class="collapse-item" href="blog.jsp">My Blogs</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
@@ -369,25 +363,25 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="LogoutController">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="Dashboard/vendor/jquery/jquery.min.js"></script>

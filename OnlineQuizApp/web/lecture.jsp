@@ -75,7 +75,7 @@
                     <div id="collapseCourses" class="collapse" aria-labelledby="headingCourses" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Courses:</h6>
-                            <a class="collapse-item" href="all-course.jsp">All Courses</a>
+                            <a class="collapse-item" href="all-course.html">All Courses</a>
                             <a class="collapse-item" href="course.jsp">My Courses</a>
                             <a class="collapse-item" href="lecture.jsp">My Lectures</a>
                             <a class="collapse-item" href="source.jsp">My Resources</a>
@@ -102,14 +102,13 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Quizzes:</h6>
                             <a class="collapse-item" href="question.jsp">All Question</a>
-                            <a class="collapse-item" href="all-quiz.jsp">All Quizzes</a>
+                            <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
                             <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
-
+                            
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="quizAdd.jsp">Create Quiz</a>
+                            <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
                             <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
-                            <a class="collapse-item" href="QuizCreateController?check=quiz2">Add Question to Quiz</a>
                         </div>
                     </div>
                 </li>
@@ -117,7 +116,7 @@
 
                 <!-- Nav Item - Marks -->
                 <li class="nav-item">
-                    <a class="nav-link" href="score.jsp">
+                    <a class="nav-link" href="charts.html">
                         <i class="fas fa-fw fa-chart-area"></i>
                         <span>Marks</span></a>
                 </li>
@@ -249,7 +248,6 @@
 
             <!-- Nav Item - Quizzes Collapse Menu -->
             <li class="nav-item">
-<<<<<<< HEAD
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
                        aria-expanded="false" aria-controls="collapseQuizzes">
                         <i class="fas fa-fw fa-edit"></i>
@@ -260,34 +258,16 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Quizzes:</h6>
                             <a class="collapse-item" href="question.jsp">All Question</a>
-                            <a class="collapse-item" href="all-quiz.jsp">All Quizzes</a>
+                            <a class="collapse-item" href="all-quiz.html">All Quizzes</a>
                             <a class="collapse-item" href="quiz.jsp">My Quizzes</a>
-
+                            
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Create:</h6>
-                            <a class="collapse-item" href="quizAdd.jsp">Create Quiz</a>
+                            <a class="collapse-item" href="quizAdd.html">Create Quiz</a>
                             <a class="collapse-item" href="questionAdd.jsp">Create Question</a>
-                            <a class="collapse-item" href="QuizCreateController?check=quiz2">Add Question to Quiz</a>
                         </div>
-=======
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuizzes"
-                    aria-expanded="true" aria-controls="collapseQuizzes">
-                    <i class="fas fa-fw fa-edit"></i>
-                    <span>Quizzes</span>
-                </a>
-                <div id="collapseQuizzes" class="collapse" aria-labelledby="headingQuizzes"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Quizzes:</h6>
-                        <a class="collapse-item" href="utilities-color.html">All Quizzes</a>
-                        <a class="collapse-item" href="utilities-border.html">My Quizzes</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Create:</h6>
-                        <a class="collapse-item" href="404.html">Create Quiz</a>
->>>>>>> parent of b80fe2f (update 1 đống jsp :>)
                     </div>
-                </div>
-            </li>
+                </li>
 
             <!-- Nav Item - Students -->
             <li class="nav-item">
@@ -297,11 +277,11 @@
             </li>
 
             <!-- Nav Item - Marks -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Marks</span></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="score.jsp">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Marks</span></a>
+                </li>
             
             <!-- Nav Item - Category Collapse Menu -->
 
@@ -333,23 +313,23 @@
 
             <!-- Nav Item - Blogs Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs" aria-expanded="false"
-                    aria-controls="collapseBlogs">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Blogs</span>
-                </a>
-                <div id="collapseBlogs" class="collapse" aria-labelledby="headingBlogs"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Blogs:</h6>
-                        <a class="collapse-item" href="#">All Blogs</a>
-                        <a class="collapse-item" href="#">My Blogs</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Create:</h6>
-                        <a class="collapse-item" href="404.html">Create Blog</a>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs"
+                       aria-expanded="false" aria-controls="collapseBlogs">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Blogs</span>
+                    </a>
+                    <div id="collapseBlogs" class="collapse" aria-labelledby="headingBlogs"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Blogs:</h6>
+                            <a class="collapse-item" href="all-blog.html">All Blogs</a>
+                            <a class="collapse-item" href="blog.jsp">My Blogs</a>
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Create:</h6>
+                            <a class="collapse-item" href="create-blog.jsp">Create Blog</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
@@ -577,7 +557,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <a class="btn btn-primary" href="LogoutController">Logout</a>
                     </div>
                 </div>
             </div>
