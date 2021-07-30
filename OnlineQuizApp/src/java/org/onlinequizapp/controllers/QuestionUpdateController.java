@@ -1,22 +1,24 @@
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.onlinequizapp.daos.CategoryDAO;
 import org.onlinequizapp.daos.QuestionDAO;
 import org.onlinequizapp.dtos.CategoryDTO;
 import org.onlinequizapp.dtos.QuestionDTO;
 
-@WebServlet(name = "QuestionUpdateController", urlPatterns = {"/QuestionUpdateController"})
+@WebServlet(name = "QuestionUpdateController", urlPatterns = { "/QuestionUpdateController" })
 public class QuestionUpdateController extends HttpServlet {
 
+    private static final String ANSWER_S_DATA_MUST_BE_MORE_THAN_0_CHARACTER = "Answer's Data must be more than 0 character";
     private static final String SUCCESS = "QuestionSearchController";
     private static final String ERROR = "updateQuestion.jsp";
 
@@ -24,17 +26,15 @@ public class QuestionUpdateController extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        String check = request.getParameter("check");
-        String cate = request.getParameter("cate");
         String action = request.getParameter("action");
         CategoryDAO dao1 = new CategoryDAO();
         List<CategoryDTO> list = null;
@@ -61,7 +61,8 @@ public class QuestionUpdateController extends HttpServlet {
                 String answer4 = request.getParameter("answer4");
                 String authorID = request.getParameter("authorID");
                 QuestionDAO dao = new QuestionDAO();
-                QuestionDTO question = new QuestionDTO(questionID, name, answer1, answer2, answer3, answer4, description, answer, authorID, status, categoryID);
+                QuestionDTO question = new QuestionDTO(questionID, name, answer1, answer2, answer3, answer4,
+                        description, answer, authorID, status, categoryID);
                 boolean flag = true;
                 if (name.length() > 250 || name.length() < 1) {
                     flag = false;
@@ -69,19 +70,19 @@ public class QuestionUpdateController extends HttpServlet {
                 }
                 if (answer1.length() < 1) {
                     flag = false;
-                    question.setName("Answer's Data must be more than 0 character");
+                    question.setName(ANSWER_S_DATA_MUST_BE_MORE_THAN_0_CHARACTER);
                 }
                 if (answer2.length() < 1) {
                     flag = false;
-                    question.setName("Answer's Data must be more than 0 character");
+                    question.setName(ANSWER_S_DATA_MUST_BE_MORE_THAN_0_CHARACTER);
                 }
                 if (answer3.length() < 1) {
                     flag = false;
-                    question.setName("Answer's Data must be more than 0 character");
+                    question.setName(ANSWER_S_DATA_MUST_BE_MORE_THAN_0_CHARACTER);
                 }
                 if (answer4.length() < 1) {
                     flag = false;
-                    question.setName("Answer's Data must be more than 0 character");
+                    question.setName(ANSWER_S_DATA_MUST_BE_MORE_THAN_0_CHARACTER);
                 }
                 if (!(answer.equals("1")) && !(answer.equals("2")) && !(answer.equals("3")) && !(answer.equals("4"))) {
                     flag = false;
@@ -101,7 +102,7 @@ public class QuestionUpdateController extends HttpServlet {
                     request.setAttribute("ERROR", question);
                 }
             } catch (Exception e) {
-
+                log(e.toString());
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
@@ -111,14 +112,15 @@ public class QuestionUpdateController extends HttpServlet {
 
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -129,10 +131,10 @@ public class QuestionUpdateController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

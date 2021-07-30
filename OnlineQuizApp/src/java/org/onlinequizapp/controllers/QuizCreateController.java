@@ -6,37 +6,33 @@
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.onlinequizapp.daos.CategoryDAO;
+
 import org.onlinequizapp.daos.ClassDAO;
-import org.onlinequizapp.daos.EmailDAO;
 import org.onlinequizapp.daos.QuestionDAO;
 import org.onlinequizapp.daos.QuizDAO;
-import org.onlinequizapp.daos.UserDAO;
-import org.onlinequizapp.dtos.CategoryBlogDTO;
-import org.onlinequizapp.dtos.CategoryDTO;
 import org.onlinequizapp.dtos.ClassDTO;
 import org.onlinequizapp.dtos.QuestionDTO;
 import org.onlinequizapp.dtos.QuizDTO;
 import org.onlinequizapp.dtos.QuizDetailDTO;
 import org.onlinequizapp.dtos.UserDTO;
-import org.onlinequizapp.dtos.UserError;
 
 /**
  *
  * @author User-PC
  */
-@WebServlet(name = "QuizCreateController", urlPatterns = {"/QuizCreateController"})
+@WebServlet(name = "QuizCreateController", urlPatterns = { "/QuizCreateController" })
 public class QuizCreateController extends HttpServlet {
 
+    private static final String ERROR_AT_CLASS_SEARCH_CONTROLLER = "Error at ClassSearchController: ";
     private static final String SUCCESS = "quizAdd.jsp";
     private static final String SUCCESS1 = "quizDetailAdd.jsp";
     private static final String ERROR = "error.jsp";
@@ -45,10 +41,10 @@ public class QuizCreateController extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -59,16 +55,16 @@ public class QuizCreateController extends HttpServlet {
         List<QuestionDTO> list1 = null;
         List<QuizDTO> list2 = null;
         HttpSession session = request.getSession();
-        String LogID = "";
+        String logID = "";
         if (session.getAttribute("LOGIN_USER") != null) {
-            LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
+            logID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
         }
         try {
             ClassDAO dao = new ClassDAO();
             list = dao.getList("");
 
         } catch (SQLException e) {
-            log("Error at ClassSearchController: " + e.toString());
+            log(ERROR_AT_CLASS_SEARCH_CONTROLLER + e.toString());
         } finally {
             if (list != null) {
                 request.setAttribute("LIST_CLASS", list);
@@ -78,7 +74,7 @@ public class QuizCreateController extends HttpServlet {
             QuestionDAO dao1 = new QuestionDAO();
             list1 = dao1.getListQ("");
         } catch (SQLException e) {
-            log("Error at ClassSearchController: " + e.toString());
+            log(ERROR_AT_CLASS_SEARCH_CONTROLLER + e.toString());
         } finally {
             if (list1 != null) {
                 request.setAttribute("LIST_QUESTION", list1);
@@ -88,7 +84,7 @@ public class QuizCreateController extends HttpServlet {
             QuizDAO dao = new QuizDAO();
             list2 = dao.getListQ("");
         } catch (SQLException e) {
-            log("Error at ClassSearchController: " + e.toString());
+            log(ERROR_AT_CLASS_SEARCH_CONTROLLER + e.toString());
         } finally {
             if (list2 != null) {
                 request.setAttribute("LIST_QUIZ", list2);
@@ -97,7 +93,7 @@ public class QuizCreateController extends HttpServlet {
         if (check.equals("quiz")) {
             QuizDTO categoryDTO = new QuizDTO("", "", "", "", "", "", "", "");
             try {
-                String Name = request.getParameter("Name");
+                String name = request.getParameter("Name");
                 String description = request.getParameter("description");
                 String status = request.getParameter("status");
                 String classID = request.getParameter("classID");
@@ -109,7 +105,7 @@ public class QuizCreateController extends HttpServlet {
                     status = "0";
                 }
                 boolean flag = true;
-                if (Name.length() > 250 || Name.length() < 1) {
+                if (name.length() > 250 || name.length() < 1) {
                     flag = false;
                     categoryDTO.setName("Name must be [1-250]");
                 }
@@ -119,10 +115,10 @@ public class QuizCreateController extends HttpServlet {
                 }
                 if (flag) {
                     QuizDAO dao = new QuizDAO();
-                    categoryDTO.setAuthorID(LogID);
+                    categoryDTO.setAuthorID(logID);
                     categoryDTO.setClassID(classID);
                     categoryDTO.setDescription(description);
-                    categoryDTO.setName(Name);
+                    categoryDTO.setName(name);
                     categoryDTO.setStatus(status);
                     categoryDTO.setTotalMark("0");
                     categoryDTO.setNumberOfQuestions("0");
@@ -138,7 +134,7 @@ public class QuizCreateController extends HttpServlet {
                 if (e.toString().contains("duplicate")) {
                     categoryDTO.setQuizID("Category Name duplicate!");
                     request.setAttribute("ERROR", categoryDTO);
-                };
+                }
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
@@ -168,8 +164,10 @@ public class QuizCreateController extends HttpServlet {
                     quiz.setMark(mark);
                     dao.insertQD(quiz);
                     QuizDTO quiz1 = dao.getQ(quizID);
-                    quiz1.setNumberOfQuestions(String.format("%.2d", Integer.parseInt(quiz1.getNumberOfQuestions()) + 1));
-                    quiz1.setTotalMark(String.format("%.2f", (Integer.parseInt(quiz1.getTotalMark()) + Integer.parseInt(mark))));
+                    quiz1.setNumberOfQuestions(
+                            String.format("%.2d", Integer.parseInt(quiz1.getNumberOfQuestions()) + 1));
+                    quiz1.setTotalMark(
+                            String.format("%.2f", (Integer.parseInt(quiz1.getTotalMark()) + Integer.parseInt(mark))));
                     dao.updateQ(quiz1);
                     request.setAttribute("CREATE_QD_SUCCESS", "Create Success!");
                     url = SUCCESS1;
@@ -182,7 +180,7 @@ public class QuizCreateController extends HttpServlet {
                 if (e.toString().contains("duplicate")) {
                     quiz.setQuizID("Category Name duplicate!");
                     request.setAttribute("ERROR", quiz);
-                };
+                }
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
@@ -193,14 +191,15 @@ public class QuizCreateController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -211,10 +210,10 @@ public class QuizCreateController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
