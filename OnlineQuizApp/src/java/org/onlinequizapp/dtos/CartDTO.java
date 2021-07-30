@@ -6,6 +6,8 @@
 package org.onlinequizapp.dtos;
 
 import org.onlinequizapp.dtos.ProductDTO;
+
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +15,7 @@ import java.util.Map;
  *
  * @author User-PC
  */
-public class CartDTO {
+public class CartDTO implements Serializable {
 
     private Map<String, ProductDTO> cart;
 
@@ -35,11 +37,10 @@ public class CartDTO {
     public void add(ProductDTO product) {
         if (this.cart == null) {
             this.cart = new HashMap<>();
-        }
-        else if (this.cart.containsKey(product.getId())) {
+        } else if (this.cart.containsKey(product.getId())) {
             int quantity = this.cart.get(product.getId()).getQuantity();
             product.setQuantity(quantity + 1);
-            //  tea.setQuantity(quantity + tea.getQuantity());
+            // tea.setQuantity(quantity + tea.getQuantity());
         }
         cart.put(product.getId(), product);
     }

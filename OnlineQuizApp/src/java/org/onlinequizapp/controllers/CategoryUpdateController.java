@@ -6,12 +6,13 @@
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.onlinequizapp.daos.CategoryDAO;
 import org.onlinequizapp.dtos.CategoryBlogDTO;
 import org.onlinequizapp.dtos.CategoryDTO;
@@ -20,7 +21,7 @@ import org.onlinequizapp.dtos.CategoryDTO;
  *
  * @author Category-PC
  */
-@WebServlet(name = "CategoryUpdateController", urlPatterns = {"/CategoryUpdateController"})
+@WebServlet(name = "CategoryUpdateController", urlPatterns = { "/CategoryUpdateController" })
 public class CategoryUpdateController extends HttpServlet {
 
     private static final String SUCCESS = "CategorySearchController";
@@ -31,10 +32,10 @@ public class CategoryUpdateController extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -78,16 +79,15 @@ public class CategoryUpdateController extends HttpServlet {
                 } else {
                     request.setAttribute("ERROR", categoryDTO);
                 }
-            } 
-            catch (Exception e) {
-
+            } catch (Exception e) {
+                log(e.toString());
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
-        } else if (check.equals("Update Quiz")){
+        } else if (check.equals("Update Quiz")) {
             request.getRequestDispatcher(url).forward(request, response);
         }
-        
+
         CategoryBlogDTO categoryBlogDTO = new CategoryBlogDTO("", "", "", "");
         if (check.equals("Confirm Update Blog")) {
             try {
@@ -120,23 +120,25 @@ public class CategoryUpdateController extends HttpServlet {
                     request.setAttribute("ERROR", categoryBlogDTO);
                 }
             } catch (Exception e) {
+                log(e.toString());
 
             } finally {
                 request.getRequestDispatcher(url2).forward(request, response);
             }
-        } else if (check.equals("Update Blog")){
+        } else if (check.equals("Update Blog")) {
             request.getRequestDispatcher(url2).forward(request, response);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -147,10 +149,10 @@ public class CategoryUpdateController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

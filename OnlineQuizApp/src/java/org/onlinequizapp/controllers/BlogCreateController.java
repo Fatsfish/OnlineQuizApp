@@ -6,23 +6,23 @@
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.onlinequizapp.daos.BlogDAO;
 import org.onlinequizapp.dtos.BlogDTO;
-import org.onlinequizapp.dtos.BlogError;
 import org.onlinequizapp.dtos.UserDTO;
 
 /**
  *
  * @author User-PC
  */
-@WebServlet(name = "BlogCreateController", urlPatterns = {"/BlogCreateController"})
+@WebServlet(name = "BlogCreateController", urlPatterns = { "/BlogCreateController" })
 public class BlogCreateController extends HttpServlet {
 
     private static final String SUCCESS = "create-blog.jsp";
@@ -32,28 +32,28 @@ public class BlogCreateController extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String check = request.getParameter("check");
-        String LogID = "";
+        String logID = "";
         HttpSession session = request.getSession();
         if (session.getAttribute("LOGIN_USER") != null) {
-            LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
+            logID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
         }
         if (check.equals("blogCreate")) {
-            BlogDTO BlogDTO = new BlogDTO("", "", "", "", "", "", "");
+            BlogDTO blogDTO = new BlogDTO("", "", "", "", "", "", "");
             try {
-                String Title = request.getParameter("Title");
+                String title = request.getParameter("Title");
                 String content = request.getParameter("content");
-                String Image = request.getParameter("Image");
-                String BlogCategoryID = request.getParameter("BlogCategory");
+                String image = request.getParameter("Image");
+                String blogCategoryID = request.getParameter("BlogCategory");
                 String status = request.getParameter("status");
                 if (status == null) {
                     status = "0";
@@ -63,13 +63,13 @@ public class BlogCreateController extends HttpServlet {
                     status = "0";
                 }
                 boolean flag = true;
-                if (Title.isEmpty() || Title.length() > 250) {
+                if (title.isEmpty() || title.length() > 250) {
                     flag = false;
-                    BlogDTO.setTitle("Title must be [1-250]");
+                    blogDTO.setTitle("Title must be [1-250]");
                 }
                 if (flag) {
                     BlogDAO dao = new BlogDAO();
-                    BlogDTO dto = new BlogDTO("", Title, LogID, BlogCategoryID, content, Image, status);
+                    BlogDTO dto = new BlogDTO("", title, logID, blogCategoryID, content, image, status);
                     dao.insert(dto);
                     request.setAttribute("CREATE_BLOG_SUCCESS", "Create Success!");
                     url = SUCCESS;
@@ -81,23 +81,24 @@ public class BlogCreateController extends HttpServlet {
             } catch (Exception e) {
                 log("Error at CreateController: " + e.toString());
                 if (e.toString().contains("duplicate")) {
-                    BlogDTO.setTitle("Title duplicate!");
-                    request.setAttribute("ERROR", BlogDTO);
-                };
+                    blogDTO.setTitle("Title duplicate!");
+                    request.setAttribute("ERROR", blogDTO);
+                }
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -108,10 +109,10 @@ public class BlogCreateController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -1,26 +1,26 @@
 package org.onlinequizapp.controllers;
 
-import org.onlinequizapp.daos.PayPalDAO;
-import org.onlinequizapp.dtos.PayPalDetail;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.paypal.base.rest.PayPalRESTException;
+
 import org.onlinequizapp.daos.BillingDAO;
-import org.onlinequizapp.daos.ServiceDAO;
+import org.onlinequizapp.daos.PayPalDAO;
 import org.onlinequizapp.daos.UserDAO;
 import org.onlinequizapp.dtos.CartDTO;
 import org.onlinequizapp.dtos.OrderDTO;
-import java.util.List;
-import org.onlinequizapp.dtos.OrderDetailDTO;
-import org.onlinequizapp.dtos.ProductDTO;
+import org.onlinequizapp.dtos.PayPalDetail;
 import org.onlinequizapp.dtos.UserDTO;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @WebServlet("/authorize_payment")
 public class PayPalAuthorizePayment extends HttpServlet {
@@ -40,8 +40,7 @@ public class PayPalAuthorizePayment extends HttpServlet {
         HttpSession session = request.getSession(true);
         UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
         CartDTO cart = (CartDTO) session.getAttribute("CART");
-        ServiceDAO flowerdao = null;
-        boolean check = false;
+        OrderDTO dto = null;
         if (cart == null) {
             cart = new CartDTO();
         }
@@ -53,32 +52,9 @@ public class PayPalAuthorizePayment extends HttpServlet {
                 Logger.getLogger(PayPalAuthorizePayment.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        /*for (ProductDTO flower : cart.getCart().values()) {
-            try {
-                int value = flowerdao.get(Integer.parseInt(flower.getId())).getQuantity();
-                if (flower.getQuantity() <= value) {
-                    if (flowerdao.update(Integer.parseInt(flower.getId()), value - flower.getQuantity())) {
-                        check = true;
-                    } else {
-                        check = false;
-                    }
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(PayPalAuthorizePayment.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }*/
-
- /*List<OrderDetailDTO> list = new ArrayList<>();
-        HttpSession session = request.getSession(true);
-        CartDTO cart = (CartDTO) session.getAttribute("CART");
-        if (cart == null) {
-            cart = new CartDTO();
+        if (user != null) {
+            dto = new OrderDTO(user.getUserID(), "CURRENT_TIMESTAMP", total);
         }
-        for (ProductDTO product : cart.getCart().values()) {
-            OrderDetailDTO orderDetail = new OrderDetailDTO(product.getCategoryId(),"", String.format("%d",product.getQuantity()), product.getName(), subtotal, shipping, tax, total);
-            list.add(orderDetail);
-        }*/
-        OrderDTO dto = new OrderDTO(user.getUserID(), "CURRENT_TIMESTAMP", total);
         BillingDAO dao = new BillingDAO();
         try {
             dao.insert(dto);

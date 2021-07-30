@@ -1,0 +1,24 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\activation-1.1.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\commons-logging-1.2.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\fluent-hc-4.5.5.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\gson-2.8.2.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\guava-30.1.1-jre.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\httpclient-4.5.5.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\httpcore-4.4.9.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\javax.mail-1.6.2.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\javax.servlet.jsp-api-2.3.3.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\javax.servlet-api-4.0.1.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\jstl-api.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\jstl-impl.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\log4j-1.2.17.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\mysql-connector-java-5.1.23-bin.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\org-netbeans-modules-schema2beans-RELEASE111.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\rest-api-sdk-1.14.0.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\slf4j-api-2.0.0-alpha1.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\spring-boot-starter-mail-2.5.1.jar",
+        "d:\\FPTU\\2021 S2 Summer\\SWP391\\Assignment\\OnlineQuizApp\\Thư viện file .jar\\sqljdbc4.jar"
+    ]
+}

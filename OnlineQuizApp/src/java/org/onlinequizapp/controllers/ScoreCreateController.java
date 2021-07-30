@@ -6,7 +6,6 @@
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -15,11 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.onlinequizapp.daos.ClassDAO;
 import org.onlinequizapp.daos.QuestionDAO;
 import org.onlinequizapp.daos.QuizDAO;
 import org.onlinequizapp.daos.ScoreDAO;
-import org.onlinequizapp.dtos.ClassDTO;
 import org.onlinequizapp.dtos.QuestionDTO;
 import org.onlinequizapp.dtos.QuizDTO;
 import org.onlinequizapp.dtos.ScoreDTO;
@@ -29,21 +26,20 @@ import org.onlinequizapp.dtos.UserDTO;
  *
  * @author User-PC
  */
-@WebServlet(name = "ScoreCreateController", urlPatterns = {"/ScoreCreateController"})
+@WebServlet(name = "ScoreCreateController", urlPatterns = { "/ScoreCreateController" })
 public class ScoreCreateController extends HttpServlet {
 
     private static final String SUCCESS = "quizPlay.jsp";
-    private static final String SUCCESS1 = "quizDetailAdd.jsp";
     private static final String ERROR = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -51,12 +47,11 @@ public class ScoreCreateController extends HttpServlet {
         String url = ERROR;
         List<QuestionDTO> list1 = null;
         List<QuizDTO> list2 = null;
-        List<String> param = null;
         HttpSession session = request.getSession();
-        String LogID = "";
+        String logID = "";
         float mark = 0;
         if (session.getAttribute("LOGIN_USER") != null) {
-            LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
+            logID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
         }
 
         try {
@@ -86,10 +81,10 @@ public class ScoreCreateController extends HttpServlet {
                     mark += 1;
                 }
             }
-            ScoreDTO score = new ScoreDTO("1", LogID, String.format("%2f", mark));
+            ScoreDTO score = new ScoreDTO("1", logID, String.format("%2f", mark));
             ScoreDAO dao = new ScoreDAO();
             ScoreDTO dto1 = new ScoreDTO();
-            dto1 = dao.getListS("1", LogID);
+            dto1 = dao.getListS("1", logID);
             if (dto1 != null) {
                 dao.updateS(score);
             } else {
@@ -107,14 +102,15 @@ public class ScoreCreateController extends HttpServlet {
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -125,10 +121,10 @@ public class ScoreCreateController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

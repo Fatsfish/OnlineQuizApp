@@ -6,17 +6,17 @@
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.onlinequizapp.daos.CategoryDAO;
 import org.onlinequizapp.daos.CourseDAO;
 import org.onlinequizapp.dtos.CategoryBlogDTO;
-import org.onlinequizapp.dtos.CategoryDTO;
 import org.onlinequizapp.dtos.CourseDTO;
 import org.onlinequizapp.dtos.UserDTO;
 
@@ -24,23 +24,20 @@ import org.onlinequizapp.dtos.UserDTO;
  *
  * @author User-PC
  */
-@WebServlet(name = "CourseCreateController", urlPatterns = {"/CourseCreateController"})
+@WebServlet(name = "CourseCreateController", urlPatterns = { "/CourseCreateController" })
 public class CourseCreateController extends HttpServlet {
 
     private static final String SUCCESS = "courseAdd.jsp";
-    private static final String LECTURE = "courseLectureAdd.jsp";
-    private static final String SOURCE = "courseSourceAdd.jsp";
-    private static final String CLASS = "courseClassAdd.jsp";
     private static final String ERROR = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -48,12 +45,12 @@ public class CourseCreateController extends HttpServlet {
         String url = ERROR;
         String function = request.getParameter("function");
         HttpSession session = request.getSession();
-        String LogID="";
+        String logID = "";
         if (session.getAttribute("LOGIN_USER") != null) {
-            LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
+            logID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
         }
         if (function.equals("course")) {
-            CourseDTO categoryDTO = new CourseDTO("", "", "", "", "","","");
+            CourseDTO categoryDTO = new CourseDTO("", "", "", "", "", "", "");
             try {
                 String courseName = request.getParameter("Name");
                 String description = request.getParameter("description");
@@ -82,7 +79,7 @@ public class CourseCreateController extends HttpServlet {
                 }
                 if (flag) {
                     CourseDAO dao = new CourseDAO();
-                    CourseDTO course = new CourseDTO("", courseName, LogID, duration, status, categoryID, description);
+                    CourseDTO course = new CourseDTO("", courseName, logID, duration, status, categoryID, description);
                     dao.insert(course);
                     url = SUCCESS;
                 } else {
@@ -93,7 +90,7 @@ public class CourseCreateController extends HttpServlet {
                 if (e.toString().contains("duplicate")) {
                     categoryDTO.setCategoryID("Category Name duplicate!");
                     request.setAttribute("ERROR", categoryDTO);
-                };
+                }
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
@@ -133,7 +130,7 @@ public class CourseCreateController extends HttpServlet {
                 if (e.toString().contains("duplicate")) {
                     categoryBlogDTO.setCategoryID("Category Name duplicate!");
                     request.setAttribute("ERROR", categoryBlogDTO);
-                };
+                }
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
@@ -141,14 +138,15 @@ public class CourseCreateController extends HttpServlet {
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -159,10 +157,10 @@ public class CourseCreateController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

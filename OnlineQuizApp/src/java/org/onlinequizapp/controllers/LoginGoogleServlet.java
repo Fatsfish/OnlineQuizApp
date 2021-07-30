@@ -1,7 +1,5 @@
 package org.onlinequizapp.controllers;
 
-import org.onlinequizapp.daos.UserDAO;
-import org.onlinequizapp.dtos.UserDTO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -14,9 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.onlinequizapp.daos.UserDAO;
 
+import org.onlinequizapp.daos.UserDAO;
 import org.onlinequizapp.dtos.GooglePojoDTO;
+import org.onlinequizapp.dtos.UserDTO;
 import org.onlinequizapp.utils.GoogleUtils;
 //@WebServlet(name = "LoginGoogleServlet", urlPatterns = {"/login-google"})
 
@@ -36,7 +35,7 @@ public class LoginGoogleServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String code = request.getParameter("code");
-        String url=STUDENT;
+        String url = STUDENT;
         if (code == null || code.isEmpty()) {
             RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
             dis.forward(request, response);
@@ -56,12 +55,12 @@ public class LoginGoogleServlet extends HttpServlet {
             try {
                 if (dao.checkEmail(fullName)) {
                     user = dao.getListEmail(fullName);
-                    if(user.getRole().equals("T")||user.getRole().equals("T1")){
-                        url=TEACHER;
-                    }else if(user.getRole().equals("U")){
+                    if (user.getRole().equals("T") || user.getRole().equals("T1")) {
+                        url = TEACHER;
+                    } else if (user.getRole().equals("U")) {
                         dao.updateEnable(user);
-                    }else if(user.getRole().equals("AD")){
-                        url=SUCCESS;
+                    } else if (user.getRole().equals("AD")) {
+                        url = SUCCESS;
                     }
                 }
             } catch (SQLException ex) {

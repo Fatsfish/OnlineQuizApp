@@ -1,14 +1,15 @@
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.onlinequizapp.daos.ClassDAO;
 import org.onlinequizapp.daos.CourseDAO;
 import org.onlinequizapp.daos.LectureDAO;
@@ -16,7 +17,7 @@ import org.onlinequizapp.dtos.ClassDTO;
 import org.onlinequizapp.dtos.CourseDTO;
 import org.onlinequizapp.dtos.LectureDTO;
 
-@WebServlet(name = "LectureUpdateController", urlPatterns = {"/LectureUpdateController"})
+@WebServlet(name = "LectureUpdateController", urlPatterns = { "/LectureUpdateController" })
 public class LectureUpdateController extends HttpServlet {
 
     private static final String SUCCESS = "LectureSearchController";
@@ -26,16 +27,15 @@ public class LectureUpdateController extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        String check = request.getParameter("check");
         String action = request.getParameter("action");
         List<CourseDTO> list = null;
         List<ClassDTO> list1 = null;
@@ -63,15 +63,15 @@ public class LectureUpdateController extends HttpServlet {
         if (action.equals("Confirm Update Lecture")) {
             try {
                 String lectureID = request.getParameter("lectureID");
-                String LectureName = request.getParameter("lectureName");
+                String lectureName = request.getParameter("lectureName");
                 String status = request.getParameter("status");
-                String Description = request.getParameter("description");
-                String CourseID = request.getParameter("courseID");
-                String ClassID = request.getParameter("classID");
+                String description = request.getParameter("description");
+                String courseID = request.getParameter("courseID");
+                String classID = request.getParameter("classID");
                 LectureDAO dao = new LectureDAO();
-                LectureDTO category = new LectureDTO(lectureID, CourseID, LectureName, ClassID, Description, status);
+                LectureDTO category = new LectureDTO(lectureID, courseID, lectureName, classID, description, status);
                 boolean flag = true;
-                if (LectureName.length() > 250 || LectureName.length() < 1) {
+                if (lectureName.length() > 250 || lectureName.length() < 1) {
                     flag = false;
                     category.setLectureName("Number Of Student must be [1-250]");
                 }
@@ -89,6 +89,7 @@ public class LectureUpdateController extends HttpServlet {
                     request.setAttribute("ERROR", category);
                 }
             } catch (Exception e) {
+                log(e.toString());
 
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
@@ -99,14 +100,15 @@ public class LectureUpdateController extends HttpServlet {
 
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -117,10 +119,10 @@ public class LectureUpdateController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

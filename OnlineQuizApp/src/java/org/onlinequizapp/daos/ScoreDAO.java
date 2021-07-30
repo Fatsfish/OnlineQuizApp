@@ -22,19 +22,19 @@ import org.onlinequizapp.utils.DBUtils;
  */
 public class ScoreDAO {
 
-    public List<ScoreDTO> getListS(String search) throws SQLException {
-        List<ScoreDTO> listQuiz = null;
+    public ScoreDTO getListS(String search, String id) throws SQLException {
+        ScoreDTO listQuiz = null;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Select QuizID, UserID, StartTime, EndTime, Mark "
-                        + "from tblScore "
-                        + "WHERE quizID like ?";
+                String sql = "Select QuizID, UserID, StartTime, EndTime, Mark " + "from tblScore "
+                        + "WHERE quizID like ? and userID like ?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, "%" + search + "%");
+                stm.setString(2, id);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String QuizID = rs.getString("QuizID");
@@ -42,10 +42,7 @@ public class ScoreDAO {
                     Timestamp STime = rs.getTimestamp("StartTime");
                     Timestamp ETime = rs.getTimestamp("EndTime");
                     String Mark = rs.getString("Mark");
-                    if (listQuiz == null) {
-                        listQuiz = new ArrayList<>();
-                    }
-                    listQuiz.add(new ScoreDTO(QuizID, questionID, STime, ETime, Mark));
+                    listQuiz = new ScoreDTO(QuizID, questionID, STime, ETime, Mark);
 
                 }
             }
@@ -75,8 +72,7 @@ public class ScoreDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "DELETE tblScore "
-                        + "Where QuizID=? and UserID=? ";
+                String sql = "DELETE tblScore " + "Where QuizID=? and UserID=? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, ID);
                 stm.setString(2, QID);
@@ -98,7 +94,7 @@ public class ScoreDAO {
         }
         return check;
     }
-    
+
     public boolean updateS(ScoreDTO quiz) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -106,8 +102,7 @@ public class ScoreDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPdaTE tblSccore SET StartTime=?, EndTime=?, Mark=? "
-                        + " Where QuizID=? and UserID=? ";
+                String sql = "UPdaTE tblSccore SET StartTime=?, EndTime=?, Mark=? " + " Where QuizID=? and UserID=? ";
                 stm = conn.prepareStatement(sql);
                 stm.setTimestamp(1, quiz.getStartTime());
                 stm.setTimestamp(1, quiz.getEndTime());

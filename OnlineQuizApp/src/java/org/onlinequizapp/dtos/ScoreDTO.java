@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author User-PC
  */
-public class ScoreDTO implements Serializable{
+public class ScoreDTO implements Serializable {
 
     private String quizID;
     private String userID;
@@ -24,8 +24,14 @@ public class ScoreDTO implements Serializable{
         this.mark = Mark;
 
     }
-    
-    public ScoreDTO(){
+
+    public ScoreDTO(String QuizID, String UserID, String Mark) {
+        this.quizID = QuizID;
+        this.userID = UserID;
+        this.mark = Mark;
+    }
+
+    public ScoreDTO() {
     }
 
     public String getQuizID() {
@@ -67,5 +73,5 @@ public class ScoreDTO implements Serializable{
     public void setMark(String Mark) {
         this.mark = Mark;
     }
-    
+
 }

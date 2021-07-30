@@ -6,17 +6,15 @@
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.onlinequizapp.daos.CategoryDAO;
+
 import org.onlinequizapp.daos.QuestionDAO;
-import org.onlinequizapp.dtos.CategoryBlogDTO;
-import org.onlinequizapp.dtos.CourseDTO;
 import org.onlinequizapp.dtos.QuestionDTO;
 import org.onlinequizapp.dtos.UserDTO;
 
@@ -24,7 +22,7 @@ import org.onlinequizapp.dtos.UserDTO;
  *
  * @author User-PC
  */
-@WebServlet(name = "QuestionCreateController", urlPatterns = {"/QuestionCreateController"})
+@WebServlet(name = "QuestionCreateController", urlPatterns = { "/QuestionCreateController" })
 public class QuestionCreateController extends HttpServlet {
 
     private static final String SUCCESS = "questionAdd.jsp";
@@ -34,10 +32,10 @@ public class QuestionCreateController extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,14 +43,14 @@ public class QuestionCreateController extends HttpServlet {
         String url = ERROR;
         String function = request.getParameter("function");
         HttpSession session = request.getSession();
-        String LogID = "";
+        String logID = "";
         if (session.getAttribute("LOGIN_USER") != null) {
-            LogID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
+            logID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
         }
         if (function.equals("question")) {
-            QuestionDTO categoryDTO = new QuestionDTO("", "", "", "", "","","","","","","");
+            QuestionDTO categoryDTO = new QuestionDTO("", "", "", "", "", "", "", "", "", "", "");
             try {
-                String Name = request.getParameter("Name");
+                String name = request.getParameter("Name");
                 String description = request.getParameter("description");
                 String status = request.getParameter("status");
                 String categoryID = request.getParameter("categoryID");
@@ -69,7 +67,7 @@ public class QuestionCreateController extends HttpServlet {
                     status = "0";
                 }
                 boolean flag = true;
-                if (Name.length() > 250 || Name.length() < 1) {
+                if (name.length() > 250 || name.length() < 1) {
                     flag = false;
                     categoryDTO.setName("Question must be [1-250]");
                 }
@@ -77,17 +75,20 @@ public class QuestionCreateController extends HttpServlet {
                     flag = false;
                     categoryDTO.setName("Description must be [1-250]");
                 }
-                if ((answer1.length() > 250 || answer1.length() < 1)&&(answer2.length() > 250 || answer2.length() < 1)&&(answer3.length() > 250 || answer3.length() < 1)&&(answer4.length() > 250 || answer4.length() < 1)) {
+                if ((answer1.length() > 250 || answer1.length() < 1) && (answer2.length() > 250 || answer2.length() < 1)
+                        && (answer3.length() > 250 || answer3.length() < 1)
+                        && (answer4.length() > 250 || answer4.length() < 1)) {
                     flag = false;
                     categoryDTO.setName("Answer must be [1-250]");
                 }
-                if(!answer.equals("1")&&!answer.equals("2")&&!answer.equals("3")&&!answer.equals("4")){
+                if (!answer.equals("1") && !answer.equals("2") && !answer.equals("3") && !answer.equals("4")) {
                     flag = false;
                     categoryDTO.setName("Answer must be 1,2,3 or 4!");
                 }
                 if (flag) {
                     QuestionDAO dao = new QuestionDAO();
-                    QuestionDTO course = new QuestionDTO("", Name, answer1, answer2, answer3, answer4, description, answer, LogID, status, categoryID );
+                    QuestionDTO course = new QuestionDTO("", name, answer1, answer2, answer3, answer4, description,
+                            answer, logID, status, categoryID);
                     dao.insertQ(course);
                     request.setAttribute("CREATE_SUCCESS", "Create Success!");
                     url = SUCCESS;
@@ -100,21 +101,22 @@ public class QuestionCreateController extends HttpServlet {
                 if (e.toString().contains("duplicate")) {
                     categoryDTO.setCategoryID("Category Name duplicate!");
                     request.setAttribute("ERROR", categoryDTO);
-                };
+                }
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
-        } 
+        }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -125,10 +127,10 @@ public class QuestionCreateController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

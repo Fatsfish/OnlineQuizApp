@@ -6,20 +6,20 @@
 package org.onlinequizapp.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.onlinequizapp.daos.CourseDAO;
+
 import org.onlinequizapp.daos.QuestionDAO;
 
 /**
  *
  * @author User-PC
  */
-@WebServlet(name = "QuestionDeleteController", urlPatterns = {"/QuestionDeleteController"})
+@WebServlet(name = "QuestionDeleteController", urlPatterns = { "/QuestionDeleteController" })
 public class QuestionDeleteController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
@@ -29,10 +29,10 @@ public class QuestionDeleteController extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,9 +42,9 @@ public class QuestionDeleteController extends HttpServlet {
         if (action.equals("Delete")) {
             try {
                 if (!request.getParameter("status").equals("1")) {
-                    String QuestionID = request.getParameter("QuestionID");
+                    String questionID = request.getParameter("QuestionID");
                     QuestionDAO dao = new QuestionDAO();
-                    boolean checkDelete = dao.deleteQ(QuestionID);
+                    boolean checkDelete = dao.deleteQ(questionID);
                     if (checkDelete) {
                         request.setAttribute("DELETE_SUCCESS", "Delete Success!");
                         url = SUCCESS;
@@ -57,6 +57,7 @@ public class QuestionDeleteController extends HttpServlet {
                     url = SUCCESS;
                 }
             } catch (Exception e) {
+                log(e.toString());
 
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
@@ -64,14 +65,15 @@ public class QuestionDeleteController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -82,10 +84,10 @@ public class QuestionDeleteController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -22,27 +22,25 @@ import org.onlinequizapp.dtos.CourseDTO;
  *
  * @author User-PC
  */
-@WebServlet(name = "CourseUpdateController", urlPatterns = {"/CourseUpdateController"})
+@WebServlet(name = "CourseUpdateController", urlPatterns = { "/CourseUpdateController" })
 public class CourseUpdateController extends HttpServlet {
 
     private static final String SUCCESS = "CourseSearchController";
     private static final String ERROR = "updateCourse.jsp";
 
     /**
-     * /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * /** Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        String check = request.getParameter("check");
         String action = request.getParameter("action");
         CategoryDAO dao1 = new CategoryDAO();
         List<CategoryDTO> list = null;
@@ -57,7 +55,7 @@ public class CourseUpdateController extends HttpServlet {
         }
         if (action.equals("Confirm")) {
             try {
-                String LogID = request.getParameter("authorID");
+                String logID = request.getParameter("authorID");
                 String courseID = request.getParameter("courseID");
                 String courseName = request.getParameter("courseName");
                 String duration = request.getParameter("duration");
@@ -65,7 +63,8 @@ public class CourseUpdateController extends HttpServlet {
                 String categoryID = request.getParameter("categoryID");
                 String description = request.getParameter("description");
                 CourseDAO dao = new CourseDAO();
-                CourseDTO categoryDTO = new CourseDTO(courseID, courseName, LogID, duration, status, categoryID, description);
+                CourseDTO categoryDTO = new CourseDTO(courseID, courseName, logID, duration, status, categoryID,
+                        description);
                 boolean flag = true;
                 if (courseName.length() > 250 || courseName.length() < 1) {
                     flag = false;
@@ -93,6 +92,7 @@ public class CourseUpdateController extends HttpServlet {
                     request.setAttribute("ERROR", categoryDTO);
                 }
             } catch (Exception e) {
+                log(e.toString());
 
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
@@ -102,14 +102,15 @@ public class CourseUpdateController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -120,10 +121,10 @@ public class CourseUpdateController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
